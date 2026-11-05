@@ -1,0 +1,68 @@
+{
+  "output_dir": "outputs/experiments_gpu",
+  "profile": "cuda_subset",
+  "seed": 42,
+  "epochs": 3,
+  "batch_size": 1,
+  "workers": 0,
+  "threads": 2,
+  "min_size": 512,
+  "max_size": 896,
+  "freeze_backbone": false,
+  "train_frames_per_sequence": 4,
+  "val_frames_per_sequence": 8,
+  "learning_rate": 0.002,
+  "momentum": 0.9,
+  "weight_decay": 0.0001,
+  "scheduler_gamma": 0.8,
+  "horizontal_flip": true,
+  "rpn_pre_train": 2000,
+  "rpn_post_train": 2000,
+  "rpn_pre_test": 1000,
+  "rpn_post_test": 1000,
+  "roi_batch_size": 512,
+  "roi_positive_fraction": 0.25,
+  "regression_loss": "smooth_l1",
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0,
+  "anchor_base_sizes": null,
+  "experiments": [
+    {
+      "name": "fasterrcnn_baseline",
+      "family": "fasterrcnn"
+    },
+    {
+      "name": "fasterrcnn_rpn",
+      "family": "fasterrcnn",
+      "rpn_pre_train": 1000,
+      "rpn_post_train": 500,
+      "rpn_pre_test": 500,
+      "rpn_post_test": 300
+    },
+    {
+      "name": "fasterrcnn_roi",
+      "family": "fasterrcnn",
+      "roi_positive_fraction": 0.5
+    },
+    {
+      "name": "fasterrcnn_giou",
+      "family": "fasterrcnn",
+      "regression_loss": "giou"
+    },
+    {
+      "name": "retinanet_baseline",
+      "family": "retinanet"
+    },
+    {
+      "name": "retinanet_small_anchors",
+      "family": "retinanet",
+      "anchor_base_sizes": "from_training_quantiles"
+    },
+    {
+      "name": "retinanet_focal_gamma",
+      "family": "retinanet",
+      "focal_gamma": 1.0
+    }
+  ],
+  "deterministic_algorithms": false
+}

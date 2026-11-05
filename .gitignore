@@ -1,0 +1,32 @@
+# Local source and generated datasets
+/multiple-object-video-detection-hw-2-ucu-ai-2026/
+/data/
+/datasets/
+/outputs/
+/artifacts/
+/checkpoints/
+/runs/
+/wandb/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.zip
+*.tar
+*.tar.gz
+# Environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+# Additional virtual environment
+.venv-1/
+
+# Jupyter temporary files
+kernel-ipc-*

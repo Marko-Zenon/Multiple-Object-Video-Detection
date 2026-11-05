@@ -1,0 +1,13 @@
+{
+  "dataset_root": "multiple-object-video-detection-hw-2-ucu-ai-2026",
+  "output_dir": "outputs/stage1",
+  "seed": 42,
+  "validation_fraction": 0.2,
+  "split_strategy": "provided",
+  "preprocessing": {
+    "size": [800, 1280],
+    "horizontal_flip_probability": 0.0,
+    "mean": null,
+    "std": null
+  }
+}
