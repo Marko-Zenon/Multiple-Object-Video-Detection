@@ -10,7 +10,7 @@
 
 | ID | Chunk | State | Start now? | Owner | Depends on | Blocked by / reason | Branch / PR | Last update |
 |---|---|---|---|---|---|---|---|---|
-| CH-01 | Repo hygiene & local dataset/env setup | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (machine needs M-ZIP) | ch-01-repo-env-setup | 2026-11-07 13:54 Kyiv |
+| CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA) | — | 2026-11-07 15:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 | label map, ignore policy, Kaggle metric come from CH-02 | — | 2026-11-07 15:00 Kyiv |
 | CH-04 | Torchvision training core | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03 | needs frozen protocol & data module | — | 2026-11-07 15:00 Kyiv |
@@ -25,7 +25,7 @@
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-05, CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | needs submission tooling & frozen final config | — | 2026-11-07 15:00 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
-| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-01, CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gate: G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
+| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gate: G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
 
@@ -38,8 +38,8 @@
 | G3 | Sample submission header/format (`sample_submission.csv` is not in the ZIP; download from Kaggle Data tab) | OPEN | either student | CH-02 §4 |
 | G4 | Ignore-file format and semantics (relation to COCO `iscrowd`) | OPEN | CH-02 owner | CH-02 §4 |
 | G5 | GitHub Pages enabled (Settings → Pages → Source: GitHub Actions); admin only | OPEN | Marko-Zenon | start gate of CH-15 |
-| G6 | Nazar's commit email linked to GitHub `Badabuba` | OPEN | Badabuba | checked in CH-01, required by CH-16 |
-| G7 | PyTorch CUDA wheel with sm_120 support works on the RTX 5070 | OPEN | CH-01 owner | CH-01 |
+| G6 | Nazar's commit email linked to GitHub `Badabuba` | RESOLVED | Badabuba | CH-01: GitHub API maps `mykolaichuk.pn@ucu.edu.ua` commits to login `Badabuba` |
+| G7 | PyTorch CUDA wheel with sm_120 support works on the RTX 5070 | RESOLVED | CH-01 owner | CH-01: torch 2.14.1+cu130, CUDA conv + NMS verified |
 | G8 | At least one student can upload to Kaggle via the web UI (no tokens in Git) | OPEN | students | needed by CH-05 |
 | G9 | RT-DETR trains reliably on 8 GB, otherwise a recorded fallback decision | OPEN | CH-11 owner | CH-11 |
 | G10 | Students wrote the report prose and conclusions | OPEN | Badabuba + Marko-Zenon | finish gate of CH-16 |
@@ -417,14 +417,34 @@ changes. Anything else needs a recorded deviation.
 - **Handoff / unblocks:** satisfies M-DATA and M-GPU on that machine. CH-01 is a start dependency of CH-16 only. No row is unblocked directly.
 - **Evidence log:**
 ```text
-Owner: Badabuba | Claimed: 2026-11-07 13:54 Kyiv | Last update: — | Branch: — | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba | Claimed: 2026-11-07 15:55 Kyiv (claim commit bc244c5) | Last update: 2026-11-07 16:15 Kyiv | Branch: ch-01-repo-env-setup | Commits: e7bac7a, 2d5bde4 + board commit | PR: https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1
+Files changed: .gitignore, scripts/check_dataset.py (new), requirements.txt, README.md (new "Setup" subsection under §3), plan.md (CH-01 row, G6/G7, CH-16 Start now?, this log)
+Validation commands:
+  Pre-checks: ZIP 10611162657 B; disk 228 GB free; dataset dir absent. Guard commit e7bac7a pushed BEFORE extraction.
+  unzip -q <zip> -d multiple-object-video-detection-hw-2-ucu-ai-2026  -> exit 0, real 3m47s; no root-level train/ val/ test/
+  python scripts/check_dataset.py -> PASSED, exit 0 (32 OK, 3.3 s): train 56 clips/24201 img/24201 labels/ignore 50 clips/
+    COCO 24201 img + 1616260 ann; val 7/2846/2846/ignore 5 clips/COCO 2846 + 146092 ann; categories = 8 expected names;
+    test 48 clips/3811 img; test_images.csv 3811 rows, 0 missing files; no double nesting; no stray root dirs
+  git check-ignore -v: zip -> .gitignore:14 *.zip; dataset dir, sample jpg, nested test_images.csv -> .gitignore:2;
+    .venv/ -> :18; root train/ -> :34; root test_images.csv -> :37
+  git status --porcelain -> only README.md, requirements.txt, scripts/ (no data files)
+  python -c "import torch; ..." -> 2.14.1+cu130 True NVIDIA GeForce RTX 5070 Laptop GPU
+    cuda 13.0, cudnn 92400, capability (12, 0), arch_list includes sm_120; Conv2d on GPU max |diff| vs CPU 7.2e-07;
+    torchvision.ops.nms on CUDA OK
+  Fresh .venv (uv 0.12.21, CPython 3.12.14): cu130 torch install, then uv pip install -r requirements.txt -> OK;
+    uv pip check -> "All installed packages are compatible" (115 pkgs); torch still +cu130 afterwards
+  G6: gh api repos/.../commits/<sha> -> author.email mykolaichuk.pn@ucu.edu.ua, login Badabuba (bc244c5, e7bac7a)
+  ZIP size after extraction: 10611162657 B (unchanged)
+Metrics / results: none (setup chunk)
+Artifacts: none committed. Local only: ./multiple-object-video-detection-hw-2-ucu-ai-2026/ (~11 GB), .venv/
+Runtime / hardware: ~20 min wall-clock; Windows 11, RTX 5070 Laptop 8 GB (8151 MiB), driver 610.74
+Blockers / deviations: requirements pins added: opencv-python==5.0.0.93, tqdm==4.70.1, pytest==9.2.0 (latest on PyPI 2026-11-07);
+  existing torch==2.14.1 / torchvision==0.29.1 pins kept, served from the cu130 index (cu128/cu129 have no 2.14.1 Windows wheels).
+  The PowerShell tar.exe extraction command in the README is documented but was not run (Git Bash unzip was used).
+  The venv uses the uv-managed CPython 3.12.14 by full path; ~/.local/bin/python3.12.exe is blocked by Application Control.
+  The claim commit row timestamp said 13:54 (UTC, Git Bash TZ issue); the real claim time was 15:55 Kyiv.
+Completion or handoff note: M-DATA and M-GPU are satisfied on Nazar's machine. Other machines run `python scripts/check_dataset.py`.
+  Unblock recalculation: CH-01 is a start dep of CH-16 only; CH-16 stays BLOCKED on CH-06, CH-12, CH-14, CH-15.
 ```
 
 ---
