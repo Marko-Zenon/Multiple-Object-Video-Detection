@@ -1,0 +1,12 @@
+{
+  "run_id": "yolo_smoke_m",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11m.pt",
+  "epochs": 2,
+  "imgsz": 1344,
+  "batch_size": 4,
+  "workers": 2,
+  "amp": true,
+  "smoke_fraction": 0.0715,
+  "note": "GPU smoke: about 200 images x 2 epochs = 50 iterations per epoch at batch 4; checks memory, speed, epoch checkpoints, resume and the curve. Not a result."
+}

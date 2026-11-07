@@ -272,3 +272,33 @@ Based on the initial comparisons:
 - Faster R-CNN generally achieved stronger detection accuracy than RetinaNet under the tested configurations.
 
 These observations are preliminary because the models were trained on
+
+<!-- CH-09 section (Ultralytics). The truncated sentence above belongs to section 6 and is left for its authors. -->
+
+## Ultralytics data path, licence and citation (CH-09)
+
+The anchor-free (YOLO11) and query-based (RT-DETR) families use **Ultralytics `ultralytics==8.4.207`**
+(pinned in `requirements.txt`), installed into the same environment as torch 2.14.1+cu130.
+
+- **Licence:** Ultralytics is distributed under the **GNU AGPL-3.0** (https://ultralytics.com/license).
+  This repository uses it unmodified as a library for coursework. The pretrained checkpoints it downloads and
+  the models fine-tuned from them are covered by the same licence. They are not committed (`outputs/` is git-ignored).
+- **Weights:** `yolo11s.pt` (sha256 `85a76fe8…d502d5`) and `yolo11m.pt` (sha256 `d5ffc1a6…305b95`), COCO-pretrained,
+  from https://github.com/ultralytics/assets/releases/tag/v8.4.0, downloaded to `outputs/weights/`.
+- **Citation:** Jocher, G., Qiu, J. *Ultralytics YOLO11*, version 11.0.0, 2024. https://github.com/ultralytics/ultralytics
+  (AGPL-3.0). RT-DETR: Zhao, Y. et al. *DETRs Beat YOLOs on Real-time Object Detection*, CVPR 2024.
+
+Pipeline (CPU steps first, GPU steps only with an explicit `--device`):
+
+```bash
+python scripts/export_yolo.py --dataset-root <dataset>          # masked train_rubric + val_fast copy -> outputs/yolo_data/ (~1.9 GB)
+python scripts/check_ultra_adapter.py --dataset-root <dataset>  # GT -> Ultralytics Results -> evaluator, mAP must be >= 0.99
+python scripts/train_ultra.py --config configs/runs/yolo_baseline.json --device 0 [--resume]
+python scripts/predict_ultra.py curve --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_fast mAP per epoch
+python scripts/predict_ultra.py final --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_full metrics + speed
+```
+
+The shipped `images/`, `labels/` and `data.yaml` are not used for training because they do not handle ignore regions.
+`movd/ultra.py` applies the CH-02 policy instead (crowd never a target; ignore regions filled with the ImageNet mean except
+inside labelled target boxes). Every reported number comes from `movd/evaluate.py` on the original val images, never from
+Ultralytics' own validator.
