@@ -12,13 +12,13 @@
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
-| CH-03 | Evaluator, speed benchmark, tests | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 | — (active worker: Claude session for Badabuba; user-approved parallel work with CH-04/Codex) | ch-03-evaluator | 2026-11-07 15:06 Kyiv |
-| CH-04 | Torchvision training core | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; user-approved parallel work with CH-03/Claude; finish needs CH-03 | ch-04-torchvision-training | 2026-11-07 17:06 Kyiv |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:00 Kyiv |
+| CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / PR pending | 2026-11-07 17:18 Kyiv |
+| CH-04 | Torchvision training core | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; user-approved parallel work with CH-03/Claude; finish dep CH-03 ✅ DONE (use `movd.evaluate` for metrics) | ch-04-torchvision-training | 2026-11-07 17:06 Kyiv |
+| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 ✅; finish still needs CH-04 or CH-09; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:18 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-07, CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | needs all four families | — | 2026-11-07 15:00 Kyiv |
@@ -597,14 +597,14 @@ Completion or handoff note: CH-03, CH-04, CH-05 and CH-09 set READY (start dep C
 - **Handoff / unblocks:** satisfies the finish dependency of CH-04, CH-05 and CH-09.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 15:06 Kyiv | Last update: 2026-11-07 15:06 Kyiv | Branch: ch-03-evaluator | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: User approved parallel workers under Badabuba: Claude owns CH-03 evaluator/speed; Codex owns CH-04 training and GPU smoke/resume. CH-03 remains a CH-04 finish dependency.
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 17:06 Kyiv (claim commit 9e72a61; its board row said 15:06, a UTC clock slip) | Last update: 2026-11-07 17:18 Kyiv | Branch: ch-03-evaluator | Commits: 9e72a61 (claim), 90e5b92 (implementation + evidence), merge of origin/develop, this board commit | PR: pending
+Files changed: movd/evaluate.py, movd/speed.py, scripts/evaluate.py, tests/test_evaluate.py (new); results/ch-03-evaluator/{make_sanity.py, sanity.json, make_speed_selftest.py, speed_selftest.json, cli_help.txt, pytest.txt, cli_example_val_fast/metrics.json, cli_example_val_fast/per_class.csv}; plan.md (this row, CH-04/05/09 notes, this log)
+Validation commands: python -m pytest tests/ (59 passed: 38 existing + 21 new; output in results/ch-03-evaluator/pytest.txt) · python -m pytest tests/test_evaluate.py (21 passed) · python results/ch-03-evaluator/make_sanity.py · python results/ch-03-evaluator/make_speed_selftest.py · python scripts/evaluate.py --help · python scripts/evaluate.py <GT-as-preds json> --split val_fast --out results/ch-03-evaluator/cli_example_val_fast · ruff check + ruff format on the new files
+Metrics / results: GT-as-predictions mAP@500: val_fast 1.0000, val_full 1.0000 (acceptance ≥ 0.99 ✓). Same at the legacy per-image cap 100: 0.9839 on both (density bin ≥100 targets/frame: 189 val frames, mAP 0.80), so the v0 cap alone costs recall on dense frames. Ignore rule on real data (val_fast): adding a score-1.0 detection on each of the 3,995 val ignore regions (classes cycling 1–8) leaves mAP at 1.0000; with the crowd annotations removed from GT the same detections drop mAP to 0.8667 (control). In-range label shift (c → c % 8 + 1): mAP 0.0004; 0–7 class ids are rejected with an error. Speed self-test (random-weight Faster R-CNN v2, fp32, bs 1, long side 1344, 30 val_fast frames, 10 warm-up): 8.51 / 8.44 / 8.28 FPS over 3 repeats (2.8 % spread), ≈ 117 ms/image — a utility check, not a model result
+Artifacts: results/ch-03-evaluator/ (above). GT-as-predictions JSON in git-ignored outputs/ch-03-evaluator/
+Runtime / hardware: CPU evaluation: val_fast ≈ 13 s, val_full ≈ 53 s (two COCOeval passes, caps 500 and 100). Speed self-test on NVIDIA GeForce RTX 5070 Laptop GPU 8 GB, torch 2.14.1+cu130, torchvision 0.29.1, CUDA 13.0, Python 3.12.14, pycocotools 2.0.11, Windows 11
+Blockers / deviations: (1) Clarification, not a protocol change: pycocotools' `maxDets` counts detections per image per class, so `maxDets=500` alone would let up to 8 × 500 detections per image through. The §4 value (500, "Kaggle scores ≤ 500 dets/image") is implemented as "keep each image's top-500 by score over all classes, then COCOeval maxDets=[500]" (`movd.evaluate.cap_per_image`); the legacy 100 uses the same per-image rule, like torchvision's `box_detections_per_img=100`. Documented in the module docstring and tested. (2) Density bins are fixed at [0,20), [20,50), [50,100), [≥100] target objects per frame (val: 977 / 1,062 / 618 / 189 frames). (3) No legacy checkpoint re-evaluated (optional; none in the repo). (4) Worked in a separate git worktree because the CH-04 session uses the main checkout concurrently
+Completion or handoff note: Use `movd.evaluate.evaluate_split(predictions, "val_full")` (or the CLI) for every headline number; write predictions in the §4 COCO-results format with category_id 1–8. `movd.speed.benchmark(run, batches, device, batch_size=..., input_size=...)` for speed; state in `note` what the timed call includes. Unblocks the CH-03 finish dependency of CH-04, CH-05 and CH-09. Shared-module rule now applies to movd/evaluate.py (§8)
 ```
 
 ---
