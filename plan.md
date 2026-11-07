@@ -15,8 +15,8 @@
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 and CH-04 ✅; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:43 Kyiv |
-| CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (worker: Claude; M-DATA ok; holds notebook lock) | ch-06-eda | 2026-11-07 19:00 Kyiv |
-| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
+| CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (worker: Claude; M-DATA ok; holds notebook lock; user-approved parallel work with CH-07/Codex) | ch-06-eda | 2026-11-07 19:00 Kyiv |
+| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude; acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
@@ -757,7 +757,7 @@ Metrics / results: —
 Artifacts: —
 Runtime / hardware: —
 Blockers / deviations: —
-Completion or handoff note: —
+Completion or handoff note: User approved parallel workers: Claude owns CH-06, the notebook lock, EDA and CH-06 figures; Codex owns CH-07 configurations, GPU training and CH-07 evidence. Workers preserve each other's files. CH-07 acceptance criterion 5 is deferred until CH-06 merges and releases the notebook lock.
 ```
 
 ---
@@ -797,14 +797,14 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 21:07 Kyiv | Last update: 2026-11-07 21:07 Kyiv | Branch: ch-07-frcnn | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
 Artifacts: —
 Runtime / hardware: —
 Blockers / deviations: —
-Completion or handoff note: —
+Completion or handoff note: User approved parallel workers: Claude owns CH-06, the notebook lock, EDA and CH-06 figures; Codex owns CH-07 configurations, GPU training and CH-07 evidence. Workers preserve each other's files. CH-07 acceptance criterion 5 is deferred until CH-06 merges and releases the notebook lock.
 ```
 
 ---
