@@ -1,0 +1,24 @@
+[
+  {
+    "loss": 1.5226407766342163,
+    "steps": 25,
+    "images_seen": 50,
+    "train_seconds": 17.508001399983186,
+    "train_peak_gpu_bytes": 4504604160,
+    "epoch": 1,
+    "global_step": 25,
+    "val_fast": null,
+    "epoch_seconds": 17.508181000011973
+  },
+  {
+    "loss": 1.2659859561920166,
+    "steps": 25,
+    "images_seen": 50,
+    "train_seconds": 15.8944305999903,
+    "train_peak_gpu_bytes": 4350774784,
+    "epoch": 2,
+    "global_step": 50,
+    "val_fast": null,
+    "epoch_seconds": 15.894605899986345
+  }
+]
