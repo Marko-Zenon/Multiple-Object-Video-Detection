@@ -1,0 +1,9 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "gpu_memory_bytes": 8546484224,
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "cuda": "13.0",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.14"
+}
