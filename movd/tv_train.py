@@ -282,6 +282,8 @@ def train(
         )
     if training_only and not config.get("smoke_steps_per_epoch"):
         raise ValueError("--training-only is restricted to smoke runs")
+    if config["epochs"] < 1 or config.get("smoke_steps_per_epoch", 1) < 1:
+        raise ValueError("Epoch and smoke step counts must be positive")
     run_id = config["run_id"]
     if Path(run_id).name != run_id or run_id in ("", ".", ".."):
         raise ValueError("run_id must be a single directory name")
@@ -297,6 +299,10 @@ def train(
                 "Resume requires the original run configuration and evaluation mode"
             )
     else:
+        if results.exists():
+            raise FileExistsError(
+                f"Evidence already exists in {results}; use a new run_id"
+            )
         output.mkdir(parents=True, exist_ok=False)
         previous = None
     results.mkdir(parents=True, exist_ok=True)

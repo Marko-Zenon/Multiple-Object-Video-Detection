@@ -652,13 +652,13 @@ Completion or handoff note: User approved parallel workers under Badabuba: Claud
 - **Handoff / unblocks:** CH-07 and CH-08 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 17:06 Kyiv | Last update: 2026-11-07 17:06 Kyiv | Branch: ch-04-torchvision-training | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 17:06 Kyiv | Last update: 2026-11-07 17:06 Kyiv | Branch: ch-04-torchvision-training | Commits: ac92cf2 (training core and smoke evidence) | PR: —
+Files changed: movd/tv_train.py, scripts/train_tv.py, tests/test_tv_train.py, configs/runs/smoke_{frcnn,retina}.json, results/smoke_{frcnn,retina}/, plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest tests/test_tv_train.py -q --basetemp outputs/ch04-pytest-final (3 passed); python -u scripts/train_tv.py --training-only --config configs/runs/smoke_{frcnn,retina}.json; repeat Faster R-CNN with --resume after forced interruption
+Metrics / results: Both GPU smokes completed 50 steps with finite losses; Faster R-CNN resumed epoch 2 at global step 25 and completed at step 50. Four-frame stress check produced 500 detections per frame for both models with valid original-pixel boxes and category IDs. AP and speed pending CH-03.
+Artifacts: results/smoke_{frcnn,retina}/{config,curve,metrics,speed,hardware,runtime,prediction_check}.json; results/smoke_frcnn/smoke_notes.md; local ignored outputs/smoke_{frcnn,retina}/epoch_*.pt
+Runtime / hardware: RTX 5070 Laptop GPU 8 GB, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130. 38.25 s Faster R-CNN and 33.40 s RetinaNet training for 100 images each, AMP and two workers.
+Blockers / deviations: CH-03 finish dependency pending. Short, random-weight training-only runs extrapolate to about 107 and 94 min before validation, so the one-hour estimate is unconfirmed. Frozen resize and image budget retained. CUDA RoI Align backward warns about nondeterminism.
 Completion or handoff note: User approved parallel workers under Badabuba: Claude owns CH-03 evaluator/speed; Codex owns CH-04 training and GPU smoke/resume. CH-03 remains a CH-04 finish dependency.
 ```
 
