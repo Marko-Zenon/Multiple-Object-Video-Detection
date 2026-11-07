@@ -40,3 +40,33 @@ dd69338a24b8d7381807e247652bdc356325bcbaf1cd3e092e00e0a1a58706bf.
 
 The preflight estimate was 3 × 119 minutes plus three short smokes,
 based on CH-04, so the inherited 2.5-hour GPU estimate was optimistic.
+
+## Measured runtime and checksums
+
+| Full run | Wall seconds (training + validation and speed) | SHA-256 of input configuration |
+|---|---:|---|
+| frcnn_baseline | 3663.15 | f93d1919083295d44a6d7fb5a57d1c2a7bea5bdf98b539b9d778abc1bedc1ddf |
+| frcnn_rpn_pre3000 | 3969.77 | 1851517004425214319c746fe21b3e66f502973466d2d45bd46f9da49d0f12c4 |
+| frcnn_roi_pos50 | 3868.59 | 1788464686b0f449730de74314aef8424fb18cb8b648d30a93b933bb58e9777d |
+
+Full runs used the RTX 5070 Laptop GPU for 191.69 minutes of wall time
+including evaluator work. Training phases totaled 151.32 minutes. The
+three GPU smokes took a further 88.83 seconds wall time. Generating the
+qualitative cases adds one forward pass over val_fast, separate from the
+timed training runs. FPS uses CH-03's 30 batch-one GPU-resident frames,
+including the model transform and NMS. Dataset decode and host transfer
+are outside that speed benchmark.
+
+`python results/ch-07-frcnn/make_evidence.py --tables-only` regenerates
+comparison.csv from the six-epoch run artifacts. Run without the flag to
+regenerate the figure set with the selected epoch-6 checkpoint. Each
+full run's metrics.json records AP for all eight classes and all density
+bins, along with the labelled maxDets=100 comparison.
+
+The selected RPN change improved val_full AP_small by 0.0170 and overall
+mAP by 0.0020 relative to baseline. AP_large fell by 0.0345, and speed
+fell from 18.69 to 14.85 FPS. Density-bin mAP increased for 20–49 and
+50–99 targets per frame and fell for both 0–19 and 100+ targets.
+The RoI variant had lower overall mAP than baseline. The results are
+one seed per configuration, and CUDA RoI Align backward warns about
+nondeterminism. Student report interpretation remains separate.

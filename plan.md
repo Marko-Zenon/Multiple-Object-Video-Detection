@@ -16,18 +16,18 @@
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟠 PARTIAL / PAUSED | ⛔ NO — decision required | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; code, tests, val round-trip done and pushed (acceptance 1, 2, 4 pass on branch). Paused waiting on: (a) CH-07 DONE with a named validated checkpoint, (b) a free GPU, (c) G2b + G8 student upload. Second-chunk exception (Nazar-approved, 23:46): Claude does CPU-only CH-09 prep during this wait; Codex exclusively owns the GPU until CH-07 is DONE; Claude does not touch CH-07 files, checkpoints, results or notebook section. CH-05 inference resumes first after CH-07, never concurrently with CH-09 training | ch-05-submission (9408fdb, no PR yet) | 2026-11-07 23:46 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
-| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude and CH-05/Claude (Codex owns CH-07 training, checkpoints, results, notebook section; Claude does not use the GPU); GPU runs and failure figures complete; notebook lock taken after CH-06 merged | ch-07-frcnn | 2026-11-08 00:29 Kyiv |
+| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn | 2026-11-08 00:33 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; second chunk while CH-05 is paused on CH-07/GPU/upload (Nazar-approved). CPU prep done and pushed (export + check, adapter GT round trip mAP 1.0, CLIs, configs, pin, 20 tests). Waiting for CH-07 DONE + idle GPU, then CH-05 inference first; only then GPU smoke + baseline. Codex exclusively owns the GPU until CH-07 is DONE; no CH-07 files, checkpoints, results or notebook edits | ch-09-yolo (64f08e6) | 2026-11-08 00:10 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
-| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-07, CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | needs all four families | — | 2026-11-07 15:00 Kyiv |
+| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-05, CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | needs submission tooling & frozen final config | — | 2026-11-07 15:00 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
-🔒 **homework.ipynb lock:** Badabuba (CH-07, taken 2026-11-08 00:29 Kyiv)
+🔒 **homework.ipynb lock:** FREE
 
 ### Gates
 
@@ -817,14 +817,14 @@ Completion or handoff note: all 4 acceptance criteria met (every Stage-1 rubric 
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 21:07 Kyiv | Last update: 2026-11-07 21:07 Kyiv | Branch: ch-07-frcnn | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: User approved parallel workers: Claude owns CH-06, the notebook lock, EDA and CH-06 figures; Codex owns CH-07 configurations, GPU training and CH-07 evidence. Workers preserve each other's files. CH-07 acceptance criterion 5 is deferred until CH-06 merges and releases the notebook lock.
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 21:07 Kyiv | Last update: 2026-11-08 00:33 Kyiv | Branch: ch-07-frcnn | Commits: ec9f3dd, ca9dd33, 652c6a5 and the final evidence commit | PR: —
+Files changed: configs/runs/frcnn_{baseline,rpn_pre3000,roi_pos50}.json; results/frcnn_*; results/ch-07-frcnn; homework.ipynb (two appended cells); plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest -q --basetemp outputs/ch07-pytest-final (62 passed); ruff check results/ch-07-frcnn/make_evidence.py movd/tv_train.py scripts/train_tv.py tests/test_tv_train.py; python scripts/train_tv.py --config outputs/<run>_smoke.json --training-only (three); python scripts/train_tv.py --config configs/runs/<run>.json (three); python results/ch-07-frcnn/make_evidence.py and --tables-only (byte-identical CSV); nbformat validation and clean-kernel nbclient execution of only the two new cells, all 88 prior cells and outputs preserved; git diff --check
+Metrics / results: Baseline / RPN pre3000 / RoI pos50: final val_fast mAP 0.18959 / 0.19255 / 0.18327; val_full mAP 0.18733 / 0.18934 / 0.18136, AP50 0.38078 / 0.38467 / 0.36430, AP_small 0.09126 / 0.10829 / 0.10035; 18.69 / 14.85 / 17.48 FPS. Selected RPN by final val_fast mAP. All runs saw 16,800 images over six epochs; every val_full result uses 2,846 frames and global maxDets 500.
+Artifacts: results/ch-07-frcnn/{protocol.md,comparison.csv,failure_analysis.md,failure_cases.csv,figures/,make_evidence.py}; results/frcnn_{baseline,rpn_pre3000,roi_pos50}{,_smoke}/{config,curve,metrics,hardware,runtime,speed}.json; local ignored outputs/<run>/epoch_*.pt. Config and weight SHA-256 recorded in protocol.md.
+Runtime / hardware: RTX 5070 Laptop GPU 8 GB, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130, AMP, batch two, two workers. Full runs 3663.15 / 3969.77 / 3868.59 s wall (191.69 min combined, 151.32 min training); smokes 88.83 s wall; one additional val_fast prediction pass for figure generation.
+Blockers / deviations: Short-smoke forecast was about six hours; observed full-run wall was about 3 h 12 min. One seed, CUDA RoI Align backward warns about nondeterminism. Whole-repo Ruff reported 16 existing findings outside CH-07 before integration of CH-06; scoped Ruff passed. RoI negative overall AP and RPN large-object/speed regressions retained. Legacy v0 kept separately.
+Completion or handoff note: User approved parallel CH-06 (Claude CPU/EDA/notebook) and CH-07 (Codex GPU/Faster R-CNN) work under Badabuba. Acceptance 5 was deferred until CH-06 merged and released the lock; CH-07 then claimed, appended and validated its own section and releases the lock with this PR. CH-12 still needs CH-08, CH-10 and CH-11. GPU training is finished.
 ```
 
 ---
