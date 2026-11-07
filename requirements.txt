@@ -10,9 +10,16 @@ ipykernel>=6.25,<8
 jupyterlab>=4,<5
 
 # Detection experiments. Install a matched PyTorch/torchvision build for your device.
+# CUDA build (needed for RTX 50xx / sm_120; verified on Windows, CPython 3.12) — install it first:
+#   pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu130
+# then: pip install -r requirements.txt   (plain PyPI otherwise gives a CPU-only torch on Windows)
 torch==2.14.1
 torchvision==0.29.1
 pycocotools==2.0.11
 ijson==3.6.0
+opencv-python==5.0.0.93
+tqdm==4.70.1
+# Tests.
+pytest==9.2.0
 # Formatting used for Python modules and notebook code cells.
 ruff==0.17.3
