@@ -1,0 +1,4 @@
+split,clips,frames,frames/clip min,frames/clip median,frames/clip max,resolutions,target objects,crowd annotations (iscrowd=1),unique ignore regions,frames with ignore regions,frames without targets
+train,56,24201,58,383,1424,6,1105516.0,510744.0,63843.0,18090.0,3.0
+val,7,2846,184,349,978,5,114132.0,31960.0,3995.0,1434.0,0.0
+test,48,3811,35,73,148,6,,,,,
