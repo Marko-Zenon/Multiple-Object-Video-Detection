@@ -1,0 +1,13 @@
+{
+  "frames": "first four val_fast frames",
+  "score_threshold_for_check": 0,
+  "detections_per_image": {
+    "1": 500,
+    "5": 500,
+    "9": 500,
+    "13": 500
+  },
+  "original_pixel_bounds": "passed",
+  "category_id_range": "1-8",
+  "scores_finite_in_unit_interval": true
+}

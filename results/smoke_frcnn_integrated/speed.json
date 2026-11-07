@@ -1,0 +1,23 @@
+{
+  "inference": {
+    "fps": 19.39093587482936,
+    "latency_ms_per_image": 51.57048666733317,
+    "latency_ms_per_batch": {
+      "mean": 51.57048666733317,
+      "median": 51.07489999500103,
+      "p90": 52.58767001214437,
+      "min": 49.84320001676679
+    },
+    "timed_batches": 30,
+    "warmup_batches": 10,
+    "batch_size": 1,
+    "input_size": "756\u20131344",
+    "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS.",
+    "device": "cuda",
+    "torch": "2.14.1+cu130",
+    "python": "3.12.14",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "cuda": "13.0"
+  },
+  "status": "complete"
+}
