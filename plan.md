@@ -11,21 +11,21 @@
 | ID | Chunk | State | Start now? | Owner | Depends on | Blocked by / reason | Branch / PR | Last update |
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
-| CH-02 | Protocol freeze, Kaggle facts, data module | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | waiting on student Kaggle read for G1–G3 (close time UTC, metric, limits, sample_submission.csv); all other scope pushed to branch | ch-02-protocol-data | 2026-11-07 17:05 Kyiv |
-| CH-03 | Evaluator, speed benchmark, tests | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 | label map, ignore policy, Kaggle metric come from CH-02 | — | 2026-11-07 15:00 Kyiv |
-| CH-04 | Torchvision training core | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03 | needs frozen protocol & data module | — | 2026-11-07 15:00 Kyiv |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | needs label map & submission format (G3) | — | 2026-11-07 15:00 Kyiv |
+| CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
+| CH-03 | Evaluator, speed benchmark, tests | 🟢 READY | 🟢 YES | — | start: CH-02 | — (policy in `configs/protocol.json` / §4) | — | 2026-11-07 17:00 Kyiv |
+| CH-04 | Torchvision training core | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
+| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:00 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03 | needs frozen protocol & ignore policy | — | 2026-11-07 15:00 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-07, CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | needs all four families | — | 2026-11-07 15:00 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-05, CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | needs submission tooling & frozen final config | — | 2026-11-07 15:00 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
-| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gate: G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
+| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
 
@@ -33,10 +33,12 @@
 
 | ID | Gate | Status | Owner | Resolved by / where |
 |---|---|---|---|---|
-| G1 | Deadline 2026-11-10 23:55 Kyiv; confirm Kaggle's UTC close time | OPEN | either student | CH-02 §4 |
-| G2 | Kaggle metric definition (IoU thresholds, ignore handling, max dets), daily submission limit, number of final selections | OPEN | either student | CH-02 §4 |
-| G3 | Sample submission header/format (`sample_submission.csv` is not in the ZIP; download from Kaggle Data tab) | OPEN | either student | CH-02 §4 |
-| G4 | Ignore-file format and semantics (relation to COCO `iscrowd`) | OPEN | CH-02 owner | CH-02 §4 |
+| G1 | Exact Kaggle close time in UTC (plan target: 2026-11-10 23:55 Kyiv). Operational | OPEN | either student | Not on the supplied official pages (they show only a relative "Close: 2 days to go"). Finish gate of CH-16; resolve before the freeze |
+| G2a | Internal evaluation protocol: metric, IoU thresholds, ignore handling, max dets. Technical | RESOLVED | Badabuba | CH-02: rubric-required standard COCO (pycocotools, AP@0.50:0.05:0.95, AP50/75, AP_S/M/L), GT with `iscrowd=1` kept, maxDets 500. Sources: the assignment + Kaggle Data text (ignored-region detections not penalized; ≤ 500 dets scored). The hidden Kaggle scorer code was not exposed and is not claimed identical |
+| G2b | Kaggle daily submission limit. Operational | OPEN | either student | Not on the supplied official pages. Check on the Kaggle submit page before CH-05's first upload |
+| G2c | Number of final selections | RESOLVED | Badabuba | CH-02: 2, chosen by internal evaluation, not only the public LB (Kaggle Rules, official Kaggle Overview/Rules/Data text copied by Badabuba 2026-11-07) |
+| G3 | Submission header/format | RESOLVED | Badabuba | CH-02: `image_id,PredictionString`, one row per test image, groups `class score x y width height` (class 0–7, top-left, original px), empty string valid (Kaggle Data text). `sample_submission.csv` is missing from the official ZIP (77,434 entries), so a canonical copy is generated by `scripts/make_sample_submission.py` (git-ignored) |
+| G4 | Ignore-file format and semantics (relation to COCO `iscrowd`) | RESOLVED | Badabuba | CH-02: `ignore/*.txt` = normalized `cx cy w h`, no class (VisDrone orig 0 + 11); each region is in the COCO JSON once per class with `iscrowd=1, ignore=1`; 100 % match on train + val (`results/ch-02-protocol/data_facts.json`) |
 | G5 | GitHub Pages enabled (Settings → Pages → Source: GitHub Actions); admin only | OPEN | Marko-Zenon | start gate of CH-15 |
 | G6 | Nazar's commit email linked to GitHub `Badabuba` | RESOLVED | Badabuba | CH-01: GitHub API maps `mykolaichuk.pn@ucu.edu.ua` commits to login `Badabuba` |
 | G7 | PyTorch CUDA wheel with sm_120 support works on the RTX 5070 | RESOLVED | CH-01 owner | CH-01: torch 2.14.1+cu130, CUDA conv + NMS verified |
@@ -115,7 +117,7 @@ architectures, and any other bonus task. Do not rewrite the legacy notebook.
 
 ## 4. Frozen protocol and interfaces
 
-Values marked **PENDING CH-02** are filled in by CH-02 and then frozen. Changing a frozen value requires a §11 change-log entry
+All values below were frozen by CH-02 on 2026-11-07 (machine-readable copy: `configs/protocol.json`). Changing a frozen value requires a §11 change-log entry
 that a student has approved.
 
 | Item | Value |
@@ -123,16 +125,16 @@ that a student has approved.
 | Dataset root | `./multiple-object-video-detection-hw-2-ucu-ai-2026/` with `train/`, `val/`, `test/` and `test_images.csv` directly inside |
 | Split | Provided clip-level split: 56 train clips / 7 val clips (0 overlap, verified in the legacy notebook). Test = 48 clips |
 | `val_full` | All 2,846 val frames. Every reported headline number uses it |
-| `val_fast` | PENDING CH-02 (fixed list, about every 4th val frame, all 7 clips). Used only for per-epoch curves |
-| `train_rubric` | PENDING CH-02 (fixed, clip-stratified frame subsample, used for all four-family comparisons) |
-| Rubric compute budget | PENDING CH-02. Rule: the same `train_rubric` list, the same number of images seen (epochs × frames) and the same input long side for all compared runs. Report wall-clock and GPU too. Target ≤ 60 min per run on the RTX 5070 |
+| `val_fast` | `configs/splits/val_fast.json`: 714 frames = every 4th frame of each of the 7 val clips, from the first frame. Used only for per-epoch curves |
+| `train_rubric` | `configs/splits/train_rubric.json`: 2,800 frames = 50 evenly spaced frames (`np.linspace`, legacy rule) from each of the 56 train clips. Used for all four-family comparisons. Deterministic (`python scripts/make_splits.py --check`) |
+| Rubric compute budget | `train_rubric` × **6 epochs = 16,800 images seen**, input **long side 1344 px** (aspect kept; torchvision `max_size=1344, min_size=756`, Ultralytics `imgsz=1344`), batch size recorded per run. Measured on the RTX 5070 (AMP, bs 2, no data loading): Faster R-CNN v2 8.38 img/s → ≈ 33 min, RetinaNet v2 10.19 img/s; ≈ 40 % headroom to the 60 min target. Same list, images seen and long side for all compared runs; report wall-clock and GPU too |
 | Seed | 42 (logged per run) |
-| Label map | COCO `category_id` 1–8 (person, bicycle, car, van, truck, tricycle, bus, motor) ↔ submission class 0–7 = `category_id − 1`. **PENDING CH-02** confirmation against G3 and YOLO labels |
-| Ignore-region policy | **PENDING CH-02** (G2, G4). It covers (a) the training treatment and (b) the evaluation rule. Masking ignored regions in training images is the leading candidate; the evaluation rule must match the Kaggle metric |
-| Prediction interchange format | COCO results JSON: list of `{"image_id": int, "category_id": 1–8, "bbox": [x, y, w, h] in original image pixels, "score": float}`. For test images, `image_id` follows the `test_images.csv` mapping (PENDING CH-02) |
-| Evaluator settings | `movd/evaluate.py` (CH-03): COCO bbox, maxDets 500 headline (100 also reported for legacy comparison), mAP, AP50, AP75, AP_S/M/L, per-class AP |
-| Submission format | One row per `test_images.csv` image. The predictions column holds space-separated groups `class score x y width height`. ≤ 500 groups. Header PENDING CH-02 (G3) |
-| Kaggle | Baseline 0.22163 (public LB). Metric, daily limit and number of final selections PENDING CH-02 (G2) |
+| Label map | COCO `category_id` 1–8 (person, bicycle, car, van, truck, tricycle, bus, motor) ↔ submission/YOLO class 0–7 = `category_id − 1`. Confirmed: Kaggle Data text (class 0–7) and the provided YOLO labels (24,339 boxes, 0 mismatches). Merged VisDrone ids: 1+2→person, 3→bicycle, 4→car, 5→van, 6→truck, 7+8→tricycle, 9→bus, 10→motor |
+| Ignore-region policy | **Training:** crowd annotations are never targets; ignore regions are filled with the ImageNet mean (124, 116, 104) except pixels inside labelled target boxes (`movd.data.mask_ignore_regions`, figure `results/ch-02-protocol/figures/ignore_masking_check.png`). **Evaluation:** the provided COCO GT unchanged, `iscrowd=1` copies kept (one per class), so pycocotools ignores detections in those regions for every class. Matches the Kaggle Data text: detections inside ignored regions are not penalized |
+| Prediction interchange format | COCO results JSON: list of `{"image_id": int, "category_id": 1–8, "bbox": [x, y, w, h] in original image pixels, "score": float}`. Val: COCO image id. Test: `image_id` = 1-based row number in `test_images.csv` (`movd.data.load_test_images()[i]["id"]`); the submission uses its string `image_key` (e.g. `clip_001_0000001`) |
+| Evaluator settings | `movd/evaluate.py` (CH-03): rubric-required standard COCO bbox via pycocotools. **Primary: mAP = AP@IoU 0.50:0.05:0.95**, plus AP50, AP75, AP_S/M/L (COCO area ranges), per-class AP. **maxDets 500** headline (Kaggle scores ≤ 500 dets/image); maxDets 100 only for the legacy-comparability note. Headline split `val_full` |
+| Submission format | Header `image_id,PredictionString`; exactly one row per `test_images.csv` image (3,811), in its order; groups `class score x y width height` (class 0–7, top-left x y, original pixels), space-separated; empty string valid; ≤ 500 groups scored. Local canonical sample: `scripts/make_sample_submission.py` (the official ZIP lacks the file) |
+| Kaggle | Baseline 0.22163 (public LB). **2 final selections**, chosen by internal evaluation (Rules). Ignored-region detections not penalized; ≤ 500 dets/image scored (Data). Hidden scorer code not exposed. **Unknown:** daily limit (G2b, before CH-05's upload), exact UTC close time (G1, before CH-16 freeze) |
 | Framework decision | Two-stage and one-stage anchor-based: torchvision (Faster R-CNN R50-FPN v2, RetinaNet R50-FPN v2). Anchor-free: Ultralytics **YOLO11**. Query-based: Ultralytics **RT-DETR** (`rtdetr-l` unless the smoke test forces otherwise). Exact package and weight versions are pinned and cited. AGPL-3.0 notice in the README |
 
 ## 5. Dependencies
@@ -150,10 +152,10 @@ Dependency kinds:
 | ID | start | finish | machine | gates |
 |---|---|---|---|---|
 | CH-01 | — | — | M-ZIP, M-GPU (set up here) | G6 (check), G7 |
-| CH-02 | — | — | M-DATA | G1, G2, G3, G4 (resolved here) |
+| CH-02 | — | — | M-DATA | G2a, G2c, G3, G4 (resolved here); G1, G2b re-scoped as operational |
 | CH-03 | CH-02 | — | M-DATA | — |
 | CH-04 | CH-02 | CH-03 | M-DATA, M-GPU | — |
-| CH-05 | CH-02 | CH-03, CH-04 or CH-09 | M-DATA, M-GPU | G8 |
+| CH-05 | CH-02 | CH-03, CH-04 or CH-09 | M-DATA, M-GPU | G2b, G8 (before the first upload) |
 | CH-06 | — | — | M-DATA, 🔒 | — |
 | CH-07 | CH-04 | — | M-DATA, M-GPU, 🔒 short | — |
 | CH-08 | CH-04 | — | M-DATA, M-GPU, 🔒 short | — |
@@ -164,7 +166,7 @@ Dependency kinds:
 | CH-13 | CH-12 | — | M-DATA, M-GPU | — |
 | CH-14 | CH-05, CH-12 | CH-13 | M-DATA, M-GPU | G8 |
 | CH-15 | — | — | CPU | G5 (start gate) |
-| CH-16 | CH-01, CH-06, CH-12, CH-14, CH-15 | — | CPU (clean env) | G6, G10 (finish gates) |
+| CH-16 | CH-01, CH-06, CH-12, CH-14, CH-15 | — | CPU (clean env) | G1, G6, G10 (finish gates) |
 
 DAG (start edges `→`, finish edges `⇢`). It has no cycles:
 
@@ -500,14 +502,57 @@ Completion or handoff note: M-DATA and M-GPU are satisfied on Nazar's machine. O
 - **Handoff / unblocks:** CH-03, CH-04, CH-05 and CH-09 become READY (their start dependency).
 - **Evidence log:**
 ```text
-Owner: Badabuba | Claimed: 2026-11-07 16:34 Kyiv | Last update: 2026-11-07 16:34 Kyiv | Branch: ch-02-protocol-data | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba | Claimed: 2026-11-07 16:34 Kyiv | Last update: 2026-11-07 17:00 Kyiv | Branch: ch-02-protocol-data | Commits: e0fa838, 0b59367, 77f8725, 9c4aab4 (+ PR-link commit) | PR: #2 (https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2)
+Files changed: movd/__init__.py, movd/data.py; tests/test_data.py, tests/test_sample_submission.py; scripts/make_splits.py,
+  scripts/make_sample_submission.py; configs/protocol.json, configs/splits/{train_rubric,val_fast,val_full}.json;
+  configs/legacy/{data.json,experiments.json} (git mv), configs/legacy/README.md; results/ch-02-protocol/{inspect_dataset.py,
+  data_facts.json,make_mask_figure.py,figures/ignore_masking_check.png}; plan.md (§1 rows, gates, §4, §5, §11, this log).
+Validation commands:
+  python -m pytest tests -q                       -> 38 passed (30 test_data + 8 test_sample_submission), 7.8 s
+  python scripts/make_splits.py --check           -> [OK] x3, canonical sha256 train_rubric 58acdbb35f1b6fed…,
+                                                     val_fast e4eaf32da5896462…, val_full 1a09ab8ac02b1e2b… (= written)
+  python scripts/make_sample_submission.py [--check] -> [OK] header image_id,PredictionString, 3811 rows, ids unique,
+                                                     same order as test_images.csv, none missing/extra, all empty,
+                                                     sha256 aee0b5dcd332c05c3658a9e34a0dee1c1eb5f2e3cb14da40b61c7574d56f37b2
+  python results/ch-02-protocol/inspect_dataset.py  -> data_facts.json (12.6 s)
+  python results/ch-02-protocol/make_mask_figure.py -> figures/ignore_masking_check.png (1 val + 1 train frame, checked visually)
+  python scripts/check_dataset.py                 -> PASSED (M-DATA)
+Metrics / results (verified facts):
+  - ignore/*.txt: one line per region, normalized "cx cy w h", no class; = VisDrone orig 0 (ignored regions) + 11 (others).
+    COCO JSON repeats each region once per category 1–8 (iscrowd=1, ignore=1): train 63,843 regions x 8 = 510,744,
+    val 3,995 x 8 = 31,960; 100 % of COCO regions matched in the txt files (train and val).
+  - Targets with >= 50 % of their area in an ignore region: train 1.07 % (11,883), val 1.06 % (1,208) -> masking keeps target pixels.
+  - Label map: merged VisDrone 1+2->1, 3->2, 4->3, 5->4, 6->5, 7+8->6, 9->7, 10->8; YOLO class = category_id-1 (24,339 boxes, 0 mismatch).
+  - Splits: train_rubric 2,800 (50/clip x 56), val_fast 714 (every 4th, 7 clips), val_full 2,846; 0 train/val clip overlap.
+  - Budget: 6 epochs x 2,800 = 16,800 images, long side 1344. RTX 5070 synthetic train step (AMP, bs 2): Faster R-CNN v2
+    8.38 img/s (3.33 GiB), RetinaNet v2 10.19 img/s at 1344; 6.09 / 7.17 img/s at 1600 -> about 33 min for Faster R-CNN.
+  - Test: 3,811 frames, 48 clips; image_id is a string (clip_001_0000001); sizes include 680x382 and 960x540.
+Confirmed official facts (Kaggle Overview/Rules/Data text copied by Badabuba, 2026-11-07):
+  - Detections inside ignored regions are not penalized; COCO ignored annotations use iscrowd=1; <= 500 dets/image scored.
+  - Submission: image_id,PredictionString; one row per test image; "class score x y width height", class 0–7, top-left,
+    original pixels; empty PredictionString valid.
+  - 2 final selections, chosen by internal evaluation, not only the public LB.
+  Frozen internal metric (rubric-required standard COCO, pycocotools): mAP = AP@0.50:0.05:0.95, plus AP50, AP75, AP_S/M/L,
+  per-class AP, maxDets 500 headline, 100 for the legacy note only, GT incl. iscrowd=1 regions, on val_full.
+Unresolved operational facts (not on the supplied pages, NOT recorded as values): exact UTC close time (G1, finish gate of
+  CH-16); daily submission limit (G2b, before CH-05's first upload); hidden Kaggle scorer code (not exposed; the internal
+  protocol is not claimed identical to it).
+Artifacts: configs/protocol.json, configs/splits/*.json, results/ch-02-protocol/ (data_facts.json, figure, scripts).
+  Local only (git-ignored): multiple-object-video-detection-hw-2-ucu-ai-2026/sample_submission.csv.
+Runtime / hardware: about 30 min of agent work; CPU inspection < 1 min per script; GPU benchmark about 2 min.
+  Nazar's laptop: RTX 5070 Laptop 8 GB, Windows 11, Python 3.12 .venv, torch 2.14.1+cu130, torchvision 0.29.1+cu130.
+Blockers / deviations:
+  - sample_submission.csv is listed in the official Data description but missing from the "Download All" ZIP
+    (77,434 entries; only CSV is test_images.csv). The local copy is generated from the documented schema and
+    test_images.csv order by scripts/make_sample_submission.py, not downloaded; it is git-ignored and never committed.
+  - Acceptance 1 ("G1–G4 resolved") is met with a re-scope approved by Badabuba (§11): G2 split into G2a/G2b/G2c; G1 and G2b
+    are operational gates carried by CH-16 and CH-05, since the official pages do not state them.
+  - Throughput is a synthetic estimate without data loading; Ultralytics was not installed, so YOLO11/RT-DETR time is not
+    measured here (RT-DETR: gate G9 in CH-11).
+  - Added scripts/make_splits.py, scripts/make_sample_submission.py, tests/test_sample_submission.py and results/ch-02-protocol/
+    scripts beyond the expected file list (generators and evidence for the validation steps).
+Completion or handoff note: CH-03, CH-04, CH-05 and CH-09 set READY (start dep CH-02 DONE). CH-03 implements the evaluation
+  rule above in movd/evaluate.py; CH-04/CH-09 use movd.data.training_sample / mask_ignore_regions for training data.
 ```
 
 ---
@@ -1167,6 +1212,7 @@ Completion or handoff note: —
 | Date (Kyiv) | Change | By | Approved by |
 |---|---|---|---|
 | 2026-11-07 15:00 | Initial coordination setup: `develop` branch, `CLAUDE.md`, `plan.md` with 16 chunks | Badabuba (via Claude) | Badabuba |
+| 2026-11-07 17:00 | CH-02 freezes §4. G2 split into G2a (internal metric, resolved), G2b (daily limit, operational, before CH-05's upload) and G2c (2 final selections, resolved). G1 (UTC close time) re-scoped as an operational finish gate of CH-16. Neither value is on the supplied official pages; neither blocks the technical protocol | Badabuba (via Claude) | Badabuba |
 
 ## 12. Definition of done and rubric audit checklist
 
