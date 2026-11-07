@@ -1,0 +1,343 @@
+{
+  "description": "CH-03 sanity checks of movd/evaluate.py on the real val annotations -> results/ch-03-evaluator/sanity.json.",
+  "val_ignore_regions": 3995,
+  "val_images_with_over_100_targets": 189,
+  "checks": {
+    "gt_as_predictions_val_fast": {
+      "split": "val_fast",
+      "num_images": 714,
+      "num_predictions": 28685,
+      "metrics": {
+        "mAP": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0,
+        "AP_small": 1.0,
+        "AP_medium": 1.0,
+        "AP_large": 1.0
+      },
+      "metrics_maxdets100": {
+        "mAP": 0.9839108910891089,
+        "AP50": 0.9839108910891089,
+        "AP75": 0.9839108910891089,
+        "AP_small": 1.0,
+        "AP_medium": 0.9789603960396039,
+        "AP_large": 1.0
+      },
+      "per_class_AP": {
+        "person": 1.0,
+        "bicycle": 1.0,
+        "car": 1.0,
+        "van": 1.0,
+        "truck": 1.0,
+        "tricycle": 1.0,
+        "bus": 1.0,
+        "motor": 1.0
+      },
+      "density": [
+        {
+          "bin": "0-19",
+          "num_images": 245,
+          "num_gt": 3400,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "20-49",
+          "num_images": 264,
+          "num_gt": 10066,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "50-99",
+          "num_images": 157,
+          "num_gt": 10090,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": ">=100",
+          "num_images": 48,
+          "num_gt": 5129,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 0.8
+        }
+      ],
+      "eval_seconds": 13.2
+    },
+    "gt_as_predictions_val_full": {
+      "split": "val_full",
+      "num_images": 2846,
+      "num_predictions": 114132,
+      "metrics": {
+        "mAP": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0,
+        "AP_small": 1.0,
+        "AP_medium": 1.0,
+        "AP_large": 0.9999988520591189
+      },
+      "metrics_maxdets100": {
+        "mAP": 0.9839108910891089,
+        "AP50": 0.9839108910891089,
+        "AP75": 0.9839108910891089,
+        "AP_small": 1.0,
+        "AP_medium": 0.9801980198019802,
+        "AP_large": 0.9999988520591189
+      },
+      "per_class_AP": {
+        "person": 1.0,
+        "bicycle": 1.0,
+        "car": 1.0,
+        "van": 1.0,
+        "truck": 1.0,
+        "tricycle": 1.0,
+        "bus": 1.0,
+        "motor": 1.0
+      },
+      "density": [
+        {
+          "bin": "0-19",
+          "num_images": 977,
+          "num_gt": 13557,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "20-49",
+          "num_images": 1062,
+          "num_gt": 40626,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "50-99",
+          "num_images": 618,
+          "num_gt": 39746,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": ">=100",
+          "num_images": 189,
+          "num_gt": 20203,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 0.8
+        }
+      ],
+      "eval_seconds": 52.8
+    },
+    "gt_plus_ignore_region_dets_val_fast": {
+      "split": "val_fast",
+      "num_images": 714,
+      "num_predictions": 29692,
+      "metrics": {
+        "mAP": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0,
+        "AP_small": 1.0,
+        "AP_medium": 1.0,
+        "AP_large": 1.0
+      },
+      "metrics_maxdets100": {
+        "mAP": 0.9839108910891089,
+        "AP50": 0.9839108910891089,
+        "AP75": 0.9839108910891089,
+        "AP_small": 1.0,
+        "AP_medium": 0.9789603960396039,
+        "AP_large": 1.0
+      },
+      "per_class_AP": {
+        "person": 1.0,
+        "bicycle": 1.0,
+        "car": 1.0,
+        "van": 1.0,
+        "truck": 1.0,
+        "tricycle": 1.0,
+        "bus": 1.0,
+        "motor": 1.0
+      },
+      "density": [
+        {
+          "bin": "0-19",
+          "num_images": 245,
+          "num_gt": 3400,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "20-49",
+          "num_images": 264,
+          "num_gt": 10066,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "50-99",
+          "num_images": 157,
+          "num_gt": 10090,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": ">=100",
+          "num_images": 48,
+          "num_gt": 5129,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 0.8
+        }
+      ],
+      "eval_seconds": 13.5
+    },
+    "control_crowd_removed_val_fast": {
+      "split": "val_fast",
+      "num_images": 714,
+      "num_predictions": 29692,
+      "metrics": {
+        "mAP": 0.8667292267890785,
+        "AP50": 0.8667292267890785,
+        "AP75": 0.8667292267890785,
+        "AP_small": 1.0,
+        "AP_medium": 0.8760487376844094,
+        "AP_large": 0.8122011724100039
+      },
+      "metrics_maxdets100": {
+        "mAP": 0.8584722183206933,
+        "AP50": 0.8584722183206934,
+        "AP75": 0.8584722183206934,
+        "AP_small": 1.0,
+        "AP_medium": 0.8549737419845634,
+        "AP_large": 0.8269406542636493
+      },
+      "per_class_AP": {
+        "person": 0.9917068271950545,
+        "bicycle": 0.9261033980788161,
+        "car": 0.9905451554424385,
+        "van": 0.9502175516481101,
+        "truck": 0.7399563966185365,
+        "tricycle": 0.8945998698763824,
+        "bus": 0.45833333333333326,
+        "motor": 0.9823712821199573
+      },
+      "density": [
+        {
+          "bin": "0-19",
+          "num_images": 245,
+          "num_gt": 3400,
+          "mAP": 1.0,
+          "AP50": 1.0,
+          "mAP_maxdets100": 1.0
+        },
+        {
+          "bin": "20-49",
+          "num_images": 264,
+          "num_gt": 10066,
+          "mAP": 0.8572116269262002,
+          "AP50": 0.8572116269262002,
+          "mAP_maxdets100": 0.8572116269262002
+        },
+        {
+          "bin": "50-99",
+          "num_images": 157,
+          "num_gt": 10090,
+          "mAP": 0.8967653425623288,
+          "AP50": 0.8967653425623288,
+          "mAP_maxdets100": 0.8972540421124561
+        },
+        {
+          "bin": ">=100",
+          "num_images": 48,
+          "num_gt": 5129,
+          "mAP": 0.9995909168426136,
+          "AP50": 0.9995909168426137,
+          "mAP_maxdets100": 0.8
+        }
+      ],
+      "eval_seconds": 12.6
+    },
+    "label_shift_val_fast": {
+      "split": "val_fast",
+      "num_images": 714,
+      "num_predictions": 28685,
+      "metrics": {
+        "mAP": 0.00038033763241738513,
+        "AP50": 0.002034774834993049,
+        "AP75": 3.472033923524788e-05,
+        "AP_small": 4.3719825863779415e-05,
+        "AP_medium": 0.0004094128346629698,
+        "AP_large": 0.001996500836547939
+      },
+      "metrics_maxdets100": {
+        "mAP": 0.00038177671888271335,
+        "AP50": 0.002020649555105059,
+        "AP75": 3.594672590924782e-05,
+        "AP_small": 4.3719825863779415e-05,
+        "AP_medium": 0.0004107161204804871,
+        "AP_large": 0.001996500836547939
+      },
+      "per_class_AP": {
+        "person": 0.0013465975605640034,
+        "bicycle": 0.001658217357495758,
+        "car": 0.0,
+        "van": 3.788614127931963e-05,
+        "truck": 0.0,
+        "tricycle": 0.0,
+        "bus": 0.0,
+        "motor": 0.0
+      },
+      "density": [
+        {
+          "bin": "0-19",
+          "num_images": 245,
+          "num_gt": 3400,
+          "mAP": 4.6575517820305156e-05,
+          "AP50": 0.00010339174146156534,
+          "mAP_maxdets100": 4.6575517820305156e-05
+        },
+        {
+          "bin": "20-49",
+          "num_images": 264,
+          "num_gt": 10066,
+          "mAP": 2.5832256393190264e-05,
+          "AP50": 0.00017304117839101848,
+          "mAP_maxdets100": 2.5832256393190264e-05
+        },
+        {
+          "bin": "50-99",
+          "num_images": 157,
+          "num_gt": 10090,
+          "mAP": 0.00010499182035223686,
+          "AP50": 0.00048115737491152626,
+          "mAP_maxdets100": 0.00010499182035223686
+        },
+        {
+          "bin": ">=100",
+          "num_images": 48,
+          "num_gt": 5129,
+          "mAP": 0.003817156911762086,
+          "AP50": 0.018545779296286546,
+          "mAP_maxdets100": 0.003973917023708187
+        }
+      ],
+      "eval_seconds": 5.8
+    }
+  },
+  "passed": {
+    "val_fast_map_ge_0.99": true,
+    "ignore_region_dets_not_penalized": true,
+    "ignore_rule_active_control_drops": true,
+    "label_shift_collapses": true
+  }
+}
