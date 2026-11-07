@@ -15,7 +15,7 @@
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 and CH-04 ✅; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:43 Kyiv |
-| CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / PR (link follows) | 2026-11-07 19:20 Kyiv |
+| CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude; acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
@@ -750,7 +750,7 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-16. Its evidence feeds the report.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 19:00 Kyiv | Last update: 2026-11-07 19:20 Kyiv | Branch: ch-06-eda | Commits: 4be64d9 (work), 4b46ac3 (merge origin/develop), this completion commit | PR: link follows
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 19:00 Kyiv | Last update: 2026-11-07 19:20 Kyiv | Branch: ch-06-eda | Commits: 4be64d9 (work), 4b46ac3 (merge origin/develop), c0c0246 (completion) | PR: https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5
 Files changed: homework.ipynb (+30 cells: 13 code, 17 markdown; all 58 legacy cells unchanged), results/ch-06-eda/ (10 figures, 17 CSV tables, key_numbers.json, run_stage1.py), plan.md (own row, CH-16 recalculation, lock, this log)
 Validation commands:
   python scripts/check_dataset.py                      -> PASSED
