@@ -259,6 +259,45 @@ def predict_coco(model, loader, family, amp):
     return predictions
 
 
+def validation_frames(config, split):
+    root = config.get("dataset_root")
+    return VisDroneDataset(
+        "val", data.split_image_ids(split), data.load_coco("val", root), root
+    )
+
+
+def evaluate_validation(model, config, split, amp):
+    from movd.evaluate import evaluate_split
+
+    frames = validation_frames(config, split)
+    predictions = predict_coco(
+        model, make_loader(frames, config), config["family"], amp
+    )
+    return evaluate_split(predictions, split=split, root=config.get("dataset_root"))
+
+
+def measure_validation_speed(model, config, amp):
+    from movd.speed import benchmark
+
+    frames = validation_frames(config, "val_full")
+    batches = [[frames[index][0].cuda()] for index in range(30)]
+    model.eval()
+
+    def forward(batch):
+        with torch.autocast("cuda", enabled=amp):
+            return model(batch)
+
+    return benchmark(
+        forward,
+        batches,
+        "cuda",
+        batch_size=1,
+        warmup=10,
+        input_size=f"{model.transform.min_size[0]}–{model.transform.max_size}",
+        note="First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS.",
+    )
+
+
 def save_json(path, value):
     temp = path.with_suffix(".tmp")
     temp.write_text(
@@ -273,13 +312,7 @@ def save_checkpoint(path, checkpoint):
     temp.replace(path)
 
 
-def train(
-    config, resume=False, training_only=False, evaluate_epoch=None, evaluate_final=None
-):
-    if not training_only and (evaluate_epoch is None or evaluate_final is None):
-        raise RuntimeError(
-            "Evaluation requires CH-03. Use --training-only for a smoke run."
-        )
+def train(config, resume=False, training_only=False):
     if training_only and not config.get("smoke_steps_per_epoch"):
         raise ValueError("--training-only is restricted to smoke runs")
     if config["epochs"] < 1 or config.get("smoke_steps_per_epoch", 1) < 1:
@@ -383,7 +416,11 @@ def train(
         row["global_step"] = (history[-1]["global_step"] if history else 0) + row[
             "steps"
         ]
-        row["val_fast"] = None if training_only else evaluate_epoch(model, config)
+        optimizer.zero_grad(set_to_none=True)
+        row["val_fast"] = None
+        if not training_only:
+            validation = evaluate_validation(model, config, "val_fast", amp)
+            row["val_fast"] = validation["metrics"]
         row["epoch_seconds"] = time.perf_counter() - epoch_start
         history.append(row)
         save_checkpoint(
@@ -403,7 +440,10 @@ def train(
             flush=True,
         )
 
-    metrics, speed = (None, None) if training_only else evaluate_final(model, config)
+    metrics, speed = None, None
+    if not training_only:
+        metrics = evaluate_validation(model, config, "val_full", amp)
+        speed = measure_validation_speed(model, config, amp)
     save_json(
         results / "metrics.json",
         {

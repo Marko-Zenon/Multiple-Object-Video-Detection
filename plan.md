@@ -13,11 +13,11 @@
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
-| CH-04 | Torchvision training core | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; user-approved parallel work with CH-03/Claude; finish dep CH-03 ✅ DONE (use `movd.evaluate` for metrics) | ch-04-torchvision-training | 2026-11-07 17:06 Kyiv |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 ✅; finish still needs CH-04 or CH-09; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:18 Kyiv |
+| CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training | 2026-11-07 17:43 Kyiv |
+| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 and CH-04 ✅; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:43 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
-| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
-| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
+| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
+| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
@@ -652,14 +652,14 @@ Completion or handoff note: Use `movd.evaluate.evaluate_split(predictions, "val_
 - **Handoff / unblocks:** CH-07 and CH-08 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 17:06 Kyiv | Last update: 2026-11-07 17:06 Kyiv | Branch: ch-04-torchvision-training | Commits: ac92cf2 (training core and smoke evidence) | PR: —
-Files changed: movd/tv_train.py, scripts/train_tv.py, tests/test_tv_train.py, configs/runs/smoke_{frcnn,retina}.json, results/smoke_{frcnn,retina}/, plan.md
-Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest tests/test_tv_train.py -q --basetemp outputs/ch04-pytest-final (3 passed); python -u scripts/train_tv.py --training-only --config configs/runs/smoke_{frcnn,retina}.json; repeat Faster R-CNN with --resume after forced interruption
-Metrics / results: Both GPU smokes completed 50 steps with finite losses; Faster R-CNN resumed epoch 2 at global step 25 and completed at step 50. Four-frame stress check produced 500 detections per frame for both models with valid original-pixel boxes and category IDs. AP and speed pending CH-03.
-Artifacts: results/smoke_{frcnn,retina}/{config,curve,metrics,speed,hardware,runtime,prediction_check}.json; results/smoke_frcnn/smoke_notes.md; local ignored outputs/smoke_{frcnn,retina}/epoch_*.pt
-Runtime / hardware: RTX 5070 Laptop GPU 8 GB, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130. 38.25 s Faster R-CNN and 33.40 s RetinaNet training for 100 images each, AMP and two workers.
-Blockers / deviations: CH-03 finish dependency pending. Short, random-weight training-only runs extrapolate to about 107 and 94 min before validation, so the one-hour estimate is unconfirmed. Frozen resize and image budget retained. CUDA RoI Align backward warns about nondeterminism.
-Completion or handoff note: User approved parallel workers under Badabuba: Claude owns CH-03 evaluator/speed; Codex owns CH-04 training and GPU smoke/resume. CH-03 remains a CH-04 finish dependency.
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 17:06 Kyiv | Last update: 2026-11-07 17:43 Kyiv | Branch: ch-04-torchvision-training | Commits: ac92cf2, ec7967b and the evaluator integration commit on the task PR | PR: —
+Files changed: movd/tv_train.py, scripts/train_tv.py, tests/test_tv_train.py, configs/runs/smoke_{frcnn,retina}.json, results/smoke_{frcnn,retina}{,_integrated}/, plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest -q --basetemp outputs/ch04-pytest-integrated (62 passed); ruff check movd/tv_train.py scripts/train_tv.py tests/test_tv_train.py; python -u scripts/train_tv.py --training-only --config configs/runs/smoke_{frcnn,retina}.json; kill Faster R-CNN after epoch 1 and repeat with --resume; python -u scripts/train_tv.py --config configs/runs/smoke_{frcnn,retina}.json --run-id smoke_{frcnn,retina}_integrated; verify curve counts, finite losses/AP, 500 detection cap, val_full frame count and speed JSON
+Metrics / results: Both families completed training-only and integrated 50-step smokes with finite losses. Forced Faster R-CNN restart resumed epoch 2 from step 25 and completed at step 50. Separate four-frame stress check returned 500 detections/frame per family, valid original-pixel boxes and category IDs. Integrated runs wrote two val_fast AP entries and val_full AP for all 2,846 frames, with zero frames over 500 detections. Batch-1 GPU-resident benchmark: 19.39 / 22.07 FPS (Faster R-CNN / RetinaNet). Random-weight smoke AP is pipeline evidence.
+Artifacts: results/smoke_{frcnn,retina}/{config,curve,metrics,speed,hardware,runtime,prediction_check}.json; results/smoke_frcnn/smoke_notes.md; results/smoke_{frcnn,retina}_integrated/{config,curve,metrics,speed,hardware,runtime}.json; local ignored outputs/smoke_*/epoch_*.pt
+Runtime / hardware: RTX 5070 Laptop GPU 8 GB, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130, AMP, batch 2, two spawned workers. Integrated Faster R-CNN: 36.51 s train / 580.02 s total; RetinaNet: 34.94 s train / 675.39 s total (100 images each).
+Blockers / deviations: CH-03 merged in PR #3. CUDA RoI Align backward warns about nondeterminism. Revised rubric runtime forecast ~119 / ~116 min, including validation, based on short smokes. Frozen 16,800-image budget, input resize and one-hour target retained. Forecast is approximate and includes startup overhead; no full-budget run was required.
+Completion or handoff note: User approved parallel workers under Badabuba: Claude owned CH-03, Codex owned CH-04. CH-03 integration passed. CH-07 and CH-08 start dependency satisfied; CH-05 finish dependencies satisfied, with upload gates remaining.
 ```
 
 ---
@@ -1213,6 +1213,7 @@ Completion or handoff note: —
 |---|---|---|---|
 | 2026-11-07 15:00 | Initial coordination setup: `develop` branch, `CLAUDE.md`, `plan.md` with 16 chunks | Badabuba (via Claude) | Badabuba |
 | 2026-11-07 17:00 | CH-02 freezes §4. G2 split into G2a (internal metric, resolved), G2b (daily limit, operational, before CH-05's upload) and G2c (2 final selections, resolved). G1 (UTC close time) re-scoped as an operational finish gate of CH-16. Neither value is on the supplied official pages; neither blocks the technical protocol | Badabuba (via Claude) | Badabuba |
+| 2026-11-07 | CH-04 runtime forecast revised from the one-hour planning target: ~119 min Faster R-CNN, ~116 min RetinaNet on the RTX 5070. Extrapolates 100-image train time to 16,800, adds six measured val_fast passes plus observed final validation, speed and overhead. Frozen protocol unchanged. | Badabuba (Codex) | — |
 
 ## 12. Definition of done and rubric audit checklist
 

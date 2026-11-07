@@ -1,0 +1,20 @@
+{
+  "run_id": "smoke_frcnn_integrated",
+  "family": "frcnn",
+  "epochs": 2,
+  "smoke_steps_per_epoch": 25,
+  "batch_size": 2,
+  "workers": 2,
+  "pretrained": false,
+  "amp": true,
+  "learning_rate": 0.0001,
+  "seed": 42,
+  "training_only": false,
+  "protocol_version": "v1",
+  "train_split": "train_rubric",
+  "train_split_size": 2800,
+  "weights": null,
+  "min_size": 756,
+  "max_size": 1344,
+  "detections_per_img": 500
+}
