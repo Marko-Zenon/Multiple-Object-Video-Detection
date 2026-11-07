@@ -12,7 +12,7 @@
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
-| CH-03 | Evaluator, speed benchmark, tests | 🟢 READY | 🟢 YES | — | start: CH-02 | — (policy in `configs/protocol.json` / §4) | — | 2026-11-07 17:00 Kyiv |
+| CH-03 | Evaluator, speed benchmark, tests | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 | — (active worker: Claude session for Badabuba) | ch-03-evaluator | 2026-11-07 15:06 Kyiv |
 | CH-04 | Torchvision training core | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:00 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
@@ -597,7 +597,7 @@ Completion or handoff note: CH-03, CH-04, CH-05 and CH-09 set READY (start dep C
 - **Handoff / unblocks:** satisfies the finish dependency of CH-04, CH-05 and CH-09.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 15:06 Kyiv | Last update: 2026-11-07 15:06 Kyiv | Branch: ch-03-evaluator | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
