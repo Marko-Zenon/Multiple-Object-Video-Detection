@@ -11,7 +11,7 @@
 | ID | Chunk | State | Start now? | Owner | Depends on | Blocked by / reason | Branch / PR | Last update |
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
-| CH-02 | Protocol freeze, Kaggle facts, data module | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (M-DATA verified on Nazar's RTX 5070) | ch-02-protocol-data | 2026-11-07 16:34 Kyiv |
+| CH-02 | Protocol freeze, Kaggle facts, data module | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | waiting on student Kaggle read for G1–G3 (close time UTC, metric, limits, sample_submission.csv); all other scope pushed to branch | ch-02-protocol-data | 2026-11-07 17:05 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 | label map, ignore policy, Kaggle metric come from CH-02 | — | 2026-11-07 15:00 Kyiv |
 | CH-04 | Torchvision training core | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03 | needs frozen protocol & data module | — | 2026-11-07 15:00 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | needs label map & submission format (G3) | — | 2026-11-07 15:00 Kyiv |
