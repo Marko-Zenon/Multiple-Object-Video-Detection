@@ -18,7 +18,7 @@
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude and CH-05/Claude (Codex owns CH-07 training, checkpoints, results, notebook section; Claude does not use the GPU); acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; second chunk while CH-05 is paused on CH-07/GPU/upload (Nazar-approved). CPU only until CH-07 is DONE: Codex exclusively owns the GPU; no CUDA, no training, no GPU smoke; no CH-07 files, checkpoints, results or notebook edits. GPU work starts only after CH-05 inference finishes | ch-09-yolo | 2026-11-07 23:46 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; second chunk while CH-05 is paused on CH-07/GPU/upload (Nazar-approved). CPU prep done and pushed (export + check, adapter GT round trip mAP 1.0, CLIs, configs, pin, 20 tests). Waiting for CH-07 DONE + idle GPU, then CH-05 inference first; only then GPU smoke + baseline. Codex exclusively owns the GPU until CH-07 is DONE; no CH-07 files, checkpoints, results or notebook edits | ch-09-yolo (64f08e6) | 2026-11-08 00:10 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-07, CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | needs all four families | — | 2026-11-07 15:00 Kyiv |
@@ -913,14 +913,19 @@ Completion or handoff note: —
 - **Handoff / unblocks:** CH-10 and CH-11 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 23:46 Kyiv | Last update: 2026-11-07 23:46 Kyiv | Branch: ch-09-yolo (worktree ../MOVD-ch09) | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 23:46 Kyiv | Last update: 2026-11-08 00:10 Kyiv | Branch: ch-09-yolo (worktree ../MOVD-ch09) | Commits: 55196b9 (claim), 64f08e6 | PR: — (not opened; GPU steps pending)
+Files changed: movd/ultra.py; scripts/{export_yolo,check_ultra_adapter,train_ultra,predict_ultra}.py; tests/test_ultra.py; configs/runs/{yolo_baseline,yolo_smoke_s,yolo_smoke_m,DO_NOT_USE_cpu_pipeline_check}.json; requirements.txt (ultralytics==8.4.207); README.md (new CH-09 section only: AGPL-3.0, weights sha256, citation, commands); results/ch-09-yolo/; results/DO_NOT_USE_cpu_pipeline_check/. No change to movd/data.py, movd/evaluate.py, homework.ipynb, CH-05 or CH-07 files.
+Validation commands (all CPU, CUDA_VISIBLE_DEVICES=-1; note: an empty value does not hide the GPU on Windows):
+  uv pip install ultralytics==8.4.207 into the shared .venv: dry-run first, purely additive (6 new packages, no existing version changed); albumentations not installed, so no hidden Ultralytics augmentation
+  pytest -q tests/test_ultra.py -> 20 passed; pytest -q tests -> 72 passed, 10 skipped (dataset tests, no dataset in the worktree); ruff check (RUF100 on `# noqa: E402` kept, repo convention) + ruff format --check clean
+  python scripts/export_yolo.py --dataset-root <dataset> -> train_rubric 2,800 images, 137,756 labels = 137,756 COCO targets (0 degenerate, 0 duplicates), classes 0-7 all present, max label box error 0.002 px, 2,161 masked / 639 byte-copied frames, 7,680 ignore regions; pixel check on 40 masked frames: fill MAE <= 1.14, kept-target MAE <= 1.45 (JPEG q95); val_fast 714 byte copies, 28,685 labels; 90 s
+  python scripts/check_ultra_adapter.py --model-preflight outputs/weights/yolo11s.pt -> GT -> YOLO lines -> Ultralytics Results -> adapter -> 500 cap -> movd.evaluate on val_full: mAP 1.0000 (114,132 dets); CPU preflight of COCO-pretrained yolo11s at imgsz 1344 on 3 val frames: boxes in original pixels, ids 1-8, evaluator accepts (80-class model filtered to classes 0-7 for this format check only; unfiltered, the adapter correctly rejects class 38)
+  python scripts/train_ultra.py --config configs/runs/DO_NOT_USE_cpu_pipeline_check.json --device cpu (8 images, imgsz 320) + predict_ultra.py curve -> epoch0/epoch1 checkpoints, resumable curve, 0 corrupt labels, label cache only under outputs/yolo_data (dataset folder untouched). Found: nbs 64 accumulation -> batch 4 gives about 44 optimizer steps/epoch (recorded in yolo_baseline.json)
+Metrics / results: no model metric yet (no GPU training).
+Artifacts: results/ch-09-yolo/{export_check.json, adapter_check.json, figures/export_check.png, README.md}; results/DO_NOT_USE_cpu_pipeline_check/ (plumbing only). Ignored: outputs/yolo_data/ (1.92 GB incl. Ultralytics label caches), outputs/weights/yolo11{s,m}.pt (sha256 85a76fe8…, d5ffc1a6…).
+Runtime / hardware: CPU only on Nazar's laptop (Ryzen 9 8940HX) while CH-07/Codex used the RTX 5070 (85-98 %, 7.7 GB). No CUDA context was created by CH-09.
+Blockers / deviations: acceptance 4 (baseline + per-epoch curve) waits on CH-07 DONE + idle GPU, then CH-05 test inference first. Deviation: masked frames are re-encoded as JPEG q95 (torchvision masks in memory); fill error <= 1.14/255 measured. Commit 64f08e6 message says 21 tests; the correct count is 20.
+Completion or handoff note: after CH-05 inference: GPU smoke yolo_smoke_s / yolo_smoke_m (train_ultra.py --device 0, then --resume, then predict_ultra.py curve) -> fix model size + batch in yolo_baseline.json -> baseline train -> predict_ultra.py curve + final -> PR ch-09-yolo -> develop, mark DONE, flip CH-10/CH-11 to READY.
 ```
 
 ---
