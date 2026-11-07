@@ -131,6 +131,50 @@ The notebook should be executed sequentially because later experiments reuse the
 
 Running the complete notebook will retrain the models. Previously saved checkpoints are stored locally in `outputs/`.
 
+### Setup: dataset placement and CUDA environment
+
+**1. Dataset.** Put `multiple-object-video-detection-hw-2-ucu-ai-2026.zip` (10,611,162,657 bytes) in the repo root.
+The ZIP has **no top-level folder** (`train/`, `val/`, `test/`, `test_images.csv`), so always extract it into the named
+target directory. Never extract it into the repo root. Both the ZIP and the target directory are git-ignored. Do not commit,
+move or delete the ZIP.
+
+```bash
+# Linux / macOS / Git Bash on Windows (verified on Windows with Git Bash unzip, about 4 min)
+unzip -q multiple-object-video-detection-hw-2-ucu-ai-2026.zip -d multiple-object-video-detection-hw-2-ucu-ai-2026
+```
+
+```powershell
+# Windows PowerShell (built-in tar.exe, same target)
+New-Item -ItemType Directory multiple-object-video-detection-hw-2-ucu-ai-2026
+tar -xf multiple-object-video-detection-hw-2-ucu-ai-2026.zip -C multiple-object-video-detection-hw-2-ucu-ai-2026
+```
+
+Expected layout: `multiple-object-video-detection-hw-2-ucu-ai-2026/{train,val,test,test_images.csv}` (about 11 GB).
+Verify it with the standard-library check, which prints the counts and exits 0 on success:
+
+```bash
+python scripts/check_dataset.py            # add --root <path> if the dataset lives elsewhere
+```
+
+**2. Python environment.** Use Python 3.12 in `.venv`. PyTorch must be the CUDA build, installed **before** the rest. Plain PyPI
+gives a CPU-only torch on Windows, and RTX 50xx (sm_120) GPUs need the CUDA 12.8+ builds. CUDA 13.0 is verified here.
+
+```bash
+uv venv .venv --python 3.12
+uv pip install --python .venv torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu130
+uv pip install --python .venv -r requirements.txt
+```
+
+Without uv: `python -m venv .venv`, activate it, then run the same two installs with `python -m pip install …`.
+
+**3. Verify the GPU.**
+
+```bash
+python -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+
+Use `.venv/Scripts/python` on Windows and `.venv/bin/python` on Linux, or activate the venv first.
+
 ## 4. Implemented Stages
 
 ### Stage 1 — Data Understanding and Preprocessing
