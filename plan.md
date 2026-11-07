@@ -10,7 +10,7 @@
 
 | ID | Chunk | State | Start now? | Owner | Depends on | Blocked by / reason | Branch / PR | Last update |
 |---|---|---|---|---|---|---|---|---|
-| CH-01 | Repo hygiene & local dataset/env setup | 🟢 READY | 🟢 YES | — | — | — (machine needs M-ZIP) | — | 2026-11-07 15:00 Kyiv |
+| CH-01 | Repo hygiene & local dataset/env setup | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (machine needs M-ZIP) | ch-01-repo-env-setup | 2026-11-07 13:54 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA) | — | 2026-11-07 15:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 | label map, ignore policy, Kaggle metric come from CH-02 | — | 2026-11-07 15:00 Kyiv |
 | CH-04 | Torchvision training core | 🟡 BLOCKED | ⛔ NO — CH-02 | — | start: CH-02 · finish: CH-03 | needs frozen protocol & data module | — | 2026-11-07 15:00 Kyiv |
@@ -417,7 +417,7 @@ changes. Anything else needs a recorded deviation.
 - **Handoff / unblocks:** satisfies M-DATA and M-GPU on that machine. CH-01 is a start dependency of CH-16 only. No row is unblocked directly.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba | Claimed: 2026-11-07 13:54 Kyiv | Last update: — | Branch: — | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
