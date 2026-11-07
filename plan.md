@@ -15,7 +15,7 @@
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 and CH-04 ✅; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:43 Kyiv |
-| CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
+| CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (worker: Claude; M-DATA ok; holds notebook lock) | ch-06-eda | 2026-11-07 19:00 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
@@ -27,7 +27,7 @@
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
-🔒 **homework.ipynb lock:** FREE
+🔒 **homework.ipynb lock:** Badabuba (CH-06, taken 2026-11-07 19:00 Kyiv)
 
 ### Gates
 
@@ -750,7 +750,7 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-16. Its evidence feeds the report.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 19:00 Kyiv | Last update: 2026-11-07 19:00 Kyiv | Branch: ch-06-eda | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
