@@ -43,9 +43,18 @@
     "target_wall_clock_min": 60,
     "estimate": {
       "hardware": "NVIDIA GeForce RTX 5070 Laptop GPU 8 GB, torch 2.14.1+cu130, AMP fp16, batch 2, synthetic 1904x1071 inputs with 45 boxes, random weights, no data loading",
-      "fasterrcnn_resnet50_fpn_v2_img_per_s": {"1344": 8.38, "1600": 6.09},
-      "retinanet_resnet50_fpn_v2_img_per_s": {"1344": 10.19, "1600": 7.17},
-      "peak_gpu_mem_gib_at_1344": {"fasterrcnn_v2": 3.33, "retinanet_v2": 3.52},
+      "fasterrcnn_resnet50_fpn_v2_img_per_s": {
+        "1344": 8.38,
+        "1600": 6.09
+      },
+      "retinanet_resnet50_fpn_v2_img_per_s": {
+        "1344": 10.19,
+        "1600": 7.17
+      },
+      "peak_gpu_mem_gib_at_1344": {
+        "fasterrcnn_v2": 3.33,
+        "retinanet_v2": 3.52
+      },
       "fasterrcnn_train_min_at_1344": 33.4,
       "reasoning": "16800 images / 8.38 img/s = 33 min of training for the slowest torchvision family, leaving about 40% headroom for JPEG decoding, masking and 6 val_fast evaluations within 60 min. Ultralytics YOLO11 and RT-DETR were not installed at freeze time; RT-DETR feasibility on 8 GB is gate G9 (CH-11)."
     }
@@ -53,36 +62,119 @@
   "preprocessing": {
     "normalization": "ImageNet mean/std (torchvision model transform); Ultralytics models use their built-in 0-1 scaling",
     "augmentation_rubric_baselines": "horizontal flip p=0.5 only (Ultralytics: mosaic=0, mixup=0, hsv/scale/translate off). Any extra augmentation is a recorded tuning experiment",
-    "ignore_fill_rgb": [124, 116, 104]
+    "ignore_fill_rgb": [
+      124,
+      116,
+      104
+    ]
   },
   "label_map": {
-    "category_ids": [1, 2, 3, 4, 5, 6, 7, 8],
-    "names": ["person", "bicycle", "car", "van", "truck", "tricycle", "bus", "motor"],
+    "category_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "names": [
+      "person",
+      "bicycle",
+      "car",
+      "van",
+      "truck",
+      "tricycle",
+      "bus",
+      "motor"
+    ],
     "submission_class": "category_id - 1 (0-7)",
     "yolo_class": "category_id - 1 (0-7); the provided labels/ files already follow it (verified on 24,339 boxes, 0 mismatches)",
-    "visdrone_orig_to_category": {"1": 1, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 6, "9": 7, "10": 8},
-    "visdrone_orig_ignored": [0, 11]
+    "visdrone_orig_to_category": {
+      "1": 1,
+      "2": 1,
+      "3": 2,
+      "4": 3,
+      "5": 4,
+      "6": 5,
+      "7": 6,
+      "8": 6,
+      "9": 7,
+      "10": 8
+    },
+    "visdrone_orig_ignored": [
+      0,
+      11
+    ]
   },
   "ignore_policy": {
     "semantics": "ignore/<clip>/<frame>.txt lines are 'cx cy w h' normalised, no class; they are the VisDrone 'ignored regions' (orig 0) and 'others' (orig 11). annotations_coco.json holds the same regions, each repeated once per category 1-8 with iscrowd=1, ignore=1",
     "training": "drop crowd annotations from targets; fill each ignore region with ignore_fill_rgb except pixels inside labelled target boxes (movd.data.mask_ignore_regions / training_sample)",
     "evaluation": "pycocotools COCOeval on the unchanged GT JSON, crowd annotations kept: detections matched to a crowd region (intersection / detection area >= IoU threshold) are ignored, for every class. Implemented in movd/evaluate.py (CH-03)",
-    "kaggle_consistency": "see kaggle.metric"
+    "kaggle_consistency": "consistent with the documented Kaggle behaviour (ignored-region detections not penalized). The hidden Kaggle scorer code was not inspectable",
+    "official_statement": "Kaggle Data description: ignored regions mark crowds, dense parking lots, objects too small or packed to annotate, and VisDrone 'others'; detections inside ignored regions are not penalized; COCO ignored annotations use iscrowd=1"
   },
   "evaluation": {
+    "protocol": "standard COCO bbox detection metrics with pycocotools, as the assignment requires (rubric-required internal protocol, identical for every detector family)",
+    "primary_metric": "mAP = COCO AP averaged over IoU 0.50:0.05:0.95, all areas, maxDets 500",
+    "metrics": [
+      "mAP",
+      "AP50",
+      "AP75",
+      "AP_S",
+      "AP_M",
+      "AP_L",
+      "per-class AP"
+    ],
+    "area_ranges": "COCO defaults: small < 32^2, medium 32^2-96^2, large > 96^2 px (original pixels)",
+    "ground_truth": "provided annotations_coco.json unchanged, including the iscrowd=1 copies of every ignore region",
     "headline_max_dets": 500,
+    "max_dets_reason": "Kaggle Data description: at most 500 detections per image are scored",
     "legacy_max_dets": 100,
-    "metrics": ["mAP", "AP50", "AP75", "AP_S", "AP_M", "AP_L", "per-class AP"]
+    "legacy_max_dets_use": "only to explain why v0 notebook numbers (maxDets 100, crowd dropped) are not directly comparable",
+    "headline_split": "val_full",
+    "implementation": "movd/evaluate.py (CH-03)",
+    "relation_to_kaggle": "the hidden Kaggle scorer implementation was not exposed on the Evaluation page; the internal protocol is not claimed to be identical to it"
   },
   "inference": {
     "max_detections_per_image": 500,
     "boxes": "original image pixels, [x, y, w, h]",
-    "test_image_sizes": {"1360x764": 1474, "1920x1080": 991, "1344x756": 441, "680x382": 321, "1904x1072": 305, "960x540": 279}
+    "test_image_sizes": {
+      "1360x764": 1474,
+      "1920x1080": 991,
+      "1344x756": 441,
+      "680x382": 321,
+      "1904x1072": 305,
+      "960x540": 279
+    }
   },
   "prediction_interchange": {
     "format": "COCO results JSON: [{image_id:int, category_id:1-8, bbox:[x,y,w,h] original pixels, score:float}]",
     "val_image_id": "COCO image id from val/annotations_coco.json",
     "test_image_id": "1-based row number in test_images.csv (movd.data.load_test_images 'id'); the submission uses the CSV image_id string ('image_key')"
   },
-  "kaggle": "PENDING student input (G1-G3)"
+  "kaggle": {
+    "source": "official Kaggle Overview, Rules and Data text copied by student Badabuba, 2026-11-07",
+    "public_baseline": 0.22163,
+    "final_submissions_selected": 2,
+    "final_selection_rule": "Rules: select the two best solutions based on internal evaluation, not only the public leaderboard",
+    "daily_submission_limit": "UNKNOWN - not on the supplied pages; gate G2b, check before CH-05's first upload",
+    "close_time_utc": "UNKNOWN - page only shows a relative 'Close: 2 days to go'; gate G1, resolve before CH-16 freeze",
+    "scorer_implementation": "not exposed; documented behaviour only (ignored regions not penalized, <= 500 detections per image scored)"
+  },
+  "submission": {
+    "source": "official Kaggle Data description (copied by student Badabuba, 2026-11-07)",
+    "columns": [
+      "image_id",
+      "PredictionString"
+    ],
+    "rows": "exactly one per test_images.csv image (3811)",
+    "prediction_group": "class score x y width height, space-separated; groups concatenated with spaces",
+    "class_ids": "0-7 = category_id - 1",
+    "box": "(x, y) = top-left corner, original-image pixels",
+    "empty_prediction_string": "valid",
+    "max_scored_detections_per_image": 500,
+    "sample_submission": "not in the competition 'Download All' ZIP (77,434 entries, only CSV is test_images.csv); a canonical local copy is generated by scripts/make_sample_submission.py into the git-ignored dataset folder (sha256 aee0b5dcd332c05c3658a9e34a0dee1c1eb5f2e3cb14da40b61c7574d56f37b2)"
+  }
 }

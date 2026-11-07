@@ -23,6 +23,8 @@ Ignore-region policy (frozen):
 * Evaluation: the COCO GT JSON is used unchanged, crowd annotations included. pycocotools then ignores
   any detection matched to a crowd region (overlap = intersection / detection area), for every class,
   because each region is replicated per category. Implemented by CH-03 in `movd/evaluate.py`.
+  This matches the official Kaggle Data description: detections inside ignored regions are not penalized,
+  ignored COCO annotations use `iscrowd=1`, and at most 500 detections per image are scored (hence maxDets 500).
 """
 
 from __future__ import annotations
