@@ -12,8 +12,8 @@
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
-| CH-03 | Evaluator, speed benchmark, tests | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 | — (active worker: Claude session for Badabuba) | ch-03-evaluator | 2026-11-07 15:06 Kyiv |
-| CH-04 | Torchvision training core | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
+| CH-03 | Evaluator, speed benchmark, tests | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 | — (active worker: Claude session for Badabuba; user-approved parallel work with CH-04/Codex) | ch-03-evaluator | 2026-11-07 15:06 Kyiv |
+| CH-04 | Torchvision training core | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; user-approved parallel work with CH-03/Claude; finish needs CH-03 | ch-04-torchvision-training | 2026-11-07 17:06 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:00 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🟢 READY | 🟢 YES | — | — | — (machine needs M-DATA; take notebook lock) | — | 2026-11-07 15:00 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🟡 BLOCKED | ⛔ NO — CH-04 | — | start: CH-04 | needs training core | — | 2026-11-07 15:00 Kyiv |
@@ -604,7 +604,7 @@ Metrics / results: —
 Artifacts: —
 Runtime / hardware: —
 Blockers / deviations: —
-Completion or handoff note: —
+Completion or handoff note: User approved parallel workers under Badabuba: Claude owns CH-03 evaluator/speed; Codex owns CH-04 training and GPU smoke/resume. CH-03 remains a CH-04 finish dependency.
 ```
 
 ---
@@ -652,14 +652,14 @@ Completion or handoff note: —
 - **Handoff / unblocks:** CH-07 and CH-08 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 17:06 Kyiv | Last update: 2026-11-07 17:06 Kyiv | Branch: ch-04-torchvision-training | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
 Artifacts: —
 Runtime / hardware: —
 Blockers / deviations: —
-Completion or handoff note: —
+Completion or handoff note: User approved parallel workers under Badabuba: Claude owns CH-03 evaluator/speed; Codex owns CH-04 training and GPU smoke/resume. CH-03 remains a CH-04 finish dependency.
 ```
 
 ---
