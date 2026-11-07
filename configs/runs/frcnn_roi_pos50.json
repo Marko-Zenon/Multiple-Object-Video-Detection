@@ -1,0 +1,16 @@
+{
+  "family": "frcnn",
+  "train_split": "train_rubric",
+  "epochs": 6,
+  "min_size": 756,
+  "max_size": 1344,
+  "batch_size": 2,
+  "workers": 2,
+  "pretrained": true,
+  "amp": true,
+  "learning_rate": 0.0001,
+  "roi": {
+    "box_positive_fraction": 0.5
+  },
+  "run_id": "frcnn_roi_pos50"
+}
