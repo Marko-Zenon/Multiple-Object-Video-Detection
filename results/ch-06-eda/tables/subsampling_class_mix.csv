@@ -1,0 +1,9 @@
+class,all train %,train_rubric %,difference (pp)
+person,29.73,34.39,4.66
+bicycle,3.64,3.38,-0.26
+car,45.71,43.03,-2.68
+van,4.25,4.12,-0.13
+truck,2.76,2.08,-0.68
+tricycle,3.74,3.44,-0.3
+bus,0.87,0.79,-0.08
+motor,9.3,8.76,-0.54

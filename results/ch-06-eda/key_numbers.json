@@ -1,0 +1,408 @@
+{
+ "split_overview": [
+  {
+   "split": "train",
+   "clips": 56,
+   "frames": 24201,
+   "frames/clip min": 58,
+   "frames/clip median": 383,
+   "frames/clip max": 1424,
+   "resolutions": 6,
+   "target objects": 1105516.0,
+   "crowd annotations (iscrowd=1)": 510744.0,
+   "unique ignore regions": 63843.0,
+   "frames with ignore regions": 18090.0,
+   "frames without targets": 3.0
+  },
+  {
+   "split": "val",
+   "clips": 7,
+   "frames": 2846,
+   "frames/clip min": 184,
+   "frames/clip median": 349,
+   "frames/clip max": 978,
+   "resolutions": 5,
+   "target objects": 114132.0,
+   "crowd annotations (iscrowd=1)": 31960.0,
+   "unique ignore regions": 3995.0,
+   "frames with ignore regions": 1434.0,
+   "frames without targets": 0.0
+  },
+  {
+   "split": "test",
+   "clips": 48,
+   "frames": 3811,
+   "frames/clip min": 35,
+   "frames/clip median": 73,
+   "frames/clip max": 148,
+   "resolutions": 6,
+   "target objects": null,
+   "crowd annotations (iscrowd=1)": null,
+   "unique ignore regions": null,
+   "frames with ignore regions": null,
+   "frames without targets": null
+  }
+ ],
+ "class_targets": [
+  {
+   "class": "person",
+   "train targets": 328701,
+   "train %": 29.73,
+   "val targets": 50312,
+   "val %": 44.08,
+   "train legacy count": 392544
+  },
+  {
+   "class": "bicycle",
+   "train targets": 40255,
+   "train %": 3.64,
+   "val targets": 6022,
+   "val %": 5.28,
+   "train legacy count": 104098
+  },
+  {
+   "class": "car",
+   "train targets": 505301,
+   "train %": 45.71,
+   "val targets": 31821,
+   "val %": 27.88,
+   "train legacy count": 569144
+  },
+  {
+   "class": "van",
+   "train targets": 46940,
+   "train %": 4.25,
+   "val targets": 6842,
+   "val %": 5.99,
+   "train legacy count": 110783
+  },
+  {
+   "class": "truck",
+   "train targets": 30498,
+   "train %": 2.76,
+   "val targets": 1359,
+   "val %": 1.19,
+   "train legacy count": 94341
+  },
+  {
+   "class": "tricycle",
+   "train targets": 41349,
+   "train %": 3.74,
+   "val targets": 5487,
+   "val %": 4.81,
+   "train legacy count": 105192
+  },
+  {
+   "class": "bus",
+   "train targets": 9653,
+   "train %": 0.87,
+   "val targets": 264,
+   "val %": 0.23,
+   "train legacy count": 73496
+  },
+  {
+   "class": "motor",
+   "train targets": 102819,
+   "train %": 9.3,
+   "val targets": 12025,
+   "val %": 10.54,
+   "train legacy count": 166662
+  }
+ ],
+ "size_by_split": [
+  {
+   "split": "train",
+   "objects": 1105516.0,
+   "median size px": 45.8,
+   "< 8 px %": 0.0,
+   "< 16 px %": 2.16,
+   "small < 32 px %": 24.91,
+   "medium 32-96 px %": 63.5,
+   "large >= 96 px %": 11.59
+  },
+  {
+   "split": "val",
+   "objects": 114132.0,
+   "median size px": 52.4,
+   "< 8 px %": 0.0,
+   "< 16 px %": 0.33,
+   "small < 32 px %": 19.2,
+   "medium 32-96 px %": 69.53,
+   "large >= 96 px %": 11.27
+  }
+ ],
+ "size_after_resize": [
+  {
+   "resize": "original",
+   "split": "train",
+   "median size px": 45.8,
+   "< 8 px %": 0.0,
+   "< 16 px %": 2.16,
+   "< 32 px %": 24.91
+  },
+  {
+   "resize": "original",
+   "split": "val",
+   "median size px": 52.4,
+   "< 8 px %": 0.0,
+   "< 16 px %": 0.33,
+   "< 32 px %": 19.2
+  },
+  {
+   "resize": "legacy 896",
+   "split": "train",
+   "median size px": 21.3,
+   "< 8 px %": 2.31,
+   "< 16 px %": 28.72,
+   "< 32 px %": 77.24
+  },
+  {
+   "resize": "legacy 896",
+   "split": "val",
+   "median size px": 22.8,
+   "< 8 px %": 2.71,
+   "< 16 px %": 22.98,
+   "< 32 px %": 75.11
+  },
+  {
+   "resize": "frozen 1344",
+   "split": "train",
+   "median size px": 31.9,
+   "< 8 px %": 0.51,
+   "< 16 px %": 8.26,
+   "< 32 px %": 50.21
+  },
+  {
+   "resize": "frozen 1344",
+   "split": "val",
+   "median size px": 34.3,
+   "< 8 px %": 0.5,
+   "< 16 px %": 7.92,
+   "< 32 px %": 44.34
+  },
+  {
+   "resize": "option 1600",
+   "split": "train",
+   "median size px": 38.0,
+   "< 8 px %": 0.18,
+   "< 16 px %": 3.81,
+   "< 32 px %": 37.0
+  },
+  {
+   "resize": "option 1600",
+   "split": "val",
+   "median size px": 40.8,
+   "< 8 px %": 0.18,
+   "< 16 px %": 4.97,
+   "< 32 px %": 30.28
+  }
+ ],
+ "occlusion_truncation": [
+  {
+   "split": "train",
+   "none occluded %": 54.34,
+   "partial occluded %": 40.32,
+   "heavy occluded %": 5.33,
+   "truncated %": 4.29
+  },
+  {
+   "split": "val",
+   "none occluded %": 40.94,
+   "partial occluded %": 52.41,
+   "heavy occluded %": 6.64,
+   "truncated %": 5.33
+  }
+ ],
+ "density_by_split": [
+  {
+   "split": "train",
+   "targets/frame mean": 45.68,
+   "targets/frame median": 43.0,
+   "targets/frame p95": 118.0,
+   "targets/frame max": 180.0,
+   "ignore regions/frame mean": 2.64,
+   "ignore regions/frame max": 22.0,
+   "crowd annotations/frame mean": 21.1,
+   "frames > 100 targets %": 7.65,
+   "targets in frames > 100 %": 20.68,
+   "targets beyond a 100 cap %": 3.94,
+   "frames > 500 targets": 0.0
+  },
+  {
+   "split": "val",
+   "targets/frame mean": 40.1,
+   "targets/frame median": 37.0,
+   "targets/frame p95": 103.0,
+   "targets/frame max": 116.0,
+   "ignore regions/frame mean": 1.4,
+   "ignore regions/frame max": 7.0,
+   "crowd annotations/frame mean": 11.23,
+   "frames > 100 targets %": 6.43,
+   "targets in frames > 100 %": 17.18,
+   "targets beyond a 100 cap %": 1.14,
+   "frames > 500 targets": 0.0
+  }
+ ],
+ "ignore_regions": [
+  {
+   "split": "train",
+   "crowd annotations": 510744.0,
+   "unique ignore regions": 63843.0,
+   "copies per region": 8.0,
+   "regions from VisDrone 'ignored' (0) %": 97.69,
+   "regions from VisDrone 'others' (11) %": 2.31,
+   "ignore txt lines": 63843.0,
+   "regions matched in txt %": 100.0,
+   "frames with ignore %": 74.75,
+   "ignore area % (frames with ignore) mean": 3.23,
+   "ignore area % max": 38.53,
+   "targets overlapping ignore": 38801.0,
+   "targets >= 50 % inside ignore": 11883.0,
+   "targets >= 50 % inside ignore %": 1.07
+  },
+  {
+   "split": "val",
+   "crowd annotations": 31960.0,
+   "unique ignore regions": 3995.0,
+   "copies per region": 8.0,
+   "regions from VisDrone 'ignored' (0) %": 99.97,
+   "regions from VisDrone 'others' (11) %": 0.03,
+   "ignore txt lines": 3995.0,
+   "regions matched in txt %": 100.0,
+   "frames with ignore %": 50.39,
+   "ignore area % (frames with ignore) mean": 3.21,
+   "ignore area % max": 11.07,
+   "targets overlapping ignore": 3730.0,
+   "targets >= 50 % inside ignore": 1208.0,
+   "targets >= 50 % inside ignore %": 1.06
+  }
+ ],
+ "redundancy": [
+  {
+   "split": "train",
+   "gap k (frames)": 1,
+   "targets of t+k already in t %": 99.5,
+   "median IoU of the same track": 0.897
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 1,
+   "targets of t+k already in t %": 99.5,
+   "median IoU of the same track": 0.873
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 2,
+   "targets of t+k already in t %": 99.1,
+   "median IoU of the same track": 0.81
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 2,
+   "targets of t+k already in t %": 99.1,
+   "median IoU of the same track": 0.766
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 4,
+   "targets of t+k already in t %": 98.3,
+   "median IoU of the same track": 0.661
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 4,
+   "targets of t+k already in t %": 98.2,
+   "median IoU of the same track": 0.592
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 8,
+   "targets of t+k already in t %": 96.6,
+   "median IoU of the same track": 0.44
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 8,
+   "targets of t+k already in t %": 96.5,
+   "median IoU of the same track": 0.348
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 16,
+   "targets of t+k already in t %": 93.4,
+   "median IoU of the same track": 0.18
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 16,
+   "targets of t+k already in t %": 93.2,
+   "median IoU of the same track": 0.078
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 32,
+   "targets of t+k already in t %": 87.4,
+   "median IoU of the same track": 0.0
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 32,
+   "targets of t+k already in t %": 87.0,
+   "median IoU of the same track": 0.0
+  },
+  {
+   "split": "train",
+   "gap k (frames)": 64,
+   "targets of t+k already in t %": 77.0,
+   "median IoU of the same track": 0.0
+  },
+  {
+   "split": "val",
+   "gap k (frames)": 64,
+   "targets of t+k already in t %": 76.4,
+   "median IoU of the same track": 0.0
+  }
+ ],
+ "subsampling": {
+  "train frames": 24201.0,
+  "train_rubric frames": 2800.0,
+  "train_rubric share of frames %": 11.6,
+  "gap between rubric frames min": 1.0,
+  "gap median": 8.0,
+  "gap max": 30.0,
+  "train_rubric targets": 137756.0,
+  "unique train tracks": 7342.0,
+  "tracks seen in train_rubric %": 98.6,
+  "tracks lasting >= 30 frames seen in train_rubric %": 100.0,
+  "train_rubric targets/frame mean": 49.2,
+  "train targets/frame mean": 45.68
+ },
+ "long_side_share_pct": {
+  "test": {
+   "680-960": 15.7,
+   "1344-1360": 50.2,
+   "1904-1920": 34.0,
+   "2688-3840": 0.0
+  },
+  "train": {
+   "680-960": 0.0,
+   "1344-1360": 27.3,
+   "1904-1920": 56.3,
+   "2688-3840": 16.4
+  },
+  "val": {
+   "680-960": 0.0,
+   "1344-1360": 29.1,
+   "1904-1920": 16.1,
+   "2688-3840": 54.8
+  }
+ },
+ "test_clips_smaller_than_train": {
+  "clips": 8,
+  "frames": 600,
+  "resolutions": [
+   "680x382",
+   "960x540"
+  ]
+ }
+}

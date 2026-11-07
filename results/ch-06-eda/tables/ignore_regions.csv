@@ -1,0 +1,3 @@
+,crowd annotations,unique ignore regions,copies per region,regions from VisDrone 'ignored' (0) %,regions from VisDrone 'others' (11) %,ignore txt lines,regions matched in txt %,frames with ignore %,ignore area % (frames with ignore) mean,ignore area % max,targets overlapping ignore,targets >= 50 % inside ignore,targets >= 50 % inside ignore %
+train,510744.0,63843.0,8.0,97.69,2.31,63843.0,100.0,74.75,3.23,38.53,38801.0,11883.0,1.07
+val,31960.0,3995.0,8.0,99.97,0.03,3995.0,100.0,50.39,3.21,11.07,3730.0,1208.0,1.06

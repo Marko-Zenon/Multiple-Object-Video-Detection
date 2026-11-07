@@ -15,7 +15,7 @@
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (CH-03 and CH-04 ✅; before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:43 Kyiv |
-| CH-06 | Corrected EDA & preprocessing evidence (notebook) | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | — | — (worker: Claude; M-DATA ok; holds notebook lock; user-approved parallel work with CH-07/Codex) | ch-06-eda | 2026-11-07 19:00 Kyiv |
+| CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude; acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
@@ -25,9 +25,9 @@
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-05, CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | needs submission tooling & frozen final config | — | 2026-11-07 15:00 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
-| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-06, CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
+| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
-🔒 **homework.ipynb lock:** Badabuba (CH-06, taken 2026-11-07 19:00 Kyiv)
+🔒 **homework.ipynb lock:** FREE
 
 ### Gates
 
@@ -750,14 +750,26 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-16. Its evidence feeds the report.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 19:00 Kyiv | Last update: 2026-11-07 19:00 Kyiv | Branch: ch-06-eda | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: User approved parallel workers: Claude owns CH-06, the notebook lock, EDA and CH-06 figures; Codex owns CH-07 configurations, GPU training and CH-07 evidence. Workers preserve each other's files. CH-07 acceptance criterion 5 is deferred until CH-06 merges and releases the notebook lock.
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 19:00 Kyiv | Last update: 2026-11-07 19:20 Kyiv | Branch: ch-06-eda | Commits: 4be64d9 (work), 4b46ac3 (merge origin/develop), c0c0246 (completion) | PR: https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5
+Files changed: homework.ipynb (+30 cells: 13 code, 17 markdown; all 58 legacy cells unchanged), results/ch-06-eda/ (10 figures, 17 CSV tables, key_numbers.json, run_stage1.py), plan.md (own row, CH-16 recalculation, lock, this log)
+Validation commands:
+  python scripts/check_dataset.py                      -> PASSED
+  python -m pytest -q tests                            -> 62 passed (plain `pytest` from the repo root also collects the ignored outputs/ch07-claim worktree copy and fails on duplicate module names; not a CH-06 issue)
+  python scripts/make_splits.py --check                -> OK (val_fast, val_full, train_rubric hashes match)
+  python results/ch-06-eda/run_stage1.py               -> Stage 1: 52 cells (26 code) executed without errors in 45 s (clean kernel, .venv)
+  notebook diff check (scripted): 58/58 legacy cells keep identical source; the re-executed legacy Stage 1 cells reproduce Marko's text outputs exactly; the 24 legacy code cells of sections 5-6 are byte-identical (not re-executed: training never runs in the notebook); every number in the CH-06 markdown occurs in a cell output, a CH-06 table or configs/protocol.json
+Metrics / results (train / val; key_numbers.json):
+  classes (targets only): car 45.71 %, person 29.73 %, bus 0.87 % (9,653) in train; imbalance 52.3:1 train, 190.6:1 val (264 buses). Legacy cell 3.2 added 63,843 / 3,995 crowd copies to every class (legacy bus 73,496 = 4.55 %)
+  sizes sqrt(w*h): COCO small 24.91 % / 19.20 %, < 16 px 2.16 % / 0.33 %; after the frozen 1344 resize: < 32 px 50.21 % / 44.34 %, < 16 px 8.26 % / 7.92 % (legacy 896: 77.24 % / 75.11 % and 28.72 % / 22.98 %)
+  occlusion partial 40.32 % / 52.41 %, heavy 5.33 % / 6.64 %; truncated 4.29 % / 5.33 %
+  density: targets/frame mean 45.68 / 40.10, max 180 / 116; frames > 100 targets 7.65 % / 6.43 %; no frame > 500
+  ignore: 63,843 / 3,995 regions (8 COCO copies each, 100 % matched to ignore/*.txt), in 74.75 % / 50.39 % of frames, mean 3.23 % / 3.21 % of those frames
+  resolutions: long side 2688-3840 px in 16.4 % train / 54.8 % val / 0 % test frames; test has 8 clips (600 frames) at 680x382 / 960x540, smaller than any train frame (upsampled x1.976 / x1.4 by the frozen resize)
+  redundancy (same track ids): 1 frame apart 99.5 % shared (median IoU 0.897 / 0.873); 8 apart 96.6 % / 96.5 % (IoU 0.440 / 0.348). train_rubric = 11.6 % of train frames (median gap 8) and holds 98.6 % of the 7,342 train tracks
+Artifacts: results/ch-06-eda/{figures,tables}, results/ch-06-eda/key_numbers.json, results/ch-06-eda/run_stage1.py
+Runtime / hardware: CPU only, Stage 1 runs in about 45 s (Windows 11, Nazar's laptop, .venv Python 3.12); no GPU, no training
+Blockers / deviations: (1) the notebook is executed top to bottom for Stage 1 only (cells before "## 5. Faster R-CNN"); sections 5-6 are the legacy v0 training runs and keep Marko's stored outputs, marked with a banner, because training never runs in the notebook (CLAUDE.md section 7) and the chunk forbids training. (2) legacy heading numbering (1, 3, 4, ...) left as is. (3) the 4.5 summary is a draft from the computed tables; the students write the report prose (G10). (4) per-sequence "ignore area %" is the summed ignore-box area / frame area, as in CH-02 (overlaps counted twice). (5) redundancy IoU is in image coordinates, so it includes camera motion
+Completion or handoff note: all 4 acceptance criteria met (every Stage-1 rubric row of section 3 has a cell plus a figure or table; legacy outputs intact; written decisions in notebook section 4.5; lock released). Unblock recalculation: CH-16 is still blocked by CH-12, CH-14, CH-15. Manual review: Nazar and Marko should read 4.5 and the legacy notes before the defence
 ```
 
 ---
