@@ -1,0 +1,40 @@
+{
+  "predictions": "outputs/ch-05-submission/DO_NOT_UPLOAD_cpu_smoke_frcnn/test_predictions.json",
+  "submission": "submissions/DO_NOT_UPLOAD_cpu_smoke_frcnn.csv",
+  "sha256": "a087f6e9cf135641ed2c17cf9f1267009cdd703a2488033ef8653457c57707b0",
+  "bytes": 98493,
+  "writer": {
+    "input_predictions": 599,
+    "accepted": 599,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 599,
+    "rows": 3811,
+    "empty_rows": 3807,
+    "max_dets": 500,
+    "score_decimals": 8,
+    "box_decimals": 5
+  },
+  "validator": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 599,
+    "empty_rows": 3807,
+    "max_detections_in_a_row": 221,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 25,
+      "bicycle": 0,
+      "car": 574,
+      "van": 0,
+      "truck": 0,
+      "tricycle": 0,
+      "bus": 0,
+      "motor": 0
+    }
+  }
+}
