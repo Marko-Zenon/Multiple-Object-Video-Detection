@@ -11,7 +11,7 @@
 | ID | Chunk | State | Start now? | Owner | Depends on | Blocked by / reason | Branch / PR | Last update |
 |---|---|---|---|---|---|---|---|---|
 | CH-01 | Repo hygiene & local dataset/env setup | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (M-DATA + M-GPU satisfied on Nazar's RTX 5070) | ch-01-repo-env-setup / [PR #1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/1) | 2026-11-07 16:15 Kyiv |
-| CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / PRLINK | 2026-11-07 17:00 Kyiv |
+| CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | 🟢 READY | 🟢 YES | — | start: CH-02 | — (policy in `configs/protocol.json` / §4) | — | 2026-11-07 17:00 Kyiv |
 | CH-04 | Torchvision training core | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish needs CH-03) | — | 2026-11-07 17:00 Kyiv |
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (before first upload: G2b daily limit, G8 upload access) | — | 2026-11-07 17:00 Kyiv |
@@ -502,7 +502,7 @@ Completion or handoff note: M-DATA and M-GPU are satisfied on Nazar's machine. O
 - **Handoff / unblocks:** CH-03, CH-04, CH-05 and CH-09 become READY (their start dependency).
 - **Evidence log:**
 ```text
-Owner: Badabuba | Claimed: 2026-11-07 16:34 Kyiv | Last update: 2026-11-07 17:00 Kyiv | Branch: ch-02-protocol-data | Commits: e0fa838, 0b59367, 77f8725 + final CH-02 commit | PR: PRLINK
+Owner: Badabuba | Claimed: 2026-11-07 16:34 Kyiv | Last update: 2026-11-07 17:00 Kyiv | Branch: ch-02-protocol-data | Commits: e0fa838, 0b59367, 77f8725, 9c4aab4 (+ PR-link commit) | PR: #2 (https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2)
 Files changed: movd/__init__.py, movd/data.py; tests/test_data.py, tests/test_sample_submission.py; scripts/make_splits.py,
   scripts/make_sample_submission.py; configs/protocol.json, configs/splits/{train_rubric,val_fast,val_full}.json;
   configs/legacy/{data.json,experiments.json} (git mv), configs/legacy/README.md; results/ch-02-protocol/{inspect_dataset.py,
