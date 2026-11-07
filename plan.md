@@ -14,7 +14,7 @@
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; user-approved parallel work with CH-07/Codex: Claude owns CH-05 inference, submission export, validation and tests, CPU only, no GPU while CH-07 trains; before first upload: G2b daily limit, G8 upload access | ch-05-submission | 2026-11-07 21:30 Kyiv |
+| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🟠 PARTIAL / PAUSED | ⛔ NO — decision required | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; code, tests, val round-trip done and pushed (acceptance 1, 2, 4 pass on branch). Waiting on: (a) a validated trained checkpoint named by CH-07 evidence, (b) a free GPU for full test inference (CH-07 training), (c) G2b daily limit + G8 web upload by a student. Parallel with CH-07/Codex: CPU only, no GPU used | ch-05-submission (9408fdb, no PR yet) | 2026-11-07 21:55 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude and CH-05/Claude (Codex owns CH-07 training, checkpoints, results, notebook section; Claude does not use the GPU); acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
@@ -703,14 +703,21 @@ Completion or handoff note: User approved parallel workers under Badabuba: Claud
 - **Handoff / unblocks:** start dependency of CH-14. Milestone M2 is optional.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 21:30 Kyiv | Last update: 2026-11-07 21:30 Kyiv | Branch: ch-05-submission | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 21:30 Kyiv | Last update: 2026-11-07 21:55 Kyiv | Branch: ch-05-submission (worktree ../MOVD-ch05) | Commits: 4cc0423 (claim), 9408fdb | PR: — (not opened; chunk not complete)
+Files changed: movd/submission.py; scripts/{predict_test,make_submission,validate_submission,submission_roundtrip}.py; tests/test_submission.py; results/submissions.csv (header only); results/ch-05-submission/{README.md, roundtrip_synthetic_seed42.json, DO_NOT_UPLOAD_synthetic_test/, DO_NOT_UPLOAD_cpu_smoke_frcnn/}. No change to movd/data.py, movd/evaluate.py, movd/tv_train.py, homework.ipynb or any CH-07 file.
+Validation commands (all CPU, CUDA_VISIBLE_DEVICES=""):
+  pytest -q tests/test_submission.py -> 49 passed (7 s); pytest -q tests -> 102 passed, 9 skipped (skips = dataset tests, no dataset in the worktree); pytest tests/test_data.py tests/test_sample_submission.py in the main checkout with the dataset -> 38 passed
+  python scripts/check_dataset.py --root <dataset> -> PASSED (32 OK); python scripts/make_splits.py --check -> 3/3 split hashes match
+  ruff format --check + ruff check on the 6 new files -> clean except RUF100 on `# noqa: E402` (same convention as existing scripts)
+  python scripts/submission_roundtrip.py --synthetic --name synthetic_seed42 -> PASSED, max |diff| = 0 on all 6 headline metrics (val_full, 176,140 synthetic detections, 2 min 20 s)
+  python scripts/make_submission.py outputs/ch-05-submission/DO_NOT_UPLOAD_synthetic_test/test_predictions.json -> 3,811 rows, 241,353 dets, 77 empty rows, 560 zero-area rejected, 5,784 over the cap; validate_submission.py [OK] sha256 0cf65fc6…; independent pandas check (no movd code) OK
+  python scripts/validate_submission.py <dataset>/sample_submission.csv -> [OK] sha256 aee0b5dc… (matches CH-02)
+  python scripts/predict_test.py --checkpoint outputs/smoke_frcnn_integrated/epoch_0002.pt --device cpu --clips clip_001 clip_011 --max-images 2 --allow-smoke -> 4 frames, 599 dets, about 5 s per clip on CPU; refused without --allow-smoke; --resume kept both shards; boxes reach x=1710 (1920 px frame) and x=680 (680 px frame), so they are in original pixels; make_submission + validate [OK]
+Metrics / results: no model metric (no trained checkpoint used). Round-trip difference 0 at score 8 / box 5 decimals; it was 2e-4 / 3.4e-6 / 1.4e-5 at 2 / 3 / 4 box decimals (borderline IoU flips), hence the chosen precision.
+Artifacts: results/ch-05-submission/ (small JSON, tracked). Ignored: submissions/DO_NOT_UPLOAD_*.csv, outputs/ch-05-submission/DO_NOT_UPLOAD_*/ (synthetic/smoke, never upload).
+Runtime / hardware: CPU only on Nazar's laptop while CH-07 trained on the RTX 5070; the GPU was never used by CH-05.
+Blockers / deviations: acceptance 3 (accepted Kaggle upload + logged score) open. It needs (a) a validated trained checkpoint explicitly named by CH-07 evidence, (b) a free GPU for 3,811-frame inference (plan estimate about 20 min), (c) G2b (daily limit, still UNKNOWN, not guessed) and G8 (student web upload). The val round-trip was run with synthetic predictions; rerun it on the chosen checkpoint's val predictions before upload. Deviation: predict_test.py has its own 15-line predict loop with a device argument (tv_train.predict_coco is CUDA-only); a test asserts identical output to predict_coco.
+Completion or handoff note: next steps after CH-07 is DONE: predict_test.py on its selected checkpoint -> make_submission.py -> validate_submission.py -> student checks G2b and uploads via the web UI -> append a row to results/submissions.csv -> PR ch-05-submission -> develop, mark DONE.
 ```
 
 ---
