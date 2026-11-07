@@ -30,3 +30,10 @@ __pycache__/
 
 # Jupyter temporary files
 kernel-ipc-*
+# Guards against extracting the dataset ZIP into the repo root (it has no top-level folder)
+/train/
+/val/
+/test/
+/test_images.csv
+/sample_submission.csv
+/submissions/
