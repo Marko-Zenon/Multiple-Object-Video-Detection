@@ -860,13 +860,13 @@ Completion or handoff note: User approved parallel CH-06 (Claude CPU/EDA/noteboo
 - **Evidence log:**
 ```text
 Owner: Badabuba (worker: Codex) | Claimed: 2026-11-08 16:59 Kyiv | Last update: 2026-11-08 16:59 Kyiv | Branch: ch-08-retina | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Files changed: configs/runs/retina_{baseline,anchors,focal_gamma15}.json; tests/test_retina_preflight.py; results/ch-08-retina/{derive_anchors.py,anchor_stats.json,preflight.md}; plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; pytest tests/test_tv_train.py tests/test_retina_preflight.py (7 passed); python -m pytest -q --basetemp outputs/ch08-pytest-full (66 passed); anchor stats regenerate; scoped Ruff; official COCO_V1 CPU load and strict reload for all three variants; git diff --check
+Metrics / results: 137,756 usable resized non-crowd targets across frozen 2,800 train_rubric frames; median square-root area 32.75 px; anchors and focal gamma isolation validated on CPU. No detector metrics yet.
+Artifacts: results/ch-08-retina/anchor_stats.json and preflight.md (method, hypothesis, weight hash and exact commands).
+Runtime / hardware: CPU preflight only, torch 2.14.1+cu130 and torchvision 0.29.1+cu130. Allow about 116 min per future full run based on CH-04's smoke projection.
+Blockers / deviations: CPU-only preparation per user-approved CH-05 coordination. Future GPU smokes, full runs, comparison and notebook section remain.
+Completion or handoff note: Before CUDA, confirm CH-05 inference has finished and GPU is available. Run three 50-step smokes and then the three frozen six-epoch configurations sequentially. CH-08 remains IN_PROGRESS.
 ```
 
 ---
