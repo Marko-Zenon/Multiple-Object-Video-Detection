@@ -1,0 +1,27 @@
+{
+  "CH09_scoped_lint": "PASS with existing RUF100 noqa convention ignored",
+  "CH09_scoped_format": "PASS, 10 files",
+  "repository_lint": "FAIL: unchanged pre-existing findings",
+  "repository_lint_findings": [
+    {
+      "path": "movd/data.py",
+      "code": "UP035",
+      "line": 37
+    },
+    {
+      "path": "tests/test_data.py",
+      "code": "PLW1510",
+      "line": 177
+    }
+  ],
+  "repository_format": "FAIL: unchanged pre-existing formatting",
+  "repository_format_paths": [
+    "movd/data.py",
+    "scripts/check_dataset.py",
+    "scripts/make_sample_submission.py",
+    "scripts/make_splits.py",
+    "tests/test_data.py",
+    "tests/test_sample_submission.py"
+  ],
+  "baseline_comparison": "All flagged files byte-unchanged from d84bf00; no unrelated fixes made"
+}

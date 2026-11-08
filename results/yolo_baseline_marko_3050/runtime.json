@@ -1,0 +1,42 @@
+{
+  "train_process_seconds": [
+    2003.0
+  ],
+  "training_processes": [
+    {
+      "status": "completed",
+      "seconds": 2002.99,
+      "resume": false,
+      "batches": 16800,
+      "saved_epochs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start_epoch": 0,
+      "samples": 2800,
+      "batches_per_epoch": 2800,
+      "optimizer_state_entries": 0,
+      "amp": true,
+      "first_loss": 5.643826484680176,
+      "last_loss": 3.2707724571228027,
+      "minimum_loss": 1.5387346744537354,
+      "maximum_loss": 12.234270095825195,
+      "elapsed_seconds": 1972.568,
+      "peak_cuda_allocated_bytes": 1454161408,
+      "peak_cuda_reserved_bytes": 1625292800
+    }
+  ],
+  "train_seconds_total": 2003.0,
+  "epoch_checkpoints": [
+    "epoch0.pt",
+    "epoch1.pt",
+    "epoch2.pt",
+    "epoch3.pt",
+    "epoch4.pt",
+    "epoch5.pt"
+  ]
+}

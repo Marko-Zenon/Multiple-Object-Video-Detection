@@ -55,3 +55,41 @@ made from the JSON manifest. Transfer into a fresh directory, preserve all exist
 and original epoch-0 copy, before Badabuba loads anything. An agreed private cloud folder with the same
 manifest verification is an alternative. Do not send credentials in logs or use public weight links.
 No external transfer was initiated, and no destination is assumed.
+
+## Approved full baseline (2026-11-08 follow-up)
+
+Marko reviewed the smoke and explicitly authorized full training and evaluation. Resume ownership was
+pushed to develop at `a20a01b` before implementation/training. Source/config commit: `80781c4`.
+Use the unique run `yolo_baseline_marko_3050`; shared baseline and all smoke directories remain intact.
+Differences from the provisional shared config: batch 4 -> 1, workers 2 -> 0, cache explicitly false,
+and a new run ID. Full 2,800 images, six epochs, 1344 pixels, seed 42, AMP and flip-only are retained.
+Expected: 2,800 batches/epoch and 16,800 images/batches total; optimizer updates depend on nbs64 accumulation.
+
+```bash
+.venv/bin/python scripts/train_ultra.py --config configs/runs/yolo_baseline_marko_3050.json --device 0 --observe
+# Only after an interrupted unfinished run, with the identical config:
+.venv/bin/python scripts/train_ultra.py --config configs/runs/yolo_baseline_marko_3050.json --device 0 --observe --resume
+.venv/bin/python scripts/predict_ultra.py curve --run-id yolo_baseline_marko_3050 --device 0
+.venv/bin/python scripts/predict_ultra.py final --run-id yolo_baseline_marko_3050 --device 0
+.venv/bin/python scripts/failures_ultra.py --run-id yolo_baseline_marko_3050
+.venv/bin/python results/ch-09-yolo/make_laptop_comparison.py
+```
+
+Use the ignored outputs/ch09_marko_baseline_20261108/ cache/settings directories in environment variables.
+`--observe` records finite post-backward batch losses and full-loader size, plus epoch checkpoint progress
+and CUDA allocated/reserved peaks in observations.json. It does not alter optimizer or sampling.
+The local monitor stores full console logs and one-second RSS/RAM/swap/device memory/utilization samples;
+it sends SIGINT only to its child process group if available system RAM falls below 1 GiB.
+Every epoch checkpoint includes optimizer/scaler state; completed last.pt/best.pt are stripped by the
+framework, so retain epoch0.pt through epoch5.pt as well. Resume loads last.pt and restarts at the next
+saved epoch; unsaved current-epoch batches must be repeated, with the repetition recorded.
+
+The curve now also preserves each epoch's raw val_fast predictions under ignored outputs/<run_id>/val_fast_predictions/.
+Final val_full predictions stay ignored as before. Headline metrics/per-class/density bins use movd.evaluate,
+maxDets500 and original validation frames. Speed is FP32 on 30 preloaded frames, 10 warmups, batch1.
+FRCNN was measured on an RTX 5070 with GPU-resident inputs; YOLO includes CPU-array preprocessing/transfer
+on an RTX 3050. The numeric comparison records both timing scopes and GPUs; no architecture-only speed
+claim is justified by those numbers. Students write the interpretation of metrics and failure examples.
+
+Do not mark DONE or merge a completion PR until acceptance and the required artifact transfer are reviewed.
+No Kaggle upload or external transfer is part of this execution session.
