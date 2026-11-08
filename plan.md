@@ -17,17 +17,17 @@
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (worker: Claude; CH-07 frcnn_rpn_pre3000 e6 submitted: Kaggle public 0.2011538266, val_full mAP 0.1893; real round-trip diff 0; G2b = 5/day, G8 resolved; CH-09 stays paused) | ch-05-submission / [PR #7](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/7) | 2026-11-08 18:10 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn / [PR #6](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6) | 2026-11-08 00:33 Kyiv |
-| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved exclusive RTX 5070 for CH-08 smokes and sequential training; Claude may do light CH-09 CPU prep in a separate worktree | ch-08-retina | 2026-11-08 20:27 Kyiv |
+| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected retina_anchors by final val_fast mAP; GPU and notebook lock released | ch-08-retina | 2026-11-08 23:45 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟠 PARTIAL / PAUSED | ⛔ NO — decision required | Marko-Zenon | start: CH-02 · finish: CH-03 | Five technical acceptance checks + notebook PASS; draft PR #10 open/unmerged. All 90 prior notebook cells/outputs preserved; lock released. Waiting on student acceptance and destination/recipient-verified checkpoint transfer; no DONE, CH-10/11 remain blocked | ch-09-yolo / [draft PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-08 23:15 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
-| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
+| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 and CH-08 ✅; remaining families pending | — | 2026-11-08 23:45 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; still needs CH-12 and CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-08 20:02 Kyiv |
 
-🔒 **homework.ipynb lock:** Badabuba (CH-08, taken 2026-11-08 23:42 Kyiv)
+🔒 **homework.ipynb lock:** FREE
 
 ### Gates
 
@@ -875,14 +875,14 @@ Completion or handoff note: User approved parallel CH-06 (Claude CPU/EDA/noteboo
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Codex) | Claimed: 2026-11-08 16:59 Kyiv | Last update: 2026-11-08 16:59 Kyiv | Branch: ch-08-retina | Commits: — | PR: —
-Files changed: configs/runs/retina_{baseline,anchors,focal_gamma15}.json; tests/test_retina_preflight.py; results/ch-08-retina/{derive_anchors.py,anchor_stats.json,preflight.md}; plan.md
-Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; pytest tests/test_tv_train.py tests/test_retina_preflight.py (7 passed); python -m pytest -q --basetemp outputs/ch08-pytest-full (66 passed); anchor stats regenerate; scoped Ruff; official COCO_V1 CPU load and strict reload for all three variants; git diff --check
-Metrics / results: 137,756 usable resized non-crowd targets across frozen 2,800 train_rubric frames; median square-root area 32.75 px; anchors and focal gamma isolation validated on CPU. No detector metrics yet.
-Artifacts: results/ch-08-retina/anchor_stats.json and preflight.md (method, hypothesis, weight hash and exact commands).
-Runtime / hardware: CPU preflight only, torch 2.14.1+cu130 and torchvision 0.29.1+cu130. Allow about 116 min per future full run based on CH-04's smoke projection.
-Blockers / deviations: CPU-only preparation per user-approved CH-05 coordination. Future GPU smokes, full runs, comparison and notebook section remain.
-Completion or handoff note: Before CUDA, confirm CH-05 inference has finished and GPU is available. Run three 50-step smokes and then the three frozen six-epoch configurations sequentially. CH-08 remains IN_PROGRESS.
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-08 16:59 Kyiv | Last update: 2026-11-08 23:45 Kyiv | Branch: ch-08-retina | Commits: 2306005, 3d70633 and final evidence commit | PR: —
+Files changed: configs/runs/retina_{baseline,anchors,focal_gamma15}.json; tests/test_retina_preflight.py; results/retina_*; results/ch-08-retina; homework.ipynb (two cells); plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest -q --basetemp outputs/ch08-execution-tests (116 passed, one pre-existing collection warning); scoped Ruff; official weights CPU strict reload; python scripts/train_tv.py --config outputs/<run>_smoke.json --training-only then --resume (three forced interruptions); python scripts/train_tv.py --config configs/runs/<run>.json (three); python results/ch-08-retina/make_comparison.py (byte-identical regeneration); nbclient clean-kernel and nbformat; git diff --check
+Metrics / results: Baseline / anchors / focal gamma 1.5: final val_fast mAP 0.16434 / 0.17053 / 0.15554; val_full mAP 0.16233 / 0.16925 / 0.15242; AP_small 0.07801 / 0.07541 / 0.08319; 12.67 / 19.71 / 24.22 FPS. Selected anchors. CH-07 selected Faster R-CNN: 0.18934 mAP and 14.85 FPS. All full runs 16,800 images with 2,846-frame final evaluation and maxDets 500.
+Artifacts: results/ch-08-retina/{preflight.md,results.md,anchor_stats.json,comparison.csv,per_class.csv,density.csv,figures/,make_comparison.py}; results/retina_{baseline,anchors,focal_gamma15}{,_smoke}/; ignored outputs/<run>/epoch_*.pt
+Runtime / hardware: RTX 5070 Laptop GPU, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130, AMP, batch 2, two workers. Full runs 3996.66 / 3464.18 / 2641.30 s wall; 168.37 min combined.
+Blockers / deviations: None at completion. One seed, speed includes model processing on GPU-resident inputs. Negative focal overall AP and anchor AP_small results retained. Three smokes used two 25-step epochs each for forced restart verification.
+Completion or handoff note: GPU free after CH-08; CH-09 current ownership and review state preserved. CH-12 still needs CH-10 and CH-11. Notebook lock released with this PR.
 ```
 
 ---
