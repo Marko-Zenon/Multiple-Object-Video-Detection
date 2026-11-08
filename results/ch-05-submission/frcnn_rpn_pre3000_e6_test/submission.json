@@ -1,0 +1,39 @@
+{
+  "predictions": "outputs/ch-05-submission/frcnn_rpn_pre3000_e6_test/test_predictions.json",
+  "submission": "submissions/frcnn_rpn_pre3000_e6_test.csv",
+  "sha256": "152b8ad1e8c608330bed086772dd8ff35380d41c49b085cbc16be303c0c625b0",
+  "bytes": 24181776,
+  "writer": {
+    "input_predictions": 261940,
+    "accepted": 261940,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 261940,
+    "rows": 3811,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "validator": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 261940,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 160,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 128985,
+      "bicycle": 3777,
+      "car": 79094,
+      "van": 8782,
+      "truck": 11738,
+      "tricycle": 6239,
+      "bus": 1649,
+      "motor": 21676
+    }
+  }
+}

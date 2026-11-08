@@ -1,0 +1,152 @@
+{
+  "val_full": {
+    "num_images": 2846,
+    "num_predictions": 1417317,
+    "num_predictions_outside_split": 0,
+    "images_over_headline_max_dets": 0,
+    "max_dets": 500,
+    "metrics": {
+      "mAP": 0.00012455441117863,
+      "AP50": 0.0005472411120874041,
+      "AP75": 6.395446135065867e-06,
+      "AP_small": 1.2971670926232574e-05,
+      "AP_medium": 0.00015847802719244983,
+      "AP_large": 0.00023606555418887262
+    },
+    "metrics_maxdets100": {
+      "mAP": 7.000455019394069e-05,
+      "AP50": 0.0002908988042864447,
+      "AP75": 4.487739097204554e-06,
+      "AP_small": 6.246325916463068e-06,
+      "AP_medium": 0.00011454680516608544,
+      "AP_large": 0.00010754599596745682
+    },
+    "per_class": [
+      {
+        "class_id": 0,
+        "category_id": 1,
+        "name": "person",
+        "num_gt": 50312,
+        "AP": 4.6239799159393706e-05,
+        "AP50": 0.00019640033337346217,
+        "AP75": 9.319276616568847e-06,
+        "AP_maxdets100": 2.9040810218482136e-05
+      },
+      {
+        "class_id": 1,
+        "category_id": 2,
+        "name": "bicycle",
+        "num_gt": 6022,
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      },
+      {
+        "class_id": 2,
+        "category_id": 3,
+        "name": "car",
+        "num_gt": 31821,
+        "AP": 0.0009409244254136706,
+        "AP50": 0.004139306857146623,
+        "AP75": 4.184429246395809e-05,
+        "AP_maxdets100": 0.0005309955913330433
+      },
+      {
+        "class_id": 3,
+        "category_id": 4,
+        "name": "van",
+        "num_gt": 6842,
+        "AP": 9.27106485597549e-06,
+        "AP50": 4.22217061791467e-05,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      },
+      {
+        "class_id": 4,
+        "category_id": 5,
+        "name": "truck",
+        "num_gt": 1359,
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      },
+      {
+        "class_id": 5,
+        "category_id": 6,
+        "name": "tricycle",
+        "num_gt": 5487,
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      },
+      {
+        "class_id": 6,
+        "category_id": 7,
+        "name": "bus",
+        "num_gt": 264,
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      },
+      {
+        "class_id": 7,
+        "category_id": 8,
+        "name": "motor",
+        "num_gt": 12025,
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "AP_maxdets100": 0.0
+      }
+    ],
+    "density": [
+      {
+        "bin": "0-19",
+        "num_images": 977,
+        "num_gt": 13557,
+        "mAP": 8.79515647436681e-07,
+        "AP50": 3.836286972930043e-06,
+        "mAP_maxdets100": 4.4307317974433317e-07
+      },
+      {
+        "bin": "20-49",
+        "num_images": 1062,
+        "num_gt": 40626,
+        "mAP": 0.00024371173026194396,
+        "AP50": 0.0009966585735270948,
+        "mAP_maxdets100": 0.00016013541454316417
+      },
+      {
+        "bin": "50-99",
+        "num_images": 618,
+        "num_gt": 39746,
+        "mAP": 0.00011173444530568874,
+        "AP50": 0.0005191603286655312,
+        "mAP_maxdets100": 6.0656573322233347e-05
+      },
+      {
+        "bin": ">=100",
+        "num_images": 189,
+        "num_gt": 20203,
+        "mAP": 0.0006033879915227893,
+        "AP50": 0.003102890148885885,
+        "mAP_maxdets100": 0.00013828882263461267
+      }
+    ],
+    "protocol": {
+      "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+      "iou_thresholds": "0.50:0.05:0.95",
+      "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+      "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+      "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+      "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+      "pycocotools": "2.0.11"
+    },
+    "split": "val_full"
+  },
+  "status": "complete"
+}

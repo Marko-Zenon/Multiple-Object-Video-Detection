@@ -1,0 +1,24 @@
+usage: evaluate.py [-h] [--split {val_full,val_fast}] [--out OUT]
+                   [--root ROOT]
+                   predictions
+
+Evaluate a COCO-results JSON on a frozen val split with the project evaluator
+(movd/evaluate.py).
+
+positional arguments:
+  predictions           COCO-results JSON file
+
+options:
+  -h, --help            show this help message and exit
+  --split {val_full,val_fast}
+                        frozen frame split (default: val_full, used for every
+                        headline number)
+  --out OUT             output folder for metrics.json and per_class.csv
+  --root ROOT           dataset root (default: ./multiple-object-video-
+                        detection-hw-2-ucu-ai-2026)
+
+Predictions: a JSON list of {image_id, category_id (1-8), bbox [x, y, w, h] in
+original pixels, score}, with COCO image ids from val/annotations_coco.json.
+Metrics: mAP (AP@0.50:0.05:0.95), AP50, AP75, AP_small/medium/large, per-class
+AP and density bins, at maxDets 500 (headline) and 100 (legacy comparison
+only). Crowd/ignore regions follow the CH-02 policy.

@@ -1,0 +1,9 @@
+resize,split,median size px,< 8 px %,< 16 px %,< 32 px %
+original,train,45.8,0.0,2.16,24.91
+original,val,52.4,0.0,0.33,19.2
+legacy 896,train,21.3,2.31,28.72,77.24
+legacy 896,val,22.8,2.71,22.98,75.11
+frozen 1344,train,31.9,0.51,8.26,50.21
+frozen 1344,val,34.3,0.5,7.92,44.34
+option 1600,train,38.0,0.18,3.81,37.0
+option 1600,val,40.8,0.18,4.97,30.28

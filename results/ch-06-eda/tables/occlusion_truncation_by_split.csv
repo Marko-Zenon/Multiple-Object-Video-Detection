@@ -1,0 +1,3 @@
+split,none occluded %,partial occluded %,heavy occluded %,truncated %
+train,54.34,40.32,5.33,4.29
+val,40.94,52.41,6.64,5.33

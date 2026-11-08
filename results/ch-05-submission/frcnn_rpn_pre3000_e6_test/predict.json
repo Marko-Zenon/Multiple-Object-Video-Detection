@@ -1,0 +1,53 @@
+{
+  "checkpoint": "C:/UCU/AI/hw2/Multiple-Object-Video-Detection/outputs/ch07/outputs/frcnn_rpn_pre3000/epoch_0006.pt",
+  "checkpoint_sha256": "522f867dea8de585b0d6b72a3f2750a7cd2470ce165225d2f9514f278804eb9f",
+  "model": {
+    "run_id": "frcnn_rpn_pre3000",
+    "family": "frcnn",
+    "epoch": 6,
+    "training_only": false,
+    "smoke": false,
+    "min_size": 756,
+    "max_size": 1344,
+    "detections_per_img": 500,
+    "last_val_fast": {
+      "mAP": 0.1925515434330417,
+      "AP50": 0.38770856070302984,
+      "AP75": 0.16527132041776385,
+      "AP_small": 0.10927151737685636,
+      "AP_medium": 0.18936033160397647,
+      "AP_large": 0.31756200660722605
+    }
+  },
+  "config": {
+    "family": "frcnn",
+    "train_split": "train_rubric",
+    "epochs": 6,
+    "min_size": 756,
+    "max_size": 1344,
+    "batch_size": 2,
+    "workers": 2,
+    "pretrained": true,
+    "amp": true,
+    "learning_rate": 0.0001,
+    "rpn": {
+      "rpn_pre_nms_top_n_train": 3000
+    },
+    "run_id": "frcnn_rpn_pre3000"
+  },
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "amp": true,
+  "batch_size": 2,
+  "partial_test_set": false,
+  "clips": 48,
+  "frames": 3811,
+  "detections": 261940,
+  "predictions_file": "outputs/ch-05-submission/frcnn_rpn_pre3000_e6_test/test_predictions.json",
+  "seconds_this_process": 373.0002116999822,
+  "seconds_new_clips": 368.1227832000004,
+  "new_clips": 48,
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "platform": "Windows-11-10.0.26300-SP0"
+}

@@ -1,0 +1,11 @@
+class,orig_class,train,val
+bicycle,bicycle,40255,6022
+bus,bus,9653,264
+car,car,505301,31821
+motor,motor,102819,12025
+person,pedestrian,234305,32404
+person,people,94396,17908
+tricycle,awning-tricycle,13011,1718
+tricycle,tricycle,28338,3769
+truck,truck,30498,1359
+van,van,46940,6842

@@ -1,0 +1,137 @@
+{
+ "train": {
+  "images": 24201,
+  "clips": 56,
+  "target_annotations": 1105516,
+  "crowd_annotations": 510744,
+  "crowd_flags": [
+   [
+    1,
+    1
+   ]
+  ],
+  "unique_ignore_regions_in_coco": 63843,
+  "categories_per_ignore_region": [
+   [
+    8,
+    63843
+   ]
+  ],
+  "ignore_region_orig_category": {
+   "0": 62369,
+   "11": 1474
+  },
+  "ignore_txt_files": 18090,
+  "ignore_txt_lines": 63843,
+  "coco_regions_matched_in_txt": 63843,
+  "images_with_ignore_regions": 18090,
+  "ignore_area_fraction_mean_median_max": [
+   0.03226710651188385,
+   0.016445051689657344,
+   0.38530200853489543
+  ],
+  "targets_touching_ignore": 38801,
+  "targets_ioa_ge_0.5": 11883,
+  "targets_inside_ignore_ioa_ge_0.99": 6630,
+  "orig_to_category": {
+   "1->1": 234305,
+   "2->1": 94396,
+   "3->2": 40255,
+   "4->3": 505301,
+   "5->4": 46940,
+   "6->5": 30498,
+   "7->6": 28338,
+   "8->6": 13011,
+   "9->7": 9653,
+   "10->8": 102819
+  },
+  "image_sizes": {
+   "1904x1071": 12895,
+   "1344x756": 5645,
+   "2688x1512": 3505,
+   "1360x765": 962,
+   "1920x1080": 721,
+   "2720x1530": 473
+  },
+  "clips_with_several_sizes": [],
+  "zero_size_or_out_of_bounds_boxes": 0
+ },
+ "val": {
+  "images": 2846,
+  "clips": 7,
+  "target_annotations": 114132,
+  "crowd_annotations": 31960,
+  "crowd_flags": [
+   [
+    1,
+    1
+   ]
+  ],
+  "unique_ignore_regions_in_coco": 3995,
+  "categories_per_ignore_region": [
+   [
+    8,
+    3995
+   ]
+  ],
+  "ignore_region_orig_category": {
+   "0": 3994,
+   "11": 1
+  },
+  "ignore_txt_files": 1434,
+  "ignore_txt_lines": 3995,
+  "coco_regions_matched_in_txt": 3995,
+  "images_with_ignore_regions": 1434,
+  "ignore_area_fraction_mean_median_max": [
+   0.03206235491410772,
+   0.014387381109851348,
+   0.11070141291810842
+  ],
+  "targets_touching_ignore": 3730,
+  "targets_ioa_ge_0.5": 1208,
+  "targets_inside_ignore_ioa_ge_0.99": 626,
+  "orig_to_category": {
+   "1->1": 32404,
+   "2->1": 17908,
+   "3->2": 6022,
+   "4->3": 31821,
+   "5->4": 6842,
+   "6->5": 1359,
+   "7->6": 3769,
+   "8->6": 1718,
+   "9->7": 264,
+   "10->8": 12025
+  },
+  "image_sizes": {
+   "3840x2160": 978,
+   "1344x756": 827,
+   "1904x1071": 459,
+   "2720x1530": 349,
+   "2688x1512": 233
+  },
+  "clips_with_several_sizes": [],
+  "zero_size_or_out_of_bounds_boxes": 0
+ },
+ "test": {
+  "images": 3811,
+  "clips": 48,
+  "csv_columns": [
+   "image_id",
+   "file_name",
+   "clip",
+   "frame",
+   "width",
+   "height"
+  ],
+  "image_id_example": "clip_001_0000001",
+  "image_sizes": {
+   "1360x764": 1474,
+   "1920x1080": 991,
+   "1344x756": 441,
+   "680x382": 321,
+   "1904x1072": 305,
+   "960x540": 279
+  }
+ },
+ "train_val_clip_overlap": []
+}

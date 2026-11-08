@@ -1,0 +1,74 @@
+{
+  "description": "CH-03 self-test of movd/speed.py on the GPU -> results/ch-03-evaluator/speed_selftest.json.",
+  "model": "fasterrcnn_resnet50_fpn_v2 (weights=None, random init, seed 42)",
+  "torchvision": "0.29.1+cu130",
+  "frames": "val_fast image ids 1,97,197,293,393,489,589,689,785,882,978,1075,1175,1271,1371,1466,1566,1662,1762,1862,1958,2058,2154,2254,2354,2448,2548,2644,2744,2844",
+  "fps_per_repeat": [
+    8.51,
+    8.44,
+    8.28
+  ],
+  "fps_spread_percent": 2.8,
+  "runs": [
+    {
+      "fps": 8.509934568737574,
+      "latency_ms_per_image": 117.50971666382004,
+      "latency_ms_per_batch": {
+        "mean": 117.50971666382004,
+        "median": 117.19509999966249,
+        "p90": 119.9041199637577,
+        "min": 114.3092000274919
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "original frames 1344x756, 1904x1071, 2688x1512, 2720x1530, 3840x2160; model resize long side 1344 (min 756)",
+      "note": "random-weight torchvision fasterrcnn_resnet50_fpn_v2, fp32, utility self-test",
+      "device": "cuda",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0"
+    },
+    {
+      "fps": 8.441322230851561,
+      "latency_ms_per_image": 118.46485333129142,
+      "latency_ms_per_batch": {
+        "mean": 118.46485333129142,
+        "median": 118.12334999558516,
+        "p90": 122.09075000719167,
+        "min": 114.21359999803826
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "original frames 1344x756, 1904x1071, 2688x1512, 2720x1530, 3840x2160; model resize long side 1344 (min 756)",
+      "note": "random-weight torchvision fasterrcnn_resnet50_fpn_v2, fp32, utility self-test",
+      "device": "cuda",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0"
+    },
+    {
+      "fps": 8.276592463960279,
+      "latency_ms_per_image": 120.82267000029485,
+      "latency_ms_per_batch": {
+        "mean": 120.82267000029485,
+        "median": 117.9806999862194,
+        "p90": 126.30518003716135,
+        "min": 114.07529999269173
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "original frames 1344x756, 1904x1071, 2688x1512, 2720x1530, 3840x2160; model resize long side 1344 (min 756)",
+      "note": "random-weight torchvision fasterrcnn_resnet50_fpn_v2, fp32, utility self-test",
+      "device": "cuda",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0"
+    }
+  ]
+}

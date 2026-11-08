@@ -1,0 +1,13 @@
+,value
+train frames,24201.0
+train_rubric frames,2800.0
+train_rubric share of frames %,11.6
+gap between rubric frames min,1.0
+gap median,8.0
+gap max,30.0
+train_rubric targets,137756.0
+unique train tracks,7342.0
+tracks seen in train_rubric %,98.6
+tracks lasting >= 30 frames seen in train_rubric %,100.0
+train_rubric targets/frame mean,49.2
+train targets/frame mean,45.68
