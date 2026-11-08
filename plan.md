@@ -20,7 +20,7 @@
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected retina_anchors by final val_fast mAP; GPU and notebook lock released | ch-08-retina / [PR #11](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/11) | 2026-11-08 23:45 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | ✅ DONE | ⛔ NO — completed | Marko-Zenon (closeout: Badabuba) | start: CH-02 · finish: CH-03 | — (YOLO11s val_full mAP 0.1439 / AP50 0.2925; 36.37 FPS on RTX 3050, not comparable with RTX 5070 numbers; Telegram artifact ZIP recipient-verified: 163/163 + 145/145 SHA-256, predictions re-evaluated exactly; notebook merged structurally, 95 cells; lock released) | ch-09-yolo / [PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-09 00:45 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟢 READY | 🟢 YES | — | start: CH-09 | — (CH-09 ✅: export, adapter, YOLO11s baseline and curve merged) | — | 2026-11-09 00:45 Kyiv |
-| CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟢 READY | 🟢 YES | — | start: CH-09 | — (CH-09 ✅: export, adapter and YOLO curve merged; G9 is resolved inside CH-11) | — | 2026-11-09 00:45 Kyiv |
+| CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-09 | worker: Claude; exclusive use of Nazar's RTX 5070 Laptop GPU claimed for CH-11 smoke + full runs; CH-10 not touched | ch-11-rtdetr | 2026-11-09 00:50 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07, CH-08 ✅, CH-09 baseline merged; still needs CH-10 and CH-11 | — | 2026-11-09 00:45 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
@@ -1044,7 +1044,7 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-09 00:50 Kyiv | Last update: 2026-11-09 00:50 Kyiv | Branch: ch-11-rtdetr | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
