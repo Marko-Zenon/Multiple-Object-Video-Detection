@@ -387,12 +387,23 @@ def boxes_to_coco(
     """Ultralytics-style arrays (xyxy original pixels, class 0-7, confidence) -> COCO-results dicts.
 
     Boxes are clipped to be non-negative in size; the evaluator rejects negative widths.
+    Raises ValueError on mismatched lengths, a non-integer class, or a non-finite box or score, so a broken
+    model output can never silently drop or corrupt detections.
     """
+    xyxy = np.asarray(xyxy, dtype=float).reshape(-1, 4)
+    classes = np.asarray(classes, dtype=float).reshape(-1)
+    scores = np.asarray(scores, dtype=float).reshape(-1)
+    if not len(xyxy) == len(classes) == len(scores):
+        raise ValueError(
+            f"image {image_id}: {len(xyxy)} boxes, {len(classes)} classes, {len(scores)} scores"
+        )
+    if not (np.isfinite(xyxy).all() and np.isfinite(scores).all()):
+        raise ValueError(f"image {image_id}: non-finite box or score")
+    if not np.array_equal(classes, np.round(classes)):
+        raise ValueError(f"image {image_id}: non-integer class id")
     detections = []
     for (x0, y0, x1, y1), cls, score in zip(
-        np.asarray(xyxy, dtype=float).tolist(),
-        np.asarray(classes).tolist(),
-        np.asarray(scores, dtype=float).tolist(),
+        xyxy.tolist(), classes.tolist(), scores.tolist()
     ):
         detections.append(
             {
@@ -477,6 +488,172 @@ def val_frames(
         (i, data.image_path("val", images[i], root))
         for i in data.split_image_ids(split)
     ]
+
+
+# ---------------------------------------------------------------- failure cases (CPU, from saved predictions)
+
+FAILURE_MIN_SCORE = 0.10
+FAILURE_MATCH_IOU = 0.50
+FAILURE_KINDS = ("car_van_confusion", "tiny_target_miss", "dense_frame_miss")
+
+
+def iou_xywh(a: np.ndarray, b: np.ndarray) -> np.ndarray:
+    """Pairwise IoU of COCO `[x, y, w, h]` boxes: (N, 4) x (M, 4) -> (N, M)."""
+    a = np.asarray(a, dtype=float).reshape(-1, 4)
+    b = np.asarray(b, dtype=float).reshape(-1, 4)
+    ax1, ay1 = a[:, 0] + a[:, 2], a[:, 1] + a[:, 3]
+    bx1, by1 = b[:, 0] + b[:, 2], b[:, 1] + b[:, 3]
+    iw = np.clip(
+        np.minimum(ax1[:, None], bx1[None]) - np.maximum(a[:, None, 0], b[None, :, 0]),
+        0,
+        None,
+    )
+    ih = np.clip(
+        np.minimum(ay1[:, None], by1[None]) - np.maximum(a[:, None, 1], b[None, :, 1]),
+        0,
+        None,
+    )
+    inter = iw * ih
+    union = (a[:, 2] * a[:, 3])[:, None] + (b[:, 2] * b[:, 3])[None] - inter
+    return np.divide(inter, union, out=np.zeros_like(inter), where=union > 0)
+
+
+def find_failure_cases(
+    images: Sequence[dict], entries: dict, predictions: Sequence[dict]
+) -> dict:
+    """First example of each failure kind, scanning `images` in order. Same rule as CH-07 (comparable).
+
+    A target is missed when no prediction with score >= 0.10 has the same class at IoU >= 0.50. Kinds:
+    car/van confusion (an IoU >= 0.50 prediction of the other class), tiny target (min side < 16 px),
+    dense frame (>= 75 targets). Returns {kind: {"image", "target", "prediction" or None, "iou"}}.
+    For illustration only; AP always comes from movd.evaluate.
+    """
+    by_image = {}
+    for p in predictions:
+        if p["score"] >= FAILURE_MIN_SCORE:
+            by_image.setdefault(p["image_id"], []).append(p)
+    cases = {}
+    for image in images:
+        targets = entries[image["id"]]["targets"]
+        dets = sorted(by_image.get(image["id"], []), key=lambda p: -p["score"])
+        if not targets:
+            continue
+        ious = iou_xywh([t["bbox"] for t in targets], [d["bbox"] for d in dets])
+        for target, row in zip(targets, ious):
+            category = target["category_id"]
+            if any(
+                iou >= FAILURE_MATCH_IOU and d["category_id"] == category
+                for iou, d in zip(row, dets)
+            ):
+                continue
+            confusion = next(
+                (
+                    (d, iou)
+                    for iou, d in zip(row, dets)
+                    if iou >= FAILURE_MATCH_IOU
+                    and {category, d["category_id"]} == {3, 4}
+                ),
+                None,
+            )
+            width, height = target["bbox"][2:]
+            if confusion and "car_van_confusion" not in cases:
+                kind, (best, best_iou) = "car_van_confusion", confusion
+            else:
+                if min(width, height) < 16 and "tiny_target_miss" not in cases:
+                    kind = "tiny_target_miss"
+                elif len(targets) >= 75 and "dense_frame_miss" not in cases:
+                    kind = "dense_frame_miss"
+                else:
+                    continue
+                k = int(row.argmax()) if len(dets) else -1
+                best, best_iou = (
+                    (dets[k], float(row[k])) if k >= 0 and row[k] > 0 else (None, 0.0)
+                )
+            cases[kind] = {
+                "image": image,
+                "target": target,
+                "prediction": best,
+                "iou": float(best_iou),
+            }
+            break
+        if len(cases) == len(FAILURE_KINDS):
+            break
+    return cases
+
+
+# ---------------------------------------------------------------- run configs
+
+RUN_CONFIG_REQUIRED = {"run_id": str, "weights": str, "batch_size": int}
+RUN_CONFIG_OPTIONAL = {
+    "family": str,
+    "epochs": int,
+    "imgsz": int,
+    "workers": int,
+    "amp": bool,
+    "smoke_fraction": float,
+    "data_yaml": str,
+    "overrides": dict,
+    "note": str,
+}
+
+
+def validate_run_config(config: dict) -> dict:
+    """Check a `configs/runs/yolo_*.json` dict: required keys, types, a plain run_id, no unknown keys.
+
+    Unknown keys are rejected so a typo (for example `batchsize`) cannot silently fall back to a default.
+    A full (non-smoke) run must keep the frozen epochs and input size at the top level; a changed value
+    belongs in `overrides`, where it is recorded as the experiment variable.
+    """
+    if not isinstance(config, dict):
+        raise TypeError("run config must be a JSON object")
+    unknown = set(config) - set(RUN_CONFIG_REQUIRED) - set(RUN_CONFIG_OPTIONAL)
+    if unknown:
+        raise ValueError(f"unknown run-config keys: {sorted(unknown)}")
+    for key, kind in RUN_CONFIG_REQUIRED.items():
+        if key not in config:
+            raise ValueError(f"run config is missing '{key}'")
+    for key, kind in {**RUN_CONFIG_REQUIRED, **RUN_CONFIG_OPTIONAL}.items():
+        if key not in config:
+            continue
+        value = config[key]
+        ok = (
+            isinstance(value, (int, float))
+            if kind is float
+            else isinstance(value, kind)
+        )
+        if kind is int and isinstance(value, bool):
+            ok = False
+        if not ok:
+            raise ValueError(
+                f"run config '{key}' must be {kind.__name__}, got {value!r}"
+            )
+    run_id = config["run_id"]
+    if Path(run_id).name != run_id or run_id in ("", ".", ".."):
+        raise ValueError("run_id must be a single directory name")
+    for key in ("batch_size", "epochs", "imgsz"):
+        if key in config and config[key] < 1:
+            raise ValueError(f"run config '{key}' must be positive")
+    if "smoke_fraction" in config and not 0 < config["smoke_fraction"] <= 1:
+        raise ValueError("smoke_fraction must be in (0, 1]")
+    if "smoke_fraction" not in config:
+        budget = data.load_protocol()["rubric_budget"]
+        frozen = {"epochs": budget["epochs"], "imgsz": budget["input_long_side"]}
+        for key, value in frozen.items():
+            if config.get(key, value) != value:
+                raise ValueError(
+                    f"full run '{run_id}': top-level {key} must be the frozen {value}; "
+                    f"put a changed value under 'overrides'"
+                )
+    return config
+
+
+def load_run_config(path: str | Path) -> dict:
+    """Read and validate a run config JSON file (see `validate_run_config`)."""
+    try:
+        config = json.loads(Path(path).read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ValueError(f"{path}: invalid JSON ({error})") from error
+    return validate_run_config(config)
 
 
 # ---------------------------------------------------------------- training arguments

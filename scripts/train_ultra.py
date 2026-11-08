@@ -69,12 +69,10 @@ def main():
     )
     args = parser.parse_args()
 
-    config = json.loads(args.config.read_text(encoding="utf-8"))
+    config = ultra.load_run_config(args.config)
     if args.run_id:
-        config["run_id"] = args.run_id
+        config = ultra.validate_run_config({**config, "run_id": args.run_id})
     run_id = config["run_id"]
-    if Path(run_id).name != run_id or run_id in ("", ".", ".."):
-        raise ValueError("run_id must be a single directory name")
     output = data.REPO_ROOT / "outputs" / run_id
     results = data.REPO_ROOT / "results" / run_id
     last = output / "train" / "weights" / "last.pt"

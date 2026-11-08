@@ -296,7 +296,10 @@ python scripts/check_ultra_adapter.py --dataset-root <dataset>  # GT -> Ultralyt
 python scripts/train_ultra.py --config configs/runs/yolo_baseline.json --device 0 [--resume]
 python scripts/predict_ultra.py curve --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_fast mAP per epoch
 python scripts/predict_ultra.py final --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_full metrics + speed
+python scripts/failures_ultra.py --run-id yolo_baseline --dataset-root <dataset>                     # CPU: failure-case figures from saved val predictions
 ```
+
+Exact GPU steps, expected evidence files and the notebook draft: `results/ch-09-yolo/GPU_RUNBOOK.md`.
 
 The shipped `images/`, `labels/` and `data.yaml` are not used for training because they do not handle ignore regions.
 `movd/ultra.py` applies the CH-02 policy instead (crowd never a target; ignore regions filled with the ImageNet mean except

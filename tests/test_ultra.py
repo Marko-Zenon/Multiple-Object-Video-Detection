@@ -453,3 +453,165 @@ def test_train_kwargs_are_valid_ultralytics_arguments(tmp_path):
         )
     )
     assert cfg.mosaic == 0 and cfg.save_period == 1
+
+
+# ---------------------------------------------------------------- malformed adapter input
+
+
+@pytest.mark.parametrize(
+    "xyxy, classes, scores",
+    [
+        (
+            [[0, 0, 1, 1], [0, 0, 2, 2]],
+            [0],
+            [0.5, 0.4],
+        ),  # length mismatch would be silently truncated
+        ([[0, 0, 1, 1]], [0], [float("nan")]),
+        ([[0, 0, float("inf"), 1]], [0], [0.5]),
+        ([[0, 0, 1, 1]], [1.5], [0.5]),
+        ([[0, 0, 1, 1]], [-1], [0.5]),
+    ],
+)
+def test_boxes_to_coco_rejects_malformed_output(xyxy, classes, scores):
+    with pytest.raises(ValueError):
+        ultra.boxes_to_coco(1, np.array(xyxy), np.array(classes), np.array(scores))
+
+
+def test_boxes_to_coco_accepts_empty_and_float_class_ids():
+    assert ultra.boxes_to_coco(1, np.zeros((0, 4)), np.zeros(0), np.zeros(0)) == []
+    dets = ultra.boxes_to_coco(
+        1, np.array([[1, 2, 3, 4]]), np.array([2.0]), np.array([0.3])
+    )
+    assert dets[0]["category_id"] == 3 and isinstance(dets[0]["category_id"], int)
+    json.dumps(dets)  # JSON-serialisable (plain Python floats)
+
+
+# ---------------------------------------------------------------- run configs
+
+
+def _write(tmp_path, value, name="cfg.json"):
+    path = tmp_path / name
+    path.write_text(
+        value if isinstance(value, str) else json.dumps(value), encoding="utf-8"
+    )
+    return path
+
+
+def test_repository_run_configs_are_valid():
+    paths = sorted((data.REPO_ROOT / "configs" / "runs").glob("yolo_*.json"))
+    assert {p.stem for p in paths} >= {"yolo_baseline", "yolo_smoke_s", "yolo_smoke_m"}
+    for path in paths:
+        config = ultra.load_run_config(path)
+        assert config["run_id"] == path.stem
+    baseline = ultra.load_run_config(data.REPO_ROOT / "configs/runs/yolo_baseline.json")
+    kwargs = ultra.train_kwargs(baseline, "d.yaml", "out", "0")
+    assert kwargs["epochs"] * 2800 == 16800 and kwargs["imgsz"] == 1344
+    assert "fraction" not in kwargs  # the baseline trains on all of train_rubric
+
+
+@pytest.mark.parametrize(
+    "change, message",
+    [
+        ({"batchsize": 4}, "unknown"),
+        ({"run_id": "../escape"}, "directory"),
+        ({"batch_size": 0}, "positive"),
+        ({"batch_size": "4"}, "must be int"),
+        ({"batch_size": True}, "must be int"),
+        ({"imgsz": 1600}, "frozen"),
+        ({"epochs": 12}, "frozen"),
+        ({"smoke_fraction": 1.5}, "smoke_fraction"),
+    ],
+)
+def test_run_config_rejects_malformed_values(tmp_path, change, message):
+    config = {"run_id": "yolo_x", "weights": "w.pt", "batch_size": 4, **change}
+    with pytest.raises(ValueError, match=message):
+        ultra.load_run_config(_write(tmp_path, config))
+
+
+def test_run_config_missing_key_and_bad_json(tmp_path):
+    with pytest.raises(ValueError, match="missing 'weights'"):
+        ultra.load_run_config(_write(tmp_path, {"run_id": "r", "batch_size": 2}))
+    with pytest.raises(ValueError, match="invalid JSON"):
+        ultra.load_run_config(_write(tmp_path, "{not json"))
+
+
+def test_run_config_overrides_and_smoke_are_allowed(tmp_path):
+    variant = {
+        "run_id": "yolo_hr",
+        "weights": "w.pt",
+        "batch_size": 2,
+        "overrides": {"imgsz": 1600},
+    }
+    assert (
+        ultra.train_kwargs(
+            ultra.load_run_config(_write(tmp_path, variant)), "d", "o", "0"
+        )["imgsz"]
+        == 1600
+    )
+    smoke = {
+        "run_id": "s",
+        "weights": "w.pt",
+        "batch_size": 2,
+        "epochs": 2,
+        "smoke_fraction": 0.07,
+    }
+    assert (
+        ultra.train_kwargs(
+            ultra.load_run_config(_write(tmp_path, smoke)), "d", "o", "0"
+        )["fraction"]
+        == 0.07
+    )
+
+
+# ---------------------------------------------------------------- failure cases
+
+
+def test_iou_xywh():
+    ious = ultra.iou_xywh(
+        [[0, 0, 10, 10]], [[0, 0, 10, 10], [5, 0, 10, 10], [20, 20, 5, 5], [0, 0, 0, 0]]
+    )
+    assert ious.shape == (1, 4)
+    assert ious[0].tolist() == pytest.approx([1.0, 50 / 150, 0.0, 0.0])
+    assert ultra.iou_xywh(np.zeros((0, 4)), [[0, 0, 1, 1]]).shape == (0, 1)
+
+
+def test_find_failure_cases_picks_each_kind_once():
+    def target(image_id, category_id, box):
+        return {"image_id": image_id, "category_id": category_id, "bbox": box}
+
+    def det(image_id, category_id, box, score):
+        return {
+            "image_id": image_id,
+            "category_id": category_id,
+            "bbox": box,
+            "score": score,
+        }
+
+    dense = [target(3, 1, [i * 20.0, 0, 18, 18]) for i in range(80)]
+    entries = {
+        1: {
+            "targets": [
+                target(1, 3, [10, 10, 50, 40]),
+                target(1, 1, [200, 200, 30, 30]),
+            ],
+            "ignore": [],
+        },
+        2: {"targets": [target(2, 1, [5, 5, 8, 20])], "ignore": []},
+        3: {"targets": dense, "ignore": []},
+    }
+    predictions = [
+        det(1, 4, [10, 10, 50, 40], 0.9),  # car labelled as van: confusion
+        det(1, 1, [200, 200, 30, 30], 0.8),  # correct: not a failure
+        det(2, 1, [5, 5, 8, 20], 0.05),  # below the 0.10 display threshold: tiny miss
+        *[det(3, 1, d["bbox"], 0.9) for d in dense[1:]],  # first dense target missed
+    ]
+    images = [{"id": i} for i in (1, 2, 3)]
+    cases = ultra.find_failure_cases(images, entries, predictions)
+    assert set(cases) == set(ultra.FAILURE_KINDS)
+    assert cases["car_van_confusion"]["prediction"]["category_id"] == 4
+    assert cases["car_van_confusion"]["iou"] == pytest.approx(1.0)
+    assert cases["tiny_target_miss"]["prediction"] is None
+    assert cases["dense_frame_miss"]["target"] is dense[0]
+    assert ultra.find_failure_cases(images, entries, []).keys() <= set(
+        ultra.FAILURE_KINDS
+    )
