@@ -1,0 +1,151 @@
+{
+  "num_images": 2846,
+  "num_predictions": 635095,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.14389177166432673,
+    "AP50": 0.29253174470489,
+    "AP75": 0.11922641134577491,
+    "AP_small": 0.0865789888569718,
+    "AP_medium": 0.1434272936224516,
+    "AP_large": 0.2554700319006125
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.13277657739778256,
+    "AP50": 0.2642531604264557,
+    "AP75": 0.1140113886229674,
+    "AP_small": 0.08094928527320797,
+    "AP_medium": 0.1304875508479437,
+    "AP_large": 0.23983324773171993
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 50312,
+      "AP": 0.2505844638512999,
+      "AP50": 0.6003514829651999,
+      "AP75": 0.1578144594861816,
+      "AP_maxdets100": 0.2381331061466821
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 6022,
+      "AP": 0.15652079783319434,
+      "AP50": 0.35792884751611437,
+      "AP75": 0.10105660386525715,
+      "AP_maxdets100": 0.12478766304627785
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 31821,
+      "AP": 0.3380801746810852,
+      "AP50": 0.5221286782723618,
+      "AP75": 0.37629889022580487,
+      "AP_maxdets100": 0.3289236783488236
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 6842,
+      "AP": 0.10684101614068887,
+      "AP50": 0.19433787327651003,
+      "AP75": 0.10691467844831899,
+      "AP_maxdets100": 0.10080329904597038
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 1359,
+      "AP": 0.05368040988860971,
+      "AP50": 0.1071223527224106,
+      "AP75": 0.05121563946275009,
+      "AP_maxdets100": 0.04952095142166547
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 5487,
+      "AP": 0.09803007992923203,
+      "AP50": 0.20413008166054622,
+      "AP75": 0.07189396053911583,
+      "AP_maxdets100": 0.08467989154726097
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 264,
+      "AP": 0.030437257781559104,
+      "AP50": 0.03871124575367232,
+      "AP75": 0.035812234774099616,
+      "AP_maxdets100": 0.03186361256053617
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 12025,
+      "AP": 0.11695997320894481,
+      "AP50": 0.31554339547230464,
+      "AP75": 0.05280482396467119,
+      "AP_maxdets100": 0.10350041706504373
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 977,
+      "num_gt": 13557,
+      "mAP": 0.04633169617676556,
+      "AP50": 0.0633712992406215,
+      "mAP_maxdets100": 0.04633169617676556
+    },
+    {
+      "bin": "20-49",
+      "num_images": 1062,
+      "num_gt": 40626,
+      "mAP": 0.14153212670716822,
+      "AP50": 0.2606345487893822,
+      "mAP_maxdets100": 0.13759814644868634
+    },
+    {
+      "bin": "50-99",
+      "num_images": 618,
+      "num_gt": 39746,
+      "mAP": 0.1842897531140142,
+      "AP50": 0.40266966162172446,
+      "mAP_maxdets100": 0.1649125425517206
+    },
+    {
+      "bin": ">=100",
+      "num_images": 189,
+      "num_gt": 20203,
+      "mAP": 0.2837408862975909,
+      "AP50": 0.5814108758927979,
+      "mAP_maxdets100": 0.2455885845132063
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_full",
+  "checkpoint": "outputs/yolo_baseline_marko_3050/train/weights/last.pt",
+  "predict_seconds": 284.3
+}

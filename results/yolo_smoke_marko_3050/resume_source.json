@@ -1,0 +1,15 @@
+{
+  "path": "outputs/yolo_smoke_marko_3050/train/weights/resume_source_epoch0.pt",
+  "bytes": 94823715,
+  "sha256": "d92352123faf120db632f5b35d768f141948daadacfc041fa149452b23d13db1",
+  "epoch": 0,
+  "optimizer_state_entries": 255,
+  "scaler": {
+    "scale": 32768.0,
+    "growth_factor": 2.0,
+    "backoff_factor": 0.5,
+    "growth_interval": 2000,
+    "_growth_tracker": 0
+  },
+  "train_args_epochs": 2
+}

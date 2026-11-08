@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "original_cells_preserved": 90,
+  "appended_cells": 3,
+  "executed_new_code_cells": 1,
+  "executed_existing_cells": 0,
+  "embedded_pngs": 5,
+  "old_cells_sha256": "c74643bd44d27d85809f5a747e9e3cb69bac665f5197b061a4e87805f6bc5f60",
+  "notebook_sha256": "7618edccb2492a2a8546015a1145808c22eb1b4f7c16a6e163c5ed99276cb5c4",
+  "training_or_inference_executed": false,
+  "kernel_python": "/home/marko/Desktop/\u043d\u0430\u0432\u0447\u0430\u043d\u043d\u044f/\u0428\u0406/Multiple-Object-Video-Detection/.venv/bin/python"
+}
