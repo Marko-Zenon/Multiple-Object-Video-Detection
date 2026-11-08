@@ -1,6 +1,6 @@
 # plan.md — live task board and execution plan
 
-> **Deadline:** Tue 2026-11-10 23:55 Kyiv (gate G1: confirm Kaggle's UTC close time). **Freeze target:** Tue 21:30.
+> **Official Kaggle Close:** Tue 2026-11-10 **21:55 UTC / 23:55 Europe/Kyiv (EET, UTC+02:00)**, verified from the official Overview Close tooltip on 2026-11-08 (G1 RESOLVED). The student-reported 23:59 display conflicts with this current official value and is retained in G1 as unconfirmed. **Freeze target:** Tue 21:30 Kyiv (unchanged).
 > **The live version of this file is the one on `origin/develop`.** Fetch before reading it. Rules are in `CLAUDE.md`.
 > **To start work:** pick a row with `🟢 READY` and `Start now? = 🟢 YES`, then run the atomic claim (§9.2) **before** coding.
 > **States:** ✅ DONE · 🟢 READY · 🔵 IN_PROGRESS · 🟡 BLOCKED · 🟠 PARTIAL / PAUSED · 🔴 FAILED / NEEDS_DECISION.
@@ -17,15 +17,15 @@
 | CH-05 | Test inference, submission writer/validator, first Kaggle upload | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | — (worker: Claude; CH-07 frcnn_rpn_pre3000 e6 submitted: Kaggle public 0.2011538266, val_full mAP 0.1893; real round-trip diff 0; G2b = 5/day, G8 resolved; CH-09 stays paused) | ch-05-submission / [PR #7](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/7) | 2026-11-08 18:10 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn / [PR #6](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6) | 2026-11-08 00:33 Kyiv |
-| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; User-approved parallel work: Claude owns CH-05 inference and submission; Codex owns CH-08 RetinaNet preparation and stays CPU-only while Claude uses the GPU. Files and worktrees are separate. | ch-08-retina | 2026-11-08 16:59 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟠 PARTIAL / PAUSED | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; paused so CH-05 can finish first (one active chunk). CPU prep kept on ch-09-yolo (64f08e6): export + check, adapter GT round trip mAP 1.0, CLIs, configs, pin, 20 tests. No GPU work started. Next: resume by explicit claim after CH-05 is DONE, then GPU smoke + baseline | ch-09-yolo (64f08e6) | 2026-11-08 17:00 Kyiv |
+| CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved exclusive RTX 5070 for CH-08 smokes and sequential training; Claude may do light CH-09 CPU prep in a separate worktree | ch-08-retina | 2026-11-08 20:27 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🔵 IN_PROGRESS | ⛔ NO — owned by Marko-Zenon | Marko-Zenon | start: CH-02 · finish: CH-03 | Explicit Badabuba/Claude → Marko-Zenon handoff authorized by Marko via direct teammate communication; continue CPU work at 8e48881. GPU execution on Marko's separate RTX 3050 6 GB; environment/export/laptop smoke + real resume only, full baseline awaits review. CH-08 remains on Badabuba's RTX 5070 | ch-09-yolo (8e48881 preserved) | 2026-11-08 21:21 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
-| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; still needs CH-12 and CH-14; finish gates G1/G10 remain open | — | 2026-11-08 20:02 Kyiv |
+| CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; still needs CH-12 and CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-08 20:02 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
 
@@ -33,7 +33,7 @@
 
 | ID | Gate | Status | Owner | Resolved by / where |
 |---|---|---|---|---|
-| G1 | Exact Kaggle close time in UTC (plan target: 2026-11-10 23:55 Kyiv). Operational | OPEN | either student | Not on the supplied official pages (they show only a relative "Close: 2 days to go"). Finish gate of CH-16; resolve before the freeze |
+| G1 | Exact official Kaggle close time in UTC and Europe/Kyiv. Operational | RESOLVED | Marko-Zenon | Verified 2026-11-08 on official [Overview](https://www.kaggle.com/competitions/multiple-object-video-detection-hw-2-ucu-ai-2026/overview): rendered Close → 2 days to go span has native title `Tue Nov 10 2026 23:55:00 GMT+0200 (Eastern European Standard Time)`; same title appears in the competition header. Thus competition Close = 2026-11-10 21:55 UTC / 2026-11-10 23:55 Europe/Kyiv (EET, UTC+02:00), checked with zoneinfo. Student-reported 2026-11-10 23:59 is preserved as conflicting/unconfirmed, not the current verified cutoff. Rules inspected; no separate absolute final-selection cutoff exposed, so do not infer a later selection window. Public HTML/API attempts returned 404, but the rendered public page loaded and supplied explicit-offset evidence. Freeze remains 21:30 Kyiv. CH-16 operational finish gate resolved |
 | G2a | Internal evaluation protocol: metric, IoU thresholds, ignore handling, max dets. Technical | RESOLVED | Badabuba | CH-02: rubric-required standard COCO (pycocotools, AP@0.50:0.05:0.95, AP50/75, AP_S/M/L), GT with `iscrowd=1` kept, maxDets 500. Sources: the assignment + Kaggle Data text (ignored-region detections not penalized; ≤ 500 dets scored). The hidden Kaggle scorer code was not exposed and is not claimed identical |
 | G2b | Kaggle daily submission limit. Operational | RESOLVED | Badabuba | 5 submissions per day, verified by Badabuba on the authenticated Kaggle Submit page 2026-11-08 (a limit-increase request is pending, not granted; re-check if it changes). First upload used 1 of 5 that day |
 | G2c | Number of final selections | RESOLVED | Badabuba | CH-02: 2, chosen by internal evaluation, not only the public LB (Kaggle Rules, official Kaggle Overview/Rules/Data text copied by Badabuba 2026-11-07) |
@@ -134,7 +134,7 @@ that a student has approved.
 | Prediction interchange format | COCO results JSON: list of `{"image_id": int, "category_id": 1–8, "bbox": [x, y, w, h] in original image pixels, "score": float}`. Val: COCO image id. Test: `image_id` = 1-based row number in `test_images.csv` (`movd.data.load_test_images()[i]["id"]`); the submission uses its string `image_key` (e.g. `clip_001_0000001`) |
 | Evaluator settings | `movd/evaluate.py` (CH-03): rubric-required standard COCO bbox via pycocotools. **Primary: mAP = AP@IoU 0.50:0.05:0.95**, plus AP50, AP75, AP_S/M/L (COCO area ranges), per-class AP. **maxDets 500** headline (Kaggle scores ≤ 500 dets/image); maxDets 100 only for the legacy-comparability note. Headline split `val_full` |
 | Submission format | Header `image_id,PredictionString`; exactly one row per `test_images.csv` image (3,811), in its order; groups `class score x y width height` (class 0–7, top-left x y, original pixels), space-separated; empty string valid; ≤ 500 groups scored. Local canonical sample: `scripts/make_sample_submission.py` (the official ZIP lacks the file) |
-| Kaggle | Baseline 0.22163 (public LB). **2 final selections**, chosen by internal evaluation (Rules). Ignored-region detections not penalized; ≤ 500 dets/image scored (Data). Hidden scorer code not exposed. **Unknown:** daily limit (G2b, before CH-05's upload), exact UTC close time (G1, before CH-16 freeze) |
+| Kaggle | Baseline 0.22163 (public LB). **2 final selections**, chosen by internal evaluation (Rules). Ignored-region detections not penalized; ≤ 500 dets/image scored (Data). Hidden scorer code not exposed. **Unknown:** daily limit (G2b, before CH-05's upload), exact UTC close time resolved by G1: 2026-11-10 21:55 UTC / 23:55 Kyiv (official Overview Close tooltip, verified 2026-11-08) |
 | Framework decision | Two-stage and one-stage anchor-based: torchvision (Faster R-CNN R50-FPN v2, RetinaNet R50-FPN v2). Anchor-free: Ultralytics **YOLO11**. Query-based: Ultralytics **RT-DETR** (`rtdetr-l` unless the smoke test forces otherwise). Exact package and weight versions are pinned and cited. AGPL-3.0 notice in the README |
 
 ## 5. Dependencies
@@ -210,7 +210,7 @@ Latest safe points:
 - **Tue 16:00:** test predictions, uploads and the final selection are done.
 - **Tue 19:00:** students have finished the report prose (drafting starts Mon evening from the evidence in `results/`).
 - **Tue 21:30:** freeze (`develop → main`).
-- **Tue 22:30:** Pages and repo verification done. The remaining time is buffer up to 23:55.
+- **Tue 22:30:** Pages and repo verification done. The remaining time is buffer up to the verified official Kaggle Close at 23:55 Kyiv / 21:55 UTC (G1); the internal freeze remains 21:30 Kyiv.
 
 CPU and documentation work fills GPU waits: CH-06, CH-12, CH-15, README sections, evidence logs.
 The estimated GPU need is about 18–22 GPU-hours across two GPUs. That is **feasible but not guaranteed**.
@@ -929,7 +929,7 @@ Completion or handoff note: —
 - **Handoff / unblocks:** CH-10 and CH-11 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 23:46 Kyiv | Last update: 2026-11-08 00:10 Kyiv | Branch: ch-09-yolo (worktree ../MOVD-ch09) | Commits: 55196b9 (claim), 64f08e6 | PR: — (not opened; GPU steps pending)
+Owner: Marko-Zenon (GPU execution; handed off by Badabuba/Claude) | Claimed originally: 2026-11-07 23:46 Kyiv by Badabuba | Handoff/resume: 2026-11-08 21:21 Kyiv | Last update: 2026-11-08 21:21 Kyiv | Branch: ch-09-yolo | Commits preserved: 55196b9, 64f08e6, 8e4888192057bdbff490d0382c7f935eb50fe73f | PR: — (full baseline/evaluation pending)
 Files changed: movd/ultra.py; scripts/{export_yolo,check_ultra_adapter,train_ultra,predict_ultra}.py; tests/test_ultra.py; configs/runs/{yolo_baseline,yolo_smoke_s,yolo_smoke_m,DO_NOT_USE_cpu_pipeline_check}.json; requirements.txt (ultralytics==8.4.207); README.md (new CH-09 section only: AGPL-3.0, weights sha256, citation, commands); results/ch-09-yolo/; results/DO_NOT_USE_cpu_pipeline_check/. No change to movd/data.py, movd/evaluate.py, homework.ipynb, CH-05 or CH-07 files.
 Validation commands (all CPU, CUDA_VISIBLE_DEVICES=-1; note: an empty value does not hide the GPU on Windows):
   uv pip install ultralytics==8.4.207 into the shared .venv: dry-run first, purely additive (6 new packages, no existing version changed); albumentations not installed, so no hidden Ultralytics augmentation
@@ -941,7 +941,8 @@ Metrics / results: no model metric yet (no GPU training).
 Artifacts: results/ch-09-yolo/{export_check.json, adapter_check.json, figures/export_check.png, README.md}; results/DO_NOT_USE_cpu_pipeline_check/ (plumbing only). Ignored: outputs/yolo_data/ (1.92 GB incl. Ultralytics label caches), outputs/weights/yolo11{s,m}.pt (sha256 85a76fe8…, d5ffc1a6…).
 Runtime / hardware: CPU only on Nazar's laptop (Ryzen 9 8940HX) while CH-07/Codex used the RTX 5070 (85-98 %, 7.7 GB). No CUDA context was created by CH-09.
 Blockers / deviations: acceptance 4 (baseline + per-epoch curve) waits on CH-07 DONE + idle GPU, then CH-05 test inference first. Deviation: masked frames are re-encoded as JPEG q95 (torchvision masks in memory); fill error <= 1.14/255 measured. Commit 64f08e6 message says 21 tests; the correct count is 20.
-Completion or handoff note: after CH-05 inference: GPU smoke yolo_smoke_s / yolo_smoke_m (train_ultra.py --device 0, then --resume, then predict_ultra.py curve) -> fix model size + batch in yolo_baseline.json -> baseline train -> predict_ultra.py curve + final -> PR ch-09-yolo -> develop, mark DONE, flip CH-10/CH-11 to READY.
+Handoff authorization: Marko-Zenon explicitly reports Badabuba's direct authorization to transfer CH-09 GPU execution to Marko on his separate Ubuntu RTX 3050 6 GB, while Badabuba runs CH-08 on his RTX 5070. Recorded paused→IN_PROGRESS handoff follows CLAUDE sections 3/4 and plan section 9.1; no takeover inferred from inactivity. Push of this coordination commit to develop is the lock before installation/implementation. No CH-08/10/11 state or notebook lock changes. Current session stops before full baseline training.
+Historical completion outline (remaining work, not executed): after CH-05 inference: GPU smoke yolo_smoke_s / yolo_smoke_m (train_ultra.py --device 0, then --resume, then predict_ultra.py curve) -> fix model size + batch in yolo_baseline.json -> baseline train -> predict_ultra.py curve + final -> PR ch-09-yolo -> develop, mark DONE, flip CH-10/CH-11 to READY.
 ```
 
 ---
@@ -1296,7 +1297,7 @@ Completion or handoff note: —
 ## 12. Definition of done and rubric audit checklist
 
 The project is done when every box is ✓ (or has a written justification), M3 is merged into `main` and tagged, and Pages shows
-the final report before 23:55 on 2026-11-10.
+the final report before the verified Kaggle Close at 23:55 Europe/Kyiv / 21:55 UTC on 2026-11-10 (G1). The earlier student-reported 23:59 display conflicts with the official Close tooltip and is not used as the cutoff.
 
 - [ ] Data understanding: class, size and density distributions, sequence differences, GT visualization (CH-06)
 - [ ] Clip-level split and justified subsampling; resizing, normalization, augmentation documented (CH-02, CH-06)
