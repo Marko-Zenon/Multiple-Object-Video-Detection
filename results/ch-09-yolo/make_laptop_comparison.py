@@ -40,7 +40,7 @@ def main():
         )
     folder = ROOT / "results" / "yolo_baseline_marko_3050"
     with (folder / "frcnn_comparison.csv").open("w", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     print(

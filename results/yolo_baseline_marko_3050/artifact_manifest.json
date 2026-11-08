@@ -1,7 +1,7 @@
 {
   "run_id": "yolo_baseline_marko_3050",
   "count": 145,
-  "total_bytes": 1339757442,
+  "total_bytes": 1339757445,
   "transfer_status": "NOT TRANSFERRED; destination/permission and recipient verification pending",
   "note": "Relative to repository root. Manifest/list files excluded. Historical smoke manifests retain their original code hashes; use this inventory for current transfer integrity.",
   "files": [
@@ -417,8 +417,8 @@
     },
     {
       "path": "results/ch-09-yolo/make_laptop_comparison.py",
-      "bytes": 1689,
-      "sha256": "1f7d402605e8c75bca8c0ba9837db343d3735b77328269d99c153e7513bcb953"
+      "bytes": 1710,
+      "sha256": "4cc367c9da1d9c4a3659d01bd85b913e1dbdee6781a3a4a3634f4a4db59b5b2a"
     },
     {
       "path": "results/ch-09-yolo/marko_baseline_export/export_check.json",
@@ -477,8 +477,8 @@
     },
     {
       "path": "results/yolo_baseline_marko_3050/failure_cases.csv",
-      "bytes": 523,
-      "sha256": "4700c6d0ced4a4eb6d99abbe78c8e69ed6138d6d17e55d9851ca05efd8da7714"
+      "bytes": 519,
+      "sha256": "c9f367bab9f414f29feb61c280fcba70256c11bd4b2e2a5d6439b9fd5767649f"
     },
     {
       "path": "results/yolo_baseline_marko_3050/failures_resources.json",
@@ -512,8 +512,8 @@
     },
     {
       "path": "results/yolo_baseline_marko_3050/frcnn_comparison.csv",
-      "bytes": 1718,
-      "sha256": "a2841d06124651eaba1a01b1d70b6ab64cfea37c200324b119332362e68c07ef"
+      "bytes": 1713,
+      "sha256": "20afb4dafc7a33f00619d4f5a2d61b00d0aebcd59758e152b83735b0c6a0c462"
     },
     {
       "path": "results/yolo_baseline_marko_3050/hardware.json",
@@ -537,8 +537,8 @@
     },
     {
       "path": "results/yolo_baseline_marko_3050/per_class.csv",
-      "bytes": 825,
-      "sha256": "92e9a17f9927b97727b31b3e50202443809d20e9ee8b9eceb6c63e7b06cceced"
+      "bytes": 816,
+      "sha256": "2fbfd0ce763ac61e739e61232c5e17033369ff7fb2841cad4d474afe88844f83"
     },
     {
       "path": "results/yolo_baseline_marko_3050/preflight.json",
