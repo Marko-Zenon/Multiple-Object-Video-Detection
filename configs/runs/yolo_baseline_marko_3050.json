@@ -1,0 +1,14 @@
+{
+  "run_id": "yolo_baseline_marko_3050",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "note": "Approved RTX 3050 Laptop baseline after smoke d84bf00. Differences from shared yolo_baseline: unique run_id; batch4->1; workers2->0; cache explicitly false. Official YOLO11s, full 2800-frame train_rubric x 6 epochs =16800 images, imgsz1344, AMP, seed42, flip-only unchanged; no smoke_fraction. nbs64 gradient accumulation retained; batch count is not optimizer-step count.",
+  "overrides": {
+    "cache": false
+  }
+}

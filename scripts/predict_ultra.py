@@ -76,6 +76,14 @@ def curve(args) -> None:
             args.half,
             args.dataset_root,
         )
+        save_json(
+            data.REPO_ROOT
+            / "outputs"
+            / args.run_id
+            / "val_fast_predictions"
+            / f"epoch{epoch - 1}.json",
+            detections,
+        )
         result = ev.evaluate_split(detections, "val_fast", args.dataset_root)
         rows.append(
             {

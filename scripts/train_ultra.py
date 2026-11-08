@@ -76,6 +76,11 @@ def main():
         type=int,
         help="Smoke only: stop after N completed epochs, preserving resumable state",
     )
+    parser.add_argument(
+        "--observe",
+        action="store_true",
+        help="Record finite batch losses, counts and CUDA peaks at each saved epoch",
+    )
     args = parser.parse_args()
 
     config = ultra.load_run_config(args.config)
@@ -136,6 +141,7 @@ def main():
 
     import torch
 
+    observe = args.observe or "smoke_fraction" in config
     observations = {"resume": args.resume, "batches": 0, "saved_epochs": []}
     model = YOLO(str(last if args.resume else weights))
 
@@ -147,13 +153,21 @@ def main():
             optimizer_state_entries=len(trainer.optimizer.state),
             amp=bool(trainer.amp),
         )
+        if args.observe and "smoke_fraction" not in config:
+            expected = json.loads(
+                (data_yaml.parent / "train_rubric_manifest.json").read_text()
+            )["num_images"]
+            if observations["samples"] != expected:
+                raise ValueError(
+                    "Training loader does not contain the full exported split"
+                )
         if trainer.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(trainer.device)
 
     def batch_end(trainer):
         loss = float(trainer.loss.detach())
         if not torch.isfinite(trainer.loss).all():
-            raise FloatingPointError("Non-finite smoke training loss")
+            raise FloatingPointError("Non-finite training loss")
         observations["batches"] += 1
         observations.setdefault("first_loss", loss)
         observations["last_loss"] = loss
@@ -162,11 +176,21 @@ def main():
 
     def model_save(trainer):
         observations["saved_epochs"].append(trainer.epoch)
+        if args.observe:
+            observations["elapsed_seconds"] = round(time.perf_counter() - start, 3)
+            if trainer.device.type == "cuda":
+                observations["peak_cuda_allocated_bytes"] = (
+                    torch.cuda.max_memory_allocated(trainer.device)
+                )
+                observations["peak_cuda_reserved_bytes"] = (
+                    torch.cuda.max_memory_reserved(trainer.device)
+                )
+            save_json(results / "observations.json", observations)
         if args.stop_after_epoch == trainer.epoch + 1:
             raise SmokeCheckpointStop()
 
-    # Instrument smoke runs only; full baseline callback behavior stays unchanged.
-    if "smoke_fraction" in config:
+    # Read-only observations do not change optimizer, sampling or training budget.
+    if observe:
         model.add_callback("on_train_start", train_start)
         model.add_callback("on_train_batch_end", batch_end)
         model.add_callback("on_model_save", model_save)
@@ -180,7 +204,7 @@ def main():
     except SmokeCheckpointStop:
         status = "checkpoint_stop"
     seconds = time.perf_counter() - start
-    if "smoke_fraction" in config and args.device != "cpu":
+    if observe and args.device != "cpu":
         observations["peak_cuda_allocated_bytes"] = torch.cuda.max_memory_allocated(
             int(args.device)
         )
@@ -203,6 +227,10 @@ def main():
     runtime["train_process_seconds"].append(round(seconds, 1))
     if "smoke_fraction" in config:
         runtime.setdefault("smoke_processes", []).append(
+            {"status": status, "seconds": round(seconds, 3), **observations}
+        )
+    elif observe:
+        runtime.setdefault("training_processes", []).append(
             {"status": status, "seconds": round(seconds, 3), **observations}
         )
     runtime["train_seconds_total"] = round(sum(runtime["train_process_seconds"]), 1)
