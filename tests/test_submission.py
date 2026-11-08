@@ -86,7 +86,20 @@ def test_box_is_top_left_xywh_in_original_pixels():
     rows, _ = sub.build_rows(
         [det(1, 3, [100.123, 200.456, 30.5, 40.25], 0.876543214)], IMAGES
     )
-    assert rows[0][1] == "2 0.87654321 100.12300 200.45600 30.50000 40.25000"
+    assert rows[0][1] == "2 0.876543214 100.123 200.456 30.5 40.25"
+
+
+def test_floats_are_written_losslessly():
+    bbox, score = (
+        [357.7352600097656, 475.4615783691406, 53.02947998046875, 1e-07],
+        0.9926649928092957,
+    )
+    rows, stats = sub.build_rows([det(1, 1, bbox, score)], IMAGES)
+    (parsed,) = sub.rows_to_predictions(rows, IMAGES)
+    assert parsed["bbox"] == bbox and parsed["score"] == score
+    assert (
+        stats["written"] == 1
+    )  # a tiny but positive width is kept, not rounded to zero
 
 
 def test_boxes_are_clipped_to_the_image():
@@ -113,10 +126,10 @@ def test_boxes_are_clipped_to_the_image():
         ([0, 0, -3, 5], 0.5, "rejected_bad_box"),
         ([0, 0, 0, 5], 0.5, "rejected_empty_box"),
         (
-            [0, 0, 0.000004, 5],
+            [-5, 10, 5, 5],
             0.5,
             "rejected_empty_box",
-        ),  # zero width after rounding to 1e-5 px
+        ),  # ends exactly at x = 0: zero width after clipping
         (
             [2000, 10, 5, 5],
             0.5,
@@ -155,7 +168,7 @@ def test_order_is_by_score_and_independent_of_input_order():
     rows, _ = sub.build_rows(preds, IMAGES)
     expected = [
         (1, 0.9, 1, 1),
-        (2, 0.7, 7, 7),
+        (2, 0.700000001, 7, 7),
         (0, 0.5, 3, 3),
         (0, 0.5, 9, 9),
         (4, 0.5, 5, 5),
@@ -346,7 +359,7 @@ def test_make_and_validate_submission_clis(tmp_path):
     assert made.returncode == 0, made.stdout + made.stderr
     assert (
         out.read_text(encoding="utf-8").splitlines()[2]
-        == "clip_001_0000002,2 0.60000000 10.00000 10.00000 1350.00000 50.00000"
+        == "clip_001_0000002,2 0.6 10.0 10.0 1350.0 50.0"
     )
     summary = json.loads(
         (

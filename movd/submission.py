@@ -16,18 +16,17 @@ Writer rules, in order, per detection:
 1. reject a detection with a non-finite score or a score outside [0, 1];
 2. reject a box with a non-finite coordinate or a negative width or height;
 3. clip the box to the image (`0 <= x0 < x1 <= width`, same for y);
-4. round to the output precision (`SCORE_DECIMALS`, `BOX_DECIMALS`) and reject boxes whose rounded width
-   or height is not positive (zero-area after clipping or rounding);
+4. reject boxes whose width or height is not positive after clipping (zero area);
 5. sort the image's detections by full-precision score, descending; ties are broken by class and box so the
    order never depends on input order;
 6. keep the first `max_dets` (500) over all classes.
 
-Output precision: scores with 8 decimals, box values with 5 decimals. This is at or below float32
-resolution for the model's outputs, so the CSV is effectively lossless: on a synthetic val_full set
-(176k detections) the val round-trip mAP differs from direct evaluation by 0.0 at 5 box decimals, but by
-2e-4 at 2, 1.4e-5 at 4 and 3.4e-6 at 3, because rounding flips borderline IoU matches. The cost is about
-52 characters per detection. Rounded boxes stay inside the image, so the validator's bounds tolerance is
-only for float noise (`BOUNDS_TOLERANCE`).
+Output precision: lossless. Every float is written as Python `repr`, which parses back to the identical
+value, so the val round-trip equals direct evaluation exactly. Rounding is not safe: with the real CH-07
+frcnn_rpn_pre3000 val_full predictions some COCO matches sit exactly on an IoU threshold, and rounding
+boxes to 5, 8 or even 12 decimals changed AP50 by 4.6e-6, 4.5e-6 and 1.5e-6 (tolerance 1e-6); 17 digits
+gave 0. The cost is about 90 characters per detection instead of 52. Clipped boxes stay inside the image,
+so the validator's bounds tolerance is only for float noise in `x + width` (`BOUNDS_TOLERANCE`).
 
 Rejected detections are counted, never silently written. The validator (`validate_rows`) uses its own
 parsing and does not call the writer, so it can check any CSV, including ones not produced here.
@@ -46,8 +45,7 @@ from movd import data
 
 HEADER = ["image_id", "PredictionString"]
 MAX_DETS = 500
-SCORE_DECIMALS = 8
-BOX_DECIMALS = 5
+FLOAT_FORMAT = "repr (lossless)"
 # The writer never exceeds the image bounds; this only absorbs float noise in `x + width`.
 BOUNDS_TOLERANCE = 1e-6
 GROUP_SIZE = 6
@@ -103,19 +101,20 @@ def clean_detection(pred: dict, width: int, height: int) -> tuple[str, tuple | N
         return "bad_box", None
     x0, y0 = min(max(x, 0.0), width), min(max(y, 0.0), height)
     x1, y1 = min(max(x + w, 0.0), width), min(max(y + h, 0.0), height)
-    x0, y0, x1, y1 = (round(v, BOX_DECIMALS) for v in (x0, y0, x1, y1))
-    w, h = round(x1 - x0, BOX_DECIMALS), round(y1 - y0, BOX_DECIMALS)
+    # A box that needed no clipping keeps its exact width/height (x1 - x0 can differ by one ulp).
+    if (x0, x1) != (x, x + w):
+        w = x1 - x0
+    if (y0, y1) != (y, y + h):
+        h = y1 - y0
     if w <= 0 or h <= 0:
         return "empty_box", None
     return "ok", (score, class_id, x0, y0, w, h)
 
 
 def format_group(det: tuple) -> str:
+    """`class score x y w h`; floats as `repr`, the shortest string that parses back to the same value."""
     score, class_id, x, y, w, h = det
-    return (
-        f"{class_id} {score:.{SCORE_DECIMALS}f} {x:.{BOX_DECIMALS}f} {y:.{BOX_DECIMALS}f} "
-        f"{w:.{BOX_DECIMALS}f} {h:.{BOX_DECIMALS}f}"
-    )
+    return " ".join([str(class_id), *(repr(float(v)) for v in (score, x, y, w, h))])
 
 
 def build_rows(
@@ -165,8 +164,7 @@ def build_rows(
         "rows": len(rows),
         "empty_rows": stats["empty_rows"],
         "max_dets": max_dets,
-        "score_decimals": SCORE_DECIMALS,
-        "box_decimals": BOX_DECIMALS,
+        "float_format": FLOAT_FORMAT,
     }
 
 
