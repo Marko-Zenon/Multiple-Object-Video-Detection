@@ -24,7 +24,7 @@
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
-| CH-15 | Report scaffold & Pages deployment check | 🟢 READY | 🟢 YES | — | gate: G5 | — (G5 resolved; Pages deployment verified) | — | 2026-11-08 18:29 Kyiv |
+| CH-15 | Report scaffold & Pages deployment check | 🔵 IN_PROGRESS | ⛔ NO — owned by Marko-Zenon | Marko-Zenon | gate: G5 | — (Pages enabled and deployment verified) | ch-15-report | 2026-11-08 18:29 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
