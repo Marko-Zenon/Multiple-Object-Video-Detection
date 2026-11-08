@@ -91,6 +91,12 @@ def main():
     parser.add_argument("--dataset-root", type=Path, default=None)
     parser.add_argument("--out", type=Path, default=ultra.DEFAULT_EXPORT_ROOT)
     parser.add_argument(
+        "--results-dir",
+        type=Path,
+        default=RESULTS,
+        help="Evidence directory; use a new directory to preserve another machine's export checks",
+    )
+    parser.add_argument(
         "--check-only",
         action="store_true",
         help="Skip writing, only check an existing export",
@@ -125,7 +131,7 @@ def main():
         for name, source, ids, mask in splits
     }
     chosen = figure(
-        args.out, args.dataset_root, RESULTS / "figures" / "export_check.png"
+        args.out, args.dataset_root, args.results_dir / "figures" / "export_check.png"
     )
 
     report = {
@@ -141,13 +147,13 @@ def main():
             name: ultra.directory_bytes(args.out / name) for name, *_ in splits
         },
         "disk_bytes_total": ultra.directory_bytes(args.out),
-        "figure": "results/ch-09-yolo/figures/export_check.png",
+        "figure": str(args.results_dir / "figures" / "export_check.png"),
         "figure_image_ids": chosen,
         "seconds": round(time.perf_counter() - start, 1),
         "export_seconds": round(export_seconds, 1),
     }
-    RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / "export_check.json").write_text(
+    args.results_dir.mkdir(parents=True, exist_ok=True)
+    (args.results_dir / "export_check.json").write_text(
         json.dumps(report, indent=2) + "\n", encoding="utf-8"
     )
     for name, check in checks.items():
