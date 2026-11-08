@@ -14,14 +14,14 @@
 | CH-02 | Protocol freeze, Kaggle facts, data module | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (G3, G4, G2a, G2c resolved; G1 → CH-16, G2b → CH-05 upload) | ch-02-protocol-data / [PR #2](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/2) | 2026-11-07 17:00 Kyiv |
 | CH-03 | Evaluator, speed benchmark, tests | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 | — (worker: Claude; `movd/evaluate.py` + `scripts/evaluate.py`, headline maxDets 500 per image) | ch-03-evaluator / [PR #3](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/3) | 2026-11-07 17:18 Kyiv |
 | CH-04 | Torchvision training core | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-02 · finish: CH-03 | worker: Codex; CH-03 evaluator and speed integration verified | ch-04-torchvision-training / [PR #4](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/4) | 2026-11-07 17:43 Kyiv |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; user-approved parallel work with CH-07/Codex: Claude owns CH-05 inference, submission export, validation and tests, CPU only, no GPU while CH-07 trains; before first upload: G2b daily limit, G8 upload access | ch-05-submission | 2026-11-07 21:30 Kyiv |
+| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; resumed by the recorded owner after CH-07 DONE. Checkpoint: CH-07 selected frcnn_rpn_pre3000 epoch_0006 (config matches configs/runs, 6 epochs, 16,800 images). GPU idle (nvidia-smi). Next: real val round-trip → test inference → validate → student upload (G2b, G8). CH-09 paused meanwhile | ch-05-submission (9408fdb, no PR yet) | 2026-11-08 17:00 Kyiv |
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
-| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-04 | worker: Codex; user-approved parallel work with CH-06/Claude and CH-05/Claude (Codex owns CH-07 training, checkpoints, results, notebook section; Claude does not use the GPU); acceptance 5 deferred until CH-06 merges and releases notebook lock | ch-07-frcnn | 2026-11-07 21:07 Kyiv |
+| CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn / [PR #6](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6) | 2026-11-08 00:33 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | 🟢 READY | 🟢 YES | — | start: CH-04 | — (CH-04 ✅; verify M-DATA, M-GPU and notebook lock at claim) | — | 2026-11-07 17:43 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟢 READY | 🟢 YES | — | start: CH-02 · finish: CH-03 | — (finish dep CH-03 ✅ DONE) | — | 2026-11-07 17:18 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟠 PARTIAL / PAUSED | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; paused so CH-05 can finish first (one active chunk). CPU prep kept on ch-09-yolo (64f08e6): export + check, adapter GT round trip mAP 1.0, CLIs, configs, pin, 20 tests. No GPU work started. Next: resume by explicit claim after CH-05 is DONE, then GPU smoke + baseline | ch-09-yolo (64f08e6) | 2026-11-08 17:00 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
-| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-07, CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | needs all four families | — | 2026-11-07 15:00 Kyiv |
+| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-05, CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | needs submission tooling & frozen final config | — | 2026-11-07 15:00 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | 🟡 BLOCKED | ⛔ NO — gate G5 | — | gate: G5 | Marko must enable Pages (Settings → Pages → Source: GitHub Actions) | — | 2026-11-07 15:00 Kyiv |
@@ -703,14 +703,22 @@ Completion or handoff note: User approved parallel workers under Badabuba: Claud
 - **Handoff / unblocks:** start dependency of CH-14. Milestone M2 is optional.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 21:30 Kyiv | Last update: 2026-11-07 21:30 Kyiv | Branch: ch-05-submission | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 21:30 Kyiv | Last update: 2026-11-07 21:55 Kyiv | Branch: ch-05-submission (worktree ../MOVD-ch05) | Commits: 4cc0423 (claim), 9408fdb | PR: — (not opened; chunk not complete)
+Files changed: movd/submission.py; scripts/{predict_test,make_submission,validate_submission,submission_roundtrip}.py; tests/test_submission.py; results/submissions.csv (header only); results/ch-05-submission/{README.md, roundtrip_synthetic_seed42.json, DO_NOT_UPLOAD_synthetic_test/, DO_NOT_UPLOAD_cpu_smoke_frcnn/}. No change to movd/data.py, movd/evaluate.py, movd/tv_train.py, homework.ipynb or any CH-07 file.
+Validation commands (all CPU, CUDA_VISIBLE_DEVICES=""):
+  pytest -q tests/test_submission.py -> 49 passed (7 s); pytest -q tests -> 102 passed, 9 skipped (skips = dataset tests, no dataset in the worktree); pytest tests/test_data.py tests/test_sample_submission.py in the main checkout with the dataset -> 38 passed
+  python scripts/check_dataset.py --root <dataset> -> PASSED (32 OK); python scripts/make_splits.py --check -> 3/3 split hashes match
+  ruff format --check + ruff check on the 6 new files -> clean except RUF100 on `# noqa: E402` (same convention as existing scripts)
+  python scripts/submission_roundtrip.py --synthetic --name synthetic_seed42 -> PASSED, max |diff| = 0 on all 6 headline metrics (val_full, 176,140 synthetic detections, 2 min 20 s)
+  python scripts/make_submission.py outputs/ch-05-submission/DO_NOT_UPLOAD_synthetic_test/test_predictions.json -> 3,811 rows, 241,353 dets, 77 empty rows, 560 zero-area rejected, 5,784 over the cap; validate_submission.py [OK] sha256 0cf65fc6…; independent pandas check (no movd code) OK
+  python scripts/validate_submission.py <dataset>/sample_submission.csv -> [OK] sha256 aee0b5dc… (matches CH-02)
+  python scripts/predict_test.py --checkpoint outputs/smoke_frcnn_integrated/epoch_0002.pt --device cpu --clips clip_001 clip_011 --max-images 2 --allow-smoke -> 4 frames, 599 dets, about 5 s per clip on CPU; refused without --allow-smoke; --resume kept both shards; boxes reach x=1710 (1920 px frame) and x=680 (680 px frame), so they are in original pixels; make_submission + validate [OK]
+Metrics / results: no model metric (no trained checkpoint used). Round-trip difference 0 at score 8 / box 5 decimals; it was 2e-4 / 3.4e-6 / 1.4e-5 at 2 / 3 / 4 box decimals (borderline IoU flips), hence the chosen precision.
+Artifacts: results/ch-05-submission/ (small JSON, tracked). Ignored: submissions/DO_NOT_UPLOAD_*.csv, outputs/ch-05-submission/DO_NOT_UPLOAD_*/ (synthetic/smoke, never upload).
+Runtime / hardware: CPU only on Nazar's laptop while CH-07 trained on the RTX 5070; the GPU was never used by CH-05.
+Blockers / deviations: acceptance 3 (accepted Kaggle upload + logged score) open. It needs (a) a validated trained checkpoint explicitly named by CH-07 evidence, (b) a free GPU for 3,811-frame inference (plan estimate about 20 min), (c) G2b (daily limit, still UNKNOWN, not guessed) and G8 (student web upload). The val round-trip was run with synthetic predictions; rerun it on the chosen checkpoint's val predictions before upload. Deviation: predict_test.py has its own 15-line predict loop with a device argument (tv_train.predict_coco is CUDA-only); a test asserts identical output to predict_coco.
+Coordination 2026-11-07 23:46 Kyiv: paused waiting on CH-07 DONE, a free GPU and the student upload. Nazar approved Claude doing CPU-only CH-09 prep meanwhile (recorded in both rows); Codex exclusively owns the GPU until CH-07 is DONE; Claude must not edit CH-07 files, checkpoints, results or notebook section. Order after CH-07: CH-05 inference first, then CH-09 GPU work, never concurrently.
+Completion or handoff note: next steps after CH-07 is DONE: predict_test.py on its selected checkpoint -> make_submission.py -> validate_submission.py -> student checks G2b and uploads via the web UI -> append a row to results/submissions.csv -> PR ch-05-submission -> develop, mark DONE.
 ```
 
 ---
@@ -809,14 +817,14 @@ Completion or handoff note: all 4 acceptance criteria met (every Stage-1 rubric 
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 21:07 Kyiv | Last update: 2026-11-07 21:07 Kyiv | Branch: ch-07-frcnn | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: User approved parallel workers: Claude owns CH-06, the notebook lock, EDA and CH-06 figures; Codex owns CH-07 configurations, GPU training and CH-07 evidence. Workers preserve each other's files. CH-07 acceptance criterion 5 is deferred until CH-06 merges and releases the notebook lock.
+Owner: Badabuba (worker: Codex) | Claimed: 2026-11-07 21:07 Kyiv | Last update: 2026-11-08 00:33 Kyiv | Branch: ch-07-frcnn | Commits: ec9f3dd, ca9dd33, 652c6a5, 2301262 | PR: https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6
+Files changed: configs/runs/frcnn_{baseline,rpn_pre3000,roi_pos50}.json; results/frcnn_*; results/ch-07-frcnn; homework.ipynb (two appended cells); plan.md
+Validation commands: python scripts/check_dataset.py; python scripts/make_splits.py --check; python -m pytest -q --basetemp outputs/ch07-pytest-final (62 passed); ruff check results/ch-07-frcnn/make_evidence.py movd/tv_train.py scripts/train_tv.py tests/test_tv_train.py; python scripts/train_tv.py --config outputs/<run>_smoke.json --training-only (three); python scripts/train_tv.py --config configs/runs/<run>.json (three); python results/ch-07-frcnn/make_evidence.py and --tables-only (byte-identical CSV); nbformat validation and clean-kernel nbclient execution of only the two new cells, all 88 prior cells and outputs preserved; git diff --check
+Metrics / results: Baseline / RPN pre3000 / RoI pos50: final val_fast mAP 0.18959 / 0.19255 / 0.18327; val_full mAP 0.18733 / 0.18934 / 0.18136, AP50 0.38078 / 0.38467 / 0.36430, AP_small 0.09126 / 0.10829 / 0.10035; 18.69 / 14.85 / 17.48 FPS. Selected RPN by final val_fast mAP. All runs saw 16,800 images over six epochs; every val_full result uses 2,846 frames and global maxDets 500.
+Artifacts: results/ch-07-frcnn/{protocol.md,comparison.csv,failure_analysis.md,failure_cases.csv,figures/,make_evidence.py}; results/frcnn_{baseline,rpn_pre3000,roi_pos50}{,_smoke}/{config,curve,metrics,hardware,runtime,speed}.json; local ignored outputs/<run>/epoch_*.pt. Config and weight SHA-256 recorded in protocol.md.
+Runtime / hardware: RTX 5070 Laptop GPU 8 GB, Windows, torch 2.14.1+cu130, torchvision 0.29.1+cu130, AMP, batch two, two workers. Full runs 3663.15 / 3969.77 / 3868.59 s wall (191.69 min combined, 151.32 min training); smokes 88.83 s wall; one additional val_fast prediction pass for figure generation.
+Blockers / deviations: Short-smoke forecast was about six hours; observed full-run wall was about 3 h 12 min. One seed, CUDA RoI Align backward warns about nondeterminism. Whole-repo Ruff reported 16 existing findings outside CH-07 before integration of CH-06; scoped Ruff passed. RoI negative overall AP and RPN large-object/speed regressions retained. Legacy v0 kept separately.
+Completion or handoff note: User approved parallel CH-06 (Claude CPU/EDA/notebook) and CH-07 (Codex GPU/Faster R-CNN) work under Badabuba. Acceptance 5 was deferred until CH-06 merged and released the lock; CH-07 then claimed, appended and validated its own section and releases the lock with this PR. CH-12 still needs CH-08, CH-10 and CH-11. GPU training is finished.
 ```
 
 ---
@@ -905,14 +913,19 @@ Completion or handoff note: —
 - **Handoff / unblocks:** CH-10 and CH-11 become READY. Satisfies the "CH-04 or CH-09" finish dependency of CH-05.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-07 23:46 Kyiv | Last update: 2026-11-08 00:10 Kyiv | Branch: ch-09-yolo (worktree ../MOVD-ch09) | Commits: 55196b9 (claim), 64f08e6 | PR: — (not opened; GPU steps pending)
+Files changed: movd/ultra.py; scripts/{export_yolo,check_ultra_adapter,train_ultra,predict_ultra}.py; tests/test_ultra.py; configs/runs/{yolo_baseline,yolo_smoke_s,yolo_smoke_m,DO_NOT_USE_cpu_pipeline_check}.json; requirements.txt (ultralytics==8.4.207); README.md (new CH-09 section only: AGPL-3.0, weights sha256, citation, commands); results/ch-09-yolo/; results/DO_NOT_USE_cpu_pipeline_check/. No change to movd/data.py, movd/evaluate.py, homework.ipynb, CH-05 or CH-07 files.
+Validation commands (all CPU, CUDA_VISIBLE_DEVICES=-1; note: an empty value does not hide the GPU on Windows):
+  uv pip install ultralytics==8.4.207 into the shared .venv: dry-run first, purely additive (6 new packages, no existing version changed); albumentations not installed, so no hidden Ultralytics augmentation
+  pytest -q tests/test_ultra.py -> 20 passed; pytest -q tests -> 72 passed, 10 skipped (dataset tests, no dataset in the worktree); ruff check (RUF100 on `# noqa: E402` kept, repo convention) + ruff format --check clean
+  python scripts/export_yolo.py --dataset-root <dataset> -> train_rubric 2,800 images, 137,756 labels = 137,756 COCO targets (0 degenerate, 0 duplicates), classes 0-7 all present, max label box error 0.002 px, 2,161 masked / 639 byte-copied frames, 7,680 ignore regions; pixel check on 40 masked frames: fill MAE <= 1.14, kept-target MAE <= 1.45 (JPEG q95); val_fast 714 byte copies, 28,685 labels; 90 s
+  python scripts/check_ultra_adapter.py --model-preflight outputs/weights/yolo11s.pt -> GT -> YOLO lines -> Ultralytics Results -> adapter -> 500 cap -> movd.evaluate on val_full: mAP 1.0000 (114,132 dets); CPU preflight of COCO-pretrained yolo11s at imgsz 1344 on 3 val frames: boxes in original pixels, ids 1-8, evaluator accepts (80-class model filtered to classes 0-7 for this format check only; unfiltered, the adapter correctly rejects class 38)
+  python scripts/train_ultra.py --config configs/runs/DO_NOT_USE_cpu_pipeline_check.json --device cpu (8 images, imgsz 320) + predict_ultra.py curve -> epoch0/epoch1 checkpoints, resumable curve, 0 corrupt labels, label cache only under outputs/yolo_data (dataset folder untouched). Found: nbs 64 accumulation -> batch 4 gives about 44 optimizer steps/epoch (recorded in yolo_baseline.json)
+Metrics / results: no model metric yet (no GPU training).
+Artifacts: results/ch-09-yolo/{export_check.json, adapter_check.json, figures/export_check.png, README.md}; results/DO_NOT_USE_cpu_pipeline_check/ (plumbing only). Ignored: outputs/yolo_data/ (1.92 GB incl. Ultralytics label caches), outputs/weights/yolo11{s,m}.pt (sha256 85a76fe8…, d5ffc1a6…).
+Runtime / hardware: CPU only on Nazar's laptop (Ryzen 9 8940HX) while CH-07/Codex used the RTX 5070 (85-98 %, 7.7 GB). No CUDA context was created by CH-09.
+Blockers / deviations: acceptance 4 (baseline + per-epoch curve) waits on CH-07 DONE + idle GPU, then CH-05 test inference first. Deviation: masked frames are re-encoded as JPEG q95 (torchvision masks in memory); fill error <= 1.14/255 measured. Commit 64f08e6 message says 21 tests; the correct count is 20.
+Completion or handoff note: after CH-05 inference: GPU smoke yolo_smoke_s / yolo_smoke_m (train_ultra.py --device 0, then --resume, then predict_ultra.py curve) -> fix model size + batch in yolo_baseline.json -> baseline train -> predict_ultra.py curve + final -> PR ch-09-yolo -> develop, mark DONE, flip CH-10/CH-11 to READY.
 ```
 
 ---
