@@ -1,0 +1,29 @@
+$ python scripts/validate_submission.py submissions/frcnn_rpn_pre3000_e6_test.csv
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 261940,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 160,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 128985,
+    "bicycle": 3777,
+    "car": 79094,
+    "van": 8782,
+    "truck": 11738,
+    "tricycle": 6239,
+    "bus": 1649,
+    "motor": 21676
+  }
+}
+[OK] submissions\frcnn_rpn_pre3000_e6_test.csv: 3811 rows, 261940 detections, sha256 152b8ad1e8c608330bed086772dd8ff35380d41c49b085cbc16be303c0c625b0
+exit 0
+
+$ independent stdlib check (no movd code)
+rows 3811, unique 3811, order OK True, detections 261940, empty rows 0, max/image 160, classes {0: 128985, 1: 3777, 2: 79094, 3: 8782, 4: 11738, 5: 6239, 6: 1649, 7: 21676}
+sha256 152b8ad1e8c608330bed086772dd8ff35380d41c49b085cbc16be303c0c625b0
+[OK] independent check passed
+exit 0
+
+file size bytes: 24181776

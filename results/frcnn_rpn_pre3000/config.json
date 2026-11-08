@@ -1,0 +1,22 @@
+{
+  "family": "frcnn",
+  "train_split": "train_rubric",
+  "epochs": 6,
+  "min_size": 756,
+  "max_size": 1344,
+  "batch_size": 2,
+  "workers": 2,
+  "pretrained": true,
+  "amp": true,
+  "learning_rate": 0.0001,
+  "rpn": {
+    "rpn_pre_nms_top_n_train": 3000
+  },
+  "run_id": "frcnn_rpn_pre3000",
+  "seed": 42,
+  "training_only": false,
+  "protocol_version": "v1",
+  "train_split_size": 2800,
+  "weights": "COCO_V1",
+  "detections_per_img": 500
+}
