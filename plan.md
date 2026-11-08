@@ -24,7 +24,7 @@
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-08, CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 ✅; remaining families pending | — | 2026-11-08 00:33 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
-| CH-15 | Report scaffold & Pages deployment check | 🔵 IN_PROGRESS | ⛔ NO — owned by Marko-Zenon | Marko-Zenon | gate: G5 | Scaffold validated locally; push/PR blocked by missing GitHub credentials; merge + M1 deployment still pending | ch-15-report / PR pending authentication | 2026-11-08 19:02 Kyiv |
+| CH-15 | Report scaffold & Pages deployment check | 🔵 IN_PROGRESS | ⛔ NO — owned by Marko-Zenon | Marko-Zenon | gate: G5 | Ready for review; task merge + M1 deployment and deployed-scaffold verification still pending | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8) | 2026-11-08 19:32 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14, CH-15 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | final-delivery chunk | — | 2026-11-07 15:00 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
@@ -1185,12 +1185,17 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-16.
 - **Evidence log:**
 ```text
-Owner: Marko-Zenon | Claimed: 2026-11-08 18:29 Kyiv (pushed c3873d2) | Last update: 2026-11-08 19:02 Kyiv | Branch: ch-15-report | Commits: CH-15 scaffold commit (git log ch-15-report) | PR: pending authentication
+Owner: Marko-Zenon | Claimed: 2026-11-08 18:29 Kyiv (pushed c3873d2) | Last update: 2026-11-08 19:32 Kyiv | Branch: ch-15-report | Commits: 27e4110 (scaffold), publication evidence commit (git log ch-15-report) | PR: https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8
 Files changed: report.md; images/ch-15-ignore-masking-check.png; plan.md (CH-15 row and this log only).
 Validation commands / observations:
   git fetch origin; git switch develop; git pull --ff-only; git switch -c ch-15-report origin/develop -> success; clean start; claim verified on origin/develop.
   git merge --no-edit origin/develop -> already up to date. Public GitHub REST /pulls?state=open&base=develop -> [] at inspection.
-  gh pr list --base develop / gh run list --workflow "Deploy report" -L 3 -> unavailable: gh not authenticated.
+  Initial session: gh was not authenticated. Publication follow-up: gh auth status -> Marko-Zenon authenticated; gh pr list --base develop -> no open PR before CH-15 publication.
+  git fetch origin; git switch develop; git pull --ff-only; git switch ch-15-report; git merge --no-edit origin/develop -> already up to date, no conflicts; original 27e4110 preserved.
+  .venv/bin/python /tmp/validate_ch15.py -> PASS metadata, 21 local links, table columns, exact six AP metrics/FPS/latency per run, eight per-class AP rows, six curve epochs/run, image decode/byte identity, allowed file list and CH-15-only board changes.
+  gh run list --workflow "Deploy report" -L 1 --json databaseId,conclusion,headSha,url -> run 42058475925 success, main 0330c83; curl public Pages URL -> HTTP 200.
+  git push -u origin ch-15-report -> success; remote ref confirms 27e4110. gh pr create --base develop --head ch-15-report --title "CH-15: report scaffold and verified evidence inventory" --body-file /tmp/ch15-pr-body.md -> PR #8.
+  Pytest availability rechecked -> No module named pytest; previous desktop/mobile preview retained (report/image unchanged).
   Public REST /actions/workflows/deploy.yml/runs?per_page=1 -> run 42058475925, attempt 2, success, main SHA 0330c836df45f3ba8199a801cbb7671f7fa1a264.
   https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/actions/runs/42058475925
   https://marko-zenon.github.io/Multiple-Object-Video-Detection/ -> HTTP 200; browser confirms old template, not this unmerged scaffold.
@@ -1205,8 +1210,8 @@ Artifacts: report.md contains inventory and source links; one pipeline test imag
 Runtime / hardware: CPU documentation/static inspection and browser preview on Marko's Ubuntu; no training, inference or notebook execution. Stored run hardware is RTX 5070 Laptop on Windows, not this session's measurement.
 Read-only audit, confirmed: CH-08 full RetinaNet, CH-09/10 YOLO11, CH-11 RT-DETR, CH-12 cross-family decision, CH-13 inference ablations, CH-14 final config/selection and baseline-beating upload missing from this develop snapshot. FRCNN has complete stored speed/failures; other-family full-run evidence absent. README still describes notebook-centric legacy 560-frame/3-epoch protocol, ends mid-sentence and says push main; use CLAUDE/plan instead. requirements.txt on develop lacks ultralytics and README lacks its license notice (CH-09 work is paused/unmerged); local pytest absent. configs/protocol.json retains stale UNKNOWN daily limit despite board G2b resolved. G1/G9/G10 remain open.
 Read-only audit, unverified risks: full clean-env reproducibility and notebook runtime dependencies not tested; legacy cells retrain if executed; hidden Kaggle scorer equivalence unknown. Static code agrees with frozen 1-8/0-7 label conversion, train mask and crowd-preserving evaluator; no confirmed new split/label/ignore/evaluation defect found. Constant-fill masking is a heuristic, not explicit loss suppression. Single seed and non-end-to-end speed limit comparison claims.
-Blockers / deviations: HTTPS git push fails "could not read Username" and gh has no authenticated session; no signed-in browser surface available. Cannot push branch, update live board, or open PR. User forbids automatic merge; no DONE transition or dependent-row edits. Existing Pages deployment verified via public REST/browser instead of authenticated gh. CH-15 permits only placeholder/test figure, so final figure pack deferred. Student discussion/conclusions/references and explanatory prose remain TODOs.
-Completion or handoff note: IN_PROGRESS, not DONE. Preserve local commit; authenticate GitHub, fetch and inspect live CH-15 ownership/board, merge origin/develop (retain latest other rows), push ch-15-report and open PR to develop. Human review/merge, then approved M1 develop-to-main PR and deployed scaffold verification are outstanding acceptance steps. Do not begin another chunk or alter protected template files. Auth-blocked board update is local only until pushed.
+Blockers / deviations: Initial HTTPS/gh authentication blocker resolved in publication follow-up. PR #8 is open for review. User forbids automatic merge; no DONE transition or dependent-row edits. Public Pages still contains the previous main template; M1 publication and verification of this scaffold remain pending. CH-15 permits only placeholder/test figure, so final figure pack deferred. Student discussion/conclusions/references and explanatory prose remain TODOs.
+Completion or handoff note: IN_PROGRESS, ready for PR review, not DONE. Task branch published and PR #8 targets develop. Human review/merge, then approved M1 develop-to-main PR and deployed-scaffold verification are outstanding acceptance steps. Do not begin another chunk or alter protected template files. No implementation or coordination push was made directly to main/develop in this follow-up.
 
 ```
 
