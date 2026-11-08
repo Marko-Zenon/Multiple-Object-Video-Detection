@@ -1,0 +1,48 @@
+{
+  "checkpoint": "../Multiple-Object-Video-Detection/outputs/smoke_frcnn_integrated/epoch_0002.pt",
+  "checkpoint_sha256": "10e93c25f3e915d458aa32900d0121821632816da1e93f6f932f49e81b1214aa",
+  "model": {
+    "run_id": "smoke_frcnn_integrated",
+    "family": "frcnn",
+    "epoch": 2,
+    "training_only": false,
+    "smoke": true,
+    "min_size": 756,
+    "max_size": 1344,
+    "detections_per_img": 500,
+    "last_val_fast": {
+      "mAP": 9.391167701396183e-05,
+      "AP50": 0.0004300822676654516,
+      "AP75": 1.0962655482160811e-05,
+      "AP_small": 2.640538186772433e-05,
+      "AP_medium": 0.0002634986518838699,
+      "AP_large": 0.00015703582883667407
+    }
+  },
+  "config": {
+    "run_id": "smoke_frcnn_integrated",
+    "family": "frcnn",
+    "epochs": 2,
+    "smoke_steps_per_epoch": 25,
+    "batch_size": 2,
+    "workers": 2,
+    "pretrained": false,
+    "amp": true,
+    "learning_rate": 0.0001
+  },
+  "device": "cpu",
+  "gpu": null,
+  "amp": false,
+  "batch_size": 2,
+  "partial_test_set": true,
+  "clips": 2,
+  "frames": 4,
+  "detections": 599,
+  "predictions_file": "outputs/ch-05-submission/DO_NOT_UPLOAD_cpu_smoke_frcnn/test_predictions.json",
+  "seconds_this_process": 0.819594899949152,
+  "seconds_new_clips": 0,
+  "new_clips": 0,
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "platform": "Windows-11-10.0.26300-SP0"
+}

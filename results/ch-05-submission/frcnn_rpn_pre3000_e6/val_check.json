@@ -1,0 +1,52 @@
+{
+  "checkpoint": "C:/UCU/AI/hw2/Multiple-Object-Video-Detection/outputs/ch07/outputs/frcnn_rpn_pre3000/epoch_0006.pt",
+  "checkpoint_sha256": "522f867dea8de585b0d6b72a3f2750a7cd2470ce165225d2f9514f278804eb9f",
+  "model": {
+    "run_id": "frcnn_rpn_pre3000",
+    "family": "frcnn",
+    "epoch": 6,
+    "training_only": false,
+    "smoke": false,
+    "min_size": 756,
+    "max_size": 1344,
+    "detections_per_img": 500,
+    "last_val_fast": {
+      "mAP": 0.1925515434330417,
+      "AP50": 0.38770856070302984,
+      "AP75": 0.16527132041776385,
+      "AP_small": 0.10927151737685636,
+      "AP_medium": 0.18936033160397647,
+      "AP_large": 0.31756200660722605
+    }
+  },
+  "predictions_file": "outputs/ch-05-submission/frcnn_rpn_pre3000_e6/val_full_predictions.json",
+  "num_images": 2846,
+  "num_predictions": 164999,
+  "stored_num_predictions": 165000,
+  "direct": {
+    "mAP": 0.18932854999659998,
+    "AP50": 0.38467172681238504,
+    "AP75": 0.16134541941462555,
+    "AP_small": 0.10828599617831683,
+    "AP_medium": 0.18686039501160318,
+    "AP_large": 0.31073584626354817
+  },
+  "stored_ch07": {
+    "mAP": 0.18933546543958218,
+    "AP50": 0.38466965324693614,
+    "AP75": 0.161351371052943,
+    "AP_small": 0.10828926194373481,
+    "AP_medium": 0.18679665162931175,
+    "AP_large": 0.3106570986422726
+  },
+  "abs_difference": {
+    "mAP": 6.915442982202702e-06,
+    "AP50": 2.073565448901249e-06,
+    "AP75": 5.951638317458485e-06,
+    "AP_small": 3.2657654179812923e-06,
+    "AP_medium": 6.374338229142573e-05,
+    "AP_large": 7.874762127557666e-05
+  },
+  "max_abs_difference": 7.874762127557666e-05,
+  "seconds": 238.2841753999819
+}
