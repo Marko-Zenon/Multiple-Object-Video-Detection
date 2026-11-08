@@ -18,7 +18,7 @@
 | CH-06 | Corrected EDA & preprocessing evidence (notebook) | ✅ DONE | ⛔ NO — completed | Badabuba | — | — (worker: Claude; Stage 1 re-run from a clean kernel, 0 errors; notebook lock released) | ch-06-eda / [PR #5](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/5) | 2026-11-07 19:20 Kyiv |
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn / [PR #6](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6) | 2026-11-08 00:33 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected retina_anchors by final val_fast mAP; GPU and notebook lock released | ch-08-retina / [PR #11](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/11) | 2026-11-08 23:45 Kyiv |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟠 PARTIAL / PAUSED | ⛔ NO — decision required | Marko-Zenon | start: CH-02 · finish: CH-03 | Five technical acceptance checks + notebook PASS; draft PR #10 open/unmerged. All 90 prior notebook cells/outputs preserved; lock released. Waiting on student acceptance and destination/recipient-verified checkpoint transfer; no DONE, CH-10/11 remain blocked | ch-09-yolo / [draft PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-08 23:15 Kyiv |
+| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🔵 IN_PROGRESS | ⛔ NO — owned by Marko-Zenon | Marko-Zenon (closeout: Badabuba) | start: CH-02 · finish: CH-03 | Recorded next actions handed to Badabuba (worker: Claude): recipient verification of Marko's Telegram artifact ZIP, review, develop integration (structural notebook merge under lock), merge of PR #10. Marko's authorship preserved | ch-09-yolo / [draft PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-09 00:30 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs YOLO baseline & export | — | 2026-11-07 15:00 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🟡 BLOCKED | ⛔ NO — CH-09 | — | start: CH-09 | needs export, adapter & YOLO curve | — | 2026-11-07 15:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07 and CH-08 ✅; remaining families pending | — | 2026-11-08 23:45 Kyiv |
@@ -27,7 +27,7 @@
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; still needs CH-12 and CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-08 20:02 Kyiv |
 
-🔒 **homework.ipynb lock:** FREE
+🔒 **homework.ipynb lock:** Badabuba (CH-09 closeout: structural merge of develop's CH-08 cells with the CH-09 cells; taken 2026-11-09 00:30 Kyiv)
 
 ### Gates
 
