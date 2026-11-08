@@ -305,3 +305,27 @@ The shipped `images/`, `labels/` and `data.yaml` are not used for training becau
 `movd/ultra.py` applies the CH-02 policy instead (crowd never a target; ignore regions filled with the ImageNet mean except
 inside labelled target boxes). Every reported number comes from `movd/evaluate.py` on the original val images, never from
 Ultralytics' own validator.
+
+<!-- CH-11 section (RT-DETR). -->
+
+## Query-based detector: RT-DETR (CH-11)
+
+- **Model:** Ultralytics RT-DETR-l (`ultralytics==8.4.207`, AGPL-3.0, see the CH-09 section). Official COCO-pretrained
+  `rtdetr-l.pt` from https://github.com/ultralytics/assets/releases/tag/v8.4.0 (66,511,432 bytes, sha256
+  `6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f`), downloaded to the git-ignored `outputs/weights/`.
+- **Citation:** Zhao, Y., Lv, W., Xu, S., Wei, J., Wang, G., Dang, Q., Liu, Y., Chen, J. *DETRs Beat YOLOs on Real-time
+  Object Detection*, CVPR 2024. Carion, N. et al. *End-to-End Object Detection with Transformers* (DETR), ECCV 2020.
+- **Code:** the CH-09 Ultralytics path unchanged (masked export, training arguments, adapter with the 500 cap, project
+  evaluator). `movd/rtdetr.py` opens RT-DETR checkpoints with `ultralytics.RTDETR` (run-config `"family": "rtdetr"`).
+  RT-DETR has no NMS and returns at most one box per decoder query. `configs/models/rtdetr-l-q500.yaml` is the packaged
+  `rtdetr-l.yaml` with 500 instead of 300 queries.
+
+```bash
+python scripts/export_yolo.py                                    # once, CPU (~1.5 min, 1.9 GB in outputs/yolo_data/)
+bash results/ch-11-rtdetr/run_ch11.sh python                     # baseline, 500 queries, lr0 1e-4: train -> val_fast curve -> val_full + speed (resumable)
+python results/ch-11-rtdetr/make_evidence.py                     # CPU: comparison tables and figures in results/ch-11-rtdetr/
+```
+
+Single steps: `python scripts/train_ultra.py --config configs/runs/rtdetr_baseline.json --device 0 --observe [--resume]`,
+`python scripts/predict_ultra.py curve|final --run-id rtdetr_baseline --device 0`,
+`python scripts/predict_ultra.py speed --weights <ckpt> --family yolo11 --out <json> --device 0`.
