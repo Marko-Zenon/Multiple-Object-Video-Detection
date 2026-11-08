@@ -155,11 +155,11 @@ Dependency kinds:
 | CH-02 | — | — | M-DATA | G2a, G2c, G3, G4 (resolved here); G1, G2b re-scoped as operational |
 | CH-03 | CH-02 | — | M-DATA | — |
 | CH-04 | CH-02 | CH-03 | M-DATA, M-GPU | — |
-| CH-05 | Test inference, submission writer/validator, first Kaggle upload | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03, CH-04 or CH-09 | worker: Claude; resumed by the recorded owner after CH-07 DONE. Checkpoint: CH-07 selected frcnn_rpn_pre3000 epoch_0006 (config matches configs/runs, 6 epochs, 16,800 images). GPU idle (nvidia-smi). Next: real val round-trip → test inference → validate → student upload (G2b, G8). CH-09 paused meanwhile | ch-05-submission (9408fdb, no PR yet) | 2026-11-08 17:00 Kyiv |
+| CH-05 | CH-02 | CH-03, CH-04 or CH-09 | M-DATA, M-GPU | G2b, G8 (before the first upload) |
 | CH-06 | — | — | M-DATA, 🔒 | — |
 | CH-07 | CH-04 | — | M-DATA, M-GPU, 🔒 short | — |
 | CH-08 | CH-04 | — | M-DATA, M-GPU, 🔒 short | — |
-| CH-09 | Ultralytics export + YOLO11 anchor-free baseline | 🟠 PARTIAL / PAUSED | ⛔ NO — owned by Badabuba | Badabuba | start: CH-02 · finish: CH-03 | worker: Claude; paused so CH-05 can finish first (one active chunk). CPU prep kept on ch-09-yolo (64f08e6): export + check, adapter GT round trip mAP 1.0, CLIs, configs, pin, 20 tests. No GPU work started. Next: resume by explicit claim after CH-05 is DONE, then GPU smoke + baseline | ch-09-yolo (64f08e6) | 2026-11-08 17:00 Kyiv |
+| CH-09 | CH-02 | CH-03 | M-DATA, M-GPU | — |
 | CH-10 | CH-09 | — | M-DATA, M-GPU, 🔒 short | — |
 | CH-11 | CH-09 | — | M-DATA, M-GPU (8 GB preferred), 🔒 short | G9 |
 | CH-12 | CH-07, CH-08, CH-10, CH-11 | — | CPU, 🔒 short | — |
