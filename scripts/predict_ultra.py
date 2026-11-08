@@ -7,7 +7,11 @@ Subcommands (all take a required --device, '0' or 'cpu'):
   results/R/figures/curve.png. Epoch = N + 1 (Ultralytics numbers checkpoints from 0).
 * `final --run-id R`: the final checkpoint (`last.pt`) on val_full -> results/R/metrics.json, per_class.csv,
   speed.json. Raw predictions go to the ignored outputs/R/val_full_predictions.json.
-* `predict --weights W --split S --out F`: COCO-results JSON for any checkpoint and val split.
+* `predict --weights W --split S --out F [--family rtdetr]`: COCO-results JSON for any checkpoint and val split.
+* `speed --weights W --out F [--family rtdetr]`: the shared speed benchmark alone (for example, to time a
+  checkpoint trained on another machine on this GPU).
+
+The model class follows the run config's `family` (yolo11 or rtdetr, `movd.rtdetr.load_model`).
 
 Prediction settings: conf 0.001, NMS IoU 0.7, max_det 500, imgsz from the run config (protocol 1344), original
 val images, boxes in original pixels, then the shared 500-per-image cap.
@@ -21,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from movd import data, ultra  # noqa: E402
+from movd import data, rtdetr, ultra  # noqa: E402
 from movd import evaluate as ev  # noqa: E402
 
 
@@ -32,21 +36,33 @@ def save_json(path: Path, value) -> None:
     temp.replace(path)
 
 
-def run_settings(run_id: str) -> dict:
-    config = json.loads(
+def run_config(run_id: str) -> dict:
+    return json.loads(
         (data.REPO_ROOT / "results" / run_id / "config.json").read_text(
             encoding="utf-8"
         )
     )
-    return config["ultralytics_train_kwargs"]
+
+
+def run_settings(run_id: str) -> dict:
+    return run_config(run_id)["ultralytics_train_kwargs"]
+
+
+def run_family(run_id: str) -> str:
+    """yolo11 or rtdetr, from the recorded run config (CH-09 runs predate the field: yolo11)."""
+    return run_config(run_id)["run_config"].get("family", "yolo11")
 
 
 def predict(
-    weights: Path, split: str, device: str, imgsz: int, half: bool, root
+    weights: Path,
+    split: str,
+    device: str,
+    imgsz: int,
+    half: bool,
+    root,
+    family: str = "yolo11",
 ) -> tuple[list[dict], float]:
-    from ultralytics import YOLO
-
-    model = YOLO(str(weights))
+    model = rtdetr.load_model(weights, family)
     start = time.perf_counter()
     detections = ultra.predict_coco(
         model, ultra.val_frames(split, root), imgsz=imgsz, device=device, half=half
@@ -75,6 +91,7 @@ def curve(args) -> None:
             settings["imgsz"],
             args.half,
             args.dataset_root,
+            run_family(args.run_id),
         )
         save_json(
             data.REPO_ROOT
@@ -124,13 +141,14 @@ def plot_curve(rows, path: Path, run_id: str) -> None:
     plt.close(fig)
 
 
-def speed(weights: Path, device: str, imgsz: int, half: bool, root) -> dict:
+def speed(
+    weights: Path, device: str, imgsz: int, half: bool, root, family: str = "yolo11"
+) -> dict:
     import cv2
-    from ultralytics import YOLO
 
     from movd.speed import benchmark
 
-    model = YOLO(str(weights))
+    model = rtdetr.load_model(weights, family)
     frames = [cv2.imread(str(p)) for _, p in ultra.val_frames("val_full", root)[:30]]
     kwargs = ultra.predict_kwargs(imgsz, device, half)
     return benchmark(
@@ -156,6 +174,7 @@ def final(args) -> None:
         settings["imgsz"],
         args.half,
         args.dataset_root,
+        run_family(args.run_id),
     )
     save_json(output / "val_full_predictions.json", detections)
     result = ev.evaluate_split(detections, "val_full", args.dataset_root)
@@ -165,16 +184,39 @@ def final(args) -> None:
     print(ev.format_summary(result))
     save_json(
         results / "speed.json",
-        speed(weights, args.device, settings["imgsz"], args.half, args.dataset_root),
+        speed(
+            weights,
+            args.device,
+            settings["imgsz"],
+            args.half,
+            args.dataset_root,
+            run_family(args.run_id),
+        ),
     )
 
 
 def predict_cmd(args) -> None:
     detections, seconds = predict(
-        args.weights, args.split, args.device, args.imgsz, args.half, args.dataset_root
+        args.weights,
+        args.split,
+        args.device,
+        args.imgsz,
+        args.half,
+        args.dataset_root,
+        args.family,
     )
     save_json(args.out, detections)
     print(f"{len(detections)} detections in {seconds:.1f} s -> {args.out}")
+
+
+def speed_cmd(args) -> None:
+    result = speed(
+        args.weights, args.device, args.imgsz, args.half, args.dataset_root, args.family
+    )
+    result["weights"] = Path(args.weights).name
+    result["family"] = args.family
+    save_json(args.out, result)
+    print(f"{result['fps']:.2f} FPS ({result.get('gpu', args.device)}) -> {args.out}")
 
 
 def main():
@@ -182,7 +224,7 @@ def main():
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("curve", "final", "predict"):
+    for name in ("curve", "final", "predict", "speed"):
         p = sub.add_parser(name)
         p.add_argument("--device", required=True)
         p.add_argument("--dataset-root", type=Path, default=None)
@@ -191,17 +233,25 @@ def main():
             p.add_argument("--run-id", required=True)
         if name == "final":
             p.add_argument("--weights", type=Path, default=None)
-        if name == "predict":
+        if name in ("predict", "speed"):
             p.add_argument("--weights", type=Path, required=True)
-            p.add_argument("--split", choices=("val_fast", "val_full"), required=True)
+            p.add_argument("--family", choices=rtdetr.FAMILIES, default="yolo11")
             p.add_argument("--out", type=Path, required=True)
             p.add_argument(
                 "--imgsz",
                 type=int,
                 default=data.load_protocol()["rubric_budget"]["input_long_side"],
             )
+        if name == "predict":
+            p.add_argument("--split", choices=("val_fast", "val_full"), required=True)
     args = parser.parse_args()
-    {"curve": curve, "final": final, "predict": predict_cmd}[args.command](args)
+    commands = {
+        "curve": curve,
+        "final": final,
+        "predict": predict_cmd,
+        "speed": speed_cmd,
+    }
+    commands[args.command](args)
 
 
 if __name__ == "__main__":

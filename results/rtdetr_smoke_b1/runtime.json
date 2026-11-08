@@ -1,0 +1,33 @@
+{
+  "train_process_seconds": [
+    114.9
+  ],
+  "smoke_processes": [
+    {
+      "status": "completed",
+      "seconds": 114.941,
+      "resume": false,
+      "batches": 100,
+      "saved_epochs": [
+        0,
+        1
+      ],
+      "start_epoch": 0,
+      "samples": 50,
+      "batches_per_epoch": 50,
+      "optimizer_state_entries": 0,
+      "amp": true,
+      "first_loss": 39.034393310546875,
+      "last_loss": 37.69155502319336,
+      "minimum_loss": 32.65724182128906,
+      "maximum_loss": 41.681480407714844,
+      "peak_cuda_allocated_bytes": 3551183872,
+      "peak_cuda_reserved_bytes": 4112515072
+    }
+  ],
+  "train_seconds_total": 114.9,
+  "epoch_checkpoints": [
+    "epoch0.pt",
+    "epoch1.pt"
+  ]
+}

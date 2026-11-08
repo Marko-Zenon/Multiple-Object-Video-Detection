@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from movd import data, ultra  # noqa: E402
+from movd import data, rtdetr, ultra  # noqa: E402
 
 
 class SmokeCheckpointStop(Exception):
@@ -112,8 +112,7 @@ def main():
             f"{results} or {output} exists; use a new run_id or --resume"
         )
 
-    from ultralytics import YOLO
-
+    family = config.get("family", "yolo11")
     weights = data.REPO_ROOT / config["weights"]
     kwargs = ultra.train_kwargs(config, data_yaml, output, args.device)
     results.mkdir(parents=True, exist_ok=True)
@@ -127,6 +126,12 @@ def main():
                 "ultralytics_train_kwargs": kwargs,
                 "weights": config["weights"],
                 "weights_sha256": hashlib.sha256(weights.read_bytes()).hexdigest(),
+                # A YAML-built model (CH-11 query variant) takes its pretrained weights from `pretrained`.
+                "pretrained_sha256": hashlib.sha256(
+                    (data.REPO_ROOT / kwargs["pretrained"]).read_bytes()
+                ).hexdigest()
+                if isinstance(kwargs.get("pretrained"), str)
+                else None,
                 "protocol_version": protocol["version"],
                 "train_split": "train_rubric",
                 "export_manifest": json.loads(
@@ -143,7 +148,7 @@ def main():
 
     observe = args.observe or "smoke_fraction" in config
     observations = {"resume": args.resume, "batches": 0, "saved_epochs": []}
-    model = YOLO(str(last if args.resume else weights))
+    model = rtdetr.load_model(last if args.resume else weights, family)
 
     def train_start(trainer):
         observations.update(
