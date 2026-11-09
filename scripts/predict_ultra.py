@@ -157,9 +157,23 @@ def speed(
         device="cuda" if device != "cpu" else "cpu",
         batch_size=1,
         warmup=10,
-        input_size=f"imgsz {imgsz} (letterbox, long side)",
-        note="First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500",
+        **speed_description(imgsz, family),
     )
+
+
+def speed_description(imgsz: int, family: str) -> dict:
+    """What the timed call includes: YOLO letterboxes and runs NMS; RT-DETR stretches to a square and has no NMS."""
+    if family == "rtdetr":
+        return {
+            "input_size": f"imgsz {imgsz} (stretched to {imgsz}x{imgsz}, scale_fill)",
+            "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics resize, "
+            "normalisation, query decoding (no NMS) and box rescaling; conf 0.001, max_det 500",
+        }
+    return {
+        "input_size": f"imgsz {imgsz} (letterbox, long side)",
+        "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, "
+        "normalisation, NMS and box rescaling; conf 0.001, max_det 500",
+    }
 
 
 def final(args) -> None:

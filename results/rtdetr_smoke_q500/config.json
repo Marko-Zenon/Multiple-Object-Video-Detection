@@ -16,7 +16,7 @@
     }
   },
   "ultralytics_train_kwargs": {
-    "data": "C:\\UCU\\AI\\hw2\\MOVD-ch11\\outputs\\yolo_data\\data.yaml",
+    "data": ".\\outputs\\yolo_data\\data.yaml",
     "epochs": 2,
     "imgsz": 1344,
     "batch": 1,
@@ -29,7 +29,7 @@
     "save_period": 1,
     "val": false,
     "plots": false,
-    "project": "C:\\UCU\\AI\\hw2\\MOVD-ch11\\outputs\\rtdetr_smoke_q500",
+    "project": ".\\outputs\\rtdetr_smoke_q500",
     "name": "train",
     "exist_ok": true,
     "max_det": 500,
