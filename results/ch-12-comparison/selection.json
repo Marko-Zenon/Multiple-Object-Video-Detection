@@ -1,0 +1,32 @@
+{
+  "rule": "results/ch-12-comparison/selection_rule.md",
+  "primary_metric": "val_full mAP@[.5:.95], movd.evaluate maxDets 500, comparable runs only",
+  "family_representatives": {
+    "rtdetr_baseline": 0.25765263737396193,
+    "frcnn_rpn_pre3000": 0.18933546543958218,
+    "retina_anchors": 0.16925451042258532,
+    "yolo_p2": 0.16261888641821381
+  },
+  "leader": "rtdetr_baseline",
+  "runner_up": "frcnn_rpn_pre3000",
+  "lead_mAP": 0.06831717193437975,
+  "run_to_run_spread_val_full_mAP": 0.006330271527100445,
+  "lead_over_spread": 10.792139269525482,
+  "secondary_checks_won_vs_runner_up": "9/9",
+  "secondary_checks_won_vs_all": "27/27",
+  "secondary_checks_lost": [],
+  "tie": false,
+  "finalist_family": "query-based (RT-DETR-l)",
+  "finalist_run": "rtdetr_baseline",
+  "resolution_exception": {
+    "run": "yolo_imgsz1600",
+    "val_full_mAP": 0.17101541964683742,
+    "below_finalist_by": 0.08663721772712452,
+    "note": "Reported separately (rule 5). Not fixed-resolution evidence. Its family is not the finalist, and the finalist has no evidence at 1600, so it does not change the final input size."
+  },
+  "excluded_from_primary": {
+    "yolo_imgsz1600": "long_side_1344",
+    "rtdetr_lr1e4": "single_variable_clean"
+  },
+  "note": "One seed per configuration. Spread from the single CH-10 replicate pair (another GPU)."
+}

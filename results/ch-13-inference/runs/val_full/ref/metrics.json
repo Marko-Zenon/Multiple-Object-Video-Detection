@@ -1,0 +1,149 @@
+{
+  "num_images": 2846,
+  "num_predictions": 853800,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.25765263737396193,
+    "AP50": 0.4775461539879139,
+    "AP75": 0.23915366087890558,
+    "AP_small": 0.12961827563214992,
+    "AP_medium": 0.22458445223922463,
+    "AP_large": 0.45380464263572234
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.23896292290207077,
+    "AP50": 0.43268941197811145,
+    "AP75": 0.22840458313578263,
+    "AP_small": 0.12345915645872,
+    "AP_medium": 0.20438126720886482,
+    "AP_large": 0.4243124737513148
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 50312,
+      "AP": 0.27482107255216626,
+      "AP50": 0.6451339085106041,
+      "AP75": 0.17914848356284768,
+      "AP_maxdets100": 0.2669568146966929
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 6022,
+      "AP": 0.26665998177172795,
+      "AP50": 0.577924726812858,
+      "AP75": 0.2048615787439404,
+      "AP_maxdets100": 0.21071939026875552
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 31821,
+      "AP": 0.4218851637850302,
+      "AP50": 0.6433146586227376,
+      "AP75": 0.4678089026702573,
+      "AP_maxdets100": 0.41221880457776333
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 6842,
+      "AP": 0.3079890615181001,
+      "AP50": 0.49764602722026513,
+      "AP75": 0.33624370954595845,
+      "AP_maxdets100": 0.2734211064316707
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 1359,
+      "AP": 0.22962039336034507,
+      "AP50": 0.38399724896982146,
+      "AP75": 0.24587774879820365,
+      "AP_maxdets100": 0.22593465861375747
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 5487,
+      "AP": 0.1927215714556623,
+      "AP50": 0.4199770665884065,
+      "AP75": 0.13945539717797734,
+      "AP_maxdets100": 0.17373833002996422
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 264,
+      "AP": 0.23471839308767142,
+      "AP50": 0.2788531944030797,
+      "AP75": 0.2783202727148615,
+      "AP_maxdets100": 0.2337652566780991
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 12025,
+      "AP": 0.13280546146099179,
+      "AP50": 0.3735224007755386,
+      "AP75": 0.061513193817198206,
+      "AP_maxdets100": 0.11494902191986266
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 977,
+      "num_gt": 13557,
+      "mAP": 0.12842229987401454,
+      "AP50": 0.19628350560151864,
+      "mAP_maxdets100": 0.12786750837577618
+    },
+    {
+      "bin": "20-49",
+      "num_images": 1062,
+      "num_gt": 40626,
+      "mAP": 0.26113739187862184,
+      "AP50": 0.44423575155329703,
+      "mAP_maxdets100": 0.24992517778312134
+    },
+    {
+      "bin": "50-99",
+      "num_images": 618,
+      "num_gt": 39746,
+      "mAP": 0.27493077581696634,
+      "AP50": 0.5753307273526106,
+      "mAP_maxdets100": 0.2516994605611978
+    },
+    {
+      "bin": ">=100",
+      "num_images": 189,
+      "num_gt": 20203,
+      "mAP": 0.36793593413845255,
+      "AP50": 0.7048435280516809,
+      "mAP_maxdets100": 0.3153569753483484
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_full"
+}

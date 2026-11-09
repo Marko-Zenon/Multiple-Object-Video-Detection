@@ -1,0 +1,210 @@
+{
+  "rule_file": "selection_rule.md (commit 2b658d0, before any CH-13 result)",
+  "thresholds": {
+    "margin": 0.003,
+    "ap_small_tolerance": 0.003,
+    "ensemble_margin": 0.005,
+    "stack_margin": 0.002,
+    "min_fps": 1.6
+  },
+  "screened_on": "val_fast",
+  "screening": [
+    {
+      "variant": "size_1152",
+      "axis": "1 input size",
+      "delta_mAP": -0.0186,
+      "delta_AP_small": -0.0088,
+      "fps": 18.8756,
+      "passes": false
+    },
+    {
+      "variant": "size_1536",
+      "axis": "1 input size",
+      "delta_mAP": -0.0121,
+      "delta_AP_small": 0.0187,
+      "fps": 11.0725,
+      "passes": false
+    },
+    {
+      "variant": "size_1728",
+      "axis": "1 input size",
+      "delta_mAP": -0.0266,
+      "delta_AP_small": -0.0062,
+      "fps": 8.5997,
+      "passes": false
+    },
+    {
+      "variant": "tile_nms05",
+      "axis": "2 tiling",
+      "delta_mAP": 0.0064,
+      "delta_AP_small": 0.0145,
+      "fps": 2.7478,
+      "passes": true
+    },
+    {
+      "variant": "tile_nms06",
+      "axis": "2 tiling",
+      "delta_mAP": 0.0064,
+      "delta_AP_small": 0.0153,
+      "fps": null,
+      "passes": true
+    },
+    {
+      "variant": "tile_nms07",
+      "axis": "2 tiling",
+      "delta_mAP": 0.0055,
+      "delta_AP_small": 0.0173,
+      "fps": null,
+      "passes": true
+    },
+    {
+      "variant": "conf_01",
+      "axis": "3a confidence",
+      "delta_mAP": 0.0,
+      "delta_AP_small": 0.0,
+      "fps": null,
+      "passes": false
+    },
+    {
+      "variant": "conf_05",
+      "axis": "3a confidence",
+      "delta_mAP": -0.001,
+      "delta_AP_small": -0.0007,
+      "fps": null,
+      "passes": false
+    },
+    {
+      "variant": "topk_100",
+      "axis": "3b decoder top-k",
+      "delta_mAP": -0.0192,
+      "delta_AP_small": -0.0066,
+      "fps": null,
+      "passes": false
+    },
+    {
+      "variant": "topk_500",
+      "axis": "3b decoder top-k",
+      "delta_mAP": 0.0019,
+      "delta_AP_small": 0.0008,
+      "fps": 13.806,
+      "passes": false
+    },
+    {
+      "variant": "postnms_07",
+      "axis": "3c post-hoc NMS",
+      "delta_mAP": -0.0002,
+      "delta_AP_small": -0.0002,
+      "fps": 13.7381,
+      "passes": false
+    },
+    {
+      "variant": "postnms_05",
+      "axis": "3c post-hoc NMS",
+      "delta_mAP": -0.001,
+      "delta_AP_small": -0.0007,
+      "fps": null,
+      "passes": false
+    },
+    {
+      "variant": "flip_nms06",
+      "axis": "4a TTA flip",
+      "delta_mAP": 0.0069,
+      "delta_AP_small": 0.0124,
+      "fps": 6.7188,
+      "passes": true
+    },
+    {
+      "variant": "flip_wbf06",
+      "axis": "4a TTA flip",
+      "delta_mAP": -0.0035,
+      "delta_AP_small": 0.0081,
+      "fps": 6.378,
+      "passes": false
+    },
+    {
+      "variant": "ms1536_nms06",
+      "axis": "4b TTA two scales",
+      "delta_mAP": 0.0004,
+      "delta_AP_small": 0.0236,
+      "fps": 5.9432,
+      "passes": false
+    },
+    {
+      "variant": "ms1536_wbf06",
+      "axis": "4b TTA two scales",
+      "delta_mAP": -0.0113,
+      "delta_AP_small": 0.014,
+      "fps": null,
+      "passes": false
+    },
+    {
+      "variant": "ens_q500_wbf06",
+      "axis": "5 ensemble",
+      "delta_mAP": -0.0079,
+      "delta_AP_small": 0.0129,
+      "fps": 6.3164,
+      "passes": false
+    },
+    {
+      "variant": "ens_q500_nms06",
+      "axis": "5 ensemble",
+      "delta_mAP": -0.0008,
+      "delta_AP_small": 0.0038,
+      "fps": 6.8536,
+      "passes": false
+    }
+  ],
+  "axis_winners": {
+    "2": "tile_nms05",
+    "4a": "flip_nms06"
+  },
+  "greedy_steps": [
+    {
+      "add": "flip_nms06",
+      "candidate": "flip_nms06",
+      "gain_vs_stack": 0.0069,
+      "fps": 6.7188,
+      "kept": true
+    },
+    {
+      "add": "tile_nms05",
+      "candidate": "combo_flip_tile_nms05",
+      "gain_vs_stack": 0.0039,
+      "fps": 2.2604,
+      "kept": true
+    }
+  ],
+  "stack": [
+    "flip_nms06",
+    "tile_nms05"
+  ],
+  "candidate_before_veto": "combo_flip_tile_nms05",
+  "val_full_veto": false,
+  "selected": "combo_flip_tile_nms05",
+  "val_full": {
+    "ref": {
+      "mAP": 0.2577,
+      "AP50": 0.4775,
+      "AP75": 0.2392,
+      "AP_small": 0.1296
+    },
+    "tile_nms05": {
+      "mAP": 0.2644,
+      "AP50": 0.4991,
+      "AP75": 0.2384,
+      "AP_small": 0.1425
+    },
+    "flip_nms06": {
+      "mAP": 0.266,
+      "AP50": 0.4941,
+      "AP75": 0.2472,
+      "AP_small": 0.1345
+    },
+    "combo_flip_tile_nms05": {
+      "mAP": 0.2696,
+      "AP50": 0.5069,
+      "AP75": 0.2453,
+      "AP_small": 0.1467
+    }
+  }
+}
