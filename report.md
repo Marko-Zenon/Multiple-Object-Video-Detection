@@ -5,7 +5,7 @@ course: Artificial Intelligence · UCU
 date: 2026-11-09
 ---
 
-> Working draft prepared with AI assistance at committed evidence snapshot `81ddfee` (2026-11-09), for Marko and Nazar to review and explain in their own words. This is not a final student-authorship sign-off (G10). AP values are fractions. CH-10 and CH-12–14 results remain pending.
+> Working draft prepared with AI assistance at committed evidence snapshot `5ec9d1f` (2026-11-09), for Marko and Nazar to review and explain in their own words. This is not a final student-authorship sign-off (G10). AP values are fractions. CH-10, CH-12 and CH-13 evidence is integrated; CH-14 final training/submissions and CH-16/G10 sign-off remain pending.
 
 ## 1. Introduction and objectives
 
@@ -94,7 +94,19 @@ The COCO-pretrained YOLO11s baseline uses the same masked training export, with 
 
 The project val_fast curve peaks at epoch two and falls by the final epoch, although training losses continue downward. This divergence does not establish a cause; the reported baseline uses the final checkpoint as specified before training. [Curve and failures](results/yolo_baseline_marko_3050/curve.json).
 
-**TODO CH-10:** Add final controlled tuning results and the size/density analysis after they merge.
+### Completed anchor-free tuning (CH-10)
+
+CH-10 reran the baseline on RTX 5070, added a stride-4 P2 head after a compatibility smoke, and tested imgsz 1600 as an approved resolution exception. The first P2 smoke exposed missing class-name weight transfer; that failed initialization is retained, and the full run uses the corrected initialization. No loss/assignment fallback was needed. [Transfer and experiment evidence](results/ch-10-yolo-tuning/analysis.md).
+
+| Run | mAP | AP50 | AP75 | AP_S | AP_M | AP_L |
+|---|---:|---:|---:|---:|---:|---:|
+| [yolo_baseline_5070](results/yolo_baseline_5070/metrics.json) | 0.1502 | 0.3079 | 0.1252 | 0.0949 | 0.1520 | 0.2542 |
+| [yolo_p2](results/yolo_p2/metrics.json) | 0.1626 | 0.3063 | 0.1510 | 0.0790 | 0.1483 | 0.3124 |
+| [yolo_imgsz1600](results/yolo_imgsz1600/metrics.json) | 0.1710 | 0.3397 | 0.1482 | 0.0894 | 0.1760 | 0.2748 |
+
+The predeclared final-epoch val_fast rule selected imgsz1600; P2 was best at the fixed 1344 size. Higher resolution raises compute, so the 1600 run is reported separately from the fixed-resolution family comparison. P2 increased overall AP but lowered AP_small; the small-object-head hypothesis was not supported at this budget. The baseline replicate differs by 0.0063 val_full mAP and 0.0092 val_fast mAP, combining hardware and nondeterministic variation rather than estimating a confidence interval. [Selection](results/ch-10-yolo-tuning/selection.json); [size/density breakdowns](results/ch-10-yolo-tuning/density.csv).
+
+Dense-bin and tiny-target results do not establish a single mechanism: scene/class mix differs, the new P2 branch has a short training budget, and the same tiny misses/class confusions persist in qualitative cases. [Failure evidence](results/ch-10-yolo-tuning/failures.csv).
 
 ## 8. Query-based detector: RT-DETR (CH-11)
 
@@ -113,26 +125,54 @@ The baseline val_fast curve exceeds every completed CNN curve at each matched ep
 
 The baseline leads the completed runs on each size bucket and density bin, but small-object AP remains much lower than large-object AP. Density bins differ in image/class mix and cannot establish a causal effect of crowding. [Size and density evidence](results/ch-11-rtdetr/density.csv).
 
-## 9. Cross-family comparison and final configuration (CH-12)
+## 9. Cross-family comparison and finalist selection (CH-12)
 
 | Run | mAP | AP50 | AP75 | AP_S | AP_M | AP_L |
 |---|---:|---:|---:|---:|---:|---:|
 | [frcnn_rpn_pre3000](results/frcnn_rpn_pre3000/metrics.json) | 0.1893 | 0.3847 | 0.1614 | 0.1083 | 0.1868 | 0.3107 |
 | [retina_anchors](results/retina_anchors/metrics.json) | 0.1693 | 0.3465 | 0.1446 | 0.0754 | 0.1528 | 0.3223 |
-| [yolo_baseline_marko_3050](results/yolo_baseline_marko_3050/metrics.json) | 0.1439 | 0.2925 | 0.1192 | 0.0866 | 0.1434 | 0.2555 |
+| [yolo_p2](results/yolo_p2/metrics.json) | 0.1626 | 0.3063 | 0.1510 | 0.0790 | 0.1483 | 0.3124 |
 | [rtdetr_baseline](results/rtdetr_baseline/metrics.json) | 0.2577 | 0.4775 | 0.2392 | 0.1296 | 0.2246 | 0.4538 |
 
-These are completed family representatives, not the final selection. RT-DETR currently leads val_full accuracy. **TODO CH-12:** Incorporate CH-10, record the finalist decision and link its frozen final configuration only after merge.
+CH-12 selected **RT-DETR-l baseline settings**. Its val_full lead over selected Faster R-CNN is 0.0683 mAP, about 10.8 times the one-pair baseline spread, and it wins all 27 secondary comparisons (five other COCO metrics and four density bins against each rival family). This supports the recorded selection under this protocol; it is not a significance test. The 1600 YOLO exception and confounded RT-DETR LR run are excluded from the primary comparison. [Decision](results/ch-12-comparison/decision.md); [selection record](results/ch-12-comparison/selection.json).
 
-Marko’s original YOLO11s FP32 benchmark is **36.37 FPS / 27.49 ms per image on RTX 3050 Laptop GPU**. In the separate back-to-back RTX 5070 session, the same YOLO checkpoint measured **64.21 FPS**, versus **10.60 FPS** for RT-DETR-l baseline. Both include CPU resize/normalization and transfer from preloaded BGR images, excluding disk I/O. This session shows an accuracy–throughput trade-off, not a universal speed ratio. [Same-session evidence](results/ch-11-rtdetr/speed_recheck/README.md).
+The frozen [final training plan](configs/runs/final.json) keeps 300 queries, imgsz1344, six epochs and baseline optimizer/augmentation settings, but uses every fourth train frame: 6,072 frames and 36,432 images seen. This is a plan for Nazar’s CH-14, not evidence that training has completed. The rubric RT-DETR checkpoint is the recorded fallback; final submission choice still requires CH-14 validation.
 
-Faster R-CNN and RetinaNet timings above use GPU-resident inputs in other RTX 5070 sessions. Their scope excludes host transfer; absolute FPS must not be ranked against Ultralytics or compared across GPUs without these qualifications.
+### Device and benchmark boundaries
 
-## 10. Final pipeline and inference improvements (CH-13, CH-14)
+Marko’s original YOLO11s FP32 result remains **36.37 FPS / 27.49 ms per image on RTX 3050 Laptop GPU**. A historical CH-11 same-session RTX 5070 measurement was YOLO 64.21 versus RT-DETR 10.60 FPS. Neither is interchangeable with a later session.
 
-**TODO CH-13:** Add merged inference-tuning comparisons and the selected inference settings.
+CH-12 retimed all family representatives on one RTX 5070 Laptop GPU: FP32, preloaded BGR host arrays, transfer, model preprocessing, inference and postprocessing included; disk I/O excluded. The table uses medians of three interleaved rounds. It supports a same-session comparison; native GPU-resident torchvision timings shown in section 5 remain a separate scope.
 
-**TODO CH-14:** Add final training/data-strategy results and the resulting test pipeline. No final-model result is implied by the completed rubric runs.
+| Run | Common-scope FPS, RTX 5070 |
+|---|---:|
+| frcnn_rpn_pre3000 | 9.10 |
+| retina_anchors | 6.29 |
+| yolo_baseline_marko_3050 | 75.24 |
+| yolo_p2 | 55.41 |
+| yolo_imgsz1600 | 49.67 |
+| rtdetr_baseline | 13.92 |
+
+Source: [common-scope benchmark and checkpoint hashes](results/ch-12-comparison/speed_same_session/summary.json). RT-DETR leads accuracy while YOLO leads throughput; Faster R-CNN and RetinaNet are slower than RT-DETR in this common scope. Resize geometry still differs between models, and these measurements are not full disk-to-video-system FPS.
+
+## 10. Completed inference tuning (CH-13), final training pending (CH-14)
+
+CH-13 used one fixed, hash-identified CH-11 RT-DETR checkpoint without retraining. Nineteen predeclared configurations (the reference plus eighteen changes) were evaluated on val_fast, followed by two recorded combinations; only the reference, adopted single changes and chosen stack were evaluated on val_full. Larger input sizes, confidence/top-k changes, WBF, multiscale and a two-model ensemble had neutral/negative or insufficient gains under the selection rule. Failed changes remain in the [complete comparison](results/ch-13-inference/comparison.csv).
+
+| Run | mAP | AP50 | AP75 | AP_S | AP_M | AP_L |
+|---|---:|---:|---:|---:|---:|---:|
+| [ref](results/ch-13-inference/runs/val_full/ref/metrics.json) | 0.2577 | 0.4775 | 0.2392 | 0.1296 | 0.2246 | 0.4538 |
+| [flip_nms06](results/ch-13-inference/runs/val_full/flip_nms06/metrics.json) | 0.2660 | 0.4941 | 0.2472 | 0.1345 | 0.2302 | 0.4622 |
+| [tile_nms05](results/ch-13-inference/runs/val_full/tile_nms05/metrics.json) | 0.2644 | 0.4991 | 0.2384 | 0.1425 | 0.2367 | 0.4404 |
+| [combo_flip_tile_nms05](results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json) | 0.2696 | 0.5069 | 0.2453 | 0.1467 | 0.2375 | 0.4502 |
+
+The frozen [inference config](configs/runs/final_inference.json) combines full frame, horizontal flip and four overlapping tiles: six passes at 1344, class-wise merge NMS IoU0.5, then global top500. On this rubric checkpoint, AP_small rises from 0.1296 to 0.1467; AP_large falls from 0.4538 to 0.4502, and the densest bin slips from 0.3679 to 0.3614. The 500 cap binds on 2,840 of 2,846 frames, so improvement is not uniform. [Analysis and limitations](results/ch-13-inference/analysis.md).
+
+Same-session RTX 5070 FP32 pipeline speed falls from **13.68 FPS / 73.11 ms** to **2.26 FPS / 442.41 ms**. Preloaded-frame timing includes all passes and CPU decode/merge, excluding disk I/O. The projected time for 3,811 test frames is 28.1 minutes; this is an estimate, not a completed test run. [Reference timing](results/ch-13-inference/speed/ref.json); [selected timing](results/ch-13-inference/speed/combo_flip_tile_nms05.json).
+
+The validation CSV round-trip initially exceeds its strict tolerance because the writer clips out-of-frame boxes. Applying the same clipping before comparison gives exactly zero difference and unchanged rounded mAP; the discrepancy is documented, not hidden. [Clipping check](results/ch-13-inference/roundtrip_clipping_check.json).
+
+**TODO CH-14 (Nazar):** Supply final training/data-strategy validation, test/submission receipts, public scores and final selections. CH-13 gains on the rubric checkpoint are not final-model or Kaggle results.
 
 ## 11. Kaggle submission and selection (CH-05, CH-14)
 
@@ -140,15 +180,15 @@ The submission writer emits original-pixel `class score x y width height` groups
 
 | Submission | val_full mAP | Kaggle public score | Status |
 |---|---:|---:|---|
-| Faster R-CNN RPN pre3000, epoch 6 | 0.1893354654 | 0.2011538266 | Accepted; below public baseline 0.22163 |
+| Faster R-CNN RPN pre3000, epoch 6 | 0.1893354654 | 0.2011538266 | Accepted; below public baseline 0.2216324580 |
 
 Source: [append-only submissions log](results/submissions.csv), [validation receipt](results/ch-05-submission/frcnn_rpn_pre3000_e6_test/validation.txt), [lossless real round-trip](results/ch-05-submission/roundtrip_frcnn_rpn_pre3000_e6_lossless.json). Test: 3,811 rows and 261,940 detections. Final uploads and selections remain CH-14 work. Official Close is 2026-11-10 21:55 UTC / 23:55 Europe/Kyiv; see [independent verification](docs/report-support/deadline.md).
 
 ## 12. Limitations and reproducibility (CH-16)
 
-Each configuration has one seed; small AP differences have no estimated uncertainty or significance. CUDA nondeterminism, correlated video frames, subset training, sequence/class shifts and scarce classes limit generalization. Repeated tuning on the same validation split can also favor that split. The common budget controls images seen, not optimizer updates, model size or compute. Resizing and benchmark scopes differ as described above. Constant-fill ignore masking and unknown equivalence to Kaggle’s hidden scorer remain limitations.
+Each configuration has one seed; CH-10 adds one same-config replicate on different hardware. Its spread is not a multi-seed uncertainty estimate, and small AP differences have no established significance. CUDA nondeterminism, correlated video frames, subset training, sequence/class shifts and scarce classes limit generalization. Repeated tuning on the same validation split can also favor that split. The common budget controls images seen, not optimizer updates, model size or compute. Resizing and benchmark scopes differ as described above. Constant-fill ignore masking and unknown equivalence to Kaggle’s hidden scorer remain limitations.
 
-CH-01/04 established the checked data/environment and resumable training pipeline. Pinned [dependencies](requirements.txt), per-run configs, curves, hardware/runtime records and weight checksums support reproduction. Use the [Faster R-CNN protocol](results/ch-07-frcnn/protocol.md), [YOLO GPU runbook](results/ch-09-yolo/GPU_RUNBOOK.md) and [RT-DETR evidence commands](results/ch-11-rtdetr/make_evidence.py); training is outside the notebook. This documentation task did not rerun models or perform the final clean-environment audit.
+CH-01/04 established the checked data/environment and resumable training pipeline. Pinned [dependencies](requirements.txt), per-run configs, curves, hardware/runtime records and weight checksums support reproduction. Use the [Faster R-CNN protocol](results/ch-07-frcnn/protocol.md), [YOLO GPU runbook](results/ch-09-yolo/GPU_RUNBOOK.md) and [RT-DETR evidence commands](results/ch-11-rtdetr/make_evidence.py); training is outside the notebook. This documentation task did not rerun models or perform the final clean-environment audit. CH-16 remains blocked by CH-14 and student authorship sign-off; the independent [preflight audit](docs/report-support/preflight-audit.md) does not claim CH-16 completion.
 
 Collaboration uses separate branches, pushed ownership claims and short notebook locks. CH-09 artifacts were transferred with hash verification and independently re-evaluated before integration; [PR #10 closeout](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) records exact reproduction. [CH-15/M1](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) established the Pages scaffold. This draft changes neither task ownership nor the deployment infrastructure.
 
@@ -160,7 +200,7 @@ The observations above describe measured outcomes and limitations. Causal explan
 
 ## 14. Conclusions — student authored
 
-**TODO final student conclusions:** After CH-10 and CH-12–14, state the selected pipeline, evidence-supported conclusions, unsuccessful hypotheses and remaining limitations in Nazar and Marko’s own words.
+**TODO final student conclusions:** After CH-14 and final audit, state the selected pipeline, evidence-supported conclusions, unsuccessful hypotheses and remaining limitations in Nazar and Marko’s own words.
 
 ## 15. References
 

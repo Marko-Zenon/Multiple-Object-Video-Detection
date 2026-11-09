@@ -1,6 +1,6 @@
 # Report draft validation and handoff
 
-Evidence base: `81ddfee79671ae4b38669007ef5070af2ab3f9a0` (`origin/develop` at worktree creation). Branch `codex/report-deadline`; independent documentation task authorized by Marko, with no task claim or board edit. Only report.md and docs/report-support/ are permitted changes.
+Evidence base: `5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633` (`origin/develop` at worktree creation). Branch `codex/report-deadline`; independent documentation task authorized by Marko, with no task claim or board edit. Only report.md and docs/report-support/ are permitted changes.
 
 ## Numerical traceability
 
@@ -26,12 +26,16 @@ git diff --check
 
 The validator is read-only: no model imports, GPU access, artifact regeneration or notebook execution. It verifies metric cells, source values, matched-epoch curves, local Markdown links, image decoding/identity, table columns, metadata, timezone conversion and the documentation-only working diff. It also supports a clean committed branch; review the full PR diff separately for its allowed paths.
 
-The previous session's /tmp/validate_ch15.py is a local historical helper, not a tracked repository tool. Its report/link/numerical checks are rerun separately; its old assertion requiring plan.md and a new image is intentionally inapplicable to this documentation-only task. No tracked report/link validation CLI exists in this evidence base. The new self-contained validator preserves and extends those checks.
+The previous session's /tmp/validate_ch15.py is a local historical helper, not a tracked repository tool. Its report/link/numerical checks passed in the earlier session; the current session uses the tracked validator instead; its old assertion requiring plan.md and a new image is intentionally inapplicable to this documentation-only task. No tracked report/link validation CLI exists in this evidence base. The new self-contained validator preserves and extends those checks.
 
-Validation PASS on 2026-11-09: 72 newly traced metric cells, all retained Faster R-CNN AP/per-class/speed cells, EDA/protocol/speed/convergence controls, 59 internal links, image decoding and source identity, table shape, front matter, timezone conversion, and documentation-only scope. Historical CH-15 report/link/numerical checks also PASS (obsolete board-edit assertion excluded). Local preview through the unchanged Pages renderer shows 16 section headings, eight tables, both images loaded, and zero broken contents anchors. No model execution or GPU work. Remote reference/paper links are source citations; internal paths and rendered images are checked locally. No claim of exhaustive external-URL availability is made.
+Validation PASS on 2026-11-09: 132 traced AP metric cells, all retained Faster R-CNN AP/per-class/speed cells, EDA/protocol/speed/convergence controls, all current internal links, image decoding and source identity, table shape, front matter, timezone conversion, and documentation-only scope. Historical CH-15 report/link/numerical checks also PASS (obsolete board-edit assertion excluded). Local preview through the unchanged Pages renderer shows 16 section headings, eleven tables, both images loaded, and zero broken contents anchors. No model execution or GPU work. Remote reference/paper links are source citations; internal paths and rendered images are checked locally. No claim of exhaustive external-URL availability is made.
 
 ## Merge hold and remaining work
 
-Keep the PR draft and do not merge until Claude's CH-12 work is merged, this branch is updated from develop, conflicts are resolved, and numerical/link checks are rerun. The current RT-DETR validation lead is provisional, not final selection.
+CH-12 and CH-13 are merged; this branch has been updated from develop and its numerical/link checks extended. No mandatory peer review applies to these documentation-only changes under plan.md §9.5 (author self-merge after checks); shared modules are untouched. Student discussion/conclusions still require G10 sign-off before final delivery. No peer review or approval is claimed. RT-DETR-l is the accepted CH-12 finalist; final training/submission acceptance remains CH-14.
 
-Only report TODOs: CH-10 final tuning/size/density results; CH-12 finalist selection; CH-13 inference tuning; CH-14 final training/submission/selection; final student discussion and conclusions in Nazar and Marko's own words. G10 is not satisfied by this AI-assisted working draft. The final clean-environment audit and Pages deployment remain later project checks, not completed by this PR.
+Only remaining report-result TODOs: CH-14 final training/submission/selection; final student discussion and conclusions in Nazar and Marko's own words. CH-10/12/13 are documented as completed, with provenance and qualifications. CH-16 final audit remains blocked; see [independent preflight](preflight-audit.md). G10 is not satisfied by this AI-assisted working draft. The final clean-environment audit and Pages deployment remain later project checks, not completed by this PR.
+
+## Accepted evidence additions
+
+CH-10 selection/spread: results/ch-10-yolo-tuning/selection.json. CH-12 finalist, lead, secondary checks and exclusions: results/ch-12-comparison/selection.json; common-scope speed: sibling speed_same_session/summary.json. Training-plan values are configs/runs/final.json settings, never completed CH-14 results. CH-13 AP cells: results/ch-13-inference/runs/val_full/*/metrics.json; pipeline speed: speed/{ref,combo_flip_tile_nms05}.json; cap/density: comparison.csv; initial round-trip failure and explained clipping: roundtrip_*.json. The validator checks these source values and all new table positions. Report/student review is still required.

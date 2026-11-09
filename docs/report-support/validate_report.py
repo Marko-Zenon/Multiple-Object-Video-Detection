@@ -1,8 +1,18 @@
+import csv
+import datetime
+import json
+import re
+import subprocess
+import zoneinfo
 from pathlib import Path
-import json, re, subprocess, datetime, zoneinfo, csv
 
 R = Path.cwd()
 s = Path("report.md").read_text()
+
+
+def csv_rows(path):
+    with Path(path).open(newline="", encoding="utf-8") as stream:
+        return list(csv.DictReader(stream))
 
 
 def j(p):
@@ -26,10 +36,10 @@ for t in trace["metric_claims"]:
 # New tables: check individual cells (not only presence elsewhere in the report).
 keys = ["mAP", "AP50", "AP75", "AP_small", "AP_medium", "AP_large"]
 for line in s.splitlines():
-    m = re.match(r"\| \[([^]]+)\]\(results/([^/]+)/metrics.json\) \| (.*)", line)
+    m = re.match(r"\| \[([^]]+)\]\((results/[^()]+/metrics.json)\) \| (.*)", line)
     if not m:
         continue
-    d = j(f"results/{m[2]}/metrics.json")
+    d = j(m[2])
     v = d.get("val_full", d)
     assert v["num_images"] == 2846 and v["max_dets"] == 500
     values = [c.strip() for c in m[3].strip("|").split("|")]
@@ -101,7 +111,7 @@ for run in ["yolo_baseline_marko_3050", "rtdetr_baseline"]:
 assert j("results/retina_baseline/config.json")["focal_gamma"] == 2
 assert j("results/retina_focal_gamma15/config.json")["focal_gamma"] == 1.5
 assert j("results/retina_focal_gamma15/config.json")["focal_alpha"] == 0.25
-rows = list(csv.DictReader(Path("results/ch-11-rtdetr/curves.csv").open()))
+rows = csv_rows("results/ch-11-rtdetr/curves.csv")
 for e in range(1, 7):
     baseline = next(
         float(x["val_fast_mAP"])
@@ -138,7 +148,7 @@ assert (
     and f"{speed['latency_ms_per_image']:.2f}" == "27.49"
 )
 # Directional findings are checked against measured values, not inferred causes.
-comparison = list(csv.DictReader(Path("results/ch-11-rtdetr/comparison.csv").open()))
+comparison = csv_rows("results/ch-11-rtdetr/comparison.csv")
 byrun = {x["run"]: x for x in comparison}
 for run in ["rtdetr_q500", "rtdetr_lr1e4_wb0"]:
     assert float(byrun[run]["val_full_mAP"]) < float(
@@ -151,11 +161,11 @@ for field in ["val_full_AP_small", "val_full_AP_medium", "val_full_AP_large"]:
     assert float(byrun["rtdetr_baseline"][field]) > max(
         float(x[field]) for x in comparison if x["run"] != "rtdetr_baseline"
     )
-density = list(csv.DictReader(Path("results/ch-11-rtdetr/density.csv").open()))
+density = csv_rows("results/ch-11-rtdetr/density.csv")
 for b in {x["bin"] for x in density}:
     vals = [x for x in density if x["bin"] == b]
     assert max(vals, key=lambda x: float(x["mAP"]))["run"] == "rtdetr_baseline"
-submission = list(csv.DictReader(Path("results/submissions.csv").open()))[0]
+submission = csv_rows("results/submissions.csv")[0]
 assert f"{float(submission['val_full_mAP']):.10f}" == "0.1893354654"
 assert (
     submission["kaggle_public_score"] == "0.2011538266"
@@ -180,6 +190,78 @@ for dest in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", s):
             ["git", "show", trace["evidence_commit"] + ":" + dest]
         )
 
+
+# CH-10/12/13 accepted evidence: exact values and table positions.
+sel10 = j("results/ch-10-yolo-tuning/selection.json")
+assert (
+    sel10["selected"] == "yolo_imgsz1600" and sel10["best_at_frozen_1344"] == "yolo_p2"
+)
+assert f"{sel10['replicate_spread_val_full']:.4f}" == "0.0063"
+assert f"{sel10['replicate_spread_val_fast']:.4f}" == "0.0092"
+sel12 = j("results/ch-12-comparison/selection.json")
+assert (
+    sel12["finalist_run"] == "rtdetr_baseline"
+    and sel12["secondary_checks_won_vs_all"] == "27/27"
+)
+assert (
+    f"{sel12['lead_mAP']:.4f}" == "0.0683"
+    and f"{sel12['lead_over_spread']:.1f}" == "10.8"
+)
+assert set(sel12["excluded_from_primary"]) == {"yolo_imgsz1600", "rtdetr_lr1e4"}
+frozen = j("configs/runs/final.json")
+assert (
+    frozen["train_split"]["num_images"] == 6072 and frozen["run_config"]["epochs"] == 6
+)
+assert 6072 * 6 == 36432 and frozen["run_config"]["imgsz"] == 1344
+common = j("results/ch-12-comparison/speed_same_session/summary.json")
+assert common["rounds"] == 3
+for run in [
+    "frcnn_rpn_pre3000",
+    "retina_anchors",
+    "yolo_baseline_marko_3050",
+    "yolo_p2",
+    "yolo_imgsz1600",
+    "rtdetr_baseline",
+]:
+    fps = common["runs"][run]["common"]["fps_median"]
+    assert f"| {run} | {fps:.2f} |" in s
+cfg = j("configs/runs/final_inference.json")
+assert cfg["selected_variant"] == "combo_flip_tile_nms05"
+assert cfg["config"]["merge"] == {"method": "nms", "iou": 0.5}
+assert cfg["config"]["max_det"] == 500
+assert cfg["config"]["tile_grid"] == 2
+assert all(x["imgsz"] == 1344 for x in cfg["config"]["passes"])
+comparison13 = csv_rows("results/ch-13-inference/comparison.csv")
+assert (
+    len([x for x in comparison13 if x["split"] == "val_fast"]) == 21
+)  # reference + 18 changed configurations + 2 combinations
+chosen = next(
+    x
+    for x in comparison13
+    if x["split"] == "val_full" and x["variant"] == "combo_flip_tile_nms05"
+)
+assert chosen["frames_at_500_cap"] == "2840" and chosen["passes_per_frame"] == "6"
+assert f"{float(chosen['mAP_density_>=100']):.4f}" == "0.3614"
+for name, fps, latency in [
+    ("ref", "13.68", "73.11"),
+    ("combo_flip_tile_nms05", "2.26", "442.41"),
+]:
+    t = j(f"results/ch-13-inference/speed/{name}.json")
+    assert f"{t['fps']:.2f}" == fps and f"{t['latency_ms_per_image']:.2f}" == latency
+assert (
+    j("results/ch-13-inference/speed/combo_flip_tile_nms05.json")[
+        "test_minutes_3811_frames"
+    ]
+    == 28.1
+)
+assert (
+    j("results/ch-13-inference/roundtrip_combo_flip_tile_nms05.json")["passed"] is False
+)
+assert (
+    j("results/ch-13-inference/roundtrip_clipping_check.json")["max_abs_difference"]
+    == 0
+)
+
 # All report and support-document links; relative Markdown paths resolved per file.
 count = 0
 for path in [Path("report.md"), *Path("docs/report-support").glob("*.md")]:
@@ -188,7 +270,7 @@ for path in [Path("report.md"), *Path("docs/report-support").glob("*.md")]:
             continue
         assert (path.parent / dest.split("#")[0]).is_file(), (str(path), dest)
         count += 1
-assert set(re.findall(r"^(\w+):", s.split("---")[1], re.M)) == {
+assert set(re.findall(r"^(\w+):", s.split("---")[1], re.MULTILINE)) == {
     "title",
     "author",
     "course",
@@ -216,6 +298,7 @@ allowed = {
     "docs/report-support/metric_trace.json",
     "docs/report-support/validation.md",
     "docs/report-support/validate_report.py",
+    "docs/report-support/preflight-audit.md",
 }
 changed = set(
     subprocess.check_output(
@@ -250,7 +333,7 @@ assert (
     == ""
 )
 dt = datetime.datetime.fromisoformat("2026-11-10T23:55:00+02:00")
-assert dt.astimezone(datetime.timezone.utc).isoformat() == "2026-11-10T21:55:00+00:00"
+assert dt.astimezone(datetime.UTC).isoformat() == "2026-11-10T21:55:00+00:00"
 assert (
     dt.astimezone(zoneinfo.ZoneInfo("Europe/Kyiv")).isoformat()
     == "2026-11-10T23:55:00+02:00"

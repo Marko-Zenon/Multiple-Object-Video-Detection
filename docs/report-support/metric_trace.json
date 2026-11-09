@@ -1,6 +1,96 @@
 {
-  "evidence_commit": "81ddfee79671ae4b38669007ef5070af2ab3f9a0",
+  "evidence_commit": "5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633",
   "metric_claims": [
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1873"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3808"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1604"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0913"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1779"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3452"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1893"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3847"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1614"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.1083"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1868"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3107"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1814"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3643"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1553"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.1004"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1763"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3109"
+    },
     {
       "source": "results/retina_baseline/metrics.json",
       "pointer": "val_full.metrics.mAP",
@@ -120,6 +210,96 @@
       "source": "results/yolo_baseline_marko_3050/metrics.json",
       "pointer": "metrics.AP_large",
       "display": "0.2555"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1502"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3079"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1252"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0949"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1520"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2542"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1626"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3063"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1510"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0790"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1483"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.3124"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1710"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3397"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1482"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0894"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1760"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2748"
     },
     {
       "source": "results/rtdetr_baseline/metrics.json",
@@ -302,34 +482,34 @@
       "display": "0.3223"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.mAP",
-      "display": "0.1439"
+      "display": "0.1626"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.AP50",
-      "display": "0.2925"
+      "display": "0.3063"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.AP75",
-      "display": "0.1192"
+      "display": "0.1510"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.AP_small",
-      "display": "0.0866"
+      "display": "0.0790"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.AP_medium",
-      "display": "0.1434"
+      "display": "0.1483"
     },
     {
-      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "source": "results/yolo_p2/metrics.json",
       "pointer": "metrics.AP_large",
-      "display": "0.2555"
+      "display": "0.3124"
     },
     {
       "source": "results/rtdetr_baseline/metrics.json",
@@ -360,6 +540,126 @@
       "source": "results/rtdetr_baseline/metrics.json",
       "pointer": "metrics.AP_large",
       "display": "0.4538"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2577"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4775"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2392"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1296"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2246"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4538"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2660"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4941"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2472"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1345"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2302"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4622"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2644"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4991"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2384"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1425"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2367"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4404"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2696"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.5069"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2453"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1467"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2375"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4502"
     }
   ]
 }
