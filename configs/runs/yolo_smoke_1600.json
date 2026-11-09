@@ -1,0 +1,15 @@
+{
+  "run_id": "yolo_smoke_1600",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 2,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "smoke_fraction": 0.018,
+  "overrides": {
+    "cache": false,
+    "imgsz": 1600
+  },
+  "note": "CH-10 CUDA smoke for the imgsz 1600 variant on the RTX 5070, at the baseline's batch 1 / workers 0 / AMP: int(2800 * 0.018) = 50 images x 2 epochs. Stop after epoch 0, then resume epoch 1. Records peak CUDA memory before the full run. Not a result."
+}

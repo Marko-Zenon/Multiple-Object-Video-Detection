@@ -1,0 +1,15 @@
+{
+  "cells_total": 101,
+  "cells_unchanged_outside_ch10": 98,
+  "ch10_cells": [
+    "ch10-summary",
+    "ch10-evidence",
+    "ch10-student-todos"
+  ],
+  "executed": "only the CH-10 cells, fresh python3 kernel (nbclient), cwd = repo root",
+  "errors": 0,
+  "outputs": 20,
+  "embedded_png": 7,
+  "nbformat_valid": true,
+  "notebook_sha256": "70cca0f2af60deebd398cdce545c366ab40286ac6bc4b70f7d9340a94815597a"
+}

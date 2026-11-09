@@ -1,0 +1,12 @@
+{
+  "what": "CH-10 re-export (scripts/export_yolo.py, this worktree) vs the CH-11 worktree export used for the CH-11 runs (same CH-09 code): sha256 of every image and label file of outputs/yolo_data/train_rubric (Ultralytics .cache files excluded)",
+  "files": 5600,
+  "file_list_sha256_ch10": "a255fa1db302d3c357264ffc8ab06c6aabf333303eaf734ac8faf8b4cddc57af",
+  "file_list_sha256_ch11": "a255fa1db302d3c357264ffc8ab06c6aabf333303eaf734ac8faf8b4cddc57af",
+  "identical": true,
+  "also_byte_identical": [
+    "train_rubric_manifest.json",
+    "val_fast_manifest.json",
+    "train_rubric.txt"
+  ]
+}
