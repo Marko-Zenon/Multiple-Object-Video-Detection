@@ -1,4 +1,4 @@
-# CH-14 selection rule (written 2026-11-09 about 21:20 Kyiv, before the CH-14 smoke or training started)
+# CH-14 selection rule (committed 2026-11-09 23:12 Kyiv in 4d69460, before the CH-14 smoke or training started)
 
 No CH-14 metric existed when this file was committed. Changing it after results exist needs a recorded deviation
 in the CH-14 evidence log. `plan.md` (CH-14 scope 2 and 5, §7 fallback) and `configs/runs/final.json`
