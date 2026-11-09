@@ -27,12 +27,21 @@ import itertools
 from movd import data  # noqa: E402
 
 OUT = ROOT / "results" / "ch-11-rtdetr"
-RTDETR_RUNS = ["rtdetr_baseline", "rtdetr_q500", "rtdetr_lr1e4"]
+RTDETR_RUNS = ["rtdetr_baseline", "rtdetr_q500", "rtdetr_lr1e4_wb0", "rtdetr_lr1e4"]
+# Runs that changed more than their declared variable: kept and shown, but never used as a clean comparison.
+CONFOUNDED = {
+    "rtdetr_lr1e4": "confounded: explicit optimizer also kept warmup_bias_lr 0.1 (auto sets 0.0); see results/rtdetr_lr1e4/README.md"
+}
 # (run, family, label). CNN comparators: the CH-09 YOLO curve (required) and the CH-07/CH-08 runs.
 RUNS = [
     ("rtdetr_baseline", "query (RT-DETR-l)", "RT-DETR-l baseline (300 queries)"),
     ("rtdetr_q500", "query (RT-DETR-l)", "RT-DETR-l 500 queries"),
-    ("rtdetr_lr1e4", "query (RT-DETR-l)", "RT-DETR-l lr0 1e-4"),
+    ("rtdetr_lr1e4_wb0", "query (RT-DETR-l)", "RT-DETR-l lr0 1e-4"),
+    (
+        "rtdetr_lr1e4",
+        "query (RT-DETR-l)",
+        "RT-DETR-l lr0 1e-4 + bias warmup 0.1 (confounded)",
+    ),
     ("yolo_baseline_marko_3050", "anchor-free (YOLO11s)", "YOLO11s baseline (CH-09)"),
     ("frcnn_baseline", "two-stage (Faster R-CNN)", "Faster R-CNN baseline"),
     (
@@ -114,7 +123,15 @@ def comparison_rows(runs) -> list[dict]:
         points = curve(run)
         fast = [p["val_fast"]["mAP"] for p in points]
         speed = load(ROOT / "results" / run / "speed.json") or {}
-        row = {"run": run, "family": family, "label": label}
+        speed = speed.get(
+            "inference", speed
+        )  # torchvision runs nest the benchmark under "inference"
+        row = {
+            "run": run,
+            "family": family,
+            "label": label,
+            "caveat": CONFOUNDED.get(run, ""),
+        }
         row.update({f"val_full_{k}": result["metrics"][k] for k in KEYS})
         row["val_full_mAP_maxdets100"] = result.get("metrics_maxdets100", {}).get("mAP")
         row.update(
@@ -249,7 +266,8 @@ def figures(runs) -> None:
     style = {
         "rtdetr_baseline": {"color": "#1f77b4", "marker": "o", "lw": 2.2},
         "rtdetr_q500": {"color": "#17becf", "marker": "s", "lw": 2.2},
-        "rtdetr_lr1e4": {"color": "#9467bd", "marker": "^", "lw": 2.2},
+        "rtdetr_lr1e4_wb0": {"color": "#9467bd", "marker": "^", "lw": 2.2},
+        "rtdetr_lr1e4": {"color": "#c5b0d5", "marker": "v", "ls": ":", "lw": 1.6},
         "yolo_baseline_marko_3050": {"color": "#d62728", "marker": "D", "lw": 2.2},
         "frcnn_rpn_pre3000": {"color": "#2ca02c", "marker": ".", "ls": "--", "lw": 1.4},
         "retina_anchors": {"color": "#ff7f0e", "marker": ".", "ls": "--", "lw": 1.4},
@@ -286,7 +304,7 @@ def figures(runs) -> None:
         for r in (
             "rtdetr_baseline",
             "rtdetr_q500",
-            "rtdetr_lr1e4",
+            "rtdetr_lr1e4_wb0",
             "yolo_baseline_marko_3050",
             "frcnn_rpn_pre3000",
             "retina_anchors",

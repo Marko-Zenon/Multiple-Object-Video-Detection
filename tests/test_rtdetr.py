@@ -6,6 +6,7 @@ CPU only. The model tests need the pinned `ultralytics`; the pretrained-weight t
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 
 import numpy as np
@@ -156,11 +157,16 @@ def _kwargs(name: str) -> dict:
 
 def test_rtdetr_run_configs_are_valid_and_keep_the_frozen_budget():
     names = {p.stem for p in RUNS.glob("rtdetr_*.json")}
-    assert names >= {"rtdetr_baseline", "rtdetr_q500", "rtdetr_lr1e4"}
+    assert names >= {
+        "rtdetr_baseline",
+        "rtdetr_q500",
+        "rtdetr_lr1e4",
+        "rtdetr_lr1e4_wb0",
+    }
     for name in names:
         config = ultra.load_run_config(RUNS / f"{name}.json")
         assert config["family"] == "rtdetr" and config["run_id"] == name
-    for name in ("rtdetr_baseline", "rtdetr_q500", "rtdetr_lr1e4"):
+    for name in ("rtdetr_baseline", "rtdetr_q500", "rtdetr_lr1e4", "rtdetr_lr1e4_wb0"):
         kwargs = _kwargs(name)
         assert kwargs["epochs"] * 2800 == 16800 and kwargs["imgsz"] == 1344
         assert kwargs["seed"] == 42 and kwargs["amp"] is True and kwargs["batch"] == 1
@@ -182,10 +188,56 @@ def test_rtdetr_variants_change_exactly_one_declared_variable():
     }  # model YAML (500 queries) + the same pretrained file
     assert q500["pretrained"] == "outputs/weights/rtdetr-l.pt"
     assert diff(base, lr) == {"optimizer", "lr0", "momentum"}
-    # optimizer=auto picks AdamW with beta1 0.9 for this budget; only lr0 really changes.
     assert lr["optimizer"] == "AdamW" and lr["momentum"] == 0.9 and lr["lr0"] == 1e-4
+    # rtdetr_lr1e4 is kept but confounded: an explicit optimizer skips the auto branch that zeroes
+    # warmup_bias_lr. rtdetr_lr1e4_wb0 sets it back to 0.0, so only lr0 differs from what auto picks.
+    clean = _kwargs("rtdetr_lr1e4_wb0")
+    assert diff(lr, clean) == {"warmup_bias_lr"} and clean["warmup_bias_lr"] == 0.0
     q500_config = ultra.load_run_config(RUNS / "rtdetr_q500.json")
     assert rtdetr.yaml_queries(data.REPO_ROOT / q500_config["weights"]) == 500
+
+
+@needs_ultralytics
+def test_optimizer_auto_matches_the_explicit_learning_rate_variant_except_lr0(tmp_path):
+    """What optimizer=auto picks (and changes) for the baseline, so the corrected variant differs only in lr0."""
+    ITERATIONS = (
+        math.ceil(2800 / 64) * 6
+    )  # BaseTrainer: ceil(len(dataset) / max(batch, nbs)) * epochs
+    from types import SimpleNamespace
+
+    from ultralytics.cfg import get_cfg
+    from ultralytics.engine.trainer import BaseTrainer
+
+    def built(name: str) -> SimpleNamespace:
+        kwargs = _kwargs(name)
+        args = get_cfg(
+            overrides={
+                k: v
+                for k, v in kwargs.items()
+                if k not in ("data", "project", "device")
+            }
+        )
+        trainer = SimpleNamespace(args=args, data={"nc": len(data.CLASS_NAMES)})
+        optimizer = BaseTrainer.build_optimizer(
+            trainer,
+            torch.nn.Linear(2, 2),
+            args.optimizer,
+            args.lr0,
+            args.momentum,
+            args.weight_decay,
+            ITERATIONS,
+        )
+        return SimpleNamespace(args=args, optimizer=optimizer)
+
+    auto, clean = built("rtdetr_baseline"), built("rtdetr_lr1e4_wb0")
+    assert type(auto.optimizer).__name__ == type(clean.optimizer).__name__ == "AdamW"
+    assert (
+        auto.optimizer.defaults["betas"][0]
+        == clean.optimizer.defaults["betas"][0]
+        == 0.9
+    )
+    assert auto.args.warmup_bias_lr == clean.args.warmup_bias_lr == 0.0
+    assert auto.args.lr0 == pytest.approx(0.000833) and clean.args.lr0 == 1e-4
 
 
 @needs_ultralytics
