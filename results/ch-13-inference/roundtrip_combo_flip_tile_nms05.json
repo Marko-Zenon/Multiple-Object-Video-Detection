@@ -1,0 +1,64 @@
+{
+  "source": "outputs/ch13/preds/val_full_combo_flip_tile_nms05.json",
+  "split": "val_full",
+  "tolerance": 1e-06,
+  "passed": false,
+  "max_abs_difference": 9.944151948548807e-06,
+  "abs_difference": {
+    "mAP": 1.237160336398091e-07,
+    "AP50": 0.0,
+    "AP75": 4.71413096891915e-08,
+    "AP_small": 2.5593487953667893e-06,
+    "AP_medium": 3.6884119965496787e-06,
+    "AP_large": 9.944151948548807e-06
+  },
+  "direct": {
+    "mAP": 0.2696340695338878,
+    "AP50": 0.5068607722408747,
+    "AP75": 0.2453147152579958,
+    "AP_small": 0.14671952325152776,
+    "AP_medium": 0.2374569218196573,
+    "AP_large": 0.45020919471383486
+  },
+  "roundtrip": {
+    "mAP": 0.26963419324992144,
+    "AP50": 0.5068607722408747,
+    "AP75": 0.2453147623993055,
+    "AP_small": 0.1467169639027324,
+    "AP_medium": 0.23745323340766075,
+    "AP_large": 0.4502191388657834
+  },
+  "writer": {
+    "input_predictions": 1422988,
+    "accepted": 1422988,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 1422988,
+    "rows": 2846,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "validator": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 2846,
+    "expected_rows": 2846,
+    "detections": 1422988,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 500,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 408709,
+      "bicycle": 57750,
+      "car": 337152,
+      "van": 177373,
+      "truck": 41887,
+      "tricycle": 149675,
+      "bus": 12374,
+      "motor": 238068
+    }
+  }
+}

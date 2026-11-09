@@ -332,3 +332,24 @@ Single steps: `python scripts/train_ultra.py --config configs/runs/rtdetr_baseli
 `python scripts/predict_ultra.py speed --weights <ckpt> --family yolo11 --out <json> --device 0`,
 `python scripts/failures_ultra.py --run-id rtdetr_baseline`, `python results/ch-11-rtdetr/relativize_paths.py <run>`
 (repo-relative paths in finished run evidence). Results and the technical analysis: `results/ch-11-rtdetr/analysis.md`.
+
+## Final-pipeline inference settings (CH-13)
+
+- **Frozen settings:** `configs/runs/final_inference.json`. RT-DETR-l, no retraining: 6 passes per frame at imgsz 1344
+  (the full frame, its horizontal flip, and a 2x2 grid of 0.6 W x 0.6 H tiles), merged by class-wise NMS at IoU 0.5,
+  then the top 500 per frame. On the CH-11 `rtdetr_baseline` checkpoint, val_full mAP goes from 0.2577 to 0.2696 at
+  2.26 FPS instead of 13.7 FPS (RTX 5070 Laptop, about 28 min for the 3,811 test frames).
+- **Code:** `movd/infer.py` (raw RT-DETR pass with a forward hook, Ultralytics-identical decoding, tiles, flip, NMS,
+  weighted boxes fusion, `predict_image` for the live pipeline); `scripts/infer_val.py` (cache / eval / speed).
+- **Weighted boxes fusion:** Solovyev, R., Wang, W., Gabruseva, T. *Weighted boxes fusion: Ensembling boxes from
+  different object detection models*, Image and Vision Computing 107, 2021 (own implementation, no new dependency).
+
+```bash
+# checkpoints: outputs/rtdetr_baseline/train/weights/last.pt and outputs/rtdetr_q500/... (CH-11, sha256 in variants.json)
+python scripts/infer_val.py cache --model baseline --imgsz 1344 --views full --split val_fast --device 0   # one per view in variants.json
+python scripts/infer_val.py eval --split val_fast --variant ref flip_nms06 tile_nms05 combo_flip_tile_nms05
+python scripts/infer_val.py speed --device 0 --variant ref combo_flip_tile_nms05
+python results/ch-13-inference/make_tables.py        # CPU: comparison.csv, selection.json, figures
+```
+
+Search space and selection rule: `results/ch-13-inference/selection_rule.md`; evidence: `results/ch-13-inference/analysis.md`.

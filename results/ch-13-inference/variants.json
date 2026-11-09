@@ -1,0 +1,562 @@
+{
+  "note": "CH-13 search space, exactly as predeclared in selection_rule.md (commit 2b658d0). Combination variants chosen by rule 5 are added under 'combinations' after screening.",
+  "models": {
+    "baseline": {
+      "run_id": "rtdetr_baseline",
+      "weights": "outputs/rtdetr_baseline/train/weights/last.pt",
+      "sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "queries": 300,
+      "source": "CH-11, copied read-only from MOVD-ch11"
+    },
+    "q500": {
+      "run_id": "rtdetr_q500",
+      "weights": "outputs/rtdetr_q500/train/weights/last.pt",
+      "sha256": "9456f34a53a9509b6311ef3e3e22f68d40e363082c4fdaf92901ede466eff055",
+      "queries": 500,
+      "source": "CH-11, copied read-only from MOVD-ch11"
+    }
+  },
+  "variants": [
+    {
+      "name": "ref",
+      "axis": "0 reference",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "size_1152",
+      "axis": "1 input size",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1152,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "size_1536",
+      "axis": "1 input size",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1536,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "size_1728",
+      "axis": "1 input size",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1728,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "tile_nms05",
+      "axis": "2 tiling",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "tiles"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.5
+        },
+        "post_nms": null,
+        "max_det": 500,
+        "tile_grid": 2,
+        "tile_frac": 0.6
+      }
+    },
+    {
+      "name": "tile_nms06",
+      "axis": "2 tiling",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "tiles"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500,
+        "tile_grid": 2,
+        "tile_frac": 0.6
+      }
+    },
+    {
+      "name": "tile_nms07",
+      "axis": "2 tiling",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "tiles"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.7
+        },
+        "post_nms": null,
+        "max_det": 500,
+        "tile_grid": 2,
+        "tile_frac": 0.6
+      }
+    },
+    {
+      "name": "conf_01",
+      "axis": "3a confidence",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.01
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "conf_05",
+      "axis": "3a confidence",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.05
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "topk_100",
+      "axis": "3b decoder top-k",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 100,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "topk_500",
+      "axis": "3b decoder top-k",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 500,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "postnms_07",
+      "axis": "3c post-hoc NMS",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": 0.7,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "postnms_05",
+      "axis": "3c post-hoc NMS",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": null,
+        "post_nms": 0.5,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "flip_nms06",
+      "axis": "4a TTA flip",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "flip"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "flip_wbf06",
+      "axis": "4a TTA flip",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "flip"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "wbf",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "ms1536_nms06",
+      "axis": "4b TTA two scales",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1536,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "ms1536_wbf06",
+      "axis": "4b TTA two scales",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1536,
+            "views": "full"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "wbf",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "ens_q500_wbf06",
+      "axis": "5 ensemble",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "q500",
+            "imgsz": 1344,
+            "views": "full",
+            "k": 500
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "wbf",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    },
+    {
+      "name": "ens_q500_nms06",
+      "axis": "5 ensemble",
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "q500",
+            "imgsz": 1344,
+            "views": "full",
+            "k": 500
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500
+      }
+    }
+  ],
+  "combinations": [
+    {
+      "name": "combo_flip_tile_nms05",
+      "axis": "rule 5 stack",
+      "members": [
+        "flip_nms06",
+        "tile_nms05"
+      ],
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "flip"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "tiles"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.5
+        },
+        "post_nms": null,
+        "max_det": 500,
+        "tile_grid": 2,
+        "tile_frac": 0.6
+      }
+    },
+    {
+      "name": "combo_flip_tile_nms06",
+      "axis": "rule 5 stack",
+      "members": [
+        "flip_nms06",
+        "tile_nms05"
+      ],
+      "config": {
+        "passes": [
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "full"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "flip"
+          },
+          {
+            "model": "baseline",
+            "imgsz": 1344,
+            "views": "tiles"
+          }
+        ],
+        "decode": {
+          "k": 300,
+          "conf": 0.001
+        },
+        "merge": {
+          "method": "nms",
+          "iou": 0.6
+        },
+        "post_nms": null,
+        "max_det": 500,
+        "tile_grid": 2,
+        "tile_frac": 0.6
+      }
+    }
+  ],
+  "combination_note": "Written 2026-11-09 about 16:40 Kyiv after the single-axis val_fast screening and before any combination result. Rule 5 stack = flip_nms06 (gain +0.0069) then tile_nms05 (+0.0064). The two winners use different merge IoUs (0.6, 0.5) but the stack has one class-wise NMS over all passes, so both values are evaluated and the better val_fast mAP is the stack candidate. The strict 'flip every pass' reading (full, flip, 4 tiles, 4 flipped tiles = 10 passes) is excluded by rule 3: the measured cache pass times give 0.0728 + 0.0888 + 2 x 0.2935 = 0.749 s/frame = 1.34 FPS < 1.6 FPS (passes/baseline_1344_*_val_fast.json)."
+}
