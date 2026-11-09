@@ -1,0 +1,30 @@
+{
+  "variant": "ref",
+  "axis": "0 reference",
+  "split": "val_full",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": null,
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 2846,
+  "num_detections": 853800,
+  "detections_per_frame_mean": 300.0,
+  "detections_per_frame_min": 300,
+  "detections_per_frame_max": 300,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 1,
+  "cpu_postprocess_seconds": 2.04,
+  "cpu_postprocess_ms_per_frame": 0.72
+}

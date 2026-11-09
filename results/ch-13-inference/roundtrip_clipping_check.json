@@ -1,0 +1,22 @@
+{
+  "check": "CH-05 round-trip diff explained: the writer clips boxes that extend outside the frame (rule: original-pixel, in-bounds boxes). Clipping the direct predictions with movd.submission.clean_detection first, then comparing with the parsed CSV",
+  "detections": 1422988,
+  "detections_changed_by_clipping": 64496,
+  "clipped_direct_metrics": {
+    "mAP": 0.26963419324992144,
+    "AP50": 0.5068607722408747,
+    "AP75": 0.2453147623993055,
+    "AP_small": 0.1467169639027324,
+    "AP_medium": 0.23745323340766075,
+    "AP_large": 0.4502191388657834
+  },
+  "round_trip_metrics": {
+    "mAP": 0.26963419324992144,
+    "AP50": 0.5068607722408747,
+    "AP75": 0.2453147623993055,
+    "AP_small": 0.1467169639027324,
+    "AP_medium": 0.23745323340766075,
+    "AP_large": 0.4502191388657834
+  },
+  "max_abs_difference": 0.0
+}

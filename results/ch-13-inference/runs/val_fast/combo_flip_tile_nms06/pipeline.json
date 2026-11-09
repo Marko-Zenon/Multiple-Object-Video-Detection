@@ -1,0 +1,45 @@
+{
+  "variant": "combo_flip_tile_nms06",
+  "axis": "rule 5 stack",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "flip"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "tiles"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.6
+    },
+    "post_nms": null,
+    "max_det": 500,
+    "tile_grid": 2,
+    "tile_frac": 0.6
+  },
+  "num_frames": 714,
+  "num_detections": 357000,
+  "detections_per_frame_mean": 500.0,
+  "detections_per_frame_min": 500,
+  "detections_per_frame_max": 500,
+  "frames_at_500_cap": 714,
+  "num_raw_passes_per_frame": 6,
+  "cpu_postprocess_seconds": 1.93,
+  "cpu_postprocess_ms_per_frame": 2.7
+}
