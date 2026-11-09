@@ -1,6 +1,6 @@
 # Гайд до захисту: Multiple Object Video Detection
 
-Зріз перевірених джерел: `d13b3eed5dcdffbf99aef216a18e05913d8676c0`, 9 листопада 2026 року. Гайд охоплює CH-01–CH-09, CH-11 і CH-15. Результати CH-10 та рішення CH-12 навмисно не включені; пояснення статусів — у розділі «Що ще не завершено». Це матеріал для усного захисту, а не фінальні висновки звіту.
+Зріз перевірених джерел: `5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633`, 9 листопада 2026 року. Гайд охоплює завершені CH-01–CH-13 і CH-15, включно з прийнятим вибором фіналіста та inference-пайплайном. CH-14 належить Назару; його фінальних результатів тут немає. CH-16 ще заблокований. Це матеріал для усного захисту, а не фінальні висновки звіту.
 
 ## 1. Що прогнозує проєкт
 
@@ -58,7 +58,7 @@ Person об’єднує початкові VisDrone pedestrian/people, tricycle
 | val_fast | 714 кадрів: кожен четвертий у кожному val-кліпі | Криві за епохами та вибір варіанта за зафіксованим правилом |
 | val_full | Усі 2 846 val-кадрів | Підсумкові AP, які наводимо в таблицях |
 
-Для включених повних запусків: **шість епох = 16 800 побачених зображень**, seed **42**, розмір **1344**, AMP і горизонтальний flip із імовірністю **0.5**. Torchvision запускався з batch **2**, YOLO11s/RT-DETR — з batch **1**; однакова кількість зображень не означає однакові optimizer steps, FLOPs чи час.
+Для включених rubric-запусків (CH-10 imgsz1600 — окремий виняток): **шість епох = 16 800 побачених зображень**, seed **42**, базовий розмір **1344**, AMP і горизонтальний flip із імовірністю **0.5**. Torchvision запускався з batch **2**, YOLO11s/RT-DETR — з batch **1**; однакова кількість зображень не означає однакові optimizer steps, FLOPs чи час.
 
 Torchvision обмежує довгу сторону, YOLO застосовує letterbox зі збереженням пропорцій; RT-DETR у реалізованому adapter розтягує кадр до квадрата **1344×1344**. Нормалізація теж модельна: ImageNet mean/std у torchvision, масштабування до **0–1** в Ultralytics. Це важливі межі «однакового протоколу». Старі v0, smoke і CPU-перевірки не змішуємо з повними порівняннями. Для Faster R-CNN/RetinaNet вибирали варіант за final-epoch val_fast; YOLO baseline заздалегідь оцінює фінальний checkpoint, а не найкращу постфактум епоху.
 
@@ -88,7 +88,10 @@ Torchvision обмежує довгу сторону, YOLO застосовує 
 | CH-07 | Faster R-CNN baseline і два окремі варіанти, метрики/криві/speed, приклади помилок; [protocol](../results/ch-07-frcnn/protocol.md), [failure analysis](../results/ch-07-frcnn/failure_analysis.md) |
 | CH-08 | RetinaNet baseline, smaller anchors і focal gamma; [порівняння](../results/ch-08-retina/results.md) |
 | CH-09 | Маскований YOLO export, coordinate/class adapter, повний YOLO11s baseline на ноутбуці Марка, notebook evidence і перевірена передача артефактів; [baseline](../results/yolo_baseline_marko_3050/README.md), [закритий PR](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) |
+| CH-10 | YOLO baseline replicate, P2 head після виправленого smoke та imgsz1600 exception; [аналіз](../results/ch-10-yolo-tuning/analysis.md) |
 | CH-11 | RT-DETR baseline, queries/LR experiments, memory/resume checks і learning curves; [аналіз](../results/ch-11-rtdetr/analysis.md) |
+| CH-12 | Cross-family comparison, спільний speed benchmark та RT-DETR-l finalist; [рішення](../results/ch-12-comparison/decision.md) |
+| CH-13 | Inference search без training: flip/tiling та їхня комбінація, негативні варіанти, frozen settings; [аналіз](../results/ch-13-inference/analysis.md) |
 | CH-15 | Report scaffold, M1 і перевірка GitHub Pages; [M1 PR](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) |
 
 Завершеність цих задач підтверджує [board і evidence logs](../plan.md). Цей гайд не змінює їхніх станів.
@@ -116,11 +119,13 @@ Torchvision обмежує довгу сторону, YOLO застосовує 
 | RT-DETR | lr0: 0.000833 → 0.0001, bias warmup 0.0 збережено | Окрема перевірка нижчого LR. Виправлений запуск також гірший за baseline |
 | RT-DETR, confounded | lr0 0.0001 разом із bias warmup 0.1 | Дві зміни одночасно. Результат збережено, але ним не можна ізольовано доводити ефект LR |
 
+CH-10 додав два контрольовані варіанти: **P2 stride 4 при 1344** і **imgsz1600** як заздалегідь дозволений resolution exception. Baseline на RTX 5070 є повтором для оцінки run/hardware spread, а не новою архітектурою. Перший P2 smoke мав помилку перенесення pretrained class rows через placeholder names; його збережено, а повний запуск використовує виправлений init. Final-epoch val_fast правило вибрало **yolo_imgsz1600**, а найкращий при frozen 1344 — **yolo_p2**. P2 підвищив загальний AP, але знизив AP_small: гіпотеза користі high-resolution head для малих цілей тут не підтвердилась. [Selection](../results/ch-10-yolo-tuning/selection.json), [smoke/transfer evidence](../results/ch-10-yolo-tuning/analysis.md).
+
 Джерела: [Faster R-CNN protocol](../results/ch-07-frcnn/protocol.md), [RetinaNet preflight](../results/ch-08-retina/preflight.md), [YOLO README](../results/yolo_baseline_marko_3050/README.md), [RT-DETR analysis](../results/ch-11-rtdetr/analysis.md), [помилка warmup](../results/rtdetr_lr1e4/README.md). Негативний результат — теж відповідь на заздалегідь сформульовану гіпотезу; причину падіння не слід видавати за експериментально доведену.
 
 ## 9. Перевірені результати
 
-У таблиці — повні запуски лише з CH-07/08/09/11, не smoke/v0 і не CH-10. Кожне посилання веде до committed `metrics.json`; поля `val_full.metrics` для torchvision, `metrics` для Ultralytics. Усі headline-оцінки: **val_full, 2846 кадрів, global maxDets 500**. Значення округлені до чотирьох знаків.
+У таблиці — 14 повних rubric-запусків CH-07/08/09/10/11, не smoke/v0. Imgsz1600 — окремий resolution exception; confounded LR-run не входить до primary comparison. Кожне посилання веде до committed `metrics.json`; поля `val_full.metrics` для torchvision, `metrics` для Ultralytics. Усі headline-оцінки: **val_full, 2846 кадрів, global maxDets 500**. Значення округлені до чотирьох знаків.
 
 | Запуск | mAP | AP50 | AP75 | AP_S | AP_M | AP_L |
 |---|---:|---:|---:|---:|---:|---:|
@@ -131,6 +136,9 @@ Torchvision обмежує довгу сторону, YOLO застосовує 
 | [RetinaNet anchors, обраний](../results/retina_anchors/metrics.json) | 0.1693 | 0.3465 | 0.1446 | 0.0754 | 0.1528 | 0.3223 |
 | [RetinaNet focal gamma 1.5](../results/retina_focal_gamma15/metrics.json) | 0.1524 | 0.3006 | 0.1362 | 0.0832 | 0.1432 | 0.3002 |
 | [YOLO11s baseline](../results/yolo_baseline_marko_3050/metrics.json) | 0.1439 | 0.2925 | 0.1192 | 0.0866 | 0.1434 | 0.2555 |
+| [YOLO11s baseline replicate RTX 5070](../results/yolo_baseline_5070/metrics.json) | 0.1502 | 0.3079 | 0.1252 | 0.0949 | 0.1520 | 0.2542 |
+| [YOLO11s P2, найкращий при 1344](../results/yolo_p2/metrics.json) | 0.1626 | 0.3063 | 0.1510 | 0.0790 | 0.1483 | 0.3124 |
+| [YOLO11s imgsz1600, exception / CH-10 selection](../results/yolo_imgsz1600/metrics.json) | 0.1710 | 0.3397 | 0.1482 | 0.0894 | 0.1760 | 0.2748 |
 | [RT-DETR-l baseline](../results/rtdetr_baseline/metrics.json) | 0.2577 | 0.4775 | 0.2392 | 0.1296 | 0.2246 | 0.4538 |
 | [RT-DETR-l 500 queries](../results/rtdetr_q500/metrics.json) | 0.2389 | 0.4556 | 0.2145 | 0.1281 | 0.2140 | 0.4027 |
 | [RT-DETR-l corrected LR 1e-4](../results/rtdetr_lr1e4_wb0/metrics.json) | 0.2179 | 0.4261 | 0.1956 | 0.1015 | 0.2120 | 0.3693 |
@@ -165,15 +173,32 @@ Torchvision обмежує довгу сторону, YOLO застосовує 
 
 FPS між GPU або різними timing scopes **не є прямим порівнянням архітектур**. Джерело методики: [same-session recheck](../results/ch-11-rtdetr/speed_recheck/README.md). Це throughput без дискового читання, не end-to-end відеосистема.
 
+### CH-12: спільна методика для всіх сімейств
+
+Попередні таблиці — історичні сесії. Для фінального порівняння CH-12 виміряв сімейства в одній RTX 5070-сесії: FP32, preloaded BGR host arrays, CPU preprocessing/transfer, resize, inference і postprocessing, без disk I/O; медіани трьох interleaved rounds. Тому не треба ранжувати моделі за старими native torchvision FPS.
+
+| Запуск | Common-scope FPS, RTX 5070 | мс/кадр |
+|---|---:|---:|
+| frcnn_rpn_pre3000 | 9.10 | 109.84 |
+| retina_anchors | 6.29 | 158.92 |
+| yolo_baseline_marko_3050 | 75.24 | 13.29 |
+| yolo_p2 | 55.41 | 18.05 |
+| yolo_imgsz1600 | 49.67 | 20.13 |
+| rtdetr_baseline | 13.92 | 71.85 |
+
+Джерело: [CH-12 summary з checkpoint SHA-256 і scopes](../results/ch-12-comparison/speed_same_session/summary.json). Відмінності resize геометрії залишаються навіть у спільному timing scope.
+
 ## 10. Як пояснити перевагу RT-DETR і швидкість YOLO
 
-У межах включених запусків RT-DETR-l baseline має найвищий val_full mAP і кращі size-bucket AP. Його val_fast крива вища за кожну CNN-криву на відповідних епохах, починаючи з першої; максимум — на третій. YOLO baseline досягає максимуму val_fast на другій епосі, після чого AP зменшується попри спад training losses. Це спостереження, а не доказ конкретної причини перенавчання. [Криві](../results/ch-11-rtdetr/curves.csv).
+У межах прийнятого CH-12 порівняння RT-DETR-l baseline має найвищий val_full mAP і кращі size-bucket AP. Його val_fast крива вища за кожну CNN-криву на відповідних епохах, починаючи з першої; максимум — на третій. YOLO baseline досягає максимуму val_fast на другій епосі, після чого AP зменшується попри спад training losses. Це спостереження, а не доказ конкретної причини перенавчання. [Криві](../results/ch-11-rtdetr/curves.csv).
 
 Можливі пояснення RT-DETR — pretrained ознаки, encoder/decoder та matching; окремого ablation, який доводить внесок кожного, немає. Не можна робити висновок, що будь-який transformer завжди кращий або швидше збігається. Також budget рівний за images seen, а не обчисленнями, і resize геометрія різна.
 
 YOLO11s у спільній RTX 5070 сесії набагато швидший за RT-DETR-l, але менш точний. Компактність моделі узгоджується з цим: у CH-11 зафіксовано **9.4 млн** параметрів YOLO11s проти **32.8 млн** RT-DETR-l. Це не ізольований доказ причини різниці FPS. Вислів «YOLO найшвидший» тут означає включений same-session Ultralytics benchmark; не доводимо глобальний рейтинг усіх моделей на різних GPU. [Model-size і speed evidence](../results/ch-11-rtdetr/analysis.md).
 
-Фінальне рішення CH-12 цей гайд не переказує: його треба включити окремим оновленням після перевірки відповідних доказів.
+**CH-12 вибрав RT-DETR-l як фіналіста.** Lead над Faster R-CNN — **0.0683 mAP**, приблизно **10.8×** spread одного baseline replicate pair; виграно **27/27** вторинних перевірок за AP і density bins. Це не статистичний тест. Для fixed-resolution YOLO представником є P2, а imgsz1600 виключено з primary comparison разом із confounded LR-run. [Selection record](../results/ch-12-comparison/selection.json).
+
+Frozen [final.json](../configs/runs/final.json) планує **6072** train-кадри (кожен четвертий), **6** епох = **36432** images seen, imgsz **1344**, queries **300**, решта baseline settings незмінна. Це конфігурація майбутньої/поточної роботи Назара, не завершений final-training result. Fallback — rubric RT-DETR baseline; остаточні checkpoint/submission selection потребують CH-14.
 
 ## 11. Проблеми даних і наслідки
 
@@ -184,7 +209,7 @@ YOLO11s у спільній RTX 5070 сесії набагато швидший 
 - **Resolution/scene shift:** розміри кадрів різняться за послідовностями; test містить і менші роздільності, яких немає в train. Однаковий resize не робить візуальний масштаб однаковим.
 - **Кореляція:** сусідні train-кадри повторюють **99.5%** track-цілей. train_rubric зберігає **98.6%** train-треків при median gap **8** кадрів, але не гарантує репрезентативність кожної рідкісної події.
 
-Джерела: [усі наведені EDA-числа](../results/ch-06-eda/key_numbers.json), [за послідовностями](../results/ch-06-eda/tables/per_sequence.csv), [помилки на конкретних кадрах](../results/ch-07-frcnn/failure_analysis.md). Один seed на конфігурацію в цьому наборі не дає оцінки статистичної значущості дрібних різниць. Ілюстрації помилок не є частотним аналізом усіх помилок.
+Джерела: [усі наведені EDA-числа](../results/ch-06-eda/key_numbers.json), [за послідовностями](../results/ch-06-eda/tables/per_sequence.csv), [помилки на конкретних кадрах](../results/ch-07-frcnn/failure_analysis.md). Один seed на конфігурацію та один baseline replicate на іншому GPU не дають статистичної значущості. CH-10 зафіксував spread **0.0063 mAP на val_full** і **0.0092 на val_fast**; це суміш hardware/nondeterminism, не довірчий інтервал. [Джерело spread](../results/ch-10-yolo-tuning/selection.json). Ілюстрації помилок не є частотним аналізом усіх помилок.
 
 ## 12. Перша Kaggle submission
 
@@ -193,6 +218,23 @@ YOLO11s у спільній RTX 5070 сесії набагато швидший 
 Це підтвердило працездатність inference→CSV→validator→upload, але не виконало вимогу перевершити baseline й не визначило фінальну модель. Валідатор перевірив **3811** рядків і **261940** detections; lossless round-trip не змінює predictions. Внутрішній AP і Kaggle score не потрібно прирівнювати: інший split і прихований scorer. Фінальні **дві** submission мають обиратися насамперед за internal validation.
 
 Джерела: [upload log із точним baseline](../results/submissions.csv), [validator receipt](../results/ch-05-submission/frcnn_rpn_pre3000_e6_test/validation.txt), [round-trip](../results/ch-05-submission/roundtrip_frcnn_rpn_pre3000_e6_lossless.json), [правило selection](../configs/protocol.json).
+
+### CH-13: що покращило inference
+
+На одному незміненому rubric RT-DETR checkpoint перевірили **19** predeclared конфігурацій (reference та **18** змін) і потім **2** записані комбінації. Screening був на val_fast; val_full — лише для reference, двох прийнятих окремих змін та обраного stack. Збільшення input size, WBF/ensemble, confidence/top-k і post-hoc NMS дали негативний, нейтральний або недостатній ефект за правилом. Це відхилення від початкового scope «все на val_full» явно зафіксовано. [Повні результати й правило](../results/ch-13-inference/analysis.md).
+
+| Inference variant | mAP | AP50 | AP75 | AP_S | AP_M | AP_L |
+|---|---:|---:|---:|---:|---:|---:|
+| [ref](../results/ch-13-inference/runs/val_full/ref/metrics.json) | 0.2577 | 0.4775 | 0.2392 | 0.1296 | 0.2246 | 0.4538 |
+| [flip_nms06](../results/ch-13-inference/runs/val_full/flip_nms06/metrics.json) | 0.2660 | 0.4941 | 0.2472 | 0.1345 | 0.2302 | 0.4622 |
+| [tile_nms05](../results/ch-13-inference/runs/val_full/tile_nms05/metrics.json) | 0.2644 | 0.4991 | 0.2384 | 0.1425 | 0.2367 | 0.4404 |
+| [combo_flip_tile_nms05](../results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json) | 0.2696 | 0.5069 | 0.2453 | 0.1467 | 0.2375 | 0.4502 |
+
+Обрано **flip + tiling**: full frame, flip і чотири overlapping tiles, разом **6 passes при 1344**; class-wise merge NMS IoU **0.5**, top **500** після merge. Хоча базовий RT-DETR не має NMS, багатовидові прогнози треба звести: це інший, pipeline-level NMS. [Frozen inference config](../configs/runs/final_inference.json).
+
+На RTX 5070 FP32, у спільній CH-13-сесії: reference **13.68 FPS / 73.11 мс**, stack **2.26 FPS / 442.41 мс**; час охоплює passes і CPU decoding/merge, але не disk I/O. Оцінка для test — **28.1 хв**, не факт виконаного test inference. AP_large падає **0.4538 → 0.4502**, densest bin **0.3679 → 0.3614**; top500 binds на **2840 із 2846** кадрів. Тому «все покращилося» — неправильний висновок. [Speed](../results/ch-13-inference/speed/combo_flip_tile_nms05.json), [comparison](../results/ch-13-inference/comparison.csv).
+
+Round-trip raw predictions не пройшов початковий strict tolerance через clipping позакадрових рамок writer-ом. Після однакового clipping обох шляхів різниця точно **0.0**; це пояснена розбіжність, а не прихований PASS. [Перевірка](../results/ch-13-inference/roundtrip_clipping_check.json). CH-13 не тренував модель і не робив Kaggle upload; виграш на rubric checkpoint треба перевірити на final checkpoint у CH-14.
 
 ## 13. Імовірні питання на захисті
 
@@ -214,19 +256,16 @@ YOLO11s у спільній RTX 5070 сесії набагато швидший 
 16. **Чому 500 queries не допомогли?** У цьому бюджеті AP впав. Queries змінюють matching і decoder training; точну причину не ізолювали, тому «більше місць для прогнозів» не є гарантією.
 17. **Чому старий LR-run не є чесним tuning?** Разом із LR змінився bias warmup. Для висновку про LR використовуємо виправлений запуск зі збереженим warmup.
 18. **Чи можна сказати, що YOLO швидший лише за цифрами 3050/5070?** Ні. Порівнюємо його з RT-DETR у спільній 5070-сесії; різні пристрої й timing scopes пояснюємо окремо.
-19. **Чи RT-DETR остаточно найкращий?** Він веде за AP серед включених завершених запусків. Остаточний pipeline і критерії рішення слід брати з окремо перевіреного CH-12, не з цього обмеженого зрізу.
+19. **Яку модель та inference обрано?** CH-12 вибрав RT-DETR-l, CH-13 — flip + tiles зі спільним NMS. Це не означає завершення final training чи успіху Kaggle: їхні докази має надати Назар у CH-14.
 20. **Що доводить Kaggle score і чи невдалі експерименти зайві?** Перша submission довела працездатність формату, але baseline не перевершила. Негативні експерименти потрібні для перевірки гіпотез; їх не видаляємо й не пояснюємо неперевіреними причинними твердженнями.
 
 ## 14. Що ще не завершено
 
-Тут **pending** означає «ще не включено або не закрито в цьому гайді», а не зміну офіційного статусу. На базовому commit [board](../plan.md) уже містить DONE для CH-10 і CH-12; їхні результати/рішення в межах цього документа не аналізувалися. CH-13/14 на цьому зрізі READY, CH-16 BLOCKED. Ця секція запобігає застарілому твердженню, що CH-10/12 досі не виконані в репозиторії.
+CH-10, CH-12 і CH-13 завершені й інтегровані; вони більше не pending. CH-09–CH-13 і CH-15 мають DONE на перевіреному [board](../plan.md). CH-14 зарезервований за Назаром прямим погодженням команди; його READY-рядок у цьому зрізі не є дозволом іншому учаснику брати задачу.
 
-| Задача | Статус у гайді | Що додати наступним оновленням |
+| Задача | Стан | Що має бути підтверджено |
 |---|---|---|
-| CH-10 | pending | Перевірені anchor-free tuning, size/density результати й статуси failed/negative runs; розширити таблицю моделей |
-| CH-12 | pending | Узгоджене рішення щодо фіналіста, критерії вибору та frozen final configuration; оновити відповідь про фінальну модель |
-| CH-13 | pending | Inference ablations, обрані settings та їхня ціна за швидкістю |
-| CH-14 | pending | Final training/data strategy, test submission receipts, scores і фінальні selections |
-| CH-16 | pending | Clean-environment reproduction, остаточний rubric audit, власні висновки студентів, final freeze і перевірка Pages |
+| CH-14 | pending, робота Назара | Final training/data-strategy validation, test predictions, validator receipts, uploads, score вище baseline і вибір двох submissions |
+| CH-16 | BLOCKED через CH-14; G10 ще відкритий | Clean-environment reproduction, повний rubric audit, власні висновки студентів, final freeze/tag і Pages verification |
 
-Перед захистом обом студентам слід звірити актуальні джерела, пояснити наведені механізми своїми словами та оновити розділи **8–10, 12–14**. Не варто називати цей зріз остаточним звітом або доказом завершення pending-пунктів.
+Оновлювати після CH-14: розділи **10, 12–14**, результати final checkpoint і публічні scores, а не вже прийняте порівняння rubric моделей. Перед захистом обидва студенти мають пояснити висновки своїми словами. Незалежні CPU/static перевірки документації не означають завершення CH-16 або виконання G10.
