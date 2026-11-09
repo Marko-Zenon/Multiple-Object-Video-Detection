@@ -15,6 +15,7 @@ Evidence base: `5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633` (merged CH-13 PR #17).
 |---|---|
 | CPU tests | `CUDA_VISIBLE_DEVICES=-1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider tests --basetemp /tmp/movd-finalization-pytest`: **178 passed, 14 skipped**, 20.87 s. Shared data/evaluation, submission, Ultralytics, P2, aggregation and inference tests included. Worktree has no dataset/weights; GPU was hidden. Skips are not GPU validation. |
 | Real dataset | `python scripts/check_dataset.py --root <existing dataset>`: PASS, train 24,201/56 clips, val 2,846/7, test 3,811/48; annotations, labels, ignore structure and CSV image paths checked. No extraction, modification or relocation. |
+| Stored-prediction reproduction | Current project evaluator on the original CH-09 val_full prediction JSON, GPU hidden, outputs only under /tmp: mAP **0.14389177166432673**, maximum difference across six AP metrics **0.0**, per-class and density records identical. No model loaded or inference run. Existing environment only; not fresh-env CH-16 reproduction. |
 | Frozen splits | `python scripts/make_splits.py --check --root <existing dataset>`: PASS; train_rubric 2,800 / val_fast 714 / val_full 2,846, regenerated in memory and committed SHA-256 identical. |
 | Final-plan sample list | Read-only every-fourth train-frame computation: 6,072 IDs; SHA-256 `68bc424a08eeb68460bab09cbdbf90b53f8e4e9b80eb3b1d1e3c8770d2add42f` matches final.json. No export/manifest/config written; no CH-14 execution. |
 | Notebook | nbformat schema PASS; 104 cells, 53 with outputs; unique nonempty IDs, zero stored error outputs; ordinary Python-cell AST syntax PASS. No cells executed, no notebook edited, no lock taken. This does not prove a complete clean-kernel run. |
@@ -44,3 +45,7 @@ The final.json runtime projection predates the chosen six-pass CH-13 pipeline: i
 5. Respect verified Close **2026-11-10 23:55 Europe/Kyiv / 21:55 UTC** and the earlier repository freeze target. No late pushes, backdating or history manipulation.
 
 Independent checks do not close CH-14, CH-16, G10 or the baseline-beating submission requirement. Raw predictions/checkpoints and final-training results remain external to Git and under their owners' control.
+
+## Publication outcome
+
+The author-self-merge rule and upstream CH-12/update gate were checked, but automatic approval review rejected the attempted `gh pr ready 13` operation because the earlier draft-only instruction was considered unresolved. That command did not execute. No ready/merge action was attempted by another route. PRs #13 and #16 remain draft pending explicit user confirmation; title/body updates were authorized and applied. This approval blocker is separate from student G10 and CH-16 dependencies.

@@ -39,3 +39,5 @@ Only remaining report-result TODOs: CH-14 final training/submission/selection; f
 ## Accepted evidence additions
 
 CH-10 selection/spread: results/ch-10-yolo-tuning/selection.json. CH-12 finalist, lead, secondary checks and exclusions: results/ch-12-comparison/selection.json; common-scope speed: sibling speed_same_session/summary.json. Training-plan values are configs/runs/final.json settings, never completed CH-14 results. CH-13 AP cells: results/ch-13-inference/runs/val_full/*/metrics.json; pipeline speed: speed/{ref,combo_flip_tile_nms05}.json; cap/density: comparison.csv; initial round-trip failure and explained clipping: roundtrip_*.json. The validator checks these source values and all new table positions. Report/student review is still required.
+
+Current CPU re-evaluation of the frozen CH-09 val_full predictions exactly reproduces all six stored AP metrics (max difference 0.0), per-class and density records; no inference or model execution. Publication remains draft because automatic approval review rejected draft-to-ready status change under the earlier draft-only constraint. See preflight audit for the precise blocker.
