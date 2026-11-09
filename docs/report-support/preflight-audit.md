@@ -49,3 +49,7 @@ Independent checks do not close CH-14, CH-16, G10 or the baseline-beating submis
 ## Publication outcome
 
 The author-self-merge rule and upstream CH-12/update gate were checked, but automatic approval review rejected the attempted `gh pr ready 13` operation because the earlier draft-only instruction was considered unresolved. That command did not execute. No ready/merge action was attempted by another route. PRs #13 and #16 remain draft pending explicit user confirmation; title/body updates were authorized and applied. This approval blocker is separate from student G10 and CH-16 dependencies.
+
+### Explicit publication authorization — follow-up
+
+Marko explicitly authorized converting PRs #13 and #16 from Draft to Ready for Review and merging both into develop, superseding the earlier draft-only restriction. The historical approval blocker above is therefore resolved. A fresh develop fetch and documentation/numerical/link validations passed; GitHub reported both PRs CLEAN/MERGEABLE, with no checks or review decision pending. Use the PR event records for the resulting merge commits. This permission does not cover CH-14 execution or prematurely claiming CH-16/G10.
