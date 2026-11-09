@@ -1,0 +1,22 @@
+{
+  "fps": 6.318910217146573,
+  "latency_ms_per_image": 158.25513666683642,
+  "latency_ms_per_batch": {
+    "mean": 158.25513666683642,
+    "median": 161.81280000000697,
+    "p90": 163.2142800006477,
+    "min": 149.41710000130115
+  },
+  "timed_batches": 30,
+  "warmup_batches": 10,
+  "batch_size": 1,
+  "input_size": "756-1344",
+  "note": "common scope: FP32; preloaded BGR uint8 host array; includes BGR->RGB, host-to-GPU copy, detector resize/normalisation, inference, NMS and box rescaling",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0",
+  "run": "retina_baseline",
+  "scope": "common"
+}

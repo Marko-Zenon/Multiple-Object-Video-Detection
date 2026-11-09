@@ -1,0 +1,28 @@
+leader,other,check,leader_value,other_value,leader_ahead
+rtdetr_baseline,frcnn_rpn_pre3000,AP50,0.4775461539879139,0.38466965324693614,True
+rtdetr_baseline,frcnn_rpn_pre3000,AP75,0.23915366087890558,0.161351371052943,True
+rtdetr_baseline,frcnn_rpn_pre3000,AP_small,0.12961827563214992,0.10828926194373481,True
+rtdetr_baseline,frcnn_rpn_pre3000,AP_medium,0.22458445223922463,0.18679665162931175,True
+rtdetr_baseline,frcnn_rpn_pre3000,AP_large,0.45380464263572234,0.3106570986422726,True
+rtdetr_baseline,frcnn_rpn_pre3000,density 0-19,0.12842229987401454,0.07181373597393623,True
+rtdetr_baseline,frcnn_rpn_pre3000,density 20-49,0.26113739187862184,0.20184444838215104,True
+rtdetr_baseline,frcnn_rpn_pre3000,density 50-99,0.27493077581696634,0.2280023992962411,True
+rtdetr_baseline,frcnn_rpn_pre3000,density >=100,0.36793593413845255,0.2785214872632182,True
+rtdetr_baseline,retina_anchors,AP50,0.4775461539879139,0.34648518343626955,True
+rtdetr_baseline,retina_anchors,AP75,0.23915366087890558,0.14459493780053986,True
+rtdetr_baseline,retina_anchors,AP_small,0.12961827563214992,0.07541240520932305,True
+rtdetr_baseline,retina_anchors,AP_medium,0.22458445223922463,0.15282830460800836,True
+rtdetr_baseline,retina_anchors,AP_large,0.45380464263572234,0.3222630584397855,True
+rtdetr_baseline,retina_anchors,density 0-19,0.12842229987401454,0.09530609968286477,True
+rtdetr_baseline,retina_anchors,density 20-49,0.26113739187862184,0.1886447367230824,True
+rtdetr_baseline,retina_anchors,density 50-99,0.27493077581696634,0.20275393993438415,True
+rtdetr_baseline,retina_anchors,density >=100,0.36793593413845255,0.26028217798925496,True
+rtdetr_baseline,yolo_p2,AP50,0.4775461539879139,0.306282578631919,True
+rtdetr_baseline,yolo_p2,AP75,0.23915366087890558,0.15101684945976046,True
+rtdetr_baseline,yolo_p2,AP_small,0.12961827563214992,0.0790084698341743,True
+rtdetr_baseline,yolo_p2,AP_medium,0.22458445223922463,0.14825838905007405,True
+rtdetr_baseline,yolo_p2,AP_large,0.45380464263572234,0.31243512478288,True
+rtdetr_baseline,yolo_p2,density 0-19,0.12842229987401454,0.10587272917669871,True
+rtdetr_baseline,yolo_p2,density 20-49,0.26113739187862184,0.16680533183657414,True
+rtdetr_baseline,yolo_p2,density 50-99,0.27493077581696634,0.17741565932381456,True
+rtdetr_baseline,yolo_p2,density >=100,0.36793593413845255,0.26717449405019933,True

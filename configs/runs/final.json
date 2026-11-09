@@ -1,0 +1,59 @@
+{
+  "frozen_by": "CH-12 (2026-11-09, Badabuba / worker Claude); decision note results/ch-12-comparison/decision.md, rule results/ch-12-comparison/selection_rule.md, evidence results/ch-12-comparison/selection.json",
+  "family": "query-based: Ultralytics RT-DETR-l (300 queries), the comparable family leader at the rubric budget",
+  "run_config": {
+    "run_id": "final_rtdetr",
+    "family": "rtdetr",
+    "weights": "outputs/weights/rtdetr-l.pt",
+    "epochs": 6,
+    "imgsz": 1344,
+    "batch_size": 1,
+    "workers": 2,
+    "amp": true,
+    "data_yaml": "outputs/yolo_data_final/data.yaml",
+    "note": "CH-14 final training frozen by CH-12. Identical to rtdetr_baseline (CH-11) except the training frames: train_final = every 4th frame of every train clip (6,072 frames) instead of train_rubric (2,800). 6 epochs = 36,432 images seen. imgsz 1344, batch 1, AMP, seed 42, flip-only, optimizer=auto (AdamW lr0 0.000833), 300 queries, frozen ignore policy (masked export).",
+    "overrides": {
+      "cache": false
+    }
+  },
+  "pretrained_sha256": "6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f",
+  "train_split": {
+    "name": "train_final",
+    "rule": "movd.data.every_kth_per_clip(train images, k=4): every 4th frame of every one of the 56 train clips, starting from the first frame (the val_fast rule applied to train)",
+    "num_images": 6072,
+    "image_ids_sha256": "68bc424a08eeb68460bab09cbdbf90b53f8e4e9b80eb3b1d1e3c8770d2add42f",
+    "image_ids_sha256_of": "hashlib.sha256(json.dumps(ids).encode()) of the list in movd.data.every_kth_per_clip order",
+    "overlap_with_train_rubric": 749,
+    "class_mix": "matches the full train set within 0.1 pp (person 29.8 / car 45.6 %); train_rubric over-represents person by 4.7 pp (results/ch-06-eda/tables/subsampling_class_mix.csv)",
+    "export": "movd.ultra.export_split('train_final', 'train', ids, 'outputs/yolo_data_final', mask=True) for the masked train frames, plus the val_fast byte copy and write_data_yaml(..., 'train_final', 'val_fast'): the CH-09 export path and the frozen CH-02 ignore policy, unchanged. Ultralytics' validation stays off (val false)",
+    "export_disk_estimate_gb": 3.7
+  },
+  "unchanged_from_rtdetr_baseline": ["weights", "epochs", "imgsz", "batch_size", "workers", "amp", "seed 42", "augmentation (flip only)", "optimizer=auto", "queries 300", "ignore policy", "val false", "save_period 1 (resumable)"],
+  "changed_from_rtdetr_baseline": {
+    "training frames": "2,800 -> 6,072 (2.17x distinct frames; 16,800 -> 36,432 images seen)"
+  },
+  "not_changed_and_why": {
+    "input size": "kept 1344: RT-DETR has no result at another size; the CH-10 imgsz 1600 gain is YOLO11s-only evidence and would cost about 1.42x compute (selection_rule.md rule 5)",
+    "epochs": "kept 6: the validated schedule shape (3 warmup epochs, linear decay); the warmup fraction stays 3/6 because Ultralytics counts warmup in epochs. rtdetr_baseline val_fast peaks at epoch 3 (0.2691) and ends at 0.2617, so more passes over the same frames are not supported",
+    "queries": "kept 300: rtdetr_q500 0.2389 < 0.2577 val_full mAP",
+    "learning rate": "kept auto: rtdetr_lr1e4_wb0 0.2179 < 0.2577 (rtdetr_lr1e4 0.1560 is confounded and not used)",
+    "augmentation": "kept flip only: no stronger-augmentation result exists in this project"
+  },
+  "expected_runtime": {
+    "basis": "rtdetr_baseline on the RTX 5070 Laptop GPU: 4,138 s for 16,800 images = 0.2463 s/image including the per-epoch overhead (results/rtdetr_baseline/ultralytics/results.csv; epochs 665-740 s); peak CUDA 3.55e9 bytes (3.31 GiB) allocated at batch 1 (results/rtdetr_baseline/runtime.json)",
+    "export_minutes": 4,
+    "training_hours": 2.5,
+    "training_seconds_estimate": 8973,
+    "val_full_evaluation_minutes": 5,
+    "test_inference_minutes": 7,
+    "one_resume_buffer_hours": 0.5,
+    "total_hours_with_buffer": 3.3,
+    "schedule_fit": "plan.md section 7: final training starts no later than Mon 22:00 Kyiv, so the job ends by about Tue 01:20 even in the worst case, before the Tue 08:00 no-new-jobs and Tue 12:00 experiment cut-offs; per-epoch checkpoints allow resume"
+  },
+  "fallback_and_second_selection": {
+    "checkpoint": "MOVD-ch11 outputs/rtdetr_baseline/train/weights/last.pt (rubric budget, val_full mAP 0.2577)",
+    "use": "plan.md section 7 fallback if the final training is late or fails; also the internal-validation candidate for the second Kaggle final selection (G2c), compared with the final model on val_full in CH-14"
+  },
+  "ch14_implementation_note": "scripts/train_ultra.py reads <data_yaml folder>/train_rubric_manifest.json for config.json and the --observe sample-count check. For train_final, CH-14 must make it read the manifest of the data.yaml train list (train_final_manifest.json), then smoke-test (stop after epoch 0 + resume) before the full run, as CLAUDE.md section 8 requires",
+  "inference": "conf, NMS/query cap, max_det (<= 500), TTA and tiling are frozen by CH-13 in configs/runs/final_inference.json; RT-DETR returns at most 300 boxes per image (300 queries)"
+}

@@ -1,0 +1,15 @@
+run,eval_split_val_full,eval_frames_2846,no_predictions_outside_split,max_dets_500,ignore_policy_crowd_kept,train_split_rubric,epochs_6,images_seen_16800,long_side_1344,seed_42,single_variable_clean,hardware_recorded,checkpoint_recorded,comparable,failed_checks,reason
+frcnn_baseline,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+frcnn_rpn_pre3000,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+frcnn_roi_pos50,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+retina_baseline,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+retina_anchors,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+retina_focal_gamma15,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+yolo_baseline_marko_3050,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+yolo_baseline_5070,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+yolo_p2,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+yolo_imgsz1600,True,True,True,True,True,True,True,True,False,True,True,True,True,False,long_side_1344,"imgsz 1600: approved CH-10 resolution exception, not the frozen 1344"
+rtdetr_baseline,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+rtdetr_q500,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+rtdetr_lr1e4_wb0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,,
+rtdetr_lr1e4,True,True,True,True,True,True,True,True,True,True,False,True,True,False,single_variable_clean,explicit optimizer also kept warmup_bias_lr 0.1 (auto sets 0.0); results/rtdetr_lr1e4/README.md
