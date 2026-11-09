@@ -1,7 +1,7 @@
 task: detect
 mode: train
-model: C:\UCU\AI\hw2\MOVD-ch10\outputs\yolo_smoke_1600\train\weights\last.pt
-data: C:\UCU\AI\hw2\MOVD-ch10\outputs\yolo_data\data.yaml
+model: .\outputs\yolo_smoke_1600\train\weights\last.pt
+data: .\outputs\yolo_data\data.yaml
 epochs: 2
 time: null
 patience: 100
@@ -12,7 +12,7 @@ save_period: 1
 cache: false
 device: "0"
 workers: 0
-project: C:\UCU\AI\hw2\MOVD-ch10\outputs\yolo_smoke_1600
+project: .\outputs\yolo_smoke_1600
 name: train
 exist_ok: true
 pretrained: true
@@ -25,7 +25,7 @@ single_cls: false
 rect: false
 cos_lr: false
 close_mosaic: 0
-resume: C:\UCU\AI\hw2\MOVD-ch10\outputs\yolo_smoke_1600\train\weights\last.pt
+resume: .\outputs\yolo_smoke_1600\train\weights\last.pt
 amp: true
 fraction: 0.018
 profile: false
@@ -112,4 +112,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: C:\UCU\AI\hw2\MOVD-ch10\outputs\yolo_smoke_1600\train
+save_dir: .\outputs\yolo_smoke_1600\train

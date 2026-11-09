@@ -14,7 +14,7 @@
     "note": "CH-10 P2 compatibility smoke on the RTX 5070: the yolo11s-p2 starting checkpoint (scripts/make_p2_init.py) through the unchanged train_ultra.py at imgsz 1344, batch 1 / workers 0 / AMP: 50 images x 2 epochs, stop after epoch 0, resume epoch 1, then predict + project evaluator. Not a result."
   },
   "ultralytics_train_kwargs": {
-    "data": "C:\\UCU\\AI\\hw2\\MOVD-ch10\\outputs\\yolo_data\\data.yaml",
+    "data": ".\\outputs\\yolo_data\\data.yaml",
     "epochs": 2,
     "imgsz": 1344,
     "batch": 1,
@@ -27,7 +27,7 @@
     "save_period": 1,
     "val": false,
     "plots": false,
-    "project": "C:\\UCU\\AI\\hw2\\MOVD-ch10\\outputs\\yolo_smoke_p2_fixed",
+    "project": ".\\outputs\\yolo_smoke_p2_fixed",
     "name": "train",
     "exist_ok": true,
     "max_det": 500,

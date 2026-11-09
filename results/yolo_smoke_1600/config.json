@@ -15,7 +15,7 @@
     "note": "CH-10 CUDA smoke for the imgsz 1600 variant on the RTX 5070, at the baseline's batch 1 / workers 0 / AMP: int(2800 * 0.018) = 50 images x 2 epochs. Stop after epoch 0, then resume epoch 1. Records peak CUDA memory before the full run. Not a result."
   },
   "ultralytics_train_kwargs": {
-    "data": "C:\\UCU\\AI\\hw2\\MOVD-ch10\\outputs\\yolo_data\\data.yaml",
+    "data": ".\\outputs\\yolo_data\\data.yaml",
     "epochs": 2,
     "imgsz": 1600,
     "batch": 1,
@@ -28,7 +28,7 @@
     "save_period": 1,
     "val": false,
     "plots": false,
-    "project": "C:\\UCU\\AI\\hw2\\MOVD-ch10\\outputs\\yolo_smoke_1600",
+    "project": ".\\outputs\\yolo_smoke_1600",
     "name": "train",
     "exist_ok": true,
     "max_det": 500,

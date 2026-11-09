@@ -1,0 +1,24 @@
+{
+  "resume": false,
+  "batches": 16800,
+  "saved_epochs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "start_epoch": 0,
+  "samples": 2800,
+  "batches_per_epoch": 2800,
+  "optimizer_state_entries": 0,
+  "amp": true,
+  "first_loss": 5.648803234100342,
+  "last_loss": 3.2236738204956055,
+  "minimum_loss": 1.48630952835083,
+  "maximum_loss": 12.247664451599121,
+  "elapsed_seconds": 1549.385,
+  "peak_cuda_allocated_bytes": 1452440576,
+  "peak_cuda_reserved_bytes": 1709178880
+}
