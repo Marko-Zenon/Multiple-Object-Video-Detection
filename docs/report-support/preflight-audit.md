@@ -1,11 +1,11 @@
 # Independent preflight audit — 2026-11-09
 
-Evidence base: `5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633` (merged CH-13 PR #17). This is independent documentation/CPU validation authorized by Marko. **It is not a CH-16 claim, completion record or repository freeze.** CH-14 is reserved for Nazar and was neither claimed nor modified. The board remains untouched.
+Accepted-code/evidence base: `5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633` (merged CH-13 PR #17). Latest coordination recheck: `164a525878f6515c53fe4d3c38b81b5361d643fb` (CH-14 claimed by Badabuba); the only intervening upstream change is plan.md, so CPU checks still cover the current code. This is independent documentation/CPU validation authorized by Marko. **It is not a CH-16 claim, completion record or repository freeze.** CH-14 is reserved for Nazar and was neither claimed nor modified. The board remains untouched.
 
 ## State and integration
 
 - CH-09, CH-10, CH-11, CH-12, CH-13 and CH-15: DONE on the inspected develop board. Merged task PRs: #10, #14, #12, #15, #17; scaffold #8/M1 #9.
-- CH-14: board row READY at this snapshot; explicit team reservation for Nazar takes precedence over that unclaimed row. Do not take it over or change its state.
+- CH-14: initially READY at the accepted-code snapshot; now IN_PROGRESS, owned by Badabuba on the final coordination recheck. Both documentation branches preserve that upstream update. Do not take it over or change its state.
 - CH-16: BLOCKED on CH-14. G10 student-authored report sign-off remains open. It cannot be claimed or marked DONE now.
 - Documentation PRs #13 and #16 are updated from develop using ordinary merges; no history rewrite. At inspection both were draft, without review, acceptance comments or approvals. plan.md §9.5 explicitly allows author self-merge after checks; these documentation-only PRs do not touch shared modules requiring peer review. The CH-12/update gate is satisfied. Integration is permitted under the current user authorization after final validation; student G10 sign-off remains a final-delivery gate, not a claim that these factual drafts are student conclusions.
 
@@ -38,7 +38,7 @@ The final.json runtime projection predates the chosen six-pass CH-13 pipeline: i
 
 ## Required handoff before final delivery
 
-1. **Nazar / CH-14 only:** record ownership through the atomic board protocol; smoke/resume the final data path, train/evaluate or document the accepted fallback; keep all checkpoint provenance. Implement/verify the train_final manifest handling noted in final.json if still needed. Compare final data strategy with the rubric checkpoint using val_full.
+1. **Nazar / CH-14 only:** preserve the now-recorded ownership; smoke/resume the final data path, train/evaluate or document the accepted fallback; keep all checkpoint provenance. Implement/verify the train_final manifest handling noted in final.json if still needed. Compare final data strategy with the rubric checkpoint using val_full.
 2. **Nazar / CH-14 only:** apply frozen final_inference settings to the actual submitted model, validate each test CSV, record its SHA-256 and accepted Kaggle score. Obtain a score above the exact recorded public baseline 0.2216324580 and document final two selections primarily from internal validation. The first score 0.2011538266 does not satisfy this requirement.
 3. **Both students:** review report facts and defense guide; write the final discussion/conclusions in their own words and explicitly confirm G10. Review the integrated factual documentation and complete G10 before final delivery; no personal observations or conclusions are fabricated.
 4. **CH-16 after eligibility:** atomic claim, fresh-environment reproduction, complete rubric/traceability audit, README reconciliation, selected figure pack, final develop-to-main M3 and tag `v1.0-final`, successful matching Pages deployment. No final milestone or tag is created by this preflight.
