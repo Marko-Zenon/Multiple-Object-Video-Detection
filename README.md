@@ -323,9 +323,12 @@ Ultralytics' own validator.
 ```bash
 python scripts/export_yolo.py                                    # once, CPU (~1.5 min, 1.9 GB in outputs/yolo_data/)
 bash results/ch-11-rtdetr/run_ch11.sh python                     # baseline, 500 queries, lr0 1e-4: train -> val_fast curve -> val_full + speed (resumable)
+bash results/ch-11-rtdetr/run_ch11.sh python rtdetr_lr1e4_wb0    # the clean lr0 1e-4 run (rtdetr_lr1e4 is kept but confounded)
 python results/ch-11-rtdetr/make_evidence.py                     # CPU: comparison tables and figures in results/ch-11-rtdetr/
 ```
 
 Single steps: `python scripts/train_ultra.py --config configs/runs/rtdetr_baseline.json --device 0 --observe [--resume]`,
 `python scripts/predict_ultra.py curve|final --run-id rtdetr_baseline --device 0`,
-`python scripts/predict_ultra.py speed --weights <ckpt> --family yolo11 --out <json> --device 0`.
+`python scripts/predict_ultra.py speed --weights <ckpt> --family yolo11 --out <json> --device 0`,
+`python scripts/failures_ultra.py --run-id rtdetr_baseline`, `python results/ch-11-rtdetr/relativize_paths.py <run>`
+(repo-relative paths in finished run evidence). Results and the technical analysis: `results/ch-11-rtdetr/analysis.md`.

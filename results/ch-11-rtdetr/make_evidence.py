@@ -155,6 +155,9 @@ def comparison_rows(runs) -> list[dict]:
     for row in rows:
         if row["run"].startswith("rtdetr"):
             row["fps_rtx5070_same_benchmark"] = row["fps"]
+        # All Ultralytics checkpoints re-timed back-to-back in one session (see speed_recheck/README.md).
+        recheck = load(OUT / "speed_recheck" / f"{row['run']}.json")
+        row["fps_rtx5070_same_session"] = recheck["fps"] if recheck else None
     return rows
 
 
@@ -273,7 +276,7 @@ def figures(runs) -> None:
         "retina_anchors": {"color": "#ff7f0e", "marker": ".", "ls": "--", "lw": 1.4},
     }
     labels = {run: label for run, _, label in runs}
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5.2))
     for run, look in style.items():
         if run not in labels:
             continue
@@ -294,8 +297,9 @@ def figures(runs) -> None:
         axis.grid(alpha=0.3)
     axes[0].set_title("Learning curves: query-based vs CNN detectors")
     axes[1].set_title("Small objects")
-    axes[0].legend(fontsize=8)
-    fig.tight_layout()
+    handles, names = axes[0].get_legend_handles_labels()
+    fig.legend(handles, names, loc="lower center", ncol=4, fontsize=8, frameon=False)
+    fig.tight_layout(rect=(0, 0.1, 1, 1))
     fig.savefig(fig_dir / "learning_curve.png", dpi=130)
     plt.close(fig)
 

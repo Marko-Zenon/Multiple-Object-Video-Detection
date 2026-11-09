@@ -1,0 +1,151 @@
+{
+  "num_images": 2846,
+  "num_predictions": 853800,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.21790252661260398,
+    "AP50": 0.4260907798976659,
+    "AP75": 0.19562894843758413,
+    "AP_small": 0.10150878730169148,
+    "AP_medium": 0.21201132404216896,
+    "AP_large": 0.36934519338205074
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.20556797700113424,
+    "AP50": 0.39459088520901014,
+    "AP75": 0.18818230163719915,
+    "AP_small": 0.09647705138796799,
+    "AP_medium": 0.197657323487027,
+    "AP_large": 0.34777524386231534
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 50312,
+      "AP": 0.28599026834264624,
+      "AP50": 0.6504148337084709,
+      "AP75": 0.20497294317508696,
+      "AP_maxdets100": 0.27648693047274925
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 6022,
+      "AP": 0.2680231216029267,
+      "AP50": 0.5688150402582479,
+      "AP75": 0.21527761486474828,
+      "AP_maxdets100": 0.23901814640201602
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 31821,
+      "AP": 0.4024856180379673,
+      "AP50": 0.6442190931445151,
+      "AP75": 0.43623671641979067,
+      "AP_maxdets100": 0.39360218486600335
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 6842,
+      "AP": 0.24952656645416602,
+      "AP50": 0.41133073519475205,
+      "AP75": 0.27426485471304995,
+      "AP_maxdets100": 0.23525498725333607
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 1359,
+      "AP": 0.23321479940824125,
+      "AP50": 0.41693962202748197,
+      "AP75": 0.22773462351940693,
+      "AP_maxdets100": 0.2314955190031319
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 5487,
+      "AP": 0.16608812490842295,
+      "AP50": 0.3546725105956096,
+      "AP75": 0.13152117628563068,
+      "AP_maxdets100": 0.15573581912999773
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 264,
+      "AP": 0.019706402191018133,
+      "AP50": 0.022655000196947696,
+      "AP75": 0.02259766839581726,
+      "AP_maxdets100": 0.015393369527344165
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 12025,
+      "AP": 0.1181853119554431,
+      "AP50": 0.3396794040553024,
+      "AP75": 0.0524259901271424,
+      "AP_maxdets100": 0.09755685935449554
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 977,
+      "num_gt": 13557,
+      "mAP": 0.11348265891451072,
+      "AP50": 0.21546605975015953,
+      "mAP_maxdets100": 0.11345197787813371
+    },
+    {
+      "bin": "20-49",
+      "num_images": 1062,
+      "num_gt": 40626,
+      "mAP": 0.21760607151808065,
+      "AP50": 0.38056206570438805,
+      "mAP_maxdets100": 0.21029575700174072
+    },
+    {
+      "bin": "50-99",
+      "num_images": 618,
+      "num_gt": 39746,
+      "mAP": 0.2613367515946317,
+      "AP50": 0.5517443512455978,
+      "mAP_maxdets100": 0.24453789261395278
+    },
+    {
+      "bin": ">=100",
+      "num_images": 189,
+      "num_gt": 20203,
+      "mAP": 0.35094688889069386,
+      "AP50": 0.6762264643220259,
+      "mAP_maxdets100": 0.308886903085058
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_full",
+  "checkpoint": "outputs/rtdetr_lr1e4_wb0/train/weights/last.pt",
+  "predict_seconds": 322.7
+}
