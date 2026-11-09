@@ -14,6 +14,10 @@ Outputs: shards in the ignored `outputs/ch14/<name>/<split>/shards/<clip>.json`;
 merged COCO-results list `outputs/ch14/<name>/test/test_predictions.json` (`image_id` = 1-based CSV row) for the
 CH-05 writer (`scripts/make_submission.py`). Evidence: `results/ch-14-final/<name>/test/run.json`.
 
+`speed --model NAME=WEIGHTS ...`: the CH-13 same-session benchmark (`movd.speed.benchmark`, first 30 val_full frames
+preloaded, FP32, batch 1) of every checkpoint in single-pass mode (the CH-13 `ref` config) and in the CH-13 pipeline,
+with the peak CUDA memory of each -> `results/ch-14-final/speed/session.json`.
+
 A shard is written atomically when its clip is complete, so a stopped run restarts at a clip boundary.
 `--clips` and `--max-images` are for smoke tests only; such runs are marked `smoke` in run.json.
 """
@@ -229,6 +233,72 @@ def run(args) -> None:
     print(f"evidence: {evidence / 'run.json'}")
 
 
+SINGLE_PASS = {
+    "passes": [{"model": "baseline", "imgsz": 1344, "views": "full"}],
+    "decode": {"k": 300, "conf": 0.001},
+    "merge": None,
+    "post_nms": None,
+    "max_det": 500,
+}  # results/ch-13-inference/variants.json "ref"
+
+
+def speed(args) -> None:
+    import cv2
+    import torch
+
+    from movd.speed import benchmark
+
+    pipeline = json.loads(PIPELINE.read_text(encoding="utf-8"))["config"]
+    frames_ = [
+        cv2.imread(str(p)) for _, _, p in frames("val_full", args.dataset_root)[:30]
+    ]
+    session = {"finished_kyiv": None, "rows": []}
+    for spec in args.model:
+        name, weights = spec.split("=", 1)
+        weights = Path(weights)
+        model = rtdetr.load_model(weights, "rtdetr")
+        models = {"baseline": model}
+        for mode, config in (("single", SINGLE_PASS), ("pipeline", pipeline)):
+            torch.cuda.reset_peak_memory_stats(int(args.device))
+            result = benchmark(
+                lambda frame, c=config, m=models: infer.predict_image(
+                    m, frame, c, args.device
+                ),
+                frames_,
+                device=f"cuda:{args.device}",
+                batch_size=1,
+                warmup=10,
+                input_size=", ".join(
+                    f"{s['imgsz']}:{s['view']}" for s in infer.pass_specs(config)
+                ),
+                note="CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass "
+                "+ CPU decoding, merge and the 500 cap; FP32, batch 1",
+            )
+            result.update(
+                name=name,
+                weights_sha256=sha256(weights),
+                mode=mode,
+                passes_per_frame=len(infer.pass_specs(config)),
+                test_minutes_3811_frames=round(3811 / result["fps"] / 60, 1),
+                peak_cuda_allocated_bytes=torch.cuda.max_memory_allocated(
+                    int(args.device)
+                ),
+                peak_cuda_reserved_bytes=torch.cuda.max_memory_reserved(
+                    int(args.device)
+                ),
+            )
+            session["rows"].append(result)
+            print(
+                f"{name:14s} {mode:8s} {result['fps']:.2f} FPS, peak {result['peak_cuda_allocated_bytes'] / 2**30:.2f} GiB"
+            )
+        del model
+        torch.cuda.empty_cache()
+    session["finished_kyiv"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+    out = RESULTS / "speed" / "session.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(session, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -248,7 +318,14 @@ def main() -> None:
             p.add_argument(
                 "--split", choices=("val_full", "val_fast"), default="val_full"
             )
-    run(parser.parse_args())
+    p = sub.add_parser("speed")
+    p.add_argument(
+        "--model", nargs="+", required=True, help="NAME=WEIGHTS, one per checkpoint"
+    )
+    p.add_argument("--device", required=True)
+    p.add_argument("--dataset-root", type=Path, default=None)
+    args = parser.parse_args()
+    speed(args) if args.command == "speed" else run(args)
 
 
 if __name__ == "__main__":
