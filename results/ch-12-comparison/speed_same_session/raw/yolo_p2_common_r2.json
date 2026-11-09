@@ -1,0 +1,22 @@
+{
+  "fps": 55.40839496356678,
+  "latency_ms_per_image": 18.047806666436372,
+  "latency_ms_per_batch": {
+    "mean": 18.047806666436372,
+    "median": 17.98309999958292,
+    "p90": 18.702899999880174,
+    "min": 17.378200000166544
+  },
+  "timed_batches": 30,
+  "warmup_batches": 10,
+  "batch_size": 1,
+  "input_size": "imgsz 1344 (letterbox, long side)",
+  "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0",
+  "weights": "last.pt",
+  "family": "yolo11"
+}
