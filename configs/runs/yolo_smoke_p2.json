@@ -1,0 +1,14 @@
+{
+  "run_id": "yolo_smoke_p2",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s-p2-init.pt",
+  "epochs": 2,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "smoke_fraction": 0.018,
+  "overrides": {
+    "cache": false
+  },
+  "note": "CH-10 P2 compatibility smoke on the RTX 5070: the yolo11s-p2 starting checkpoint (scripts/make_p2_init.py) through the unchanged train_ultra.py at imgsz 1344, batch 1 / workers 0 / AMP: 50 images x 2 epochs, stop after epoch 0, resume epoch 1, then predict + project evaluator. Not a result."
+}

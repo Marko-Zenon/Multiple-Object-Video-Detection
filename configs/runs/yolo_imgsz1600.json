@@ -1,0 +1,15 @@
+{
+  "run_id": "yolo_imgsz1600",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "note": "CH-10 required higher-input-size variant. One variable: training and inference imgsz 1344 -> 1600 (overrides.imgsz; predeclared, student-approved CH-10 tuning exception to the frozen 1344 long side, not protocol drift). Everything else equals yolo_baseline_marko_3050: official YOLO11s, full 2,800-frame train_rubric x 6 epochs = 16,800 images, batch 1, workers 0, cache false, AMP, seed 42, flip-only, optimizer=auto, nbs 64. Extra cost: about (1600/1344)^2 = 1.42x pixels per image. Hypothesis, stated before training: VisDrone targets are tiny (24.9% small, many under 16 px at 1344), so 19% more resolution should raise AP_small and dense-frame AP at a throughput cost; large objects may gain little.",
+  "overrides": {
+    "cache": false,
+    "imgsz": 1600
+  }
+}
