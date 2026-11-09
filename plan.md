@@ -21,7 +21,7 @@
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | ✅ DONE | ⛔ NO — completed | Marko-Zenon (closeout: Badabuba) | start: CH-02 · finish: CH-03 | — (YOLO11s val_full mAP 0.1439 / AP50 0.2925; 36.37 FPS on RTX 3050, not comparable with RTX 5070 numbers; Telegram artifact ZIP recipient-verified: 163/163 + 145/145 SHA-256, predictions re-evaluated exactly; notebook merged structurally, 95 cells; lock released) | ch-09-yolo / [PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-09 00:45 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-09 | — (worker: Claude; selected yolo_imgsz1600 by the pre-set rule: val_full mAP 0.1710 / AP50 0.3397 at imgsz 1600 (approved exception, 48.3 vs 73.3 FPS same session); best at 1344 yolo_p2 0.1626 (P2 smoke passed, AP_small not improved); replicate spread 0.006-0.009 mAP; RTX 5070 and notebook lock released) | ch-10-yolo-tuning / [PR #14](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/14) | 2026-11-09 12:58 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-09 | — (worker: Claude; RT-DETR-l val_full mAP 0.2577 / AP50 0.4775 at the frozen budget; tuned q500 0.2389, lr0 1e-4 0.2179, confounded lr1e4 kept and marked; learning curve vs YOLO11s/FRCNN/RetinaNet + analysis in results/ch-11-rtdetr/; G9 resolved, 3.3 GB peak at batch 1; RTX 5070 released; notebook lock released; CH-10 not touched) | ch-11-rtdetr / [PR #12](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/12) | 2026-11-09 07:00 Kyiv |
-| CH-12 | Cross-family comparison & final-config decision | 🟢 READY | 🟢 YES | — | start: CH-07, CH-08, CH-10, CH-11 | — (CH-07, CH-08, CH-10, CH-11 ✅) | — | 2026-11-09 12:58 Kyiv |
+| CH-12 | Cross-family comparison & final-config decision | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-07, CH-08, CH-10, CH-11 | — (worker: Claude; CPU aggregation, no training) | ch-12-comparison | 2026-11-09 12:58 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
@@ -1084,7 +1084,7 @@ Completion or handoff note: G9 resolved; CH-12 still needs CH-10, which was not 
 - **Handoff / unblocks:** CH-13 becomes READY, and CH-14 becomes READY once CH-05 is DONE.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-09 12:58 Kyiv | Last update: 2026-11-09 12:58 Kyiv | Branch: ch-12-comparison | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
