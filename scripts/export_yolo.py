@@ -1,9 +1,11 @@
-"""Export train_rubric (masked, CH-02 policy) and val_fast (unmodified) to YOLO format, then check the export.
+"""Export a train list (masked, CH-02 policy) and val_fast (unmodified) to YOLO format, then check the export.
 
-CPU only. Writes the data to the git-ignored `outputs/yolo_data/` and the small evidence to
-`results/ch-09-yolo/` (export_check.json, figures/export_check.png).
+CPU only. Writes the data to the git-ignored `--out` folder (default `outputs/yolo_data/`) and the small evidence
+to `--results-dir` (default `results/ch-09-yolo/`: export_check.json, figures/export_check.png).
+`--train-split` picks the frozen train list (default train_rubric; CH-14 uses train_final).
 
     python scripts/export_yolo.py --dataset-root <dataset>
+    python scripts/export_yolo.py --train-split train_final --out outputs/yolo_data_final --results-dir results/ch-14-final/export
 """
 
 import argparse
@@ -19,7 +21,9 @@ from movd import data, ultra  # noqa: E402
 RESULTS = data.REPO_ROOT / "results" / "ch-09-yolo"
 
 
-def figure(out_root: Path, root, path: Path, count: int = 2) -> list[int]:
+def figure(
+    out_root: Path, root, path: Path, train_split: str = "train_rubric", count: int = 2
+) -> list[int]:
     """Original (ignore regions red, targets green) next to the exported frame, for the frames with the most fill."""
     import cv2
     import matplotlib
@@ -31,7 +35,7 @@ def figure(out_root: Path, root, path: Path, count: int = 2) -> list[int]:
     coco = data.load_coco("train", root)
     images = {img["id"]: img for img in coco["images"]}
     entries = data.split_annotations(coco)
-    ids = data.split_image_ids("train_rubric")
+    ids = ultra.train_split_ids(train_split)
 
     def filled(image_id):
         image, entry = images[image_id], entries[image_id]
@@ -63,7 +67,7 @@ def figure(out_root: Path, root, path: Path, count: int = 2) -> list[int]:
             Path(Path(image["file_name"]).parent.name) / Path(image["file_name"]).name
         )
         exported = cv2.cvtColor(
-            cv2.imread(str(out_root / "train_rubric" / "images" / relative)),
+            cv2.imread(str(out_root / train_split / "images" / relative)),
             cv2.COLOR_BGR2RGB,
         )
         row[0].imshow(original)
@@ -84,6 +88,15 @@ def figure(out_root: Path, root, path: Path, count: int = 2) -> list[int]:
     return chosen
 
 
+def _relative(path: Path) -> str:
+    """Repo-relative POSIX path when possible (keeps evidence free of machine paths)."""
+    path = Path(path).resolve()
+    try:
+        return path.relative_to(data.REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -97,6 +110,9 @@ def main():
         help="Evidence directory; use a new directory to preserve another machine's export checks",
     )
     parser.add_argument(
+        "--train-split", choices=ultra.TRAIN_SPLITS, default=ultra.DEFAULT_TRAIN_SPLIT
+    )
+    parser.add_argument(
         "--check-only",
         action="store_true",
         help="Skip writing, only check an existing export",
@@ -105,7 +121,7 @@ def main():
 
     start = time.perf_counter()
     splits = [
-        ("train_rubric", "train", data.split_image_ids("train_rubric"), True),
+        (args.train_split, "train", ultra.train_split_ids(args.train_split), True),
         ("val_fast", "val", data.split_image_ids("val_fast"), False),
     ]
     manifests = {}
@@ -114,7 +130,7 @@ def main():
             manifests[name] = ultra.export_split(
                 name, source, ids, args.out, args.dataset_root, mask=mask
             )
-        ultra.write_data_yaml(args.out, "train_rubric", "val_fast")
+        ultra.write_data_yaml(args.out, args.train_split, "val_fast")
     else:  # keep the manifests written by the export run
         manifests = {
             name: json.loads(
@@ -131,12 +147,16 @@ def main():
         for name, source, ids, mask in splits
     }
     chosen = figure(
-        args.out, args.dataset_root, args.results_dir / "figures" / "export_check.png"
+        args.out,
+        args.dataset_root,
+        args.results_dir / "figures" / "export_check.png",
+        args.train_split,
     )
 
     report = {
-        "export_root": "outputs/yolo_data (git-ignored)",
-        "data_yaml": "outputs/yolo_data/data.yaml",
+        "export_root": f"{_relative(args.out)} (git-ignored)",
+        "data_yaml": f"{_relative(args.out)}/data.yaml",
+        "train_split": args.train_split,
         "policy": "configs/protocol.json ignore_policy.training (CH-02): crowd never a target; ignore regions filled with "
         f"{list(data.IGNORE_FILL_RGB)} except inside labelled target boxes; masked frames re-encoded JPEG q{ultra.JPEG_QUALITY}; "
         "frames without ignore regions byte-copied",
@@ -147,7 +167,7 @@ def main():
             name: ultra.directory_bytes(args.out / name) for name, *_ in splits
         },
         "disk_bytes_total": ultra.directory_bytes(args.out),
-        "figure": str(args.results_dir / "figures" / "export_check.png"),
+        "figure": _relative(args.results_dir / "figures" / "export_check.png"),
         "figure_image_ids": chosen,
         "seconds": round(time.perf_counter() - start, 1),
         "export_seconds": round(export_seconds, 1),

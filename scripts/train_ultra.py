@@ -101,6 +101,10 @@ def main():
         raise FileNotFoundError(
             f"{data_yaml} missing; run scripts/export_yolo.py first"
         )
+    # The training list the config selects (train_split, default train_rubric), checked against data.yaml,
+    # the export manifest and the frozen split file before anything is written or trained.
+    manifest = ultra.train_manifest(config, data_yaml)
+    train_split = config.get("train_split", ultra.DEFAULT_TRAIN_SPLIT)
     if args.resume:
         if not last.exists():
             raise FileNotFoundError(f"no checkpoint to resume: {last}")
@@ -133,12 +137,11 @@ def main():
                 if isinstance(kwargs.get("pretrained"), str)
                 else None,
                 "protocol_version": protocol["version"],
-                "train_split": "train_rubric",
-                "export_manifest": json.loads(
-                    (data_yaml.parent / "train_rubric_manifest.json").read_text(
-                        encoding="utf-8"
-                    )
-                ),
+                "train_split": train_split,
+                "train_split_file_sha256": hashlib.sha256(
+                    (data.SPLITS_DIR / f"{train_split}.json").read_bytes()
+                ).hexdigest(),
+                "export_manifest": manifest,
                 "headline_evaluator": "movd/evaluate.py via scripts/predict_ultra.py (Ultralytics validation off)",
             },
         )
@@ -159,9 +162,7 @@ def main():
             amp=bool(trainer.amp),
         )
         if args.observe and "smoke_fraction" not in config:
-            expected = json.loads(
-                (data_yaml.parent / "train_rubric_manifest.json").read_text()
-            )["num_images"]
+            expected = manifest["num_images"]
             if observations["samples"] != expected:
                 raise ValueError(
                     "Training loader does not contain the full exported split"
