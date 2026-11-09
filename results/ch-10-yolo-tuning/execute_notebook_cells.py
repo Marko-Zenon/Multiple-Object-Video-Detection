@@ -31,29 +31,48 @@ def digest(cell: dict) -> str:
 
 def main() -> int:
     notebook = json.loads(NOTEBOOK.read_bytes().replace(b"\r\n", b"\n"))
-    before = {i: digest(c) for i, c in enumerate(notebook["cells"]) if c.get("id") not in IDS}
+    before = {
+        i: digest(c) for i, c in enumerate(notebook["cells"]) if c.get("id") not in IDS
+    }
     ours = [c for c in notebook["cells"] if c.get("id") in IDS]
     if [c["id"] for c in ours] != list(IDS):
         raise SystemExit("CH-10 cells missing; run notebook_cells.py first")
-    temp = nbformat.from_dict(
-        {**{k: v for k, v in notebook.items() if k != "cells"}, "cells": copy.deepcopy(ours)}
+    temp = nbformat.reads(  # reads() normalises list sources to strings, as nbclient expects
+        json.dumps(
+            {
+                **{k: v for k, v in notebook.items() if k != "cells"},
+                "cells": copy.deepcopy(ours),
+            }
+        ),
+        as_version=4,
     )
     NotebookClient(
-        temp, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(ROOT)}}
+        temp,
+        timeout=600,
+        kernel_name="python3",
+        resources={"metadata": {"path": str(ROOT)}},
     ).execute()
     code = next(c for c in temp.cells if c["id"] == "ch10-evidence")
     errors = [o for o in code["outputs"] if o.get("output_type") == "error"]
     if errors:
-        raise SystemExit(f"CH-10 cell raised: {errors[0].get('ename')}: {errors[0].get('evalue')}")
+        raise SystemExit(
+            f"CH-10 cell raised: {errors[0].get('ename')}: {errors[0].get('evalue')}"
+        )
     for cell in notebook["cells"]:
         if cell.get("id") == "ch10-evidence":
             cell["outputs"] = json.loads(json.dumps(code["outputs"]))
             cell["execution_count"] = code["execution_count"]
-    after = {i: digest(c) for i, c in enumerate(notebook["cells"]) if c.get("id") not in IDS}
+    after = {
+        i: digest(c) for i, c in enumerate(notebook["cells"]) if c.get("id") not in IDS
+    }
     if after != before:
         raise SystemExit("a non-CH-10 cell changed; nothing written")
     nbformat.validate(nbformat.from_dict(notebook))
-    NOTEBOOK.write_text(json.dumps(notebook, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    NOTEBOOK.write_text(
+        json.dumps(notebook, indent=1, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     images = sum("image/png" in o.get("data", {}) for o in code["outputs"])
     report = {
         "cells_total": len(notebook["cells"]),

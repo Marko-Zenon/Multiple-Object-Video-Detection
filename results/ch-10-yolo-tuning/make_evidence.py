@@ -290,7 +290,9 @@ def fine_size_rows(runs) -> list[dict]:
 
 def selection(runs) -> dict:
     """Apply results/ch-10-yolo-tuning/selection_rule.md (written before the variants finished)."""
-    names = [r[0] for r in runs]  # fixed RUNS order, so selection.json is byte-reproducible
+    names = [
+        r[0] for r in runs
+    ]  # fixed RUNS order, so selection.json is byte-reproducible
     final = {run: curve(run)[-1]["val_fast"]["mAP"] for run in names}
     candidates = [r for r in CANDIDATES if r in names]
     winner = max(candidates, key=final.get)
