@@ -1,0 +1,39 @@
+{
+  "variant": "ens_q500_nms06",
+  "axis": "5 ensemble",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      },
+      {
+        "model": "q500",
+        "imgsz": 1344,
+        "views": "full",
+        "k": 500
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.6
+    },
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 714,
+  "num_detections": 315110,
+  "detections_per_frame_mean": 441.33,
+  "detections_per_frame_min": 361,
+  "detections_per_frame_max": 500,
+  "frames_at_500_cap": 81,
+  "num_raw_passes_per_frame": 2,
+  "cpu_postprocess_seconds": 0.91,
+  "cpu_postprocess_ms_per_frame": 1.27
+}
