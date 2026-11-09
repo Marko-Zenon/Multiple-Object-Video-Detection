@@ -19,7 +19,7 @@
 | CH-07 | Two-stage: Faster R-CNN corrected + tuning + failure cases | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected frcnn_rpn_pre3000; CH-07 notebook section executed; GPU and notebook lock released | ch-07-frcnn / [PR #6](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/6) | 2026-11-08 00:33 Kyiv |
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected retina_anchors by final val_fast mAP; GPU and notebook lock released | ch-08-retina / [PR #11](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/11) | 2026-11-08 23:45 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | ✅ DONE | ⛔ NO — completed | Marko-Zenon (closeout: Badabuba) | start: CH-02 · finish: CH-03 | — (YOLO11s val_full mAP 0.1439 / AP50 0.2925; 36.37 FPS on RTX 3050, not comparable with RTX 5070 numbers; Telegram artifact ZIP recipient-verified: 163/163 + 145/145 SHA-256, predictions re-evaluated exactly; notebook merged structurally, 95 cells; lock released) | ch-09-yolo / [PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-09 00:45 Kyiv |
-| CH-10 | Anchor-free tuning + small/dense analysis | 🟢 READY | 🟢 YES | — | start: CH-09 | — (CH-09 ✅: export, adapter, YOLO11s baseline and curve merged) | — | 2026-11-09 00:45 Kyiv |
+| CH-10 | Anchor-free tuning + small/dense analysis | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-09 | — (worker: Claude; exclusive RTX 5070; variants imgsz 1600 (approved tuning exception) + P2 head after smoke) | ch-10-yolo-tuning | 2026-11-09 08:05 Kyiv |
 | CH-11 | Query-based RT-DETR baseline + tuning + learning curve | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-09 | — (worker: Claude; RT-DETR-l val_full mAP 0.2577 / AP50 0.4775 at the frozen budget; tuned q500 0.2389, lr0 1e-4 0.2179, confounded lr1e4 kept and marked; learning curve vs YOLO11s/FRCNN/RetinaNet + analysis in results/ch-11-rtdetr/; G9 resolved, 3.3 GB peak at batch 1; RTX 5070 released; notebook lock released; CH-10 not touched) | ch-11-rtdetr / [PR #12](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/12) | 2026-11-09 07:00 Kyiv |
 | CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07, CH-08, CH-11 ✅, CH-09 baseline merged; still needs CH-10 | — | 2026-11-09 07:00 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
@@ -1002,7 +1002,7 @@ Historical completion outline (remaining work, not executed): after CH-05 infere
 - **Handoff / unblocks:** start dependency of CH-12. Gives the best anchor-free checkpoint for CH-13.
 - **Evidence log:**
 ```text
-Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-09 08:05 Kyiv | Last update: 2026-11-09 08:05 Kyiv | Branch: ch-10-yolo-tuning | Commits: — | PR: —
 Files changed: —
 Validation commands: —
 Metrics / results: —
