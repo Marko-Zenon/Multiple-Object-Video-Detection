@@ -20,14 +20,14 @@
 | CH-08 | One-stage anchor-based: RetinaNet + anchors + focal-loss experiment | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-04 | worker: Codex; selected retina_anchors by final val_fast mAP; GPU and notebook lock released | ch-08-retina / [PR #11](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/11) | 2026-11-08 23:45 Kyiv |
 | CH-09 | Ultralytics export + YOLO11 anchor-free baseline | ✅ DONE | ⛔ NO — completed | Marko-Zenon (closeout: Badabuba) | start: CH-02 · finish: CH-03 | — (YOLO11s val_full mAP 0.1439 / AP50 0.2925; 36.37 FPS on RTX 3050, not comparable with RTX 5070 numbers; Telegram artifact ZIP recipient-verified: 163/163 + 145/145 SHA-256, predictions re-evaluated exactly; notebook merged structurally, 95 cells; lock released) | ch-09-yolo / [PR #10](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/10) | 2026-11-09 00:45 Kyiv |
 | CH-10 | Anchor-free tuning + small/dense analysis | 🟢 READY | 🟢 YES | — | start: CH-09 | — (CH-09 ✅: export, adapter, YOLO11s baseline and curve merged) | — | 2026-11-09 00:45 Kyiv |
-| CH-11 | Query-based RT-DETR baseline + tuning + learning curve | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: CH-09 | worker: Claude; exclusive use of Nazar's RTX 5070 Laptop GPU; smokes passed; full runs baseline + q500 done and pushed to branch, lr1e4 training (ETA ~05:20); CH-10 not touched | ch-11-rtdetr | 2026-11-09 03:52 Kyiv |
-| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10, CH-11 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07, CH-08 ✅, CH-09 baseline merged; still needs CH-10 and CH-11 | — | 2026-11-09 00:45 Kyiv |
+| CH-11 | Query-based RT-DETR baseline + tuning + learning curve | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-09 | — (worker: Claude; RT-DETR-l val_full mAP 0.2577 / AP50 0.4775 at the frozen budget; tuned q500 0.2389, lr0 1e-4 0.2179, confounded lr1e4 kept and marked; learning curve vs YOLO11s/FRCNN/RetinaNet + analysis in results/ch-11-rtdetr/; G9 resolved, 3.3 GB peak at batch 1; RTX 5070 released; notebook lock released; CH-10 not touched) | ch-11-rtdetr / [PR #12](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/12) | 2026-11-09 07:00 Kyiv |
+| CH-12 | Cross-family comparison & final-config decision | 🟡 BLOCKED | ⛔ NO — CH-10 | — | start: CH-07, CH-08, CH-10, CH-11 | CH-07, CH-08, CH-11 ✅, CH-09 baseline merged; still needs CH-10 | — | 2026-11-09 07:00 Kyiv |
 | CH-13 | Final-pipeline inference experiments on val | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-12 | needs chosen final family | — | 2026-11-07 15:00 Kyiv |
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟡 BLOCKED | ⛔ NO — CH-12 | — | start: CH-05, CH-12 · finish: CH-13 | CH-05 ✅ (submission tooling ready); still needs CH-12 (frozen final config) | — | 2026-11-08 18:10 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-12, CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; still needs CH-12 and CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-08 20:02 Kyiv |
 
-🔒 **homework.ipynb lock:** Badabuba (CH-11 notebook section; worker: Claude; taken 2026-11-09 07:05 Kyiv)
+🔒 **homework.ipynb lock:** FREE
 
 ### Gates
 
@@ -43,7 +43,7 @@
 | G6 | Nazar's commit email linked to GitHub `Badabuba` | RESOLVED | Badabuba | CH-01: GitHub API maps `mykolaichuk.pn@ucu.edu.ua` commits to login `Badabuba` |
 | G7 | PyTorch CUDA wheel with sm_120 support works on the RTX 5070 | RESOLVED | CH-01 owner | CH-01: torch 2.14.1+cu130, CUDA conv + NMS verified |
 | G8 | At least one student can upload to Kaggle via the web UI (no tokens in Git) | RESOLVED | Badabuba | Badabuba uploaded the CH-05 submission via the web UI on 2026-11-08 (team Nachalnyky); accepted, public 0.2011538266 |
-| G9 | RT-DETR trains reliably on 8 GB, otherwise a recorded fallback decision | OPEN | CH-11 owner | CH-11 |
+| G9 | RT-DETR trains reliably on 8 GB, otherwise a recorded fallback decision | RESOLVED | CH-11 owner | CH-11: rtdetr-l trains reliably on the 8 GB RTX 5070 at batch 1 (3.3-3.4 GB peak, 4 full 6-epoch runs, resume tested); no fallback needed |
 | G10 | Students wrote the report prose and conclusions | OPEN | Badabuba + Marko-Zenon | finish gate of CH-16 |
 
 ## 2. Current verified state (inspection 2026-11-07, read-only)
@@ -1044,14 +1044,14 @@ Completion or handoff note: —
 - **Handoff / unblocks:** start dependency of CH-12.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-09 00:50 Kyiv | Last update: 2026-11-09 00:50 Kyiv | Branch: ch-11-rtdetr | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-09 00:50 Kyiv | Last update: 2026-11-09 07:00 Kyiv | Branch: ch-11-rtdetr | Commits: 5c4d566, f08836a, c60bd54, 17a452c, a270db4, e84fb53, f648831 (+ develop merges, this closeout) | PR: #12
+Files changed: movd/rtdetr.py (new), movd/ultra.py (family field), scripts/train_ultra.py, scripts/predict_ultra.py (family, speed subcommand, RT-DETR speed note), configs/models/rtdetr-l-q500.yaml, configs/runs/rtdetr_*.json (3 smoke + baseline, q500, lr1e4, lr1e4_wb0), tests/test_rtdetr.py (12 tests), results/rtdetr_{baseline,q500,lr1e4,lr1e4_wb0,smoke_b1,smoke_b2,smoke_q500}/, results/ch-11-rtdetr/ (runner, evidence generator, path relativizer, notebook-cell script, tables, figures, query_saturation.json, speed_recheck/, yolo11s_speed_rtx5070.json, export_check/, analysis.md), README.md (CH-11 section), homework.ipynb (3 cells appended under the lock, 95 existing cells unchanged).
+Validation commands: pytest -q (166 passed, 1 skipped: CUDA-only test with the GPU hidden); python scripts/check_dataset.py (PASSED); python scripts/make_splits.py --check (val_fast 714 / val_full 2846, hashes match); ruff check --ignore RUF100 + ruff format --check on the CH-11 files (pass); python results/ch-11-rtdetr/make_evidence.py --tables-only (byte-identical tables); CH-11 notebook cells executed from a clean kernel (0 errors, 5 figures); git diff --check (clean).
+Metrics / results: val_full (project evaluator, maxDets 500): rtdetr_baseline mAP 0.2577 / AP50 0.4775 / AP75 0.2392 / AP_S 0.1296 / AP_M 0.2246 / AP_L 0.4538; rtdetr_q500 0.2389; rtdetr_lr1e4_wb0 0.2179; rtdetr_lr1e4 (confounded) 0.1560. Comparators: YOLO11s 0.1439, Faster R-CNN RPN pre3000 0.1893, RetinaNet anchors 0.1693. val_fast best: baseline 0.2691 at epoch 3. Densest bin (>=100 targets): 0.368 at maxDets 500 vs 0.315 at 100. Every val_full frame returns exactly the query cap (300/500); 1.13 confident (>=0.3) detections per target.
+Artifacts: tracked: results/rtdetr_*/ and results/ch-11-rtdetr/ (figures/learning_curve.png, figures/size_density.png). Not tracked (outputs/, Nazar's machine): per-epoch checkpoints epoch0-5 + last/best for the 4 full runs, raw val_full/val_fast predictions, logs in outputs/ch11_logs/; pretrained rtdetr-l.pt sha256 6de60b10…e73f.
+Runtime / hardware: Nazar's RTX 5070 Laptop GPU 8 GB, torch 2.14.1+cu130, ultralytics 8.4.207. Training 4,018-4,289 s per full run (about 4 img/s), plus about 18 min curve + val_full each; total GPU time about 6 h incl. smoke (00:55-06:50 Kyiv plus smokes). Speed (same session): RT-DETR-l 10.6 FPS, YOLO11s 64.2 FPS (CH-09 checkpoint on the RTX 5070; 36.37 FPS on the RTX 3050); absolute FPS varied 20-25% between sessions.
+Blockers / deviations: none on protocol (imgsz 1344, 6 epochs, splits and ignore policy unchanged). Batch 1 chosen from the smoke (batch 2 peaked at 6.3 GB, same throughput). rtdetr_lr1e4 is confounded: an explicit optimizer skips Ultralytics' auto branch that sets warmup_bias_lr 0.0; kept and marked, and the clean rtdetr_lr1e4_wb0 was added. Notebook lock line on develop said "taken 07:05"; actual time was about 06:49 Kyiv.
+Completion or handoff note: G9 resolved; CH-12 still needs CH-10, which was not touched. Report prose and conclusions stay with the students (TODOs in analysis.md section 10 and in the notebook). No Kaggle submission was made. RTX 5070 released.
 ```
 
 ---

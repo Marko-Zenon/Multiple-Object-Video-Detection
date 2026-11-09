@@ -1,0 +1,17 @@
+{
+  "run_id": "rtdetr_lr1e4",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "note": "CH-11 tuned variant (one variable: peak learning rate 0.000833 -> 0.0001, the RT-DETR paper's AdamW rate). optimizer and momentum are set explicitly only so that lr0 is not ignored: AdamW with beta1 0.9 is what optimizer=auto picks for the baseline; weight decay, warmup and the linear schedule stay the same. Hypothesis, stated before training: the Ultralytics auto rate is tuned for CNN YOLO heads; a DETR-style lower rate may disturb the pretrained transformer less and converge more smoothly, but may also learn the 8-class head more slowly within 6 epochs.",
+  "overrides": {
+    "cache": false,
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "momentum": 0.9
+  }
+}

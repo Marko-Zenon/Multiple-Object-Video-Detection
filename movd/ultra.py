@@ -583,6 +583,8 @@ def find_failure_cases(
 
 # ---------------------------------------------------------------- run configs
 
+# Ultralytics families; movd.rtdetr.load_model picks the model class (YOLO or RTDETR) per family.
+ULTRALYTICS_FAMILIES = ("yolo11", "rtdetr")
 RUN_CONFIG_REQUIRED = {"run_id": str, "weights": str, "batch_size": int}
 RUN_CONFIG_OPTIONAL = {
     "family": str,
@@ -627,6 +629,10 @@ def validate_run_config(config: dict) -> dict:
             raise ValueError(
                 f"run config '{key}' must be {kind.__name__}, got {value!r}"
             )
+    if config.get("family", "yolo11") not in ULTRALYTICS_FAMILIES:
+        raise ValueError(
+            f"run config 'family' must be one of {ULTRALYTICS_FAMILIES}, got {config['family']!r}"
+        )
     run_id = config["run_id"]
     if Path(run_id).name != run_id or run_id in ("", ".", ".."):
         raise ValueError("run_id must be a single directory name")
