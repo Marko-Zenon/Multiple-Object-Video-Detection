@@ -1,0 +1,665 @@
+{
+  "evidence_commit": "5ec9d1f14a9f9aa9e16a4e56c3113dbf3aad3633",
+  "metric_claims": [
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1873"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3808"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1604"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0913"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1779"
+    },
+    {
+      "source": "results/frcnn_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3452"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1893"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3847"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1614"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.1083"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1868"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3107"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1814"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3643"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1553"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.1004"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1763"
+    },
+    {
+      "source": "results/frcnn_roi_pos50/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3109"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1623"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3137"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1458"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0780"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1492"
+    },
+    {
+      "source": "results/retina_baseline/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3045"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1693"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3465"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1446"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0754"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1528"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3223"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1524"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3006"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1362"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0832"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1432"
+    },
+    {
+      "source": "results/retina_focal_gamma15/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3002"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1439"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.2925"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1192"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0866"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1434"
+    },
+    {
+      "source": "results/yolo_baseline_marko_3050/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2555"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1502"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3079"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1252"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0949"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1520"
+    },
+    {
+      "source": "results/yolo_baseline_5070/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2542"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1626"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3063"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1510"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0790"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1483"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.3124"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1710"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3397"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1482"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0894"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1760"
+    },
+    {
+      "source": "results/yolo_imgsz1600/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2748"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2577"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4775"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2392"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1296"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2246"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4538"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2389"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4556"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2145"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1281"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2140"
+    },
+    {
+      "source": "results/rtdetr_q500/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4027"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2179"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4261"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1956"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1015"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2120"
+    },
+    {
+      "source": "results/rtdetr_lr1e4_wb0/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.3693"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1560"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3066"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1412"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0639"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1556"
+    },
+    {
+      "source": "results/rtdetr_lr1e4/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.2818"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1893"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3847"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1614"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.1083"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1868"
+    },
+    {
+      "source": "results/frcnn_rpn_pre3000/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3107"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.mAP",
+      "display": "0.1693"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP50",
+      "display": "0.3465"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP75",
+      "display": "0.1446"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_small",
+      "display": "0.0754"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_medium",
+      "display": "0.1528"
+    },
+    {
+      "source": "results/retina_anchors/metrics.json",
+      "pointer": "val_full.metrics.AP_large",
+      "display": "0.3223"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.1626"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.3063"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.1510"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.0790"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.1483"
+    },
+    {
+      "source": "results/yolo_p2/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.3124"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2577"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4775"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2392"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1296"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2246"
+    },
+    {
+      "source": "results/rtdetr_baseline/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4538"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2577"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4775"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2392"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1296"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2246"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/ref/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4538"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2660"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4941"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2472"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1345"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2302"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/flip_nms06/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4622"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2644"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.4991"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2384"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1425"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2367"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/tile_nms05/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4404"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.mAP",
+      "display": "0.2696"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP50",
+      "display": "0.5069"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP75",
+      "display": "0.2453"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_small",
+      "display": "0.1467"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_medium",
+      "display": "0.2375"
+    },
+    {
+      "source": "results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "pointer": "metrics.AP_large",
+      "display": "0.4502"
+    }
+  ]
+}
