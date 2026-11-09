@@ -37,11 +37,12 @@ RUNS = [
 ]
 CANDIDATES = [BASELINE, "yolo_p2", "yolo_imgsz1600"]
 KEYS = ["mAP", "AP50", "AP75", "AP_small", "AP_medium", "AP_large"]
-# Finer area ranges (px^2) inside COCO "small" (< 32^2); medium and large as COCO.
+# Finer area ranges (px^2) inside COCO "small" (< 32^2; val_full has no target under 8 px and only 380 under 16 px);
+# medium and large as COCO, so those two rows must equal the evaluator's AP_medium / AP_large.
 FINE_BUCKETS = [
-    ("<8px", 0, 8**2),
-    ("8-16px", 8**2, 16**2),
-    ("16-32px", 16**2, 32**2),
+    ("<16px", 0, 16**2),
+    ("16-24px", 16**2, 24**2),
+    ("24-32px", 24**2, 32**2),
     ("32-96px", 32**2, 96**2),
     (">96px", 96**2, 1e10),
 ]
@@ -274,8 +275,14 @@ def fine_size_rows(runs) -> list[dict]:
     for run, label, _ in runs:
         raw = ROOT / "outputs" / run / "val_full_predictions.json"
         if raw.exists():
-            for row in fine_size_eval(json.loads(raw.read_text(encoding="utf-8"))):
-                rows.append({"run": run, "label": label, **row})
+            fine = fine_size_eval(json.loads(raw.read_text(encoding="utf-8")))
+            # Cross-check with the evaluator: the medium and large buckets are the COCO ranges.
+            metrics = evaluation(run)["metrics"]
+            by_bucket = {row["bucket"]: row["AP"] for row in fine}
+            for bucket, key in (("32-96px", "AP_medium"), (">96px", "AP_large")):
+                if abs(by_bucket[bucket] - metrics[key]) > 1e-9:
+                    raise ValueError(f"{run}: fine bucket {bucket} != {key}")
+            rows.extend({"run": run, "label": label, **row} for row in fine)
         else:
             rows.extend(stored.get(run, []))
     return rows
@@ -283,7 +290,7 @@ def fine_size_rows(runs) -> list[dict]:
 
 def selection(runs) -> dict:
     """Apply results/ch-10-yolo-tuning/selection_rule.md (written before the variants finished)."""
-    names = {r[0] for r in runs}
+    names = [r[0] for r in runs]  # fixed RUNS order, so selection.json is byte-reproducible
     final = {run: curve(run)[-1]["val_fast"]["mAP"] for run in names}
     candidates = [r for r in CANDIDATES if r in names]
     winner = max(candidates, key=final.get)
