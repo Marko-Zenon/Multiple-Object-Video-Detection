@@ -1,0 +1,17 @@
+{
+  "rule": "results/opt-02-rtdetr-ensemble/selection_rule.md",
+  "max_det": 500,
+  "baseline": "A",
+  "candidates": [
+    {"id": "c1_w100_nms05", "w_A": 1.0, "w_B": 1.0, "iou": 0.5, "route": null},
+    {"id": "c2_w100_nms06", "w_A": 1.0, "w_B": 1.0, "iou": 0.6, "route": null},
+    {"id": "c3_w075_nms05", "w_A": 1.0, "w_B": 0.75, "iou": 0.5, "route": null},
+    {"id": "c4_w075_nms06", "w_A": 1.0, "w_B": 0.75, "iou": 0.6, "route": null},
+    {"id": "c5_w050_nms05", "w_A": 1.0, "w_B": 0.5, "iou": 0.5, "route": null},
+    {"id": "c6_w050_nms06", "w_A": 1.0, "w_B": 0.5, "iou": 0.6, "route": null},
+    {"id": "c7_specialist_bicycle", "w_A": 1.0, "w_B": 1.0, "iou": 0.5, "route": {"B": [2], "A": [1, 3, 4, 5, 6, 7, 8]}}
+  ],
+  "gate_val_fast": {"min_mAP_gain": 0.003, "max_AP_small_drop": 0.003, "max_density_ge100_drop": 0.005, "max_projected_test_minutes": 90},
+  "gate_val_full": {"min_mAP_gain": 0.003, "max_AP_small_drop": 0.003, "max_density_ge100_drop": 0.005},
+  "route_note": "route lists COCO category_id 1-8 per model (2 = bicycle); null = every class from both models"
+}
