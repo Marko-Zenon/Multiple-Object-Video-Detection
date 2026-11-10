@@ -98,7 +98,7 @@ GPU minutes used: 40.4 of 90 (val_full shards 11.7 min, test cache 28.7 min; Mod
 * Independently positive so far: x2 only. x5 needs at least two, so it depends on x4.
 * Next iteration: x4_border_confirmation (rule to be written and committed first; needs Model A raw shards).
 
-### Iterations 4–5 — 2026-11-11 00:50–01:45 Kyiv (x4; loop iteration 4 ended while the GPU fill ran, iteration 5 finished x4)
+### Iterations 4–5 — 2026-11-11 00:50–01:40 Kyiv (x4; loop iteration 4 ended while the GPU fill ran, iteration 5 finished x4)
 
 * x4 = OPT-03 e2 unchanged (drop tile boxes within 0.005 of an inner tile edge before the CH-13 merge), never
   evaluated on val_full before. Rule + code + 2 tests committed in **6101fc7 before the cache fill and any x4 result**.
@@ -119,6 +119,6 @@ GPU minutes used: 40.4 of 90 (val_full shards 11.7 min, test cache 28.7 min; Mod
 
 ## Stop
 
-Terminal condition reached at 2026-11-11 ~01:45 Kyiv: **two upload-ready CSVs exist** (x2, x4). x5 (x2 on top of x4,
+Terminal condition reached at 2026-11-11 01:40 Kyiv: **two upload-ready CSVs exist** (x2, x4). x5 (x2 on top of x4,
 both independently positive) was **not run** because the CSV cap is reached; it stays an untested idea. Final
 summary and recommended upload order: [`README.md`](README.md).
