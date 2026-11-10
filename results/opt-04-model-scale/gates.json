@@ -278,6 +278,148 @@
         }
       ],
       "pass": true
+    },
+    "G1": {
+      "request": {
+        "run": "opt04_rtdetrl1600_e1",
+        "log": [
+          "outputs/opt04/logs/FB_train.log"
+        ],
+        "restarts": 0
+      },
+      "inputs": {
+        "run_id": "opt04_rtdetrl1600_e1",
+        "checkpoint_sha256": "e06a1a4b3a4213147fe98083b5a8d3cd50aaa74dc7c38c72c0047e900acca33f",
+        "train_seconds": 1792.167,
+        "peak_cuda_reserved_bytes": 5324668928,
+        "peak_cuda_allocated_bytes": 4722961408,
+        "logs": [
+          "outputs/opt04/logs/FB_train.log"
+        ]
+      },
+      "checks": [
+        {
+          "check": "epoch0.pt written",
+          "value": "outputs/opt04_rtdetrl1600_e1/train/weights/epoch0.pt",
+          "pass": true
+        },
+        {
+          "check": "checkpoint epoch field",
+          "value": 0,
+          "pass": true
+        },
+        {
+          "check": "run status",
+          "value": "stopped_after_epoch_1",
+          "pass": true
+        },
+        {
+          "check": "finite losses",
+          "value": true,
+          "pass": true
+        },
+        {
+          "check": "train_args epochs",
+          "value": 6,
+          "pass": true
+        },
+        {
+          "check": "train_args imgsz",
+          "value": 1600,
+          "pass": true
+        },
+        {
+          "check": "train_args batch",
+          "value": 1,
+          "pass": true
+        },
+        {
+          "check": "train_args seed",
+          "value": 42,
+          "pass": true
+        },
+        {
+          "check": "train_args fraction",
+          "value": 1.0,
+          "pass": true
+        },
+        {
+          "check": "train split train_final (config + data.yaml)",
+          "value": [
+            "train_final",
+            "C:\\UCU\\AI\\hw2\\MOVD-opt04\\outputs\\yolo_data_final\\data.yaml"
+          ],
+          "pass": true
+        },
+        {
+          "check": "samples and batches of epoch 1",
+          "value": [
+            6072,
+            6072
+          ],
+          "pass": true
+        },
+        {
+          "check": "no OOM-retry / batch-reduce event in the log",
+          "value": [],
+          "pass": true
+        },
+        {
+          "check": "restarts",
+          "value": 0,
+          "threshold": 1,
+          "op": "<=",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    "G2": {
+      "request": {
+        "name": "FB_rtdetrl1600_e1"
+      },
+      "inputs": {
+        "metrics": "results/opt-04-model-scale/FB_rtdetrl1600_e1/val_fast/pipeline/metrics.json",
+        "subset_guard": {
+          "frames": 322,
+          "max_width": 1920,
+          "candidate_mAP": 0.2927881877248657,
+          "model_A_mAP": 0.3120912393562929,
+          "candidate_predictions_sha256": "f0c86d7077d9d05d3f4fd50da508d844819479572d90b2c6120d6a30b43107e0",
+          "model_A_predictions_sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e"
+        }
+      },
+      "checks": [
+        {
+          "check": "val_fast mAP",
+          "value": 0.2760746661947264,
+          "threshold": 0.2922,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small",
+          "value": 0.1577194998241636,
+          "threshold": 0.1397,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin mAP",
+          "value": 0.3469163099805198,
+          "threshold": 0.3465,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "test-like subset mAP (width <= 1920) vs Model A",
+          "value": 0.2927881877248657,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": false
+        }
+      ],
+      "pass": false
     }
   }
 }

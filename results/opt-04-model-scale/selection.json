@@ -1,0 +1,44 @@
+{
+  "rule": "results/opt-04-model-scale/selection_rule.md (commit 1ba4118, before any OPT-04 result)",
+  "gates": "results/opt-04-model-scale/gates.json (scripts/opt04_gates.py; verify with `python scripts/opt04_gates.py verify`)",
+  "outcome": "NEGATIVE: neither P nor FB passes G2 (val_fast screen); no val_full run, no test inference, no CSV, no upload",
+  "P": {
+    "description": "RT-DETR-x (official Ultralytics COCO rtdetr-x.pt, sha256 81071ffee0986edff2dd2d790da364843b66717cdc61d9491edb50790fd3345b), Model A recipe, stopped after epoch 1 of 6",
+    "checkpoint": "MOVD-opt04 outputs/opt04_rtdetrx_e1/train/weights/epoch0.pt (git-ignored)",
+    "checkpoint_sha256": "4a4bba8d1bb1feebdc8fe0fcfa49dfc1bbd81dcf44b0c13492883f5bca63c843",
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "FAIL (val_fast mAP 0.2304 < 0.2922; >=100 bin 0.3224 < 0.3465; width<=1920 subset 0.2644 < Model A 0.3121; AP_small 0.1559 >= 0.1397 passes)",
+    "stop_condition": "S3 -> fallback FB run (started 2026-11-10 18:30 Kyiv, before the Thu 12 Nov 18:00 cutoff)",
+    "G3_G4_G5": "not run (rule: val_full only after G2 passes)"
+  },
+  "FB": {
+    "description": "RT-DETR-l (COCO rtdetr-l.pt, sha256 6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f) at imgsz 1600 for training and all 6 inference passes, Model A recipe, stopped after epoch 1 of 6",
+    "checkpoint": "MOVD-opt04 outputs/opt04_rtdetrl1600_e1/train/weights/epoch0.pt (git-ignored)",
+    "checkpoint_sha256": "e06a1a4b3a4213147fe98083b5a8d3cd50aaa74dc7c38c72c0047e900acca33f",
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "FAIL (val_fast mAP 0.2761 < 0.2922; width<=1920 subset 0.2928 < Model A 0.3121; AP_small 0.1577 >= 0.1397 and >=100 bin 0.3469 >= 0.3465 pass)",
+    "G3_G4_G5": "not run (rule: val_full only after G2 passes)"
+  },
+  "p_vs_fb": "not applicable (neither passed G3 and G4)",
+  "third_experiment": "none (rule)",
+  "upload_ready_csvs": [],
+  "recommended_final_selections": {
+    "row": "Neither P nor FB passes G3/G4 (current default)",
+    "primary": {
+      "name": "Model A",
+      "csv_sha256": "e587c68b517d6d59f90122946d8a45ef5beac4fb8ae3b24f66ced1268def0da7",
+      "val_full_mAP": 0.286,
+      "public": "0.2774301362 (student-reported)"
+    },
+    "secondary": {
+      "name": "F (CH-11 rtdetr_baseline + CH-13 pipeline)",
+      "csv_sha256": "73f73e219dfbf3b674277703f7314d14c316d0800bcd046634aaecd27f2b793b",
+      "val_full_mAP": 0.2696,
+      "public": "0.2328849249 (student-reported)"
+    },
+    "never": "val_roundtrip (a411f7fb...), FRCNN 0.2012",
+    "who": "the students set the 2 selections in the Kaggle web UI and record them in CH-14"
+  }
+}
