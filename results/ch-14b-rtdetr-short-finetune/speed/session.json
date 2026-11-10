@@ -1,0 +1,113 @@
+{
+  "finished_kyiv": "2026-11-10T13:24:10",
+  "rows": [
+    {
+      "fps": 13.733809383533348,
+      "latency_ms_per_image": 72.81301000136106,
+      "latency_ms_per_batch": {
+        "mean": 72.81301000136106,
+        "median": 72.71005000075093,
+        "p90": 73.44427001080476,
+        "min": 71.21920000645332
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1344:full",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "rtdetr_baseline_F",
+      "weights_sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "mode": "single",
+      "passes_per_frame": 1,
+      "test_minutes_3811_frames": 4.6,
+      "peak_cuda_allocated_bytes": 699874304,
+      "peak_cuda_reserved_bytes": 924844032
+    },
+    {
+      "fps": 2.273204542352118,
+      "latency_ms_per_image": 439.9076200003037,
+      "latency_ms_per_batch": {
+        "mean": 439.9076200003037,
+        "median": 440.7530000025872,
+        "p90": 444.37117999768816,
+        "min": 431.9273000000976
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1344:full, 1344:flip, 1344:tile0, 1344:tile1, 1344:tile2, 1344:tile3",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "rtdetr_baseline_F",
+      "weights_sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "mode": "pipeline",
+      "passes_per_frame": 6,
+      "test_minutes_3811_frames": 27.9,
+      "peak_cuda_allocated_bytes": 699874304,
+      "peak_cuda_reserved_bytes": 924844032
+    },
+    {
+      "fps": 13.731168617686048,
+      "latency_ms_per_image": 72.82701333315345,
+      "latency_ms_per_batch": {
+        "mean": 72.82701333315345,
+        "median": 72.89929999387823,
+        "p90": 73.89171000249917,
+        "min": 71.15390000399202
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1344:full",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "stageA_epoch1",
+      "weights_sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "mode": "single",
+      "passes_per_frame": 1,
+      "test_minutes_3811_frames": 4.6,
+      "peak_cuda_allocated_bytes": 796772352,
+      "peak_cuda_reserved_bytes": 1065353216
+    },
+    {
+      "fps": 2.255199655989507,
+      "latency_ms_per_image": 443.41971999868593,
+      "latency_ms_per_batch": {
+        "mean": 443.41971999868593,
+        "median": 443.42034999863245,
+        "p90": 446.8012499943143,
+        "min": 439.5869999862043
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1344:full, 1344:flip, 1344:tile0, 1344:tile1, 1344:tile2, 1344:tile3",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "stageA_epoch1",
+      "weights_sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "mode": "pipeline",
+      "passes_per_frame": 6,
+      "test_minutes_3811_frames": 28.2,
+      "peak_cuda_allocated_bytes": 796772352,
+      "peak_cuda_reserved_bytes": 1065353216
+    }
+  ]
+}
