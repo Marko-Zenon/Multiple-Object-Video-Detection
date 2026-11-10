@@ -1,0 +1,58 @@
+{
+  "s1": {
+    "predictions_sha256": "521a1d782580fe94b474ee699f95361cb40b1ac763b5607c463b875cff392d55",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s2": {
+    "predictions_sha256": "2a884012437018ade4f031e689129dd2f724478fabe8bc5cc4255f73424307ab",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s3": {
+    "predictions_sha256": "a273d9a955bc386ee2c97fe1ae8259093d6a1365f6c4675ad3cbd75cd7d4e90c",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s4": {
+    "predictions_sha256": "9a85cdd2efba5e18bb896d73f316150c511352d20c641efd6841987a411a04d9",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s5": {
+    "predictions_sha256": "74324bd28257c224d63c1c98b7d3cb0c64d1770c16af7c5dec1e9f75c2ddf385",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s6": {
+    "predictions_sha256": "25f979381e39cda4a072506b084441da7c15793d8db09c4698ae123145457c6b",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s7": {
+    "predictions_sha256": "96b18157e0dea2221119c044ad7871aa92a385fc45b0a106e3216e6b44116ae7",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  },
+  "s8": {
+    "predictions_sha256": "92f0a8f9ba282e76b387d6d1b59c6baad4c6de9c335b51b60f3876df8016fd5d",
+    "same_predictions": true,
+    "same_metrics": true,
+    "same_subset": true,
+    "pass": true
+  }
+}
