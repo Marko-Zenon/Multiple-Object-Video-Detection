@@ -1,0 +1,40 @@
+{
+  "runs": 2,
+  "commands": [
+    "scripts/opt03_diagnose.py tables",
+    "scripts/opt03_edge.py screen"
+  ],
+  "identical": [
+    "results/opt-03-modelA-diagnosis/diagnosis/tables.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e1/metrics.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e2/metrics.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e3/metrics.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e4/metrics.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e5/metrics.json",
+    "results/opt-03-modelA-diagnosis/val_fast/e6/metrics.json"
+  ],
+  "different": [
+    "results/opt-03-modelA-diagnosis/screening_val_fast.csv"
+  ],
+  "note": "screening_val_fast.csv also stores cpu_ms_per_frame / projected_test_minutes (wall-clock timing), which varies between runs; its metric columns come from the val_fast/<id>/metrics.json files, which are byte-identical across the two runs. The tracked CSV is the second run.",
+  "sha256_first": {
+    "results/opt-03-modelA-diagnosis/diagnosis/tables.json": "099a07f8f2de5e67426d95d398f2c1286fadb3893c76c208caea9ce12be217f4",
+    "results/opt-03-modelA-diagnosis/screening_val_fast.csv": "2b6af2ed378a774483d8f981f91ba61fad376211617a9855c2f38b061b88f1fb",
+    "results/opt-03-modelA-diagnosis/val_fast/e1/metrics.json": "6d825ba88a95ee44c6f6a0d1e7acc55eb677b8c0ab2b4d22ab14b20b5147d3a1",
+    "results/opt-03-modelA-diagnosis/val_fast/e2/metrics.json": "4260510ce96da01bb3be565a68101c95fe008e8ed77f3ce55f761fa2dae97e68",
+    "results/opt-03-modelA-diagnosis/val_fast/e3/metrics.json": "12d7c349ce9a3cdc5edc059398094e7097ecfa7d4610e70c58633384bf847048",
+    "results/opt-03-modelA-diagnosis/val_fast/e4/metrics.json": "efa95f95d1e2c4c4051d47086592447f9b013271b5b53d5656da33eaae57011b",
+    "results/opt-03-modelA-diagnosis/val_fast/e5/metrics.json": "7e5cb73fae5543f8c73c79ec4da9fd4191fe98629d7077d3f7e2df5028cccc52",
+    "results/opt-03-modelA-diagnosis/val_fast/e6/metrics.json": "6a869ae5695e6558801762d3f489ebc0a3dea991358d7f42acabbabeb517be55"
+  },
+  "sha256_second": {
+    "results/opt-03-modelA-diagnosis/diagnosis/tables.json": "099a07f8f2de5e67426d95d398f2c1286fadb3893c76c208caea9ce12be217f4",
+    "results/opt-03-modelA-diagnosis/screening_val_fast.csv": "c58454481006eb2cf46252fcd81d26da352cb9a1041084889b11b030a635b0fb",
+    "results/opt-03-modelA-diagnosis/val_fast/e1/metrics.json": "6d825ba88a95ee44c6f6a0d1e7acc55eb677b8c0ab2b4d22ab14b20b5147d3a1",
+    "results/opt-03-modelA-diagnosis/val_fast/e2/metrics.json": "4260510ce96da01bb3be565a68101c95fe008e8ed77f3ce55f761fa2dae97e68",
+    "results/opt-03-modelA-diagnosis/val_fast/e3/metrics.json": "12d7c349ce9a3cdc5edc059398094e7097ecfa7d4610e70c58633384bf847048",
+    "results/opt-03-modelA-diagnosis/val_fast/e4/metrics.json": "efa95f95d1e2c4c4051d47086592447f9b013271b5b53d5656da33eaae57011b",
+    "results/opt-03-modelA-diagnosis/val_fast/e5/metrics.json": "7e5cb73fae5543f8c73c79ec4da9fd4191fe98629d7077d3f7e2df5028cccc52",
+    "results/opt-03-modelA-diagnosis/val_fast/e6/metrics.json": "6a869ae5695e6558801762d3f489ebc0a3dea991358d7f42acabbabeb517be55"
+  }
+}

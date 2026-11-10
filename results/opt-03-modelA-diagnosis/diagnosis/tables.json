@@ -1,0 +1,802 @@
+{
+  "recall_by_cls": [
+    {
+      "cls": "person",
+      "gt": 12644,
+      "recall50_capped": 0.8256,
+      "recall50_precap": 0.8287,
+      "lost_to_cap": 39
+    },
+    {
+      "cls": "bicycle",
+      "gt": 1519,
+      "recall50_capped": 0.8532,
+      "recall50_precap": 0.8618,
+      "lost_to_cap": 13
+    },
+    {
+      "cls": "car",
+      "gt": 8001,
+      "recall50_capped": 0.8305,
+      "recall50_precap": 0.8321,
+      "lost_to_cap": 13
+    },
+    {
+      "cls": "van",
+      "gt": 1718,
+      "recall50_capped": 0.8172,
+      "recall50_precap": 0.8207,
+      "lost_to_cap": 6
+    },
+    {
+      "cls": "truck",
+      "gt": 340,
+      "recall50_capped": 0.7471,
+      "recall50_precap": 0.7471,
+      "lost_to_cap": 0
+    },
+    {
+      "cls": "tricycle",
+      "gt": 1375,
+      "recall50_capped": 0.8807,
+      "recall50_precap": 0.8829,
+      "lost_to_cap": 3
+    },
+    {
+      "cls": "bus",
+      "gt": 66,
+      "recall50_capped": 0.5455,
+      "recall50_precap": 0.5455,
+      "lost_to_cap": 0
+    },
+    {
+      "cls": "motor",
+      "gt": 3022,
+      "recall50_capped": 0.7816,
+      "recall50_precap": 0.7829,
+      "lost_to_cap": 4
+    }
+  ],
+  "recall_by_size": [
+    {
+      "size": "large",
+      "gt": 3241,
+      "recall50_capped": 0.9627,
+      "recall50_precap": 0.9645,
+      "lost_to_cap": 6
+    },
+    {
+      "size": "medium",
+      "gt": 19951,
+      "recall50_capped": 0.8369,
+      "recall50_precap": 0.8396,
+      "lost_to_cap": 55
+    },
+    {
+      "size": "small",
+      "gt": 5493,
+      "recall50_capped": 0.6974,
+      "recall50_precap": 0.7005,
+      "lost_to_cap": 17
+    }
+  ],
+  "recall_by_density": [
+    {
+      "density": "0-19",
+      "gt": 3400,
+      "recall50_capped": 0.5782,
+      "recall50_precap": 0.5835,
+      "lost_to_cap": 18
+    },
+    {
+      "density": "20-49",
+      "gt": 10066,
+      "recall50_capped": 0.8487,
+      "recall50_precap": 0.8513,
+      "lost_to_cap": 26
+    },
+    {
+      "density": "50-99",
+      "gt": 10090,
+      "recall50_capped": 0.8326,
+      "recall50_precap": 0.8346,
+      "lost_to_cap": 20
+    },
+    {
+      "density": ">=100",
+      "gt": 5129,
+      "recall50_capped": 0.9236,
+      "recall50_precap": 0.9263,
+      "lost_to_cap": 14
+    }
+  ],
+  "recall_by_occlusion": [
+    {
+      "occlusion": 0,
+      "gt": 11735,
+      "recall50_capped": 0.9216,
+      "recall50_precap": 0.9229,
+      "lost_to_cap": 15
+    },
+    {
+      "occlusion": 1,
+      "gt": 15054,
+      "recall50_capped": 0.8042,
+      "recall50_precap": 0.8074,
+      "lost_to_cap": 49
+    },
+    {
+      "occlusion": 2,
+      "gt": 1896,
+      "recall50_capped": 0.3829,
+      "recall50_precap": 0.3903,
+      "lost_to_cap": 14
+    }
+  ],
+  "recall_by_truncation": [
+    {
+      "truncation": 0,
+      "gt": 27160,
+      "recall50_capped": 0.8335,
+      "recall50_precap": 0.8363,
+      "lost_to_cap": 75
+    },
+    {
+      "truncation": 1,
+      "gt": 1525,
+      "recall50_capped": 0.6616,
+      "recall50_precap": 0.6636,
+      "lost_to_cap": 3
+    }
+  ],
+  "recall_by_width": [
+    {
+      "width": 1344,
+      "gt": 10187,
+      "recall50_capped": 0.8506,
+      "recall50_precap": 0.851,
+      "lost_to_cap": 4
+    },
+    {
+      "width": 1904,
+      "gt": 4623,
+      "recall50_capped": 0.8486,
+      "recall50_precap": 0.8531,
+      "lost_to_cap": 21
+    },
+    {
+      "width": 2688,
+      "gt": 6104,
+      "recall50_capped": 0.9191,
+      "recall50_precap": 0.9217,
+      "lost_to_cap": 16
+    },
+    {
+      "width": 2720,
+      "gt": 4371,
+      "recall50_capped": 0.7968,
+      "recall50_precap": 0.8012,
+      "lost_to_cap": 19
+    },
+    {
+      "width": 3840,
+      "gt": 3400,
+      "recall50_capped": 0.5782,
+      "recall50_precap": 0.5835,
+      "lost_to_cap": 18
+    }
+  ],
+  "capped_outcomes_by_class": [
+    {
+      "cls": "person",
+      "boxes": 62573,
+      "tp": 10439,
+      "fp_duplicate": 1622,
+      "fp_wrong_class": 3010,
+      "fp_background": 34430,
+      "ignored": 13072
+    },
+    {
+      "cls": "bicycle",
+      "boxes": 11512,
+      "tp": 1296,
+      "fp_duplicate": 44,
+      "fp_wrong_class": 3024,
+      "fp_background": 5480,
+      "ignored": 1668
+    },
+    {
+      "cls": "car",
+      "boxes": 28225,
+      "tp": 6645,
+      "fp_duplicate": 211,
+      "fp_wrong_class": 4031,
+      "fp_background": 16131,
+      "ignored": 1207
+    },
+    {
+      "cls": "van",
+      "boxes": 71068,
+      "tp": 1404,
+      "fp_duplicate": 81,
+      "fp_wrong_class": 13508,
+      "fp_background": 54276,
+      "ignored": 1799
+    },
+    {
+      "cls": "truck",
+      "boxes": 15585,
+      "tp": 254,
+      "fp_duplicate": 12,
+      "fp_wrong_class": 5452,
+      "fp_background": 9468,
+      "ignored": 399
+    },
+    {
+      "cls": "tricycle",
+      "boxes": 52292,
+      "tp": 1211,
+      "fp_duplicate": 145,
+      "fp_wrong_class": 11006,
+      "fp_background": 37763,
+      "ignored": 2167
+    },
+    {
+      "cls": "bus",
+      "boxes": 2047,
+      "tp": 36,
+      "fp_duplicate": 0,
+      "fp_wrong_class": 1386,
+      "fp_background": 556,
+      "ignored": 69
+    },
+    {
+      "cls": "motor",
+      "boxes": 109584,
+      "tp": 2362,
+      "fp_duplicate": 414,
+      "fp_wrong_class": 13391,
+      "fp_background": 84898,
+      "ignored": 8519
+    }
+  ],
+  "capped_outcomes_by_density": [
+    {
+      "density": "0-19",
+      "boxes": 122500,
+      "tp": 1966,
+      "fp_duplicate": 131,
+      "fp_wrong_class": 7756,
+      "fp_background": 112647,
+      "ignored": 0
+    },
+    {
+      "density": "20-49",
+      "boxes": 128736,
+      "tp": 8543,
+      "fp_duplicate": 1021,
+      "fp_wrong_class": 23834,
+      "fp_background": 79275,
+      "ignored": 16063
+    },
+    {
+      "density": "50-99",
+      "boxes": 77650,
+      "tp": 8401,
+      "fp_duplicate": 1071,
+      "fp_wrong_class": 18047,
+      "fp_background": 39000,
+      "ignored": 11131
+    },
+    {
+      "density": ">=100",
+      "boxes": 24000,
+      "tp": 4737,
+      "fp_duplicate": 306,
+      "fp_wrong_class": 5171,
+      "fp_background": 12080,
+      "ignored": 1706
+    }
+  ],
+  "capped_by_source_view": [
+    {
+      "view": "full",
+      "kept_boxes": 62589,
+      "tp": 5762,
+      "precision50": 0.0987,
+      "fp_duplicate": 444,
+      "mean_score": 0.191
+    },
+    {
+      "view": "flip",
+      "kept_boxes": 63053,
+      "tp": 5385,
+      "precision50": 0.0938,
+      "fp_duplicate": 464,
+      "mean_score": 0.1928
+    },
+    {
+      "view": "tile0",
+      "kept_boxes": 65613,
+      "tp": 3297,
+      "precision50": 0.0528,
+      "fp_duplicate": 519,
+      "mean_score": 0.1456
+    },
+    {
+      "view": "tile1",
+      "kept_boxes": 90448,
+      "tp": 4913,
+      "precision50": 0.0605,
+      "fp_duplicate": 400,
+      "mean_score": 0.1613
+    },
+    {
+      "view": "tile2",
+      "kept_boxes": 33922,
+      "tp": 2602,
+      "precision50": 0.0814,
+      "fp_duplicate": 431,
+      "mean_score": 0.1844
+    },
+    {
+      "view": "tile3",
+      "kept_boxes": 37261,
+      "tp": 1688,
+      "precision50": 0.0518,
+      "fp_duplicate": 271,
+      "mean_score": 0.152
+    }
+  ],
+  "tile_inner_edge": [
+    {
+      "tile_box_touches_inner_edge": true,
+      "boxes": 47158,
+      "tp": 162,
+      "precision50": 0.0035,
+      "fp_duplicate": 164,
+      "fp_background": 42411,
+      "mean_score": 0.0911
+    },
+    {
+      "tile_box_touches_inner_edge": false,
+      "boxes": 180086,
+      "tp": 12338,
+      "precision50": 0.0761,
+      "fp_duplicate": 1457,
+      "fp_background": 116228,
+      "mean_score": 0.1764
+    }
+  ],
+  "calibration_precision_by_class_score": [
+    {
+      "cls": "person",
+      "score_bin": "0.00-0.05",
+      "boxes": 3354,
+      "precision50": 0.0066
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.05-0.10",
+      "boxes": 7698,
+      "precision50": 0.0213
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.10-0.20",
+      "boxes": 12195,
+      "precision50": 0.0241
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.20-0.30",
+      "boxes": 6491,
+      "precision50": 0.0504
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.30-0.50",
+      "boxes": 6558,
+      "precision50": 0.1314
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.50-0.70",
+      "boxes": 7633,
+      "precision50": 0.483
+    },
+    {
+      "cls": "person",
+      "score_bin": "0.70-1.00",
+      "boxes": 5572,
+      "precision50": 0.9122
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.00-0.05",
+      "boxes": 257,
+      "precision50": 0.0
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.05-0.10",
+      "boxes": 1841,
+      "precision50": 0.0076
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.10-0.20",
+      "boxes": 3713,
+      "precision50": 0.025
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.20-0.30",
+      "boxes": 1393,
+      "precision50": 0.0639
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.30-0.50",
+      "boxes": 1154,
+      "precision50": 0.1369
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.50-0.70",
+      "boxes": 735,
+      "precision50": 0.4422
+    },
+    {
+      "cls": "bicycle",
+      "score_bin": "0.70-1.00",
+      "boxes": 751,
+      "precision50": 0.8216
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.00-0.05",
+      "boxes": 1666,
+      "precision50": 0.0006
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.05-0.10",
+      "boxes": 5734,
+      "precision50": 0.003
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.10-0.20",
+      "boxes": 6337,
+      "precision50": 0.0189
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.20-0.30",
+      "boxes": 3263,
+      "precision50": 0.0873
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.30-0.50",
+      "boxes": 3214,
+      "precision50": 0.3351
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.50-0.70",
+      "boxes": 2058,
+      "precision50": 0.5296
+    },
+    {
+      "cls": "car",
+      "score_bin": "0.70-1.00",
+      "boxes": 4746,
+      "precision50": 0.8544
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.00-0.05",
+      "boxes": 12845,
+      "precision50": 0.0001
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.05-0.10",
+      "boxes": 40348,
+      "precision50": 0.0008
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.10-0.20",
+      "boxes": 11076,
+      "precision50": 0.0123
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.20-0.30",
+      "boxes": 2054,
+      "precision50": 0.055
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.30-0.50",
+      "boxes": 1488,
+      "precision50": 0.1431
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.50-0.70",
+      "boxes": 664,
+      "precision50": 0.3855
+    },
+    {
+      "cls": "van",
+      "score_bin": "0.70-1.00",
+      "boxes": 794,
+      "precision50": 0.8212
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.00-0.05",
+      "boxes": 639,
+      "precision50": 0.0
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.05-0.10",
+      "boxes": 5333,
+      "precision50": 0.0009
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.10-0.20",
+      "boxes": 5117,
+      "precision50": 0.001
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.20-0.30",
+      "boxes": 1756,
+      "precision50": 0.0028
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.30-0.50",
+      "boxes": 1182,
+      "precision50": 0.0093
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.50-0.70",
+      "boxes": 524,
+      "precision50": 0.0248
+    },
+    {
+      "cls": "truck",
+      "score_bin": "0.70-1.00",
+      "boxes": 635,
+      "precision50": 0.3386
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.00-0.05",
+      "boxes": 3893,
+      "precision50": 0.0005
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.05-0.10",
+      "boxes": 30914,
+      "precision50": 0.0013
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.10-0.20",
+      "boxes": 11157,
+      "precision50": 0.0106
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.20-0.30",
+      "boxes": 2063,
+      "precision50": 0.078
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.30-0.50",
+      "boxes": 1203,
+      "precision50": 0.2519
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.50-0.70",
+      "boxes": 569,
+      "precision50": 0.5764
+    },
+    {
+      "cls": "tricycle",
+      "score_bin": "0.70-1.00",
+      "boxes": 326,
+      "precision50": 0.7945
+    },
+    {
+      "cls": "bus",
+      "score_bin": "0.00-0.05",
+      "boxes": 65,
+      "precision50": 0.0154
+    },
+    {
+      "cls": "bus",
+      "score_bin": "0.05-0.10",
+      "boxes": 819,
+      "precision50": 0.0134
+    },
+    {
+      "cls": "bus",
+      "score_bin": "0.10-0.20",
+      "boxes": 911,
+      "precision50": 0.0033
+    },
+    {
+      "cls": "bus",
+      "score_bin": "0.20-0.30",
+      "boxes": 133,
+      "precision50": 0.0
+    },
+    {
+      "cls": "bus",
+      "score_bin": "0.30-0.50",
+      "boxes": 30,
+      "precision50": 0.1
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.00-0.05",
+      "boxes": 8886,
+      "precision50": 0.0028
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.05-0.10",
+      "boxes": 67758,
+      "precision50": 0.0012
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.10-0.20",
+      "boxes": 13182,
+      "precision50": 0.0107
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.20-0.30",
+      "boxes": 3805,
+      "precision50": 0.0313
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.30-0.50",
+      "boxes": 3403,
+      "precision50": 0.0887
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.50-0.70",
+      "boxes": 2645,
+      "precision50": 0.3062
+    },
+    {
+      "cls": "motor",
+      "score_bin": "0.70-1.00",
+      "boxes": 1386,
+      "precision50": 0.6385
+    }
+  ],
+  "below_cap": {
+    "frames": 714,
+    "frames_at_cap": 599,
+    "boxes_after_nms_mean": 768.1,
+    "boxes_cut_total": 195544,
+    "cut_outcomes_when_matched_without_cap": {
+      "tp": 78,
+      "fp_duplicate": 238,
+      "fp_wrong_class": 12911,
+      "fp_background": 177908,
+      "ignored": 4409
+    },
+    "gt_lost_to_cap": 78,
+    "gt_total": 28685,
+    "score_at_rank500_median": 0.058057285845279694,
+    "cut_by_class": {
+      "person": 6668,
+      "bicycle": 1725,
+      "car": 14639,
+      "van": 58390,
+      "truck": 9623,
+      "tricycle": 34573,
+      "bus": 2808,
+      "motor": 67118
+    },
+    "cut_tp_by_class": {
+      "person": 39,
+      "bicycle": 13,
+      "car": 13,
+      "van": 6,
+      "truck": 0,
+      "tricycle": 3,
+      "bus": 0,
+      "motor": 4
+    }
+  },
+  "cap_by_density": [
+    {
+      "density": "0-19",
+      "frames": 245,
+      "mean_after_nms": 1011.9,
+      "mean_cut": 511.9,
+      "gt_lost_to_cap": 18
+    },
+    {
+      "density": "20-49",
+      "frames": 264,
+      "mean_after_nms": 657.4,
+      "mean_cut": 169.8,
+      "gt_lost_to_cap": 26
+    },
+    {
+      "density": "50-99",
+      "frames": 157,
+      "mean_after_nms": 604.9,
+      "mean_cut": 110.3,
+      "gt_lost_to_cap": 20
+    },
+    {
+      "density": ">=100",
+      "frames": 48,
+      "mean_after_nms": 666.3,
+      "mean_cut": 166.3,
+      "gt_lost_to_cap": 14
+    }
+  ],
+  "temporal": {
+    "frame_spacing_in_val_fast": 4,
+    "gt_missed_capped": 5038,
+    "missed_but_track_hit_in_a_neighbour_frame": 2066,
+    "share_of_all_gt": 0.072,
+    "by_class": {
+      "motor": 292,
+      "person": 1099,
+      "bicycle": 131,
+      "tricycle": 72,
+      "car": 367,
+      "van": 74,
+      "truck": 19,
+      "bus": 12
+    },
+    "by_size": {
+      "medium": 1409,
+      "small": 592,
+      "large": 65
+    }
+  },
+  "score_quantiles": {
+    "tp": [
+      0.2944,
+      0.5346,
+      0.6995,
+      0.7696,
+      0.8347
+    ],
+    "fp": [
+      0.0488,
+      0.0611,
+      0.0786,
+      0.1356,
+      0.2723
+    ],
+    "share_of_capped_boxes_below_0.05": 0.0923,
+    "tp_share_below_0.05": 0.0022
+  }
+}
