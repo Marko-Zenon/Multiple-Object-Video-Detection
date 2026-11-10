@@ -1,0 +1,73 @@
+{
+  "rule": "results/opt-04-model-scale/selection_rule.md (commit 1ba4118)",
+  "P": {
+    "G0": {
+      "request": {
+        "smoke_run": "opt04_rtdetrx_smoke",
+        "speed": "g0_P",
+        "log": [
+          "outputs/opt04/logs/P_smoke_1.log",
+          "outputs/opt04/logs/P_smoke_2.log",
+          "outputs/opt04/logs/P_g0_speed.log"
+        ]
+      },
+      "inputs": {
+        "smoke_run": "opt04_rtdetrx_smoke",
+        "runtime": "results/opt04_rtdetrx_smoke/runtime.json",
+        "speed": "results/opt-04-model-scale/speed/g0_P.json",
+        "logs": [
+          "outputs/opt04/logs/P_smoke_1.log",
+          "outputs/opt04/logs/P_smoke_2.log",
+          "outputs/opt04/logs/P_g0_speed.log"
+        ],
+        "seconds_per_batch": [
+          0.3068,
+          0.3039
+        ]
+      },
+      "checks": [
+        {
+          "check": "finite losses in every smoke process",
+          "value": true,
+          "pass": true
+        },
+        {
+          "check": "stop after epoch 1, then resume to completion",
+          "value": [
+            "checkpoint_stop",
+            "completed"
+          ],
+          "pass": true
+        },
+        {
+          "check": "peak CUDA reserved bytes",
+          "value": 5886705664,
+          "threshold": 7000000000.0,
+          "op": "<=",
+          "pass": true
+        },
+        {
+          "check": "no OOM / CUDA error / batch-reduce log line",
+          "value": [],
+          "pass": true
+        },
+        {
+          "check": "projected train_final epoch minutes",
+          "value": 31.0,
+          "threshold": 120.0,
+          "op": "<=",
+          "pass": true
+        },
+        {
+          "check": "projected test minutes (30-frame pipeline speed)",
+          "value": 45.7,
+          "threshold": 90.0,
+          "op": "<=",
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  },
+  "FB": {}
+}
