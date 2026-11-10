@@ -1,0 +1,64 @@
+{
+  "candidate": {
+    "id": "c4_w075_nms06",
+    "w_A": 1.0,
+    "w_B": 0.75,
+    "iou": 0.6,
+    "route": null
+  },
+  "csv": "C:/UCU/AI/hw2/MOVD-opt06a/submissions/opt06a_c4_ensemble_test.csv",
+  "csv_bytes": 175459286,
+  "csv_sha256": "51a03e33ca487fa2bd4c78948b0bdd71bd57ec59a35f456b8c303c1c25ba0cea",
+  "test_predictions": "C:/UCU/AI/hw2/MOVD-opt06a/outputs/opt06a/test/test_predictions.json",
+  "test_predictions_sha256": "b168ede4258c8df1b30761a26505dd905d9bf34f67dcfabdd654af8e507f4b6c",
+  "checkpoint_sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+  "checkpoint_sha256_F": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+  "inputs_sha256": {
+    "A": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+    "B": "184ddccc963df0bfa5f31665500c671388d4e8b4bdd48c605640d6acc3647ccd"
+  },
+  "merge_seconds": 7.63,
+  "detections": 1905500,
+  "mean_per_frame": 500.0,
+  "frames_at_cap": 3811,
+  "frames": 3811,
+  "share_from_B": 0.1822,
+  "writer": {
+    "input_predictions": 1905500,
+    "accepted": 1905500,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 1905500,
+    "rows": 3811,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "project_validator_inline": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 1905500,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 500,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 492763,
+      "bicycle": 34925,
+      "car": 265922,
+      "van": 339442,
+      "truck": 154862,
+      "tricycle": 228647,
+      "bus": 32061,
+      "motor": 356878
+    }
+  },
+  "uploaded": false,
+  "validators_exit": {
+    "project": 0,
+    "independent": 0
+  }
+}
