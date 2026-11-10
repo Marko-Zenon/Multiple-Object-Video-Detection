@@ -26,6 +26,7 @@
 | CH-14 | Final training, test predictions, Kaggle submissions & selection | 🟠 PARTIAL / PAUSED | ⛔ NO — decision required | Badabuba | start: CH-05, CH-12 · finish: CH-13 | CH-14b extension done (worker: Claude, authorized by Badabuba 2026-11-10 after the deadline extension): CH-14 epoch0.pt (epoch 1 of 6, sha256 6ff4a430…5b0b) + CH-13 pipeline = val_fast 0.2892 / val_full 0.2860 vs fallback 0.2696, predeclared rule R (CH-14 rule B thresholds) passes 8/9, so it is the new internal selection; Stage B fine-tune not run. New validated candidate CSV final_rtdetr_epoch1_ch13_fliptile_nms05_test.csv (sha256 e587c68b…0da7, both validators pass), NOT uploaded; evidence results/ch-14b-rtdetr-short-finetune/. Open, students only: (1) upload decision + public score for the CH-14b CSV; (2) treatment of the accidental val_roundtrip upload; (3) the 2 Kaggle final selections. RTX 5070 and notebook lock released. Original CH-14 result unchanged: Automated work done and merged (worker: Claude): final_rtdetr trained on train_final 6,072 x 6 (2.50 h, last.pt sha256 a85d2741…d482b) = val_full 0.2359 single / 0.2372 CH-13 pipeline, below the fallback 0.2696, so predeclared rule B keeps the fallback rtdetr_baseline + CH-13 CSV (sha256 73f73e21…793b, public 0.2328849249 user-reported; both validators pass). Open, students only: (1) record how the accidental val_roundtrip upload is treated (it fails the validator, so acceptance 3 is not literally met); (2) make the 2 Kaggle final selections in the web UI and record them. RTX 5070 and notebook lock released | ch-14b-rtdetr-short-finetune (extension, PR #19) · ch-14-final / [PR #18](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/18) (merged 2026-11-10 12:37 Kyiv) | 2026-11-10 14:10 Kyiv |
 | CH-15 | Report scaffold & Pages deployment check | ✅ DONE | ⛔ NO — completed | Marko-Zenon | gate: G5 | PR #8 and M1 #9 merged; deployment 42507083884 succeeded at fec11cb; public scaffold verified | ch-15-report / [PR #8](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/8), [M1 #9](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/9) | 2026-11-08 20:02 Kyiv |
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; CH-12 ✅; still needs CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-09 13:22 Kyiv |
+| OPT-02 | Optional post-plan experiment: ensemble of the two validated RT-DETR-l models (CH-14b epoch 1 + CH-11 rtdetr_baseline) | 🟢 READY | 🟢 YES | — | start: CH-13, CH-14b extension (both merged) | — (added 2026-11-10 at Badabuba's request; CPU on cached CH-13-pipeline predictions, RTX 5070 only if fresh inference is needed; does not change CH-14 state or any registered result; not a CH-16 dependency) | — | 2026-11-10 15:10 Kyiv |
 
 🔒 **homework.ipynb lock:** FREE
 
@@ -1324,6 +1325,25 @@ Blockers / deviations: —
 Completion or handoff note: —
 ```
 
+### OPT-02 — Optional: RT-DETR-l two-model ensemble (post-plan addendum)
+
+- **Goal:** test whether the complementary errors of Model A (CH-14b epoch-1 checkpoint, sha256 6ff4a430…5b0b, val_full 0.2860, public 0.2774301362) and Model B (CH-11 rtdetr_baseline, sha256 da5d3625…e872, val_full 0.2696) improve on Model A.
+- **Why:** optional, after the plan; requested by Badabuba on 2026-11-10. Not a rubric requirement and not a CH-16 dependency.
+- **Scope (fixed by the student):** score-weighted union of the two models' CH-13-pipeline detections, class-wise NMS, global top 500 per frame; 6 weight/IoU candidates + 1 per-class specialist (bicycle from B); val_fast screening against Model A, one val_full check, predeclared gate in `results/opt-02-rtdetr-ensemble/selection_rule.md` (committed before any metric). A test CSV only if the rule passes; never uploaded by Claude.
+- **Non-goals:** WBF, Soft-NMS, tracking, other models, retraining, changing CH-11/CH-13/CH-14/CH-14b results, CH-16, report prose.
+- **Files expected to change:** `movd/ensemble.py`, `scripts/opt02_ensemble.py`, `tests/test_ensemble.py`, `results/opt-02-rtdetr-ensemble/`, `results/submissions.csv` (append the CH-14b upload row), this row and log.
+- **Evidence log:**
+```text
+Owner: — | Claimed: — | Last update: — | Branch: — | Commits: — | PR: —
+Files changed: —
+Validation commands: —
+Metrics / results: —
+Artifacts: —
+Runtime / hardware: —
+Blockers / deviations: —
+Completion or handoff note: —
+```
+
 ## 11. Change log
 
 | Date (Kyiv) | Change | By | Approved by |
@@ -1331,6 +1351,7 @@ Completion or handoff note: —
 | 2026-11-07 15:00 | Initial coordination setup: `develop` branch, `CLAUDE.md`, `plan.md` with 16 chunks | Badabuba (via Claude) | Badabuba |
 | 2026-11-07 17:00 | CH-02 freezes §4. G2 split into G2a (internal metric, resolved), G2b (daily limit, operational, before CH-05's upload) and G2c (2 final selections, resolved). G1 (UTC close time) re-scoped as an operational finish gate of CH-16. Neither value is on the supplied official pages; neither blocks the technical protocol | Badabuba (via Claude) | Badabuba |
 | 2026-11-07 | CH-04 runtime forecast revised from the one-hour planning target: ~119 min Faster R-CNN, ~116 min RetinaNet on the RTX 5070. Extrapolates 100-image train time to 16,800, adds six measured val_fast passes plus observed final validation, speed and overhead. Frozen protocol unchanged. | Badabuba (Codex) | — |
+| 2026-11-10 15:10 | Optional addendum OPT-02 (RT-DETR-l two-model ensemble on cached predictions) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 
 ## 12. Definition of done and rubric audit checklist
 
