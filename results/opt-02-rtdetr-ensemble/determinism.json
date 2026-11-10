@@ -1,0 +1,16 @@
+{
+  "candidate": "c1_w100_nms05",
+  "merge_sha256_run1": "5d3d9b212b603e642f2bc849b4c240dea8408edfd6067d305356c8c53e67e7dd",
+  "merge_sha256_run2": "5d3d9b212b603e642f2bc849b4c240dea8408edfd6067d305356c8c53e67e7dd",
+  "identical": true,
+  "val_fast_metrics_regenerated": {
+    "c1_w100_nms05": true,
+    "c2_w100_nms06": true,
+    "c3_w075_nms05": true,
+    "c4_w075_nms06": true,
+    "c5_w050_nms05": true,
+    "c6_w050_nms06": true,
+    "c7_specialist_bicycle": true
+  },
+  "all_regenerated": true
+}

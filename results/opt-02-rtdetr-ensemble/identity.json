@@ -1,0 +1,111 @@
+{
+  "checkpoints": {
+    "A": {
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "matches_evidence": true
+    },
+    "B": {
+      "path": "MOVD-ch11/outputs/rtdetr_baseline/train/weights/last.pt",
+      "sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "matches_evidence": true
+    }
+  },
+  "inputs": {
+    "A/val_fast": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_fast/pipeline_predictions.json",
+      "sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e",
+      "bytes": 53367049,
+      "committed_sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e",
+      "matches_evidence": true
+    },
+    "A/val_full": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_full/pipeline_predictions.json",
+      "sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+      "bytes": 212607551,
+      "committed_sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+      "matches_evidence": true
+    },
+    "A/test": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/test/test_predictions.json",
+      "sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+      "bytes": 285736475,
+      "committed_sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+      "matches_evidence": true,
+      "detections": 1875374,
+      "mean_per_frame": 492.09,
+      "frames_at_cap": 3120,
+      "frames": 3811,
+      "share_from_B": null
+    },
+    "B/val_fast": {
+      "path": "MOVD-ch13/outputs/ch13/preds/val_fast_combo_flip_tile_nms05.json",
+      "sha256": "ef43e3198bcbe7b928c91b48d4818c3fd841ecb1086093f57dd522a735758ac5",
+      "bytes": 76339222,
+      "committed_sha256": null,
+      "matches_evidence": null
+    },
+    "B/val_full": {
+      "path": "MOVD-ch13/outputs/ch13/preds/val_full_combo_flip_tile_nms05.json",
+      "sha256": "5e42bbaeae6ebfc6b21e55fbf78ef2dbc442518679f5f5a0170261365ee92847",
+      "bytes": 304289473,
+      "committed_sha256": null,
+      "matches_evidence": null
+    },
+    "B/test": {
+      "path": "MOVD-ch13/outputs/ch13_test/test_predictions.json",
+      "sha256": "184ddccc963df0bfa5f31665500c671388d4e8b4bdd48c605640d6acc3647ccd",
+      "bytes": 290257180,
+      "committed_sha256": "184ddccc963df0bfa5f31665500c671388d4e8b4bdd48c605640d6acc3647ccd",
+      "matches_evidence": true,
+      "detections": 1902580,
+      "mean_per_frame": 499.23,
+      "frames_at_cap": 3695,
+      "frames": 3811,
+      "share_from_B": null
+    }
+  },
+  "registered_metrics_reproduced": {
+    "A/val_fast": {
+      "registered": "MOVD-opt02/results/ch-14b-rtdetr-short-finetune/stageA_epoch1/val_fast/pipeline/metrics.json",
+      "identical": true,
+      "mAP": 0.2892166441381564,
+      "detections": 352886,
+      "mean_per_frame": 494.24,
+      "frames_at_cap": 599,
+      "frames": 714,
+      "share_from_B": null
+    },
+    "A/val_full": {
+      "registered": "MOVD-opt02/results/ch-14b-rtdetr-short-finetune/stageA_epoch1/val_full/pipeline/metrics.json",
+      "identical": true,
+      "mAP": 0.28596193196293734,
+      "detections": 1405788,
+      "mean_per_frame": 493.95,
+      "frames_at_cap": 2368,
+      "frames": 2846,
+      "share_from_B": null
+    },
+    "B/val_fast": {
+      "registered": "MOVD-opt02/results/ch-13-inference/runs/val_fast/combo_flip_tile_nms05/metrics.json",
+      "identical": true,
+      "mAP": 0.2725477989076859,
+      "detections": 356992,
+      "mean_per_frame": 499.99,
+      "frames_at_cap": 711,
+      "frames": 714,
+      "share_from_B": null
+    },
+    "B/val_full": {
+      "registered": "MOVD-opt02/results/ch-13-inference/runs/val_full/combo_flip_tile_nms05/metrics.json",
+      "identical": true,
+      "mAP": 0.2696340695338878,
+      "detections": 1422988,
+      "mean_per_frame": 500.0,
+      "frames_at_cap": 2840,
+      "frames": 2846,
+      "share_from_B": null
+    }
+  },
+  "ok": true
+}
