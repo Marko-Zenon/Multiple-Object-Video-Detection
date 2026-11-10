@@ -192,7 +192,8 @@ def paired_bars(ax, labels, c_vals, f_vals) -> None:
         x + width / 2 + 0.01, f_vals, width, color=ORANGE, label=LABELS["F_pipeline"]
     )
     ax.set_xticks(x, labels)
-    ax.legend(frameon=False, labelcolor=INK, loc="upper left")
+    ax.set_ylim(0, max(max(c_vals), max(f_vals)) * 1.25)
+    ax.legend(frameon=False, labelcolor=INK, loc="upper left", ncol=2)
     style(ax)
 
 
@@ -250,8 +251,8 @@ def figures(m: dict, epochs: list[dict]) -> None:
     fig.savefig(out / "per_class.png", dpi=130)
     plt.close(fig)
 
-    fig, ax = plt.subplots(figsize=(7, 4))
-    bins = [f"{b['bin']} ({b['num_images']} frames)" for b in c["density"]]
+    fig, ax = plt.subplots(figsize=(8.5, 4.4))
+    bins = [f"{b['bin']}\n({b['num_images']} frames)" for b in c["density"]]
     paired_bars(
         ax, bins, [b["mAP"] for b in c["density"]], [b["mAP"] for b in f["density"]]
     )

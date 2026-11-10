@@ -249,6 +249,9 @@ def speed(args) -> None:
     from movd.speed import benchmark
 
     pipeline = json.loads(PIPELINE.read_text(encoding="utf-8"))["config"]
+    torch.zeros(
+        1, device=f"cuda:{args.device}"
+    )  # initialise CUDA before resetting its counters
     frames_ = [
         cv2.imread(str(p)) for _, _, p in frames("val_full", args.dataset_root)[:30]
     ]

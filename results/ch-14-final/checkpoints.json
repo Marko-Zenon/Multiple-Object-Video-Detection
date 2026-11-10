@@ -1,0 +1,37 @@
+{
+  "location": "outputs/final_rtdetr/train/weights (git-ignored)",
+  "files": {
+    "best.pt": {
+      "bytes": 66498749,
+      "sha256": "fbf249b832f20f50c950bb871267172ca920f19a2b8f6a34d3bf48029baba816"
+    },
+    "epoch0.pt": {
+      "bytes": 329312362,
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+    },
+    "epoch1.pt": {
+      "bytes": 329312490,
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+    },
+    "epoch2.pt": {
+      "bytes": 329312554,
+      "sha256": "6b4421bf4f41494dfc55913f02cd655d6a00a25e2aa9ea26bfc51fe2da28d3fd"
+    },
+    "epoch3.pt": {
+      "bytes": 329312618,
+      "sha256": "9372a432c42ab5ed37ff188f2011da531d8e3488cbbe0280111bf51198c272e0"
+    },
+    "epoch4.pt": {
+      "bytes": 329312682,
+      "sha256": "ced31e38396aa0680a1ccdd61c304399681f152cf9888b3c98e7be88e535b057"
+    },
+    "epoch5.pt": {
+      "bytes": 329643114,
+      "sha256": "4e1bfc42b7bac175fbaf6ef9882673c0d3770073f74ecba059dcdd5869eb7d1f"
+    },
+    "last.pt": {
+      "bytes": 66498749,
+      "sha256": "a85d2741f1891df7ee536a99e98f1e02d2c188591a1b9634728e5930469d482b"
+    }
+  }
+}
