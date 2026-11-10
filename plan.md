@@ -29,6 +29,7 @@
 | OPT-02 | Optional post-plan experiment: ensemble of the two validated RT-DETR-l models (CH-14b epoch 1 + CH-11 rtdetr_baseline) | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-13, CH-14b extension (both merged) | — (worker: Claude; NEGATIVE result: 7 predeclared candidates on cached capped CH-13-pipeline predictions, none passes the val_fast gate (best c4 A:B 1.0:0.75, NMS 0.6 = 0.2921 vs Model A 0.2892, +0.0029 < +0.003), so Model A (val_full 0.2860, public 0.2774301362) is kept; no val_full ensemble run, no new CSV, no upload; CH-14b upload logged in results/submissions.csv; RTX 5070 not used; notebook not touched; CH-14 stays PARTIAL; evidence results/opt-02-rtdetr-ensemble/) | opt-02-rtdetr-ensemble / [PR #20](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/20) | 2026-11-10 15:45 Kyiv |
 
 | OPT-03 | Optional post-plan optimization cycle on Model A (CH-14b epoch 1): diagnose, then one predeclared inference-side intervention | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-13, CH-14b extension, OPT-02 (all merged) | — (worker: Claude; NEGATIVE result: diagnosis on val_fast found the 500 cap harmless (no-cap oracle +0.00006) and precision the bottleneck, esp. tile boxes on inner tile borders (13 % of scored boxes, precision 0.35 %); frozen rule 528167a; 6 border drop/down-weight candidates best e2 0.2906 vs Model A 0.2892 (+0.0014 < +0.003), all classes/bins slightly up; none passes, so no val_full candidate run, no CSV, no upload; Model A (val_full 0.2860, public 0.2774301362) kept; RTX 5070 used ~25 min for raw caching, released; notebook not touched; CH-14 stays PARTIAL; evidence results/opt-03-modelA-diagnosis/) | opt-03-modelA-diagnosis / [PR #21](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/21) | 2026-11-10 16:35 Kyiv |
+| OPT-04 | Optional post-plan model-level experiment: RT-DETR-x (Model A recipe, epoch 1), fallback RT-DETR-l at imgsz 1600 | 🔵 IN_PROGRESS | ⛔ NO — claimed | Badabuba | start: CH-14b extension, OPT-02, OPT-03 (all merged) | — (worker: Claude; RTX 5070 in use by OPT-04; plan approved by Badabuba 2026-11-10; gates frozen in results/opt-04-model-scale/selection_rule.md before any result; Model A read-only; no upload by Claude; CH-14 stays PARTIAL, CH-16 not claimed) | opt-04-rtdetrx | 2026-11-10 17:28 Kyiv |
 🔒 **homework.ipynb lock:** FREE
 
 ### Gates
@@ -47,6 +48,8 @@
 | G8 | At least one student can upload to Kaggle via the web UI (no tokens in Git) | RESOLVED | Badabuba | Badabuba uploaded the CH-05 submission via the web UI on 2026-11-08 (team Nachalnyky); accepted, public 0.2011538266 |
 | G9 | RT-DETR trains reliably on 8 GB, otherwise a recorded fallback decision | RESOLVED | CH-11 owner | CH-11: rtdetr-l trains reliably on the 8 GB RTX 5070 at batch 1 (3.3-3.4 GB peak, 4 full 6-epoch runs, resume tested); no fallback needed |
 | G10 | Students wrote the report prose and conclusions | OPEN | Badabuba + Marko-Zenon | finish gate of CH-16 |
+| G11 | Exact authenticated Kaggle close for the extended deadline (Sun 2026-11-15), in UTC and Europe/Kyiv. Operational | OPEN | Badabuba + Marko-Zenon | Needed by Wed 2026-11-11 12:00 Kyiv (OPT-04 plan §11). Until resolved, the G1 value (2026-11-10 23:55 Kyiv) is superseded but the new exact time is unknown |
+| G12 | Re-verify the Kaggle daily submission limit (10/day reported vs G2b 5/day) on the authenticated Submit page. Operational | OPEN | Badabuba | Until resolved, plan with 5/day (G2b) |
 
 ## 2. Current verified state (inspection 2026-11-07, read-only)
 
@@ -1364,6 +1367,25 @@ Blockers / deviations: (1) the hypothesis was chosen on the same val_fast used f
 Completion or handoff note: negative result preserved; Model A and its 0.2774301362 submission stay selected. Nothing depends on OPT-03. CH-14 stays PARTIAL / PAUSED (student Kaggle decisions); CH-16 not claimed. Report prose stays with the students (TODOs in the OPT-03 README)
 ```
 
+### OPT-04 — Optional: RT-DETR-x model-scale experiment, fallback RT-DETR-l at 1600 (post-plan addendum)
+
+- **Goal:** test whether a larger pretrained RT-DETR (COCO `rtdetr-x.pt`) under Model A's exact recipe (train_final, 6-epoch schedule, stopped after epoch 1, CH-13 pipeline) beats Model A (sha256 6ff4a430…5b0b, val_fast 0.2892, val_full 0.2860, public 0.2774301362). Fallback FB: RT-DETR-l from COCO `rtdetr-l.pt` at imgsz 1600 (train + all 6 inference passes), same recipe.
+- **Why:** optional, after the plan; requested and approved by Badabuba on 2026-11-10 (plan file `pasted-content-id-afd9-create-a-quirky-raven.md`). Not a rubric requirement and not a CH-16 dependency.
+- **Scope (fixed by the student):** P = only the pretrained weights change (l → x). FB runs only on stop conditions S1–S6 (P fails G0/G1/G2/G3, misses the Thu 12 Nov 12:00 Kyiv G2 deadline, or passes G3 but fails G5), and only if it can start by Thu 12 Nov 18:00 Kyiv; never if P passes G5. Gates (frozen in `results/opt-04-model-scale/selection_rule.md` before any result): G0 smoke (peak reserved ≤ 7.0 GB, projected epoch ≤ 120 min, test ≤ 90 min); G1 training identity; G2 val_fast mAP ≥ 0.2922, AP_S ≥ 0.1397, ≥100 bin ≥ 0.3465, width ≤ 1920 subset ≥ Model A; G3 val_full (once) mAP ≥ 0.2890, AP_S ≥ 0.1474, ≥100 bin ≥ 0.3447, ≥ 5/9 secondary checks; G4 upload-ready CSV (both validators); G5 replacement mAP ≥ 0.2923. P vs FB by val_full only, never by the public LB. No training starts after Fri 13 Nov 12:00 Kyiv, no test inference after Fri 13 Nov 18:00 Kyiv. At most two upload-ready CSVs; Claude uploads neither.
+- **Non-goals:** a third experiment, Kaggle-based tuning, changing Model A or any CH-11/CH-13/CH-14/CH-14b/OPT-02/OPT-03 evidence, `movd/data.py`, `movd/evaluate.py`, `movd/infer.py`, `movd/submission.py`, `configs/runs/final_inference.json`, CH-16, report prose, the notebook.
+- **Files expected to change:** `movd/ultra.py` (`stop_after_epoch` optional key), `scripts/train_ultra.py`, `scripts/opt04_infer.py`, `scripts/opt04_gates.py`, `scripts/opt04_make_evidence.py`, `tests/test_opt04.py`, `configs/runs/opt04_*.json`, `results/opt-04-model-scale/`, `results/<opt04 run_id>/`, this row and log.
+- **Evidence log:**
+```text
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-10 17:28 Kyiv | Last update: 2026-11-10 17:28 Kyiv | Branch: opt-04-rtdetrx | Commits: — | PR: —
+Files changed: —
+Validation commands: —
+Metrics / results: —
+Artifacts: —
+Runtime / hardware: —
+Blockers / deviations: —
+Completion or handoff note: —
+```
+
 ## 11. Change log
 
 | Date (Kyiv) | Change | By | Approved by |
@@ -1373,6 +1395,7 @@ Completion or handoff note: negative result preserved; Model A and its 0.2774301
 | 2026-11-07 | CH-04 runtime forecast revised from the one-hour planning target: ~119 min Faster R-CNN, ~116 min RetinaNet on the RTX 5070. Extrapolates 100-image train time to 16,800, adds six measured val_fast passes plus observed final validation, speed and overhead. Frozen protocol unchanged. | Badabuba (Codex) | — |
 | 2026-11-10 15:10 | Optional addendum OPT-02 (RT-DETR-l two-model ensemble on cached predictions) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 | 2026-11-10 16:10 | Optional addendum OPT-03 (Model A diagnosis + one predeclared intervention) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
+| 2026-11-10 17:28 | Deadline extension recorded (student-reported): Kaggle closes Sun 2026-11-15 (exact time OPEN, G11), report + LMS due Mon 2026-11-16, defenses 17–20 Nov. The G1 value (2026-11-10 23:55 Kyiv) and the header freeze target are superseded pending G11. G12 added (daily limit re-check). Optional addendum OPT-04 (RT-DETR-x model-scale, fallback RT-DETR-l at 1600) added to the board and §10, with a pre-approved resolution exception (imgsz 1600 for training and inference, only for FB, only if P hits S1–S6), mirroring CH-10's exception. No registered result changed | Badabuba (via Claude) | Badabuba |
 
 ## 12. Definition of done and rubric audit checklist
 
