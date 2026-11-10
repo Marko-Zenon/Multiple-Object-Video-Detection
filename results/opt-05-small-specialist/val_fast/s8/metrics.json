@@ -1,0 +1,149 @@
+{
+  "num_images": 714,
+  "num_predictions": 355995,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.29027483749440214,
+    "AP50": 0.5425406317836615,
+    "AP75": 0.2668450561031751,
+    "AP_small": 0.14418554308846873,
+    "AP_medium": 0.26086248752658137,
+    "AP_large": 0.49009032805131447
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.27233983315879734,
+    "AP50": 0.4949885745902381,
+    "AP75": 0.2578899756339716,
+    "AP_small": 0.13647537232382712,
+    "AP_medium": 0.24217949019664592,
+    "AP_large": 0.45792834483134826
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 12644,
+      "AP": 0.29984026090262994,
+      "AP50": 0.6879829714411827,
+      "AP75": 0.20537118441102614,
+      "AP_maxdets100": 0.2918434371307353
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 1519,
+      "AP": 0.2531257772101276,
+      "AP50": 0.6148416442814383,
+      "AP75": 0.13735412125304886,
+      "AP_maxdets100": 0.20174042798801822
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 8001,
+      "AP": 0.45501293056373976,
+      "AP50": 0.708891471469181,
+      "AP75": 0.498116288704139,
+      "AP_maxdets100": 0.44190418119883956
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 1718,
+      "AP": 0.3297495828114242,
+      "AP50": 0.5571728083289639,
+      "AP75": 0.3573336272000634,
+      "AP_maxdets100": 0.3063702214419097
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 340,
+      "AP": 0.3126285364871433,
+      "AP50": 0.5125849612136861,
+      "AP75": 0.3280701350320595,
+      "AP_maxdets100": 0.3099118984409138
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 1375,
+      "AP": 0.26406897654183614,
+      "AP50": 0.5380457755387744,
+      "AP75": 0.23159330175132137,
+      "AP_maxdets100": 0.24008843766971458
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 66,
+      "AP": 0.252987859006144,
+      "AP50": 0.2993454684481846,
+      "AP75": 0.2979805594949849,
+      "AP_maxdets100": 0.2501161560483779
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 3022,
+      "AP": 0.15478477643217217,
+      "AP50": 0.42145995354788135,
+      "AP75": 0.07894123097875758,
+      "AP_maxdets100": 0.13674390535186956
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 245,
+      "num_gt": 3400,
+      "mAP": 0.2194175501761589,
+      "AP50": 0.3915328140377262,
+      "mAP_maxdets100": 0.2174224209619621
+    },
+    {
+      "bin": "20-49",
+      "num_images": 264,
+      "num_gt": 10066,
+      "mAP": 0.30219949690712716,
+      "AP50": 0.5088080286936892,
+      "mAP_maxdets100": 0.29206806495364024
+    },
+    {
+      "bin": "50-99",
+      "num_images": 157,
+      "num_gt": 10090,
+      "mAP": 0.310510851271226,
+      "AP50": 0.6392187029381007,
+      "mAP_maxdets100": 0.2822992957918304
+    },
+    {
+      "bin": ">=100",
+      "num_images": 48,
+      "num_gt": 5129,
+      "mAP": 0.3518590925488467,
+      "AP50": 0.7474713025697776,
+      "mAP_maxdets100": 0.3106094044525963
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_fast"
+}
