@@ -39,7 +39,7 @@ validators; path, sha256 and rule recorded); nothing is uploaded. At most 2 uplo
 | # | ID | Rule | Status |
 |---|---|---|---|
 | 1 | x1_isolation_demotion | [rule](x1_isolation_demotion/rule.md) | **rejected** (P1), not independently positive |
-| 2 | x2_persistence_boost | [rule](x2_persistence_boost/rule.md) | pending |
+| 2 | x2_persistence_boost | [rule](x2_persistence_boost/rule.md) | **PROMOTED** (P1–P7), upload-ready CSV 1 of 2 |
 | 3 | x3_interpolation | [rule](x3_interpolation/rule.md) | pending |
 | 4 | x4_border_confirmation | rule to be written and committed before its evaluation (needs Model A raw shards) | pending |
 | 5 | x5_combination | defined below | pending |
@@ -59,7 +59,7 @@ GPU minutes used: 0.
 
 ## Iteration log
 
-### Iteration 1 — 2026-11-11 00:25–00:45 Kyiv
+### Iteration 1 — 2026-11-11 00:25–00:38 Kyiv
 
 * Setup: claim bf144ad; worktree `MOVD-opt07` (dataset via junction); `verify` ok (all 4 protected hashes match,
   `identity.json`); rules x1–x3, gate and transforms committed in **771b851 before any result**, pushed.
@@ -70,3 +70,20 @@ GPU minutes used: 0.
   (P1). Evidence `x1_isolation_demotion/` (gate.json, subsets.csv, per_class.csv, val_full/). No determinism step,
   no CSV.
 * Next iteration: x2_persistence_boost (rule already frozen in 771b851).
+
+### Iteration 2 — 2026-11-11 00:39–00:50 Kyiv
+
+* `verify` ok. Rule frozen in 771b851 (before any result); parameters `{"iou": 0.5, "kind": "persistence_boost"}`.
+* **x2_persistence_boost — PROMOTED (P1–P7 all pass).** 395,849 of 1,405,788 scores raised (never lowered, no box
+  added or removed). val_full 0.28596 -> **0.28787 (+0.00191)**, AP50 0.5390; width<=1920 **+0.00261**; without-4K
+  **+0.00192**; AP_small **+0.00188**; >=100 bin **+0.00158**; clips non-negative **7/7** (086 +0.00066, 117 +0.00579,
+  137 +0.00138, 182 +0.00136, 268 (4K) +0.00299, 305 +0.00412, 339 +0.00234); all 8 classes up (+0.0003 bus …
+  +0.0038 tricycle). Transform 9.7 s; evaluation 3.9 min.
+* P7: fresh-process val_full re-run sha256 identical (`6c3a929f…2c03`); test predictions identical across two
+  processes (`fc4fdc8f…9191`) (`determinism.json`).
+* **Upload-ready CSV 1/2** (not uploaded): `C:/UCU/AI/hw2/MOVD-opt07/submissions/opt07_x2_persistence_boost_test.csv`,
+  172,652,039 bytes, sha256 `9dc8fb03dc708b2b78b05afeff29289317a810f0219e9be4e2fd50029433c867`, 3,811 rows, 1,875,374
+  detections (= Model A count; scores only), lossless repr floats; project validator OK, independent validator
+  valid (0 rows differ from the predictions) (`x2_persistence_boost/test/`).
+* x2 counts as "independently positive" for x5.
+* Next iteration: x3_interpolation (rule frozen in 771b851).
