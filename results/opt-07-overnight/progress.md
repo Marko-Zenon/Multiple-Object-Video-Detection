@@ -41,8 +41,8 @@ validators; path, sha256 and rule recorded); nothing is uploaded. At most 2 uplo
 | 1 | x1_isolation_demotion | [rule](x1_isolation_demotion/rule.md) | **rejected** (P1), not independently positive |
 | 2 | x2_persistence_boost | [rule](x2_persistence_boost/rule.md) | **PROMOTED** (P1–P7), upload-ready CSV 1 of 2 |
 | 3 | x3_interpolation | [rule](x3_interpolation/rule.md) | **rejected** (P1, P2, P6), not independently positive |
-| 4 | x4_border_confirmation | rule to be written and committed before its evaluation (needs Model A raw shards) | pending |
-| 5 | x5_combination | defined below | pending |
+| 4 | x4_border_confirmation | [rule](x4_border_confirmation/rule.md) (6101fc7) | **PROMOTED** (P1–P7), upload-ready CSV 2 of 2 |
+| 5 | x5_combination | defined below | **not run**: stop condition reached (2 upload-ready CSVs) |
 
 **x5 (fixed now):** "independently positive" = a candidate among x1–x4 whose own val_full delta passes P1 (>= +0.0005)
 and P3 and P4. If at least two exist, x5 applies all of them with their frozen parameters in list order (x4 first, on
@@ -55,7 +55,7 @@ no RT-DETR-x, no RT-DETR-l at 1600, no A + F ensemble, no evaluator / protocol c
 report.md, homework.ipynb. Stop at: 2 upload-ready CSVs, all directions failed, 6 iterations, unsafe repo state, or
 2026-11-11 08:00 Kyiv.
 
-GPU minutes used: 0.
+GPU minutes used: 40.4 of 90 (val_full shards 11.7 min, test cache 28.7 min; Model A raw shards only; one process at a time). RTX 5070 released.
 
 ## Iteration log
 
@@ -97,3 +97,28 @@ GPU minutes used: 0.
   (086 -0.000001, 182 -0.000005). Effect is negligible. Not "independently positive" (P1). No determinism step, no CSV.
 * Independently positive so far: x2 only. x5 needs at least two, so it depends on x4.
 * Next iteration: x4_border_confirmation (rule to be written and committed first; needs Model A raw shards).
+
+### Iterations 4–5 — 2026-11-11 00:50–01:45 Kyiv (x4; loop iteration 4 ended while the GPU fill ran, iteration 5 finished x4)
+
+* x4 = OPT-03 e2 unchanged (drop tile boxes within 0.005 of an inner tile edge before the CH-13 merge), never
+  evaluated on val_full before. Rule + code + 2 tests committed in **6101fc7 before the cache fill and any x4 result**.
+* Raw cache: 4 OPT-03 val_full shards copied (sha256 identical); 3 missing clips (268, 305, 339; 1,437 frames) filled
+  by the unchanged `scripts/opt03_cache.py` (checkpoint sha256 checked), 11.7 GPU min, 0.49 s/frame, peak 0.70 GB
+  (`cache_val_full.json`). **Identity:** cache merged at factor 1 == Model A stored val_full predictions, 1,405,788
+  boxes, max abs diff 0.0 (`identity_val_full.json`).
+* **x4_border_confirmation — PROMOTED (P1–P7 all pass).** val_full 0.28596 -> **0.28739 (+0.00142)**, AP50 0.5382;
+  width<=1920 **+0.00109**; without-4K **+0.00136**; AP_small **+0.00036**; >=100 bin **+0.00186**; clips
+  non-negative **7/7** (086 +0.00015, 117 +0.00261, 137 +0.00159, 182 +0.00116, 268 (4K) +0.00141, 305 +0.00085,
+  339 +0.00129); all 8 classes up (+0.0003 truck … +0.0029 tricycle). 1,384,308 val_full boxes (fewer than A).
+* Test raw cache 3,811 frames, 28.7 GPU min (`cache_test.json`); **test identity** at factor 1 == Model A stored test
+  predictions, 1,875,374 boxes, max abs diff 0.0 (`identity_test.json`). P7: val_full re-run sha256 identical
+  (`a7c97b07…1a5f`), test identical across two processes (`bb7adfaa…6b8c`).
+* **Upload-ready CSV 2/2** (not uploaded): `C:/UCU/AI/hw2/MOVD-opt07/submissions/opt07_x4_border_confirmation_test.csv`,
+  167,530,212 bytes, sha256 `09a5c8d14633f4bade9b9c5b2edd6122c38ca8c3de0cf8afa6b5f79184cd2fcb`, 3,811 rows,
+  1,820,997 detections, lossless; project validator OK, independent validator valid (`x4_border_confirmation/test/`).
+
+## Stop
+
+Terminal condition reached at 2026-11-11 ~01:45 Kyiv: **two upload-ready CSVs exist** (x2, x4). x5 (x2 on top of x4,
+both independently positive) was **not run** because the CSV cap is reached; it stays an untested idea. Final
+summary and recommended upload order: [`README.md`](README.md).
