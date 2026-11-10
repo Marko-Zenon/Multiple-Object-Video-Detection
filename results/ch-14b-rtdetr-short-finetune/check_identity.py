@@ -22,7 +22,9 @@ from movd import data, rtdetr  # noqa: E402
 
 STAGE_A_SHA = "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
 FALLBACK_SHA = "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872"
-NAMES = data.load_protocol()["label_map"]["names"]  # person, bicycle, car, van, truck, tricycle, bus, motor
+NAMES = data.load_protocol()["label_map"][
+    "names"
+]  # person, bicycle, car, van, truck, tricycle, bus, motor
 
 
 def sha256(path: Path) -> str:
@@ -42,7 +44,9 @@ def architecture(weights: Path) -> dict:
     """Head type, queries, classes and layer count of a checkpoint vs the official rtdetr-l.pt."""
     model = rtdetr.load_model(weights, "rtdetr")
     reference = rtdetr.load_model(REPO / "outputs/weights/rtdetr-l.pt", "rtdetr")
-    names = model.names if isinstance(model.names, dict) else dict(enumerate(model.names))
+    names = (
+        model.names if isinstance(model.names, dict) else dict(enumerate(model.names))
+    )
     return {
         "head": type(rtdetr.decoder(model)).__name__,
         "num_queries": rtdetr.num_queries(model),
@@ -57,7 +61,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("stageA", "stageB"))
     parser.add_argument("--weights", type=Path, required=True)
-    parser.add_argument("--run-id", default="ch14b_finetune", help="stageB: the run directory name")
+    parser.add_argument(
+        "--run-id", default="ch14b_finetune", help="stageB: the run directory name"
+    )
     args = parser.parse_args()
 
     import torch
@@ -67,7 +73,9 @@ def main() -> None:
     arch = architecture(args.weights)
     split_sha = text_sha256(data.SPLITS_DIR / "train_final.json")
     run = "final_rtdetr" if args.stage == "stageA" else args.run_id
-    record = json.loads((REPO / "results" / run / "config.json").read_text(encoding="utf-8"))
+    record = json.loads(
+        (REPO / "results" / run / "config.json").read_text(encoding="utf-8")
+    )
     info = {
         "weights": args.weights.resolve().as_posix(),
         "sha256": sha256(args.weights),
@@ -93,14 +101,17 @@ def main() -> None:
         and info["train_args"]["batch"] == 1
         and info["train_args"]["seed"] == 42,
         "not_smoke": info["train_args"]["fraction"] in (None, 1.0),
-        "data_is_train_final_export": "yolo_data_final" in str(info["train_args"]["data"]),
+        "data_is_train_final_export": "yolo_data_final"
+        in str(info["train_args"]["data"]),
         "run_on_train_final_6072": info["run_train_split"] == "train_final"
         and info["run_manifest_num_images"] == 6072,
         "split_file_unchanged": info["run_split_file_sha256"] == split_sha,
     }
     if args.stage == "stageA":
         checks["sha256_matches_ch14_checkpoints_json"] = info["sha256"] == STAGE_A_SHA
-        checks["epoch1_of_6"] = info["epoch_field"] == 0 and info["train_args"]["epochs"] == 6
+        checks["epoch1_of_6"] = (
+            info["epoch_field"] == 0 and info["train_args"]["epochs"] == 6
+        )
     else:
         checks["init_is_fallback"] = record["weights_sha256"] == FALLBACK_SHA
         checks["epochs_2_lr0"] = (

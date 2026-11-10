@@ -1,0 +1,4 @@
+model,mAP,AP50,AP75,AP_small,AP_medium,AP_large
+F rtdetr_baseline + CH-13 pipeline,0.2696,0.5069,0.2453,0.1467,0.2375,0.4502
+stageA_epoch1 + CH-13 pipeline,0.286,0.5358,0.26,0.1504,0.2568,0.4812
+delta,0.0163,0.029,0.0147,0.0037,0.0194,0.031
