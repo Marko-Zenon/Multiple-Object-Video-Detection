@@ -28,6 +28,7 @@
 | CH-16 | Reproducibility, evidence pack, rubric audit, freeze | 🟡 BLOCKED | ⛔ NO — CH-14 | — | start: CH-01, CH-06, CH-12, CH-14, CH-15 · finish gates: G1, G10 | CH-15 ✅; CH-12 ✅; still needs CH-14; G1 resolved; finish gate G10 remains open | — | 2026-11-09 13:22 Kyiv |
 | OPT-02 | Optional post-plan experiment: ensemble of the two validated RT-DETR-l models (CH-14b epoch 1 + CH-11 rtdetr_baseline) | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-13, CH-14b extension (both merged) | — (worker: Claude; NEGATIVE result: 7 predeclared candidates on cached capped CH-13-pipeline predictions, none passes the val_fast gate (best c4 A:B 1.0:0.75, NMS 0.6 = 0.2921 vs Model A 0.2892, +0.0029 < +0.003), so Model A (val_full 0.2860, public 0.2774301362) is kept; no val_full ensemble run, no new CSV, no upload; CH-14b upload logged in results/submissions.csv; RTX 5070 not used; notebook not touched; CH-14 stays PARTIAL; evidence results/opt-02-rtdetr-ensemble/) | opt-02-rtdetr-ensemble / [PR #20](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/20) | 2026-11-10 15:45 Kyiv |
 
+| OPT-03 | Optional post-plan optimization cycle on Model A (CH-14b epoch 1): diagnose, then one predeclared inference-side intervention | 🔵 IN_PROGRESS | ⛔ NO — claimed | Badabuba | start: CH-13, CH-14b extension, OPT-02 (all merged) | — (worker: Claude, requested by Badabuba 2026-11-10; RTX 5070 claimed for raw per-view caching of Model A; notebook not used; CH-14/CH-16/report.md not touched; no Kaggle upload) | opt-03-modelA-diagnosis | 2026-11-10 16:10 Kyiv |
 🔒 **homework.ipynb lock:** FREE
 
 ### Gates
@@ -1344,6 +1345,15 @@ Blockers / deviations: (1) inputs are the capped CH-13 outputs (no pre-cap predi
 Completion or handoff note: negative result preserved; Model A and its 0.2774301362 submission stay selected. Nothing depends on OPT-02. CH-14 stays PARTIAL / PAUSED (student Kaggle decisions); CH-16 not claimed. Report prose stays with the students (TODOs in the OPT-02 README)
 ```
 
+### OPT-03 — Optional: Model A diagnosis + one predeclared improvement (post-plan addendum)
+
+- **Goal:** find why Model A (CH-14b epoch-1 checkpoint, sha256 6ff4a430…5b0b, val_fast 0.2892, val_full 0.2860, public 0.2774301362) is limited, and test the single most promising, defensible intervention.
+- **Why:** optional, after the plan; requested by Badabuba on 2026-11-10. Not a rubric requirement and not a CH-16 dependency.
+- **Scope (fixed by the student):** diagnosis (`results/opt-03-modelA-diagnosis/diagnosis.md`) from raw per-view caches of Model A; then one intervention frozen in `selection_rule.md` before its result; ≤ 12 cheap inference candidates on val_fast, ≤ 2 training runs / ≤ 4 GPU-hours; gate to val_full = +0.003 over 0.2892, AP_S ≥ −0.003, ≥100-density bin ≥ −0.005, test inference < 90 min; final gate val_full +0.003 over 0.2860. A test CSV only if both gates pass; never uploaded by Claude.
+- **Non-goals:** repeating the OPT-02 ensemble grid, Kaggle-based tuning, changing CH-13/CH-14/CH-14b/OPT-02 evidence, the Model A checkpoint or its CSV, CH-16, report prose, the notebook.
+- **Files expected to change:** new code under `movd/`, `scripts/opt03_*.py`, `tests/`, `results/opt-03-modelA-diagnosis/`, this row and log.
+- **Evidence log:** filled at closeout.
+
 ## 11. Change log
 
 | Date (Kyiv) | Change | By | Approved by |
@@ -1352,6 +1362,7 @@ Completion or handoff note: negative result preserved; Model A and its 0.2774301
 | 2026-11-07 17:00 | CH-02 freezes §4. G2 split into G2a (internal metric, resolved), G2b (daily limit, operational, before CH-05's upload) and G2c (2 final selections, resolved). G1 (UTC close time) re-scoped as an operational finish gate of CH-16. Neither value is on the supplied official pages; neither blocks the technical protocol | Badabuba (via Claude) | Badabuba |
 | 2026-11-07 | CH-04 runtime forecast revised from the one-hour planning target: ~119 min Faster R-CNN, ~116 min RetinaNet on the RTX 5070. Extrapolates 100-image train time to 16,800, adds six measured val_fast passes plus observed final validation, speed and overhead. Frozen protocol unchanged. | Badabuba (Codex) | — |
 | 2026-11-10 15:10 | Optional addendum OPT-02 (RT-DETR-l two-model ensemble on cached predictions) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
+| 2026-11-10 16:10 | Optional addendum OPT-03 (Model A diagnosis + one predeclared intervention) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 
 ## 12. Definition of done and rubric audit checklist
 
