@@ -38,7 +38,7 @@ validators; path, sha256 and rule recorded); nothing is uploaded. At most 2 uplo
 
 | # | ID | Rule | Status |
 |---|---|---|---|
-| 1 | x1_isolation_demotion | [rule](x1_isolation_demotion/rule.md) | pending |
+| 1 | x1_isolation_demotion | [rule](x1_isolation_demotion/rule.md) | **rejected** (P1), not independently positive |
 | 2 | x2_persistence_boost | [rule](x2_persistence_boost/rule.md) | pending |
 | 3 | x3_interpolation | [rule](x3_interpolation/rule.md) | pending |
 | 4 | x4_border_confirmation | rule to be written and committed before its evaluation (needs Model A raw shards) | pending |
@@ -58,3 +58,15 @@ report.md, homework.ipynb. Stop at: 2 upload-ready CSVs, all directions failed, 
 GPU minutes used: 0.
 
 ## Iteration log
+
+### Iteration 1 — 2026-11-11 00:25–00:45 Kyiv
+
+* Setup: claim bf144ad; worktree `MOVD-opt07` (dataset via junction); `verify` ok (all 4 protected hashes match,
+  `identity.json`); rules x1–x3, gate and transforms committed in **771b851 before any result**, pushed.
+* Baseline (`baseline/subsets.json`): Model A val_full 0.28596193196293734 = registered CH-14b value exactly; 4.1 min.
+* **x1_isolation_demotion — REJECTED (P1).** 178,041 of 1,405,788 scores halved. val_full +0.00020 (needs +0.0005);
+  width<=1920 +0.00149; without-4K +0.00060; AP_small -0.00161; >=100 bin -0.00219; clips non-negative 4/7
+  (137: -0.00317, 182: -0.00125, 086: -0.00009; 305: +0.00497). P2–P6 pass, P1 fails. Not "independently positive"
+  (P1). Evidence `x1_isolation_demotion/` (gate.json, subsets.csv, per_class.csv, val_full/). No determinism step,
+  no CSV.
+* Next iteration: x2_persistence_boost (rule already frozen in 771b851).

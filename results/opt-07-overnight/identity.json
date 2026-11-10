@@ -1,0 +1,24 @@
+{
+  "checkpoint": {
+    "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+    "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+    "matches": true
+  },
+  "csv": {
+    "path": "MOVD-ch14b/submissions/final_rtdetr_epoch1_ch13_fliptile_nms05_test.csv",
+    "sha256": "e587c68b517d6d59f90122946d8a45ef5beac4fb8ae3b24f66ced1268def0da7",
+    "matches": true
+  },
+  "val_full": {
+    "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_full/pipeline_predictions.json",
+    "sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+    "matches": true
+  },
+  "test": {
+    "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/test/test_predictions.json",
+    "sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+    "matches": true
+  },
+  "ok": true,
+  "checked_at_kyiv": "2026-11-11 00:31"
+}
