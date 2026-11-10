@@ -1,0 +1,109 @@
+{
+  "frozen_by": "CH-13 (2026-11-09, Badabuba / worker Claude); rule results/ch-13-inference/selection_rule.md (commit 2b658d0, before any CH-13 result), evidence results/ch-13-inference/selection.json and comparison.csv",
+  "selected_variant": "combo_flip_tile_nms05",
+  "description": "RT-DETR-l, no retraining. Per frame 6 passes at imgsz 1344 (stretched square, as in training): the full frame, its horizontal flip (boxes un-flipped), and a 2x2 grid of tiles of 0.6 W x 0.6 H (0.2 overlap, frame aspect kept, about 1.67x zoom). Each pass is decoded the Ultralytics way (top 300 (query, class) pairs, score > 0.001); all boxes are shifted to frame pixels and merged by class-wise NMS at IoU 0.5 (torchvision batched_nms); then the top 500 per frame by score.",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "flip"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "tiles"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.5
+    },
+    "post_nms": null,
+    "max_det": 500,
+    "tile_grid": 2,
+    "tile_frac": 0.6
+  },
+  "implementation": "movd.infer.predict_image(models={'baseline': <RTDETR model>}, image=<BGR frame>, config=<this config>, device='0') -> movd.infer.Dets (xyxy frame pixels, class 0-7); movd.infer.to_coco(image_id, dets) -> COCO results for the CH-05 writer (movd.submission.build_rows clips out-of-frame boxes). The 'baseline' key names the checkpoint the passes use: in CH-14 it is the model being submitted (final_rtdetr, or the rtdetr_baseline fallback)",
+  "validated_with": {
+    "checkpoint": "rtdetr_baseline last.pt (CH-11)",
+    "sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872"
+  },
+  "evidence": {
+    "val_fast": {
+      "reference": {
+        "mAP": 0.2617,
+        "AP50": 0.4829,
+        "AP75": 0.242,
+        "AP_small": 0.1213,
+        "AP_medium": 0.2247,
+        "AP_large": 0.4692
+      },
+      "selected": {
+        "mAP": 0.2725,
+        "AP50": 0.5083,
+        "AP75": 0.2494,
+        "AP_small": 0.1439,
+        "AP_medium": 0.2383,
+        "AP_large": 0.4584
+      }
+    },
+    "val_full": {
+      "reference": {
+        "mAP": 0.2577,
+        "AP50": 0.4775,
+        "AP75": 0.2392,
+        "AP_small": 0.1296,
+        "AP_medium": 0.2246,
+        "AP_large": 0.4538
+      },
+      "selected": {
+        "mAP": 0.2696,
+        "AP50": 0.5069,
+        "AP75": 0.2453,
+        "AP_small": 0.1467,
+        "AP_medium": 0.2375,
+        "AP_large": 0.4502
+      },
+      "delta_mAP": 0.012
+    },
+    "single_changes_val_full": {
+      "flip_nms06": {
+        "mAP": 0.266,
+        "AP50": 0.4941,
+        "AP75": 0.2472,
+        "AP_small": 0.1345,
+        "AP_medium": 0.2302,
+        "AP_large": 0.4622
+      },
+      "tile_nms05": {
+        "mAP": 0.2644,
+        "AP50": 0.4991,
+        "AP75": 0.2384,
+        "AP_small": 0.1425,
+        "AP_medium": 0.2367,
+        "AP_large": 0.4404
+      }
+    }
+  },
+  "speed_cost": {
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "reference_fps": 13.68,
+    "selected_fps": 2.26,
+    "slowdown": 6.05,
+    "test_minutes_3811_frames": 28.1,
+    "scope": "end to end, batch 1, FP32, first 30 val_full frames preloaded (no disk I/O); results/ch-13-inference/speed/",
+    "peak_gpu_memory_bytes": 699874304
+  },
+  "not_adopted": "input size 1152/1536/1728, conf 0.01/0.05, decoder top-k 100/500, post-hoc NMS 0.7/0.5, two-scale TTA, WBF merges and the rtdetr_q500 ensemble: none passed the predeclared rule (comparison.csv)",
+  "max_detections_per_image": 500
+}

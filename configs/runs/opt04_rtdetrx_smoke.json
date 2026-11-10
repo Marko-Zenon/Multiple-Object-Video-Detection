@@ -1,0 +1,17 @@
+{
+  "run_id": "opt04_rtdetrx_smoke",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-x.pt",
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "train_split": "train_final",
+  "epochs": 2,
+  "smoke_fraction": 0.0165,
+  "note": "OPT-04 G0 smoke for P: opt04_rtdetrx_e1 settings on about 100 frames x 2 epochs (0.0165 x 6,072); run with --stop-after-epoch 1, then --resume. Checks finite losses, peak memory, checkpoint stop + resume and speed. Not a result.",
+  "overrides": {
+    "cache": false
+  }
+}
