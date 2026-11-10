@@ -188,7 +188,29 @@ def params_text(name: str) -> str:
     return json.dumps(opt07.EXPERIMENTS[name], sort_keys=True)
 
 
+def raw_cache(split: str) -> Path:
+    return REPO / "outputs" / "opt03" / "raw" / f"{split}.npz"
+
+
+def edge_transform(params: dict, split: str) -> list[dict]:
+    """OPT-03 e2 on the Model A raw cache, through the unchanged OPT-03 code (scripts/opt03_edge.py)."""
+    sys.path.insert(0, str(REPO / "scripts"))
+    import opt03_edge
+
+    if (params["factor"], params["margin"]) != opt03_edge.CANDIDATES["e2"]:
+        raise SystemExit("x4 parameters differ from OPT-03 e2")
+    if not raw_cache(split).exists():
+        raise SystemExit(
+            f"{raw_cache(split)} missing: fill the Model A raw shards first"
+        )
+    preds, _stats = opt03_edge.run_candidate(split, params["factor"], params["margin"])
+    return preds
+
+
 def transform(name: str, split: str) -> list[dict]:
+    params = opt07.EXPERIMENTS[name]
+    if params["kind"] == "opt03_edge":
+        return edge_transform(params, split)
     preds = load_a(split)
     if split == "test":
         nbrs = opt07.test_neighbours(data.load_test_images())
@@ -229,6 +251,67 @@ def cmd_verify(_args) -> None:
     print(json.dumps(record, indent=2))
     if not record["ok"]:
         raise SystemExit("IDENTITY FAILED: repository state unsafe, stop")
+
+
+def same_predictions(a: list[dict], b: list[dict]) -> dict:
+    """Per-image multiset equality of (category, bbox, score), plus the largest absolute difference."""
+
+    def key(p):
+        return (p["image_id"], -p["score"], p["category_id"], *p["bbox"])
+
+    sa, sb = sorted(a, key=key), sorted(b, key=key)
+    if len(sa) != len(sb):
+        return {
+            "identical": False,
+            "count_a": len(sa),
+            "count_b": len(sb),
+            "max_abs_diff": None,
+        }
+    diff = 0.0
+    for x, y in zip(sa, sb, strict=True):
+        if x["image_id"] != y["image_id"] or x["category_id"] != y["category_id"]:
+            return {
+                "identical": False,
+                "count_a": len(sa),
+                "count_b": len(sb),
+                "max_abs_diff": None,
+            }
+        diff = max(
+            diff,
+            abs(x["score"] - y["score"]),
+            *(abs(u - v) for u, v in zip(x["bbox"], y["bbox"], strict=True)),
+        )
+    return {
+        "identical": diff == 0.0,
+        "count_a": len(sa),
+        "count_b": len(sb),
+        "max_abs_diff": diff,
+    }
+
+
+def cmd_identity(args) -> None:
+    """Raw cache merged with the unchanged CH-13 combine (factor 1) == Model A's stored predictions."""
+    sys.path.insert(0, str(REPO / "scripts"))
+    import opt03_edge
+
+    split = args.split
+    start = time.perf_counter()
+    preds, stats = opt03_edge.run_candidate(split, 1.0, 0.0)
+    out = {
+        "split": split,
+        "raw_cache": rel(raw_cache(split)),
+        "raw_cache_sha256": sha256(raw_cache(split)),
+        "model_A_predictions_sha256": MODEL_A[split][1],
+        **same_predictions(preds, load_a(split)),
+        "frames": stats["frames"],
+        "seconds": round(time.perf_counter() - start, 1),
+    }
+    save_json(EVID / "x4_border_confirmation" / f"identity_{split}.json", out)
+    print(json.dumps(out, indent=2))
+    if not out["identical"]:
+        raise SystemExit(
+            "raw cache does not reproduce Model A: stop (x4 not evaluated)"
+        )
 
 
 def cmd_baseline(_args) -> None:
@@ -489,15 +572,18 @@ def main() -> None:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument(
-        "command", choices=["verify", "baseline", "run", "determinism", "test"]
+        "command",
+        choices=["verify", "baseline", "identity", "run", "determinism", "test"],
     )
     parser.add_argument("name", nargs="?", choices=sorted(opt07.EXPERIMENTS))
+    parser.add_argument("--split", default="val_full", choices=["val_full", "test"])
     args = parser.parse_args()
     if args.command in ("run", "determinism", "test") and not args.name:
         parser.error("candidate name required")
     {
         "verify": cmd_verify,
         "baseline": cmd_baseline,
+        "identity": cmd_identity,
         "run": cmd_run,
         "determinism": cmd_determinism,
         "test": cmd_test,

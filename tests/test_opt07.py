@@ -116,7 +116,9 @@ def test_deterministic():
     preds = [
         box(i, (i * 7) % 13, 0.1 + 0.05 * (i % 5), cat=1 + i % 2) for i in (1, 2, 3)
     ] * 3
-    for name in opt07.EXPERIMENTS:
+    for name, params in opt07.EXPERIMENTS.items():
+        if params["kind"] == "opt03_edge":
+            continue  # runs on the raw cache, not on merged predictions
         assert opt07.apply(name, preds, NBRS) == opt07.apply(name, list(preds), NBRS)
 
 
@@ -147,3 +149,22 @@ def test_gate():
         **{k: sub(0.299) for k in list(clips)[:4]},
     }  # only 3 clips non-negative
     assert not loop.gate(base, few)["checks"]["P5 >= 4 of 7 clips non-negative"]
+
+
+def test_x4_is_opt03_e2_unchanged():
+    import opt03_edge
+
+    x4 = opt07.EXPERIMENTS["x4_border_confirmation"]
+    assert x4 == {"kind": "opt03_edge", "factor": 0.0, "margin": 0.005}
+    assert (x4["factor"], x4["margin"]) == opt03_edge.CANDIDATES["e2"]
+
+
+def test_same_predictions():
+    import opt07_loop as loop
+
+    a = [box(1, 0, 0.5), box(1, 3, 0.7), box(2, 0, 0.1)]
+    assert loop.same_predictions(a, list(reversed(a)))["identical"]
+    b = [box(1, 0, 0.5), box(1, 3.5, 0.7), box(2, 0, 0.1)]
+    r = loop.same_predictions(a, b)
+    assert not r["identical"] and r["max_abs_diff"] == 0.5
+    assert not loop.same_predictions(a, a[:2])["identical"]

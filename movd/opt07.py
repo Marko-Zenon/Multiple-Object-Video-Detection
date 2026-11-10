@@ -38,6 +38,10 @@ EXPERIMENTS: dict[str, dict] = {
         "factor": 0.5,  # new score = 0.5 * min(endpoint scores)
         "max_det": MAX_DET,  # then per-frame top 500 by score
     },
+    # OPT-03 e2 unchanged (scripts/opt03_edge.py CANDIDATES["e2"]), confirmed on val_full: tile-view boxes within
+    # 0.005 of the tile side from an inner tile edge are dropped before the CH-13 merge. Runs on the Model A raw
+    # per-view cache (scripts/opt07_loop.py), not on the merged predictions, so `apply` does not handle it.
+    "x4_border_confirmation": {"kind": "opt03_edge", "factor": 0.0, "margin": 0.005},
 }
 
 
