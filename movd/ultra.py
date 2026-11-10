@@ -696,6 +696,9 @@ RUN_CONFIG_OPTIONAL = {
     "train_split": str,
     "overrides": dict,
     "note": str,
+    # OPT-04: stop right after the epoch-N checkpoint is written (0 < N < epochs). The schedule (warmup length,
+    # LR decay) still follows `epochs`; read by scripts/train_ultra.py, never passed to Ultralytics.
+    "stop_after_epoch": int,
 }
 
 
@@ -745,6 +748,12 @@ def validate_run_config(config: dict) -> dict:
             raise ValueError(f"run config '{key}' must be positive")
     if "smoke_fraction" in config and not 0 < config["smoke_fraction"] <= 1:
         raise ValueError("smoke_fraction must be in (0, 1]")
+    if "stop_after_epoch" in config:
+        epochs = config.get("epochs", data.load_protocol()["rubric_budget"]["epochs"])
+        if not 0 < config["stop_after_epoch"] < epochs:
+            raise ValueError(
+                f"stop_after_epoch must be in (0, epochs={epochs}), got {config['stop_after_epoch']}"
+            )
     if "smoke_fraction" not in config:
         budget = data.load_protocol()["rubric_budget"]
         frozen = {"epochs": budget["epochs"], "imgsz": budget["input_long_side"]}

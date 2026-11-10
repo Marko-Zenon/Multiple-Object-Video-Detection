@@ -91,6 +91,19 @@ def main():
         or not 0 < args.stop_after_epoch < config["epochs"]
     ):
         parser.error("--stop-after-epoch requires a smoke run and 0 < N < epochs")
+    # OPT-04: a full run whose config sets stop_after_epoch stops right after that epoch's checkpoint is written,
+    # through the same callback as the smoke flag. It always records observations, and it is never resumed
+    # (a resume would continue past the stop epoch); a crashed run is restarted under a new --run-id instead.
+    config_stop = config.get("stop_after_epoch")
+    if config_stop is not None:
+        if args.stop_after_epoch is not None:
+            parser.error("the run config already sets stop_after_epoch")
+        if args.resume:
+            parser.error(
+                "a stop_after_epoch run is not resumed; restart it with a new --run-id"
+            )
+        args.observe = True
+    stop_after = args.stop_after_epoch if config_stop is None else config_stop
     run_id = config["run_id"]
     output = data.REPO_ROOT / "outputs" / run_id
     results = data.REPO_ROOT / "results" / run_id
@@ -175,6 +188,10 @@ def main():
         if not torch.isfinite(trainer.loss).all():
             raise FloatingPointError("Non-finite training loss")
         observations["batches"] += 1
+        # OPT-04: wall-clock of the first and latest batch, so an epoch time can be projected without setup time.
+        elapsed = round(time.perf_counter() - start, 3)
+        observations.setdefault("first_batch_elapsed_seconds", elapsed)
+        observations["last_batch_elapsed_seconds"] = elapsed
         observations.setdefault("first_loss", loss)
         observations["last_loss"] = loss
         observations["minimum_loss"] = min(observations.get("minimum_loss", loss), loss)
@@ -192,7 +209,7 @@ def main():
                     torch.cuda.max_memory_reserved(trainer.device)
                 )
             save_json(results / "observations.json", observations)
-        if args.stop_after_epoch == trainer.epoch + 1:
+        if stop_after == trainer.epoch + 1:
             raise SmokeCheckpointStop()
 
     # Read-only observations do not change optimizer, sampling or training budget.
@@ -208,7 +225,11 @@ def main():
         else:
             model.train(**kwargs)
     except SmokeCheckpointStop:
-        status = "checkpoint_stop"
+        status = (
+            "checkpoint_stop"
+            if config_stop is None
+            else f"stopped_after_epoch_{config_stop}"
+        )
     seconds = time.perf_counter() - start
     if observe and args.device != "cpu":
         observations["peak_cuda_allocated_bytes"] = torch.cuda.max_memory_allocated(
