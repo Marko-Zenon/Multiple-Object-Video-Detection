@@ -165,7 +165,11 @@ def main() -> None:
     for name, text in files.items():
         path = HERE / name
         if args.check:
-            same = path.exists() and path.read_bytes() == text.encode("utf-8")
+            # A Windows checkout may hold the tables with CRLF line endings (core.autocrlf); compare as LF.
+            on_disk = (
+                path.read_bytes().replace(b"\r\n", b"\n") if path.exists() else None
+            )
+            same = on_disk == text.encode("utf-8")
             bad += not same
             print(f"{name}: {'identical' if same else 'DIFFERS'}")
         else:
