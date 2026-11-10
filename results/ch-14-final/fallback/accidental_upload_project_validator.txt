@@ -1,0 +1,21 @@
+[FAIL] 2846 data rows, expected 3811
+[FAIL] 3811 missing image_id values, e.g. ['clip_001_0000001', 'clip_001_0000002', 'clip_001_0000003', 'clip_001_0000004', 'clip_001_0000005']
+[FAIL] 2846 unknown image_id values, e.g. ['1', '10', '100', '1000', '1001']
+{
+  "data_rows": 2846,
+  "expected_rows": 3811,
+  "detections": 1422988,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 408709,
+    "bicycle": 57750,
+    "car": 337152,
+    "van": 177373,
+    "truck": 41887,
+    "tricycle": 149675,
+    "bus": 12374,
+    "motor": 238068
+  }
+}

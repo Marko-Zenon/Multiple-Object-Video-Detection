@@ -73,7 +73,9 @@ The fallback CSV passed both validators: `scripts/validate_submission.py` (proje
 Results: 3,811 rows in `test_images.csv` order, header `image_id,PredictionString`, 1,902,580 groups, at most 500 per row, classes
 0-7, finite scores and boxes inside the frame, lossless `repr` numbers, 0 rows differing from the raw test predictions, and
 checkpoint sha256 `da5d3625…e872` recorded in the test run. The accidental upload `val_roundtrip_ch13_combo_flip_tile_nms05.csv` is
-logged in `results/submissions.csv` as NOT A CANDIDATE.
+logged in `results/submissions.csv` as NOT A CANDIDATE. It fails the project validator (2,846 val rows, all 3,811 test ids
+missing; `fallback/accidental_upload_project_validator.txt`), so CH-14 acceptance criterion 3 ("every uploaded file passed the
+validator") is not literally met. A student must record how this upload is treated before CH-14 can be DONE.
 
 ## 5. Student TODOs (conclusions are written by the students)
 
