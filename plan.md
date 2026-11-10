@@ -30,6 +30,7 @@
 
 | OPT-03 | Optional post-plan optimization cycle on Model A (CH-14b epoch 1): diagnose, then one predeclared inference-side intervention | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-13, CH-14b extension, OPT-02 (all merged) | — (worker: Claude; NEGATIVE result: diagnosis on val_fast found the 500 cap harmless (no-cap oracle +0.00006) and precision the bottleneck, esp. tile boxes on inner tile borders (13 % of scored boxes, precision 0.35 %); frozen rule 528167a; 6 border drop/down-weight candidates best e2 0.2906 vs Model A 0.2892 (+0.0014 < +0.003), all classes/bins slightly up; none passes, so no val_full candidate run, no CSV, no upload; Model A (val_full 0.2860, public 0.2774301362) kept; RTX 5070 used ~25 min for raw caching, released; notebook not touched; CH-14 stays PARTIAL; evidence results/opt-03-modelA-diagnosis/) | opt-03-modelA-diagnosis / [PR #21](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/21) | 2026-11-10 16:35 Kyiv |
 | OPT-04 | Optional post-plan model-level experiment: RT-DETR-x (Model A recipe, epoch 1), fallback RT-DETR-l at imgsz 1600 | ✅ DONE | ⛔ NO — completed | Badabuba | start: CH-14b extension, OPT-02, OPT-03 (all merged) | — (worker: Claude; NEGATIVE result: frozen rule 1ba4118; P RT-DETR-x epoch 1 (G0/G1 pass, 32 min) val_fast pipeline 0.2304 vs Model A 0.2892, fails G2 (gate 0.2922; >=100 bin and width<=1920 subset also fail) -> S3; fallback FB RT-DETR-l at 1600 epoch 1 (G0/G1 pass, 30 min) val_fast 0.2761, fails G2 (mAP and subset guard); both raise AP_S (0.156/0.158 vs 0.143); no val_full run, no test inference, no CSV, no upload; recommended selections unchanged: Model A (val_full 0.2860, public 0.2774301362) + F (0.2696, 0.2328849249); no third experiment; RTX 5070 released; notebook not touched; CH-14 stays PARTIAL, CH-16 not claimed; evidence results/opt-04-model-scale/) | opt-04-rtdetrx / [PR #22](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/pull/22) | 2026-11-10 19:20 Kyiv |
+| OPT-05 | Optional post-plan final cycle: FB (OPT-04 RT-DETR-l@1600) as a small-object specialist added to protected Model A | 🔵 IN_PROGRESS | ⛔ NO — owned by Badabuba | Badabuba | start: OPT-04 (merged) | — (worker: Claude; requested by Badabuba 2026-11-10; initial screening CPU-only on cached val_fast predictions, RTX 5070 claimed only if a candidate passes the val_fast gate; rule + grid frozen in results/opt-05-small-specialist/selection_rule.md before any candidate result; Model A + FB checkpoints/predictions read-only, no retraining; no upload by Claude; notebook not touched; CH-14 stays PARTIAL, CH-16 not claimed; last optimization cycle) | opt-05-small-specialist | 2026-11-10 19:23 Kyiv |
 🔒 **homework.ipynb lock:** FREE
 
 ### Gates
@@ -1386,6 +1387,25 @@ Blockers / deviations: (1) the venv python.exe was blocked by Windows Applicatio
 Completion or handoff note: negative result preserved; no upload-ready CSV; recommended final selections unchanged (Model A primary, F secondary, per the rule's default row). Nothing depends on OPT-04. Open, students only: G11 (exact Kaggle close), G12 (daily limit), the 2 Kaggle selections and CH-14 decisions, report prose (TODOs in results/opt-04-model-scale/README.md), CH-16
 ```
 
+### OPT-05 — Optional: FB as a small-object specialist on top of Model A (post-plan addendum, final cycle)
+
+- **Goal:** test whether the OPT-04 fallback FB (RT-DETR-l, imgsz 1600, epoch 1, sha256 e06a1a4b…a33f; val_fast 0.2761, AP_S 0.1577) can add only small-object detections to protected Model A (sha256 6ff4a430…5b0b, val_fast 0.2892, AP_S 0.1427, val_full 0.2860, public 0.2774301362) and improve it.
+- **Why:** optional, after the plan; requested by Badabuba on 2026-11-10 as the last optimization cycle. Not a rubric requirement and not a CH-16 dependency.
+- **Scope (fixed by the student):** Model A detections unchanged as the base; only FB detections passing a predeclared size rule are added (one fixed score multiplier), class-wise NMS, global top 500, original-pixel boxes. ≤ 8 candidates varying only the size threshold, the FB multiplier and the NMS IoU, frozen in `results/opt-05-small-specialist/selection_rule.md` before any candidate result. val_fast gate: mAP ≥ A + 0.003, AP_S ≥ A, ≥100 bin ≥ A − 0.005, width ≤ 1920 subset ≥ A, deterministic rerun. val_full (once, GPU for FB val_full predictions) only if one passes: mAP ≥ 0.2890, AP_S ≥ 0.1504, ≥100 bin ≥ A − 0.005, ≥ 5/9 secondary improve or tie. A test CSV only if val_full passes; never uploaded by Claude.
+- **Non-goals:** retraining FB, a full-model ensemble, per-class rules, Kaggle-based tuning, changing Model A or any earlier evidence, `movd/data.py`, `movd/evaluate.py`, `movd/infer.py`, `movd/submission.py`, CH-16, report prose, the notebook, another experiment.
+- **Files expected to change:** `movd/specialist.py`, `scripts/opt05_specialist.py`, `tests/test_opt05.py`, `results/opt-05-small-specialist/`, this row and log.
+- **Evidence log:**
+```text
+Owner: Badabuba (worker: Claude) | Claimed: 2026-11-10 19:23 Kyiv | Last update: 2026-11-10 19:23 Kyiv | Branch: opt-05-small-specialist | Commits: — | PR: —
+Files changed: —
+Validation commands: —
+Metrics / results: —
+Artifacts: —
+Runtime / hardware: —
+Blockers / deviations: —
+Completion or handoff note: —
+```
+
 ## 11. Change log
 
 | Date (Kyiv) | Change | By | Approved by |
@@ -1396,6 +1416,7 @@ Completion or handoff note: negative result preserved; no upload-ready CSV; reco
 | 2026-11-10 15:10 | Optional addendum OPT-02 (RT-DETR-l two-model ensemble on cached predictions) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 | 2026-11-10 16:10 | Optional addendum OPT-03 (Model A diagnosis + one predeclared intervention) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 | 2026-11-10 17:28 | Deadline extension recorded (student-reported): Kaggle closes Sun 2026-11-15 (exact time OPEN, G11), report + LMS due Mon 2026-11-16, defenses 17–20 Nov. The G1 value (2026-11-10 23:55 Kyiv) and the header freeze target are superseded pending G11. G12 added (daily limit re-check). Optional addendum OPT-04 (RT-DETR-x model-scale, fallback RT-DETR-l at 1600) added to the board and §10, with a pre-approved resolution exception (imgsz 1600 for training and inference, only for FB, only if P hits S1–S6), mirroring CH-10's exception. No registered result changed | Badabuba (via Claude) | Badabuba |
+| 2026-11-10 19:23 | Optional addendum OPT-05 (FB as a small-object specialist on Model A, final optimization cycle) added to the board and §10; no frozen value, chunk state or registered result changed | Badabuba (via Claude) | Badabuba |
 
 ## 12. Definition of done and rubric audit checklist
 
