@@ -211,5 +211,73 @@
       "pass": false
     }
   },
-  "FB": {}
+  "FB": {
+    "G0": {
+      "request": {
+        "smoke_run": "opt04_rtdetrl1600_smoke",
+        "speed": "g0_FB",
+        "log": [
+          "outputs/opt04/logs/FB_smoke_1.log",
+          "outputs/opt04/logs/FB_smoke_2.log",
+          "outputs/opt04/logs/FB_g0_speed.log"
+        ]
+      },
+      "inputs": {
+        "smoke_run": "opt04_rtdetrl1600_smoke",
+        "runtime": "results/opt04_rtdetrl1600_smoke/runtime.json",
+        "speed": "results/opt-04-model-scale/speed/g0_FB.json",
+        "logs": [
+          "outputs/opt04/logs/FB_smoke_1.log",
+          "outputs/opt04/logs/FB_smoke_2.log",
+          "outputs/opt04/logs/FB_g0_speed.log"
+        ],
+        "seconds_per_batch": [
+          0.2754,
+          0.2719
+        ]
+      },
+      "checks": [
+        {
+          "check": "finite losses in every smoke process",
+          "value": true,
+          "pass": true
+        },
+        {
+          "check": "stop after epoch 1, then resume to completion",
+          "value": [
+            "checkpoint_stop",
+            "completed"
+          ],
+          "pass": true
+        },
+        {
+          "check": "peak CUDA reserved bytes",
+          "value": 5421137920,
+          "threshold": 7000000000.0,
+          "op": "<=",
+          "pass": true
+        },
+        {
+          "check": "no OOM / CUDA error / batch-reduce log line",
+          "value": [],
+          "pass": true
+        },
+        {
+          "check": "projected train_final epoch minutes",
+          "value": 27.9,
+          "threshold": 120.0,
+          "op": "<=",
+          "pass": true
+        },
+        {
+          "check": "projected test minutes (30-frame pipeline speed)",
+          "value": 38.2,
+          "threshold": 90.0,
+          "op": "<=",
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  }
 }
