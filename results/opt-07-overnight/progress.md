@@ -40,7 +40,7 @@ validators; path, sha256 and rule recorded); nothing is uploaded. At most 2 uplo
 |---|---|---|---|
 | 1 | x1_isolation_demotion | [rule](x1_isolation_demotion/rule.md) | **rejected** (P1), not independently positive |
 | 2 | x2_persistence_boost | [rule](x2_persistence_boost/rule.md) | **PROMOTED** (P1–P7), upload-ready CSV 1 of 2 |
-| 3 | x3_interpolation | [rule](x3_interpolation/rule.md) | pending |
+| 3 | x3_interpolation | [rule](x3_interpolation/rule.md) | **rejected** (P1, P2, P6), not independently positive |
 | 4 | x4_border_confirmation | rule to be written and committed before its evaluation (needs Model A raw shards) | pending |
 | 5 | x5_combination | defined below | pending |
 
@@ -71,7 +71,7 @@ GPU minutes used: 0.
   no CSV.
 * Next iteration: x2_persistence_boost (rule already frozen in 771b851).
 
-### Iteration 2 — 2026-11-11 00:39–00:50 Kyiv
+### Iteration 2 — 2026-11-11 00:39–00:45 Kyiv
 
 * `verify` ok. Rule frozen in 771b851 (before any result); parameters `{"iou": 0.5, "kind": "persistence_boost"}`.
 * **x2_persistence_boost — PROMOTED (P1–P7 all pass).** 395,849 of 1,405,788 scores raised (never lowered, no box
@@ -87,3 +87,13 @@ GPU minutes used: 0.
   valid (0 rows differ from the predictions) (`x2_persistence_boost/test/`).
 * x2 counts as "independently positive" for x5.
 * Next iteration: x3_interpolation (rule frozen in 771b851).
+
+### Iteration 3 — 2026-11-11 00:46–00:52 Kyiv
+
+* `verify` ok. Rule frozen in 771b851 (before any result).
+* **x3_interpolation — REJECTED (P1, P2, P6).** Net +25 boxes (1,405,788 -> 1,405,813): 2,368 of 2,846 frames are
+  already at the 500 cap, so added midpoint boxes mostly displace the lowest-score boxes. val_full +0.00005;
+  width<=1920 +0.00001; without-4K +0.00004; AP_small +0.00004; >=100 bin +0.00014; clips non-negative 5/7
+  (086 -0.000001, 182 -0.000005). Effect is negligible. Not "independently positive" (P1). No determinism step, no CSV.
+* Independently positive so far: x2 only. x5 needs at least two, so it depends on x4.
+* Next iteration: x4_border_confirmation (rule to be written and committed first; needs Model A raw shards).
