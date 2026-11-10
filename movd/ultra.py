@@ -581,6 +581,105 @@ def find_failure_cases(
     return cases
 
 
+# ---------------------------------------------------------------- training lists (CH-14)
+
+# Frozen train frame lists a run may train on (configs/splits/<name>.json, scripts/make_splits.py).
+# train_rubric: the four-family comparison list (CH-02). train_final: the CH-12 final list, every 4th frame of
+# every train clip (configs/runs/final.json), trained in CH-14. A run config selects one with `train_split`;
+# configs without the key keep training on train_rubric, as before.
+TRAIN_SPLITS = ("train_rubric", "train_final")
+DEFAULT_TRAIN_SPLIT = "train_rubric"
+
+
+def train_split_ids(name: str) -> list[int]:
+    """Image ids of a frozen train list, checked for name, source split, count and duplicates."""
+    if name not in TRAIN_SPLITS:
+        raise ValueError(
+            f"unknown train split {name!r}; expected one of {TRAIN_SPLITS}"
+        )
+    path = data.SPLITS_DIR / f"{name}.json"
+    if not path.exists():
+        raise FileNotFoundError(f"{path} missing; run scripts/make_splits.py")
+    split = json.loads(path.read_text(encoding="utf-8"))
+    ids = list(split["image_ids"])
+    if split["name"] != name or split["source_split"] != "train":
+        raise ValueError(
+            f"{path}: name/source {split['name']!r}/{split['source_split']!r} do not match {name!r}/'train'"
+        )
+    if len(ids) != split["num_images"] or len(set(ids)) != len(ids):
+        raise ValueError(
+            f"{path}: {len(ids)} ids, {len(set(ids))} unique, num_images {split['num_images']}"
+        )
+    return ids
+
+
+def _data_yaml_entry(data_yaml: Path, key: str) -> str | None:
+    for line in data_yaml.read_text(encoding="utf-8").splitlines():
+        if line.startswith(f"{key}:"):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
+def train_manifest(config: dict, data_yaml: str | Path) -> dict:
+    """The export manifest of the run's training list, after checking that everything names the same frames.
+
+    The run config's `train_split` (default train_rubric) must be the `train:` list of `data_yaml`, its
+    `<split>_manifest.json` must describe a masked export of that train list, and the list file must hold exactly
+    the frames of the frozen split file (same frames, no duplicates). Any mismatch raises, so a run can never
+    train on, or record, another list than the one its config names.
+    """
+    name = config.get("train_split", DEFAULT_TRAIN_SPLIT)
+    if name not in TRAIN_SPLITS:
+        raise ValueError(
+            f"unknown train split {name!r}; expected one of {TRAIN_SPLITS}"
+        )
+    data_yaml = Path(data_yaml)
+    if not data_yaml.exists():
+        raise FileNotFoundError(
+            f"{data_yaml} missing; run scripts/export_yolo.py first"
+        )
+    entry = _data_yaml_entry(data_yaml, "train")
+    if entry != f"{name}.txt":
+        raise ValueError(
+            f"{data_yaml} trains on {entry!r}, but the run config selects train_split {name!r}"
+        )
+    root = data_yaml.parent
+    manifest_path = root / f"{name}_manifest.json"
+    list_path = root / f"{name}.txt"
+    for path in (manifest_path, list_path):
+        if not path.exists():
+            raise FileNotFoundError(
+                f"{path} missing; export {name} with scripts/export_yolo.py"
+            )
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if (
+        manifest.get("name") != name
+        or manifest.get("source_split") != "train"
+        or manifest.get("masked") is not True
+    ):
+        raise ValueError(
+            f"{manifest_path} is not a masked train export of {name!r} "
+            f"(name {manifest.get('name')!r}, source {manifest.get('source_split')!r}, masked {manifest.get('masked')!r})"
+        )
+    split = json.loads((data.SPLITS_DIR / f"{name}.json").read_text(encoding="utf-8"))
+    train_split_ids(name)  # the split file itself is consistent
+    expected = {
+        "./" + (Path(name) / "images" / Path(f).parent.name / Path(f).name).as_posix()
+        for f in split["file_names"]
+    }
+    lines = list_path.read_text(encoding="utf-8").splitlines()
+    if (
+        len(lines) != len(set(lines))
+        or set(lines) != expected
+        or manifest["num_images"] != len(expected)
+    ):
+        raise ValueError(
+            f"{list_path}: {len(lines)} lines ({len(set(lines))} unique), manifest {manifest['num_images']}, "
+            f"frozen split {len(expected)} frames, {len(set(lines) ^ expected)} differ"
+        )
+    return manifest
+
+
 # ---------------------------------------------------------------- run configs
 
 # Ultralytics families; movd.rtdetr.load_model picks the model class (YOLO or RTDETR) per family.
@@ -594,6 +693,7 @@ RUN_CONFIG_OPTIONAL = {
     "amp": bool,
     "smoke_fraction": float,
     "data_yaml": str,
+    "train_split": str,
     "overrides": dict,
     "note": str,
 }
@@ -632,6 +732,10 @@ def validate_run_config(config: dict) -> dict:
     if config.get("family", "yolo11") not in ULTRALYTICS_FAMILIES:
         raise ValueError(
             f"run config 'family' must be one of {ULTRALYTICS_FAMILIES}, got {config['family']!r}"
+        )
+    if config.get("train_split", DEFAULT_TRAIN_SPLIT) not in TRAIN_SPLITS:
+        raise ValueError(
+            f"run config 'train_split' must be one of {TRAIN_SPLITS}, got {config['train_split']!r}"
         )
     run_id = config["run_id"]
     if Path(run_id).name != run_id or run_id in ("", ".", ".."):

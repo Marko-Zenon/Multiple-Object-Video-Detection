@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1902580,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 648016,
+    "bicycle": 47015,
+    "car": 438442,
+    "van": 203341,
+    "truck": 89258,
+    "tricycle": 186045,
+    "bus": 33706,
+    "motor": 256757
+  }
+}
+[OK] ..\MOVD-ch13\submissions\rtdetr_baseline_ch13_fliptile_nms05_test.csv: 3811 rows, 1902580 detections, sha256 73f73e219dfbf3b674277703f7314d14c316d0800bcd046634aaecd27f2b793b

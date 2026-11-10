@@ -1,0 +1,5 @@
+model,label,mAP,AP50,AP75,AP_small,AP_medium,AP_large,density_0-19,density_20-49,density_50-99,density_>=100,num_predictions,images_over_500
+C_single,"CH-14 final_rtdetr, single pass",0.2359,0.4479,0.213,0.0883,0.2103,0.4003,0.1087,0.2406,0.247,0.342,853800,0
+C_pipeline,"CH-14 final_rtdetr, CH-13 pipeline",0.2372,0.4648,0.2086,0.149,0.2231,0.3939,0.1514,0.2609,0.2614,0.3379,1423000,0
+F_single,"fallback rtdetr_baseline, single pass",0.2577,0.4775,0.2392,0.1296,0.2246,0.4538,0.1284,0.2611,0.2749,0.3679,853800,0
+F_pipeline,"fallback rtdetr_baseline, CH-13 pipeline",0.2696,0.5069,0.2453,0.1467,0.2375,0.4502,0.1994,0.2816,0.2859,0.3614,1422988,0

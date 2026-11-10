@@ -1,0 +1,17 @@
+{
+  "run_id": "final_rtdetr_smoke",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "train_split": "train_final",
+  "epochs": 2,
+  "smoke_fraction": 0.0083,
+  "note": "CH-14 CUDA smoke on the RTX 5070: the final_rtdetr settings and the real train_final export (outputs/yolo_data_final), about 50 frames x 2 epochs (0.0083 x 6,072). Checks the selected manifest, finite losses, memory, checkpoint writing, stop after epoch 1 + resume, and inference/evaluation. Not a result.",
+  "overrides": {
+    "cache": false
+  }
+}
