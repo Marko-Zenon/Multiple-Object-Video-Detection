@@ -1,0 +1,17 @@
+{
+  "run_id": "opt04_rtdetrx_e1",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-x.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "note": "OPT-04 primary P (results/opt-04-model-scale/selection_rule.md). configs/runs/final_rtdetr.json (Model A's run) with one change: the pretrained model rtdetr-l.pt -> official Ultralytics COCO rtdetr-x.pt. epochs stays 6, so the 3-epoch warmup and the epoch-1 LR/momentum/accumulation trajectory equal Model A's; stop_after_epoch 1 stops right after epoch0.pt is written.",
+  "overrides": {
+    "cache": false
+  },
+  "train_split": "train_final",
+  "stop_after_epoch": 1
+}
