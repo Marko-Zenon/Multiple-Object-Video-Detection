@@ -7,7 +7,7 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 | # | Experiment | Rule commit | S1 discovery | S2 confirmation | S3 val_full / gate | CSV | Decision |
 |---|---|---|---|---|---|---|---|
 | 1 | e1_x4_then_x2 | 0e73d20 | c1 +0.0015 pass | +0.0011 pass | 0.2892 (+0.0014), U1-U8 pass | `17273d34…dbf8` | **UPLOAD-READY 1** |
-| 2 | e2_tracklet_smoothing | 0e73d20 | — | — | — | — | pending |
+| 2 | e2_tracklet_smoothing | 0e73d20 | t4 +0.0029 pass | -0.0062 **fail** | not run (rule) | — | **rejected (S2)** |
 | 3 | e3_broader_support | 0e73d20 | — | — | — | — | pending |
 | 4 | e4_checkpoint_soup | rule pending | — | — | — | — | pending |
 | 5 | e5_lowlr_epoch | decision pending | — | — | — | — | pending (optional) |
@@ -33,3 +33,12 @@ Upload-ready CSVs: 1 of 4. GPU minutes used: 0 of 240.
   fresh process, test sha identical across two processes; U8 unchanged. **Upload-ready CSV 1 of 4**:
   `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e1_x4_then_x2_c1_test.csv`, sha256 `17273d344bb0fed82804b69abba3d018ef89e8c04cc87291e78356f2b8f2dbf8`, 167,503,001 B, 3,811 rows,
   1,820,997 detections (0 rejected, 0 over the cap); project validator OK, independent validator valid (0 rows differ). Not uploaded. (02:17)
+
+### Iteration 2 — 2026-11-11 02:17-02:25
+
+* State: branch clean, OPT-08 row still IN_PROGRESS (mine), notebook lock FREE, GPU idle, no Python process.
+* **E2 `e2_tracklet_smoothing`** (rule 0e73d20, 6 candidates, CPU, 6.1 min screen). S1 discovery deltas vs x2:
+  t1 +0.000696, t2 +0.001113, t3 +0.001520, t4 +0.002879, t5 +0.000417, t6 +0.000679. Selected t4 (`replace_mean`, k=2; the only rule that can lower scores), S1 pass.
+  S2 confirmation (305, 117, 268): t4 -0.006218 vs x2 -> **rejected at S2**; no val_full run, no CSV.
+  The discovery gain did not transfer to the other clips (selection overfit to the discovery clips; kept as a
+  negative result). No retuning. E2 cannot enter E6.
