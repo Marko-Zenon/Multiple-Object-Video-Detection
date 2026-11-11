@@ -253,6 +253,15 @@ def selected(exp: str) -> tuple[str, dict]:
 # ---------------------------------------------------------------- commands
 
 
+def candidate_checkpoint(params: dict) -> str:
+    """sha256 of the weights that produced the candidate's raw detections (Model A, or the E4 soup, re-hashed)."""
+    if params["kind"] in ("soup", "combo"):
+        import opt08_soup
+
+        return sha256(opt08_soup.weights_path(params["tag"]))
+    return o7.MODEL_A["checkpoint"][1]
+
+
 def cmd_verify(_args) -> None:
     items = {f"model_A_{k}": v for k, v in o7.MODEL_A.items()}
     items |= {f"x2_{k}": v for k, v in X2.items()}
@@ -628,6 +637,7 @@ def cmd_test(args) -> None:
     ready = sorted(p.parent.parent.name for p in EVID.glob("*/test/run.json"))
     if exp not in ready and len(ready) >= MAX_UPLOAD_READY:
         raise SystemExit(f"already {len(ready)} upload-ready CSVs: {ready}")
+    ckpt_sha = candidate_checkpoint(params)
     if sha256(o7.MODEL_A["checkpoint"][0]) != o7.MODEL_A["checkpoint"][1]:
         raise SystemExit("Model A checkpoint hash mismatch")
     preds = transform(params, "test")
@@ -654,7 +664,8 @@ def cmd_test(args) -> None:
         "test_predictions": pred_path.resolve().as_posix(),
         "test_predictions_sha256": test_sha,
         "test_predictions_deterministic": True,
-        "checkpoint_sha256": o7.MODEL_A["checkpoint"][1],
+        "checkpoint_sha256": ckpt_sha,
+        "model_A_checkpoint_sha256": o7.MODEL_A["checkpoint"][1],
         "writer": stats,
         "project_validator_inline": {
             "valid": not problems,
@@ -683,7 +694,7 @@ def cmd_test(args) -> None:
             "--run-json",
             str(tdir / "run.json"),
             "--expected-checkpoint-sha256",
-            o7.MODEL_A["checkpoint"][1],
+            ckpt_sha,
             "--out",
             str(tdir / "independent_validator.json"),
         ],

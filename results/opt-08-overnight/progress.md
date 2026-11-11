@@ -9,11 +9,11 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 | 1 | e1_x4_then_x2 | 0e73d20 | c1 +0.0015 pass | +0.0011 pass | 0.2892 (+0.0014), U1-U8 pass | `17273d34…dbf8` | **UPLOAD-READY 1** |
 | 2 | e2_tracklet_smoothing | 0e73d20 | t4 +0.0029 pass | -0.0062 **fail** | not run (rule) | — | **rejected (S2)** |
 | 3 | e3_broader_support | 0e73d20 | b3 +0.0004 pass | +0.0005 pass | 0.2885 (+0.0006), U1-U8 pass | `e45f1b54…c444` | **UPLOAD-READY 2** |
-| 4 | e4_checkpoint_soup | 35464d5 | s1 (w080) +0.0030 pass | +0.0236 pass | 0.2945 (+0.0067), U1-U6/U8 pass | pending | U7 / test pending |
+| 4 | e4_checkpoint_soup | 35464d5 | s1 (w080) +0.0030 pass | +0.0236 pass | 0.2945 (+0.0067), U1-U8 pass | `7dc9b318…2014` | **UPLOAD-READY 3** |
 | 5 | e5_lowlr_epoch | decision pending | — | — | — | — | pending (optional) |
 | 6 | e6_combination | 5f495e2 | — | — | — | — | pending |
 
-Upload-ready CSVs: 2 of 4. GPU minutes used: 0 of 240.
+Upload-ready CSVs: 3 of 4. GPU minutes used: 72.7 of 240.
 
 ## Iteration log
 
@@ -75,3 +75,9 @@ Upload-ready CSVs: 2 of 4. GPU minutes used: 0 of 240.
   (117 +0.021, 305 +0.013, 268 +0.011 vs 086 +0.0008, 137 -0.0016); it rests on 7 val clips.
 * U7 GPU part (`gpu_recheck_w080.json`): re-inference of clip 305 in a new process = cached shard exactly (max diff 0).
 * Test raw cache for w080 started (3,811 frames, ~31 GPU min).
+* Test raw cache 28.6 GPU min. U7 CPU part: val_full rebuilt in a fresh process byte-identical
+  (`ba88e072…9d4a`), test predictions identical across two processes (`f97dd8e1…43e9`). **Upload-ready CSV 3 of 4**:
+  `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv`, sha256 `7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014`, 173,452,716 B, 3,811 rows, 1,881,202 detections;
+  checkpoint = soup w080 sha256 `2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939` (recorded in run.json and checked by the independent
+  validator); project validator OK, independent validator valid (0 rows differ). Not uploaded. (04:39)
+  GPU total so far 72.7 min (smoke 0.2, discovery 30.3, confirmation 12.2, recheck 1.4, test 28.6).

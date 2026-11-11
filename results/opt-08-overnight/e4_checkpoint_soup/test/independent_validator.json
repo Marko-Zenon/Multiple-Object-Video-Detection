@@ -1,0 +1,27 @@
+{
+  "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv",
+  "csv_bytes": 173452716,
+  "csv_sha256": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+  "rows": 3811,
+  "groups": 1881202,
+  "max_groups_per_row": 500,
+  "empty_rows": 0,
+  "classes_seen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "predictions": "C:/UCU/AI/hw2/MOVD-opt08/outputs/opt08/e4_checkpoint_soup/s1/test/test_predictions.json",
+  "predictions_sha256": "f97dd8e18bed1aa6483b6fc99bd203e7ebb9df38254c69b7500415970bf443e9",
+  "predictions_count": 1881202,
+  "rows_differing_from_predictions": 0,
+  "run_json": "C:/UCU/AI/hw2/MOVD-opt08/results/opt-08-overnight/e4_checkpoint_soup/test/run.json",
+  "run_checkpoint_sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+  "failures": [],
+  "valid": true
+}
