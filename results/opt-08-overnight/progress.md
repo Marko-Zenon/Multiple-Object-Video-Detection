@@ -8,12 +8,12 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 |---|---|---|---|---|---|---|---|
 | 1 | e1_x4_then_x2 | 0e73d20 | c1 +0.0015 pass | +0.0011 pass | 0.2892 (+0.0014), U1-U8 pass | `17273d34…dbf8` | **UPLOAD-READY 1** |
 | 2 | e2_tracklet_smoothing | 0e73d20 | t4 +0.0029 pass | -0.0062 **fail** | not run (rule) | — | **rejected (S2)** |
-| 3 | e3_broader_support | 0e73d20 | — | — | — | — | pending |
+| 3 | e3_broader_support | 0e73d20 | b3 +0.0004 pass | +0.0005 pass | 0.2885 (+0.0006), U1-U8 pass | `e45f1b54…c444` | **UPLOAD-READY 2** |
 | 4 | e4_checkpoint_soup | rule pending | — | — | — | — | pending |
 | 5 | e5_lowlr_epoch | decision pending | — | — | — | — | pending (optional) |
 | 6 | e6_combination | TASK.md | — | — | — | — | pending |
 
-Upload-ready CSVs: 1 of 4. GPU minutes used: 0 of 240.
+Upload-ready CSVs: 2 of 4. GPU minutes used: 0 of 240.
 
 ## Iteration log
 
@@ -42,3 +42,18 @@ Upload-ready CSVs: 1 of 4. GPU minutes used: 0 of 240.
   S2 confirmation (305, 117, 268): t4 -0.006218 vs x2 -> **rejected at S2**; no val_full run, no CSV.
   The discovery gain did not transfer to the other clips (selection overfit to the discovery clips; kept as a
   negative result). No retuning. E2 cannot enter E6.
+
+### Iteration 3 — 2026-11-11 02:25-02:39
+
+* State: clean, row mine, lock FREE, GPU idle, no Python process.
+* **E3 `e3_broader_support`** (rule 0e73d20, 4 candidates, CPU). S1 discovery deltas vs x2: b1 +0.000024, b2 -0.000039, b3 +0.000369, b4 -0.000013.
+  Selected b3 (`five_frame_mean`: x2 condition, mean also over matched t-2 / t+2), S1 pass (just above +0.0003).
+  S2 confirmation +0.000504 (pass). S3 val_full 0.288472
+  (+0.000605 vs x2); width<=1920 +0.000547 (preferred +0.0005 met); AP_small +0.000322;
+  >=100 +0.000324; 7/7 clips >= 0 (smallest 305 +0.00004); without 4K +0.000580; U7 identical
+  (val_full in a fresh process, test across two processes); U8 unchanged. **Upload-ready CSV 2 of 4**:
+  `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e3_broader_support_b3_test.csv`, sha256 `e45f1b5416cae645100ae3d744d93511d6608e8b2b8c65d119ca3ff942c1a444`, 172,647,586 B, 3,811 rows,
+  1,875,374 detections (box set = Model A / x2, scores only); both validators pass. Not uploaded.
+  Small gain (about a third of E1's); the gap-tolerant and clip-end variants were neutral or negative on discovery.
+* E6 now has two independently passed components (E1's x4 step and E3 b3 as the temporal rule), so by TASK.md it
+  will be x4 -> b3; it runs after E4 / E5 (order), rule written before it runs.
