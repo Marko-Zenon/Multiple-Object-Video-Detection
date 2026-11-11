@@ -385,6 +385,350 @@ def cmd_bn(args) -> None:
         raise SystemExit(f"{cid}: BatchNorm re-estimation checks failed: stop")
 
 
+def cmd_build(args) -> None:
+    """Build a `bn: false` candidate (m2, m4, m4e1): the frozen weighted average, saved like OPT-08's soups (CPU)."""
+    import torch
+
+    cid = args.tag
+    if opt10.GRID[cid]["bn"]:
+        raise SystemExit(f"{cid} needs BatchNorm re-estimation: use `bn`")
+    target = EVID / cid / "build.json"
+    if target.exists():
+        raise SystemExit(f"{cid} already built")
+    first, state, parts = averaged_state(cid)
+    model = copy.deepcopy(first["ema"])
+    model.load_state_dict(state)
+    ckpt = {
+        k: v
+        for k, v in first.items()
+        if k not in ("optimizer", "scaler", "ema", "model")
+    }
+    ckpt.update({"ema": model, "model": None, "optimizer": None, "scaler": None})
+    ckpt["opt10"] = {"candidate": cid, "weights": parts}
+    path = tag_path(cid)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(ckpt, path)
+    saved = torch.load(path, map_location="cpu", weights_only=False)["ema"].state_dict()
+    # Independent recomputation of the average from freshly loaded, hash-checked sources.
+    states = [
+        load_checkpoint(run_checkpoint(p["run"], p["epoch"])[0], p["sha256"])[
+            "ema"
+        ].state_dict()
+        for p in parts
+    ]
+    floating = [k for k, v in states[0].items() if v.is_floating_point()]
+    others = [k for k in states[0] if k not in floating]
+    max_err = 0.0
+    for k in floating:
+        ref = sum(
+            p["weight"] * s[k].float() for p, s in zip(parts, states, strict=True)
+        )
+        diff = saved[k].float() - ref.to(saved[k].dtype).float()
+        max_err = max(max_err, float(diff.abs().max()))
+    sources_after = {
+        f"{p['run']}_epoch{p['epoch']}": o7.sha256(
+            run_checkpoint(p["run"], p["epoch"])[0]
+        )
+        == p["sha256"]
+        for p in parts
+    }
+    out = {
+        "candidate": cid,
+        "spec": opt10.GRID[cid],
+        "weights": parts,
+        "weights_sum": sum(p["weight"] for p in parts),
+        "path": o7.rel(path),
+        "sha256": o7.sha256(path),
+        "num_tensors": len(saved),
+        "floating_tensors": len(floating),
+        "non_floating_tensors": len(others),
+        "saved_identical_to_weighted_state": list(saved) == list(state)
+        and all(torch.equal(saved[k], state[k]) for k in state),
+        "max_abs_error_vs_independent_recomputation": max_err,
+        "non_floating_identical_to_first_source": all(
+            torch.equal(saved[k], states[0][k]) for k in others
+        ),
+        "floating_tensors_changed_vs_first_source": sum(
+            not torch.equal(saved[k], states[0][k]) for k in floating
+        ),
+        "dtypes": sorted({str(v.dtype) for v in saved.values()}),
+        "all_finite": all(bool(torch.isfinite(saved[k]).all()) for k in floating),
+        "sources_unchanged_after_build": sources_after,
+        "built_at_kyiv": o7.kyiv_now(),
+    }
+    out["ok"] = (
+        out["saved_identical_to_weighted_state"]
+        and out["non_floating_identical_to_first_source"]
+        and out["all_finite"]
+        and all(sources_after.values())
+        and abs(out["weights_sum"] - 1) < 1e-9
+    )
+    o7.save_json(target if out["ok"] else EVID / cid / "build_FAILED.json", out)
+    print(json.dumps(out, indent=2))
+    if not out["ok"]:
+        raise SystemExit(f"{cid}: build checks failed: stop")
+
+
+# ---------------------------------------------------------------- replicate runs (Phase 1-2, chunk 10.4 / 10.6)
+
+REP_EVID = EVID / "replicates"
+SMOKE_CONFIG = REPO / "configs/runs/opt10_rep_smoke.json"
+TRAIN_PROJECTED_MAX_MIN = 70  # rule: a run projected beyond 70 min stops
+LOSS_KEYS = ("first_loss", "last_loss", "minimum_loss", "maximum_loss")
+
+
+def rep_config(run: str) -> Path:
+    return REPO / f"configs/runs/opt10_rep_s{opt10.REPLICATE_SEEDS[run]}.json"
+
+
+def nvidia_snapshot(name: str) -> None:
+    """`nvidia-smi` before every GPU job (rule), kept as evidence."""
+    import subprocess
+
+    text = subprocess.run(
+        ["nvidia-smi"], capture_output=True, text=True, check=True
+    ).stdout
+    REP_EVID.mkdir(parents=True, exist_ok=True)
+    (REP_EVID / f"nvidia_before_{name}.txt").write_text(text, encoding="utf-8")
+
+
+def train_process(
+    config: Path, *extra: str, watch_epoch_seconds: float | None = None
+) -> int:
+    """Run scripts/train_ultra.py; stop it if epoch 1 ends after `watch_epoch_seconds` (projection rule)."""
+    import subprocess
+
+    run_id = o7.load_json(config)["run_id"]
+    suffix = "".join(
+        e.strip("-").replace("-", "_") for e in extra if e.startswith("--")
+    )
+    log = OUT / "logs" / f"train_{run_id}_{suffix or 'run'}.txt"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        sys.executable,
+        str(REPO / "scripts/train_ultra.py"),
+        "--config",
+        str(config),
+        "--device",
+        "0",
+        *extra,
+    ]
+    obs = REPO / "results" / run_id / "observations.json"
+    with log.open("a", encoding="utf-8") as fh:
+        proc = subprocess.Popen(cmd, cwd=REPO, stdout=fh, stderr=subprocess.STDOUT)
+        while proc.poll() is None:
+            time.sleep(20)
+            if watch_epoch_seconds and obs.exists():
+                o = o7.load_json(obs)
+                if (
+                    o.get("saved_epochs") == [0]
+                    and o["elapsed_seconds"] > watch_epoch_seconds
+                ):
+                    proc.terminate()
+                    proc.wait()
+                    raise SystemExit(
+                        f"{run_id}: epoch 1 took {o['elapsed_seconds'] / 60:.1f} min, projected beyond "
+                        f"{TRAIN_PROJECTED_MAX_MIN} min: stopped (rule)"
+                    )
+    return proc.returncode
+
+
+def cmd_rep_smoke(_args) -> None:
+    """Replicate smoke: ~100 frames x 2 epochs at seed 43, stop after epoch 1 + resume, then an inference check."""
+    import torch
+    import yaml
+
+    run_id = o7.load_json(SMOKE_CONFIG)["run_id"]
+    target = REP_EVID / "smoke.json"
+    if target.exists():
+        raise SystemExit("replicate smoke already passed")
+    nvidia_snapshot("rep_smoke")
+    with gpu_job("rep_smoke", 1, estimate_min=4):
+        codes = [
+            train_process(SMOKE_CONFIG, "--stop-after-epoch", "1"),
+            train_process(SMOKE_CONFIG, "--resume"),
+        ]
+        weights = REPO / "outputs" / run_id / "train" / "weights"
+        net = unfused(
+            torch.load(weights / "epoch1.pt", map_location="cpu", weights_only=False),
+            "0",
+        )
+        items = [(i, p) for _, i, p in frames("val_fast", None)][:8]
+        preds = single_view(net, items, "0")
+    args_yaml = yaml.safe_load(
+        (REPO / "outputs" / run_id / "train" / "args.yaml").read_text(encoding="utf-8")
+    )
+    runtime = o7.load_json(REPO / "results" / run_id / "runtime.json")
+    procs = runtime["smoke_processes"]
+    out = {
+        "config": o7.rel(SMOKE_CONFIG),
+        "return_codes": codes,
+        "args_yaml_seed": args_yaml["seed"],
+        "args_yaml_deterministic": args_yaml["deterministic"],
+        "processes": procs,
+        "stop_then_resume": [p["status"] for p in procs]
+        == ["checkpoint_stop", "completed"]
+        and procs[1]["resume"]
+        and procs[1]["start_epoch"] == 1
+        and procs[1]["optimizer_state_entries"] > 0,
+        "epoch_checkpoints": runtime["epoch_checkpoints"],
+        "losses_finite": all(
+            bool(np.isfinite([p[k] for k in LOSS_KEYS]).all()) for p in procs
+        ),
+        "inference_frames": len(items),
+        "inference_predictions": len(preds),
+        "inference_finite": bool(
+            np.isfinite([v for p in preds for v in (*p["bbox"], p["score"])]).all()
+        ),
+        "peak_cuda_reserved_gb": round(
+            max(p["peak_cuda_reserved_bytes"] for p in procs) / 2**30, 2
+        ),
+        "checked_at_kyiv": o7.kyiv_now(),
+    }
+    out["ok"] = (
+        codes == [0, 0]
+        and out["args_yaml_seed"] == opt10.REPLICATE_SEEDS["R1"]
+        and out["stop_then_resume"]
+        and out["epoch_checkpoints"] == ["epoch0.pt", "epoch1.pt"]
+        and out["losses_finite"]
+        and out["inference_predictions"] > 0
+        and out["inference_finite"]
+    )
+    o7.save_json(target if out["ok"] else REP_EVID / "smoke_FAILED.json", out)
+    print(json.dumps(out, indent=2))
+    if not out["ok"]:
+        raise SystemExit("replicate smoke failed: stop")
+
+
+def cmd_train(args) -> None:
+    """Train one replicate with its frozen config (a stop_after_epoch run, never resumed); record its checkpoints."""
+    import yaml
+
+    run = args.tag
+    if not (REP_EVID / "smoke.json").exists():
+        raise SystemExit("the replicate smoke must pass first")
+    record_path = REP_EVID / f"{run}.json"
+    if record_path.exists():
+        raise SystemExit(f"{run} already trained")
+    config_path = rep_config(run)
+    config = ultra.load_run_config(config_path)
+    run_id = config["run_id"]
+    nvidia_snapshot(f"train_{run}")
+    with gpu_job(f"train_{run}", 1 if run == "R1" else 2, estimate_min=55):
+        code = train_process(
+            config_path, watch_epoch_seconds=TRAIN_PROJECTED_MAX_MIN * 60 / 2
+        )
+    if code != 0:
+        raise SystemExit(f"{run_id}: train_ultra.py exited with {code}")
+    results = REPO / "results" / run_id
+    weights = REPO / "outputs" / run_id / "train" / "weights"
+    cfg = o7.load_json(results / "config.json")
+    proc = o7.load_json(results / "runtime.json")["training_processes"][-1]
+    args_yaml = yaml.safe_load(
+        (weights.parent / "args.yaml").read_text(encoding="utf-8")
+    )
+    model_a = o7.load_json(REPO / "results/final_rtdetr/config.json")
+    kwargs_diff = {
+        k: [model_a["ultralytics_train_kwargs"].get(k), v]
+        for k, v in cfg["ultralytics_train_kwargs"].items()
+        if k not in ("project", "data")
+        and model_a["ultralytics_train_kwargs"].get(k) != v
+    }
+    stop = config["stop_after_epoch"]
+    checkpoints = {
+        f"epoch{e + 1}": {
+            "file": f"epoch{e}.pt",
+            "path": o7.rel(weights / f"epoch{e}.pt"),
+            "sha256": o7.sha256(weights / f"epoch{e}.pt"),
+        }
+        for e in range(stop)
+    }
+    out = {
+        "run": run,
+        "run_id": run_id,
+        "config": o7.rel(config_path),
+        "config_sha256": o7.sha256(config_path),
+        "seed": args_yaml["seed"],
+        "deterministic": args_yaml["deterministic"],
+        "schedule_epochs": args_yaml["epochs"],
+        "stop_after_epoch": stop,
+        "ultralytics_train_kwargs_diff_vs_model_A": kwargs_diff,
+        "start_weights": cfg["weights"],
+        "start_weights_sha256": cfg["weights_sha256"],
+        "start_weights_equal_model_A": cfg["weights_sha256"]
+        == model_a["weights_sha256"],
+        "train_split": cfg["train_split"],
+        "train_split_file_sha256": cfg["train_split_file_sha256"],
+        "export_manifest_equal_model_A": cfg["export_manifest"]
+        == model_a["export_manifest"],
+        "frames": proc["samples"],
+        "batches_per_epoch": proc["batches_per_epoch"],
+        "images_seen": proc["batches"],
+        "saved_epochs": proc["saved_epochs"],
+        "status": proc["status"],
+        "losses": {k: proc[k] for k in LOSS_KEYS},
+        "losses_finite": bool(np.isfinite([proc[k] for k in LOSS_KEYS]).all()),
+        "train_seconds": proc["seconds"],
+        "peak_cuda_allocated_gb": round(proc["peak_cuda_allocated_bytes"] / 2**30, 2),
+        "peak_cuda_reserved_gb": round(proc["peak_cuda_reserved_bytes"] / 2**30, 2),
+        "checkpoints": checkpoints,
+        "recorded_at_kyiv": o7.kyiv_now(),
+    }
+    out["ok"] = (
+        out["seed"] == opt10.REPLICATE_SEEDS[run]
+        and set(kwargs_diff) == {"seed"}
+        and out["start_weights_equal_model_A"]
+        and out["export_manifest_equal_model_A"]
+        and out["frames"] == 6072
+        and out["images_seen"] == 6072 * stop
+        and out["saved_epochs"] == list(range(stop))
+        and out["status"] == f"stopped_after_epoch_{stop}"
+        and out["losses_finite"]
+    )
+    o7.save_json(record_path if out["ok"] else REP_EVID / f"{run}_FAILED.json", out)
+    print(json.dumps(out, indent=2))
+    if not out["ok"]:
+        raise SystemExit(f"{run}: training record checks failed: stop")
+
+
+def cmd_valfast(args) -> None:
+    """Reported only: each replicate checkpoint alone, single full-frame view on val_fast (D1's eval-mode path)."""
+    import torch
+
+    run = args.tag
+    target = REP_EVID / f"{run}_val_fast.json"
+    if target.exists():
+        raise SystemExit(f"{run} val_fast already run once")
+    gt = data.load_coco("val")
+    ids = data.split_image_ids("val_fast")
+    items = [(i, p) for _, i, p in frames("val_fast", None)]
+    curve = o7.load_json(REPO / "results/final_rtdetr/curve.json")
+    stored = {row["epoch"]: row["val_fast"]["mAP"] for row in curve}
+    record = {
+        "run": run,
+        "path": "unfused network, single full-frame view at 1344, top-300 decoding, conf 0.001 (D1 eval mode)",
+        "epochs": {},
+    }
+    nvidia_snapshot(f"valfast_{run}")
+    with gpu_job(f"valfast_{run}", 1 if run == "R1" else 2, estimate_min=6):
+        for epoch in (1, 2):
+            path, expected = run_checkpoint(run, epoch)
+            net = unfused(load_checkpoint(path, expected), args.device)
+            m = summary(ev.evaluate(single_view(net, items, args.device), gt, ids))
+            record["epochs"][str(epoch)] = {
+                "checkpoint_sha256": expected,
+                "val_fast": m,
+                "model_A_stored_val_fast_mAP": stored[epoch],
+                "delta_vs_model_A_stored": m["mAP"] - stored[epoch],
+            }
+            print(epoch, json.dumps(record["epochs"][str(epoch)]), flush=True)
+            del net
+            torch.cuda.empty_cache()
+    record["peak_mem_gb"] = round(torch.cuda.max_memory_reserved() / 2**30, 2)
+    record["run_at_kyiv"] = o7.kyiv_now()
+    o7.save_json(target, record)
+
+
 # ---------------------------------------------------------------- raw cache (OPT-08's loop, checkpoint by path)
 
 
@@ -653,24 +997,31 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument("command", choices=["check", "smoke", "diag", "bn", "cache"])
+    cmds = {
+        "check": cmd_check,
+        "smoke": cmd_smoke,
+        "diag": cmd_diag,
+        "bn": cmd_bn,
+        "build": cmd_build,
+        "cache": cmd_cache,
+        "rep-smoke": cmd_rep_smoke,
+        "train": cmd_train,
+        "valfast": cmd_valfast,
+    }
+    ap.add_argument("command", choices=list(cmds))
     ap.add_argument("tag", nargs="?")
     ap.add_argument("--stage", choices=["discovery", "confirmation"])
     ap.add_argument("--device", default="0")
     args = ap.parse_args()
     if args.command == "diag" and args.tag not in ("d1", "d2"):
         ap.error("diag needs d1 or d2")
-    if args.command in ("bn", "cache") and args.tag not in opt10.GRID:
+    if args.command in ("bn", "build", "cache") and args.tag not in opt10.GRID:
         ap.error(f"candidate required: {list(opt10.GRID)}")
+    if args.command in ("train", "valfast") and args.tag not in opt10.REPLICATE_SEEDS:
+        ap.error(f"replicate required: {list(opt10.REPLICATE_SEEDS)}")
     if args.command == "cache" and not args.stage:
         ap.error("cache needs --stage")
-    {
-        "check": cmd_check,
-        "smoke": cmd_smoke,
-        "diag": cmd_diag,
-        "bn": cmd_bn,
-        "cache": cmd_cache,
-    }[args.command](args)
+    cmds[args.command](args)
 
 
 if __name__ == "__main__":
