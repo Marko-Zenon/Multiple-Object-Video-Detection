@@ -1,0 +1,40 @@
+{
+  "c0": {
+    "nonpositive_layers": [
+      {
+        "layer": "model.6.ec.bn",
+        "zero_channels": 7,
+        "negative_channels": 0,
+        "min": 0.0,
+        "epsilon": 0.001
+      },
+      {
+        "layer": "model.7.ec.bn",
+        "zero_channels": 1,
+        "negative_channels": 0,
+        "min": 0.0,
+        "epsilon": 0.001
+      }
+    ],
+    "bn_layers": 122
+  },
+  "w080": {
+    "nonpositive_layers": [
+      {
+        "layer": "model.6.ec.bn",
+        "zero_channels": 7,
+        "negative_channels": 0,
+        "min": 0.0,
+        "epsilon": 0.001
+      },
+      {
+        "layer": "model.7.ec.bn",
+        "zero_channels": 1,
+        "negative_channels": 0,
+        "min": 0.0,
+        "epsilon": 0.001
+      }
+    ],
+    "bn_layers": 122
+  }
+}

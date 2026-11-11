@@ -1,0 +1,49 @@
+# OPT-10 progress
+
+## 2026-11-11 13:56 Kyiv — resumed at pushed checkpoint cffa98e
+
+Badabuba authorized Codex to continue Fable's chunks 10.1/10.2 in the existing `opt-10-soup-bn` branch and `MOVD-opt10` worktree. No earlier Phase 0 outputs existed. The frozen rule, frame lists, implementation and git history were read before execution.
+
+- Fetched origin. OPT-10 remains IN_PROGRESS under Badabuba. Task branch matched its pushed checkpoint cffa98e.
+- No conflicting Python process or NVIDIA compute process at preflight. Desktop VRAM use approximately 2 GiB.
+- Exclusive RTX 5070 GPU reservation pushed to origin/develop in heartbeat 4e93f72 and merged into the existing task branch (6380501) before CUDA.
+- Session limited to identity checks and chunk 10.3. Phase 0 GPU budget is 45 minutes. Stop for student review after D1, D2 and c0's frozen stage decision.
+- Python runtime uses uv CPython 3.12 with the repository's existing site-packages via PYTHONPATH. Torch 2.14.1+cu130, Ultralytics 8.4.207. CPU commands hide CUDA.
+- Initial `opt10_loop.py verify` running on CPU, followed by `opt10_soup.py check`. Logs in ignored outputs/opt10/logs.
+
+## 2026-11-11 14:03 Kyiv — identity and raw-cache smoke passed
+
+- `opt10_loop.py verify` PASS: all protected hashes and 55 raw shards match, frozen files equal origin/develop, E6 full-validation prediction rebuild byte-identical (bdb2806e...cad52), generalized soup tensors equal w080. CPU rebuild 366.6 seconds.
+- `opt10_soup.py check` PASS: all 941 tensors identical to E6 soup w080 using the frozen 0.8/0.2 average.
+- `opt10_soup.py smoke` PASS: 20 frames / 6 views reproduce OPT-08's protected raw shard exactly. Inference 12.7 seconds, peak reserved 0.86 GiB. No conflicting Python job before smoke or D1.
+- D1 started after these prerequisites, with its unfused normal-eval anchor checked before per-image-statistics inference.
+
+## 2026-11-11 14:19 Kyiv — D1 complete, H1 not supported
+
+| epoch | stored fused val_fast mAP | unfused eval mAP | per-image BN mAP | lift |
+|---|---:|---:|---:|---:|
+| 1 | 0.278966707 | 0.278989974 | 0.256616625 | -0.022373349 |
+| 3 | 0.261371116 | 0.261349820 | 0.243914599 | -0.017435221 |
+| 6 | 0.238126383 | 0.238084752 | 0.233885170 | -0.004199582 |
+
+Anchor passed (difference 0.000023267 vs tolerance 0.0005). State restored byte-identically at all three epochs. The frozen H1 criterion is epoch-6 lift >= +0.010; observed -0.004199582, so H1 is not supported. Full six-metric rows are in diagnostics/d1.json. No diagnostic is used to select a checkpoint. D2 started after another process/GPU preflight.
+
+## 2026-11-11 14:28 Kyiv — D2 complete, H3 confirmed
+
+| epoch | train-frame mAP | AP50 | AP75 | AP_small | AP_medium | AP_large |
+|---|---:|---:|---:|---:|---:|---:|
+| 1 | 0.397074777 | 0.692873962 | 0.399839886 | 0.249959559 | 0.390724972 | 0.580053381 |
+| 3 | 0.477392397 | 0.801686188 | 0.494474800 | 0.323713383 | 0.483948795 | 0.636769752 |
+| 6 | 0.499405821 | 0.825606311 | 0.523386757 | 0.338506376 | 0.505452235 | 0.654685267 |
+
+Frozen 714-frame list hash matches; unmasked train originals, normal eval mode, unchanged evaluator. Epoch 1 -> 6 train mAP +0.102331044 >= +0.03 while normal-eval validation mAP falls -0.040905222. H3 confirmed under the frozen reading. GPU-accounted wall time after D2 is 23.9 min.
+
+## 2026-11-11 14:29 Kyiv — existing manifest lookup corrected before c0 CUDA
+
+The first `bn c0` attempt stopped before the GPU-job context because the CLI referred to a nonexistent tracked `results/ch-14-final/export/train_final_manifest.json`. CH-14 stores the same reference manifest inside `results/ch-14-final/export/export_check.json`. Corrected only this reference lookup and compared the actual masked export manifest to that committed embedded object. Regression test checks acceptance and rejection of a changed manifest. Scoped OPT-10 tests: 36 passed. Fix committed as 47e0f39 before building c0. The frozen rule, frame lists, averaging, BN algorithm and protected artifacts were unchanged. Failed-attempt log retained in ignored outputs/opt10/logs/bn_c0.txt. c0 build resumed after another GPU/process preflight.
+
+## 2026-11-11 14:35 Kyiv — c0 built, valid zero-variance channels audited
+
+The frozen re-estimation completed once: 1,024 batches, 122 BN layers, every counter 1,024; non-BN tensors and saved parameters identical to w080; flags and momenta restored. Checkpoint SHA256 6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c. Image-content SHA256 b8c9bb9d89a7b5266608df63dc2b1fa750d0f19c40f8482c327adc0a5b1bf69f. GPU-accounted re-estimation wall time 208.4 seconds.
+
+The original build check falsely required strictly positive variance. Eight constant channels have zero variance (7 in model.6.ec.bn and 1 in model.7.ec.bn), exactly as in the protected w080 checkpoint, with epsilon 0.001 and no negative variance. The saved checkpoint is finite. Corrected this implementation validity check to finite nonnegative variance (ebb72d8), added a constant-channel regression test (37 OPT-10 tests pass), retained build_FAILED.json and variance_audit.json, then CPU-audited the same completed checkpoint and wrote build.json. No tensor changed, no BN rerun, no candidate retuning, no selection threshold changed. Median relative BN mean / variance changes are 0.003793946 / 0.010448006. Discovery inference is next.

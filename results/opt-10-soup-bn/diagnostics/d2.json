@@ -1,0 +1,57 @@
+{
+  "diagnostic": "d2",
+  "epochs": {
+    "1": {
+      "eval_mode_train_frames": {
+        "mAP": 0.39707477714260453,
+        "AP50": 0.6928739618046443,
+        "AP75": 0.3998398861851129,
+        "AP_small": 0.2499595593690545,
+        "AP_medium": 0.39072497192468003,
+        "AP_large": 0.5800533812708079,
+        "num_predictions": 214200
+      },
+      "seconds": 149.1
+    },
+    "3": {
+      "eval_mode_train_frames": {
+        "mAP": 0.4773923970906749,
+        "AP50": 0.8016861882759255,
+        "AP75": 0.49447480012748873,
+        "AP_small": 0.32371338266987404,
+        "AP_medium": 0.483948794895637,
+        "AP_large": 0.6367697522283673,
+        "num_predictions": 214200
+      },
+      "seconds": 156.4
+    },
+    "6": {
+      "eval_mode_train_frames": {
+        "mAP": 0.49940582107616804,
+        "AP50": 0.8256063110045004,
+        "AP75": 0.5233867569662717,
+        "AP_small": 0.3385063762633075,
+        "AP_medium": 0.5054522351272276,
+        "AP_large": 0.6546852674871879,
+        "num_predictions": 214200
+      },
+      "seconds": 155.5
+    }
+  },
+  "thresholds": {
+    "anchor_model_A_val_fast_mAP": 0.27896670695801273,
+    "anchor_tolerance": 0.0005,
+    "D1_H1_min_lift_epoch6": 0.01,
+    "c0_H2_min_delta_discovery": 0.001,
+    "D2_H3_min_rise_epoch1_to_6": 0.03
+  },
+  "rise_epoch1_to_6": 0.10233104393356351,
+  "frames": {
+    "count": 714,
+    "ids_sha256": "1d34971dcf2f2f68517ff08dec3041c64d7fc391f92ddfb7e1e900786fbef6fb",
+    "images": "unmasked originals"
+  },
+  "H3_confirmed": true,
+  "reading": "train-frame mAP rise epoch 1 -> 6 +0.1023 vs threshold +0.03: H3 confirmed",
+  "run_at_kyiv": "2026-11-11 14:28"
+}

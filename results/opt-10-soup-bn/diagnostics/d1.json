@@ -1,0 +1,91 @@
+{
+  "diagnostic": "d1",
+  "epochs": {
+    "1": {
+      "stored_fused_val_fast_mAP": 0.27896670695801273,
+      "eval_mode": {
+        "mAP": 0.2789899742582456,
+        "AP50": 0.5160957179247528,
+        "AP75": 0.25789056312964087,
+        "AP_small": 0.1078835538735142,
+        "AP_medium": 0.24631024041410746,
+        "AP_large": 0.48346313128392165,
+        "num_predictions": 214200
+      },
+      "unfused_minus_stored": 2.326730023288759e-05,
+      "anchor_ok": true,
+      "per_image_statistics": {
+        "mAP": 0.2566166253897772,
+        "AP50": 0.48360688903268245,
+        "AP75": 0.23792223380986105,
+        "AP_small": 0.10741233640702735,
+        "AP_medium": 0.21884320427524656,
+        "AP_large": 0.46274482717957977,
+        "num_predictions": 214200
+      },
+      "lift_mAP": -0.022373348868468423,
+      "state_byte_identical_after": true,
+      "seconds": 336.5
+    },
+    "3": {
+      "stored_fused_val_fast_mAP": 0.26137111557483733,
+      "eval_mode": {
+        "mAP": 0.2613498196294433,
+        "AP50": 0.495466966026775,
+        "AP75": 0.23671664819438448,
+        "AP_small": 0.10473874209774643,
+        "AP_medium": 0.2291357087691727,
+        "AP_large": 0.45336246391777396,
+        "num_predictions": 214200
+      },
+      "unfused_minus_stored": -2.129594539401758e-05,
+      "per_image_statistics": {
+        "mAP": 0.24391459906469148,
+        "AP50": 0.46044944623323686,
+        "AP75": 0.22171569979308955,
+        "AP_small": 0.10273355730369861,
+        "AP_medium": 0.208397629001258,
+        "AP_large": 0.45025012640827133,
+        "num_predictions": 214200
+      },
+      "lift_mAP": -0.01743522056475183,
+      "state_byte_identical_after": true,
+      "seconds": 307.8
+    },
+    "6": {
+      "stored_fused_val_fast_mAP": 0.23812638326014604,
+      "eval_mode": {
+        "mAP": 0.23808475228034154,
+        "AP50": 0.45199589963080017,
+        "AP75": 0.21563465752829752,
+        "AP_small": 0.08998575407084287,
+        "AP_medium": 0.21118975531870207,
+        "AP_large": 0.4113373386200321,
+        "num_predictions": 214200
+      },
+      "unfused_minus_stored": -4.1630979804502255e-05,
+      "per_image_statistics": {
+        "mAP": 0.23388517019269373,
+        "AP50": 0.4441215455883861,
+        "AP75": 0.2161098337216689,
+        "AP_small": 0.09640092951397766,
+        "AP_medium": 0.19776772291687728,
+        "AP_large": 0.426711341550438,
+        "num_predictions": 214200
+      },
+      "lift_mAP": -0.004199582087647813,
+      "state_byte_identical_after": true,
+      "seconds": 314.1
+    }
+  },
+  "thresholds": {
+    "anchor_model_A_val_fast_mAP": 0.27896670695801273,
+    "anchor_tolerance": 0.0005,
+    "D1_H1_min_lift_epoch6": 0.01,
+    "c0_H2_min_delta_discovery": 0.001,
+    "D2_H3_min_rise_epoch1_to_6": 0.03
+  },
+  "H1_material": false,
+  "reading": "epoch 6 lift -0.0042 vs threshold +0.01: H1 not supported by D1",
+  "run_at_kyiv": "2026-11-11 14:19"
+}

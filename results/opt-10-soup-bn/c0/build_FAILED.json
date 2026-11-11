@@ -1,0 +1,60 @@
+{
+  "candidate": "c0",
+  "spec": {
+    "bn": true,
+    "epoch_weights": [
+      0.8,
+      0.2
+    ],
+    "phase": 0,
+    "runs": [
+      "A"
+    ]
+  },
+  "weights": [
+    {
+      "run": "A",
+      "epoch": 1,
+      "weight": 0.8,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+    },
+    {
+      "run": "A",
+      "epoch": 2,
+      "weight": 0.2,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+    }
+  ],
+  "path": "MOVD-opt10/outputs/opt10/soup/c0.pt",
+  "sha256": "6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c",
+  "bn_layers": 122,
+  "batches": 1024,
+  "bn_frames": 1024,
+  "bn_frames_ids_sha256": "7a80e65ff02808e4a17e3bd6725fee3fff075907b38abf97698f75bc5ba008fe",
+  "bn_image_files_sha256": "b8c9bb9d89a7b5266608df63dc2b1fa750d0f19c40f8482c327adc0a5b1bf69f",
+  "export": "MOVD-ch14/outputs/yolo_data_final",
+  "non_bn_tensors_identical_to_the_average": true,
+  "saved_parameters_identical_to_the_average": true,
+  "num_tensors": 941,
+  "bn_buffers": 366,
+  "num_batches_tracked": [
+    1024
+  ],
+  "statistics_finite": true,
+  "variance_positive": false,
+  "median_relative_change_vs_stored_statistics": {
+    "running_mean": 0.0037939464673399925,
+    "running_var": 0.010448006447404623
+  },
+  "modes_restored": true,
+  "momenta_restored": true,
+  "momentum_values": [
+    0.03
+  ],
+  "precision": "FP32, torch.no_grad, batch 1, 1344 x 1344 stretched, RGB / 255",
+  "seconds": 208.4,
+  "built_at_kyiv": "2026-11-11 14:33",
+  "ok": false
+}

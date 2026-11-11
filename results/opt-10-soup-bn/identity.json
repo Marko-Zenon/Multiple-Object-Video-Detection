@@ -1,0 +1,68 @@
+{
+  "runs": [
+    {
+      "model_A_epoch0": {
+        "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+        "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+        "matches": true
+      },
+      "adjacent_epoch1": {
+        "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+        "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799",
+        "matches": true
+      },
+      "E6_soup_w080": {
+        "path": "MOVD-opt08/outputs/opt08/soup/soup_w080.pt",
+        "sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+        "matches": true
+      },
+      "E6_val_full_predictions": {
+        "path": "MOVD-opt08/outputs/opt08/e6_combination/k1/val_full.json",
+        "sha256": "bdb2806edad09fa093d5b59369780a8dbbb6fea4758522c72c86b8c8e98cad52",
+        "matches": true
+      },
+      "E6_test_predictions": {
+        "path": "MOVD-opt08/outputs/opt08/e6_combination/k1/test/test_predictions.json",
+        "sha256": "ef3f5c2ff42598696dfcd44aa1431c0d422598203bbfce8f0370c333c14cb0aa",
+        "matches": true
+      },
+      "E6_csv": {
+        "path": "MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv",
+        "sha256": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+        "matches": true
+      },
+      "E4_csv": {
+        "path": "MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv",
+        "sha256": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+        "matches": true
+      },
+      "x2_csv": {
+        "path": "MOVD-opt07/submissions/opt07_x2_persistence_boost_test.csv",
+        "sha256": "9dc8fb03dc708b2b78b05afeff29289317a810f0219e9be4e2fd50029433c867",
+        "matches": true
+      },
+      "x4_csv": {
+        "path": "MOVD-opt07/submissions/opt07_x4_border_confirmation_test.csv",
+        "sha256": "09a5c8d14633f4bade9b9c5b2edd6122c38ca8c3de0cf8afa6b5f79184cd2fcb",
+        "matches": true
+      },
+      "pipeline_config": {
+        "path": "MOVD-opt10/configs/runs/final_inference.json",
+        "sha256": "2e730aeecca4331909de4c8083ea15562fbc8a03fd226e520ee8f04f44164bd7",
+        "matches": true
+      },
+      "E6_raw_shards_equal_opt09_record": true,
+      "val_annotations": {
+        "path": "Multiple-Object-Video-Detection/multiple-object-video-detection-hw-2-ucu-ai-2026/val/annotations_coco.json",
+        "sha256": "dfb32c400a07d4250c9ed11682d354dafc471f8fdaa10a5c18c80ce3dbdd80b5"
+      },
+      "frozen_files_unchanged": true,
+      "E6_val_full_rebuilt_sha256": "bdb2806edad09fa093d5b59369780a8dbbb6fea4758522c72c86b8c8e98cad52",
+      "E6_val_full_rebuilt_identical": true,
+      "rebuild_seconds": 366.6,
+      "weighted_state_identical_to_E6_soup": true,
+      "ok": true,
+      "checked_at_kyiv": "2026-11-11 14:02"
+    }
+  ]
+}

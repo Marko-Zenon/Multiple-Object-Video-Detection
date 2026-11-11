@@ -1,0 +1,25 @@
+{
+  "weights": [
+    {
+      "run": "A",
+      "epoch": 1,
+      "weight": 0.8,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+    },
+    {
+      "run": "A",
+      "epoch": 2,
+      "weight": 0.2,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+    }
+  ],
+  "E6_soup": {
+    "path": "MOVD-opt08/outputs/opt08/soup/soup_w080.pt",
+    "sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939"
+  },
+  "num_tensors": 941,
+  "weighted_state_identical_to_E6_soup": true,
+  "checked_at_kyiv": "2026-11-11 14:02"
+}

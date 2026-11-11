@@ -1,0 +1,46 @@
+{
+  "budget": {
+    "gpu_minutes_total": 435,
+    "gpu_minutes_phase0": 45,
+    "gpu_minutes_phase1": 85,
+    "gpu_minutes_phase2": 200,
+    "gpu_minutes_test": 105,
+    "max_training_runs": 3,
+    "max_new_csvs": 3
+  },
+  "phase0_minutes": 27.4,
+  "jobs": [
+    {
+      "job": "smoke",
+      "phase": 0,
+      "seconds": 13.1,
+      "started_kyiv": "2026-11-11 14:03",
+      "ended_kyiv": "2026-11-11 14:03",
+      "status": "ok"
+    },
+    {
+      "job": "d1",
+      "phase": 0,
+      "seconds": 960.2,
+      "started_kyiv": "2026-11-11 14:03",
+      "ended_kyiv": "2026-11-11 14:19",
+      "status": "ok"
+    },
+    {
+      "job": "d2",
+      "phase": 0,
+      "seconds": 462.7,
+      "started_kyiv": "2026-11-11 14:20",
+      "ended_kyiv": "2026-11-11 14:28",
+      "status": "ok"
+    },
+    {
+      "job": "bn_c0",
+      "phase": 0,
+      "seconds": 208.6,
+      "started_kyiv": "2026-11-11 14:30",
+      "ended_kyiv": "2026-11-11 14:33",
+      "status": "ok"
+    }
+  ]
+}
