@@ -218,7 +218,7 @@ def cmd_verify(_args) -> None:
     record["val_annotations"] = {"path": rel(gt_path), "sha256": sha256(gt_path)}
     record["frozen_files_unchanged"] = frozen_unchanged()
     t0 = time.perf_counter()
-    rebuilt = OUT / "e6_rebuild" / "val_full.json"
+    rebuilt = getattr(_args, "output_dir", OUT) / "e6_rebuild" / "val_full.json"
     save_json(rebuilt, pipeline(s10.E6_TAG))
     record["E6_val_full_rebuilt_sha256"] = sha256(rebuilt)
     record["E6_val_full_rebuilt_identical"] = (
@@ -239,7 +239,7 @@ def cmd_verify(_args) -> None:
         and record["weighted_state_identical_to_E6_soup"]
     )
     record["checked_at_kyiv"] = o7.kyiv_now()
-    history = EVID / "identity.json"
+    history = getattr(_args, "evidence_dir", EVID) / "identity.json"
     runs = load_json(history)["runs"] if history.exists() else []
     save_json(history, {"runs": [*runs, record]})
     print(json.dumps(record, indent=2))

@@ -1,0 +1,24 @@
+{
+  "chunk": "10.3c",
+  "authorized_by": "Badabuba",
+  "recorded_at_kyiv": "2026-11-11T16:14:13+02:00",
+  "base_commit": "dec99da6457c4fee525545234532f55bad4ae467",
+  "purpose": "Evaluate the existing c0 through pending S2 and, only on S2 pass, S3 and frozen promotion checks.",
+  "gpu_budget_minutes": 25,
+  "gpu_job": "cache_c0_confirmation",
+  "gpu_job_estimate_minutes": 13,
+  "budget_scope": "This continuation only. Original chunk 10.3 gpu_log.json and its 45-minute cap remain historical and unchanged.",
+  "rule": "results/opt-10-soup-bn/selection_rule.md",
+  "candidate": "c0",
+  "checkpoint_sha256": "6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c",
+  "evaluation": "Use committed opt10_loop.py confirm/full/determinism; S2 failure stops all candidate evaluation.",
+  "scope_exclusions": [
+    "Phase 0 restart",
+    "D1/D2/BN/S1 rerun",
+    "replicate training",
+    "test predictions",
+    "Kaggle CSV/upload",
+    "PR",
+    "DONE"
+  ]
+}

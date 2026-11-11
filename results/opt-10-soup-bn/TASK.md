@@ -35,3 +35,7 @@ Replicate runs R1-R3 use seeds 43, 44, 45 through `overrides.seed` (plan.md sect
 ## Continuation checkpoint
 
 Codex resumed the latest pushed Fable checkpoint cffa98e on 2026-11-11 under the existing Badabuba ownership. See progress.md, README.md and session_decision.json. No new branch, worktree, claim or experiment was created. Chunk 10.3 is partial because confirmation admission exceeds the frozen Phase 0 GPU cap after S1 passed.
+
+## Separately authorized chunk 10.3c — c0 evaluation continuation
+
+Authorized by Badabuba on 2026-11-11 from dec99da. The previous chunk 10.3 and its 45-minute guard are retained as the completed historical execution checkpoint. This is a new continuation of only the pending c0 evaluation, with an independent 25-minute GPU budget and timestamps in continuation-c0-eval/contract.json and gpu_log.json. It does not restart Phase 0 or authorize chunk 10.4. Use the original selection_rule.md for S2, conditional S3, all promotion checks and determinism. Stop after the c0 decision. See continuation-c0-eval/progress.md.
