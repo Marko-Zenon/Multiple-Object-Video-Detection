@@ -199,6 +199,7 @@ def cache(
     device: str = "0",
     max_frames: int = 0,
     clips: list[str] | None = None,
+    out_dir: Path | None = None,
 ) -> dict:
     import cv2
     import torch
@@ -209,7 +210,8 @@ def cache(
     by_clip = stage_frames(stage)
     model = rtdetr.load_model(weights_path(tag), "rtdetr")
     torch.zeros(1, device=f"cuda:{device}")
-    out_dir = shard_dir(tag, stage) if not max_frames else OUT / "raw_smoke" / tag
+    if out_dir is None:
+        out_dir = shard_dir(tag, stage) if not max_frames else OUT / "raw_smoke" / tag
     out_dir.mkdir(parents=True, exist_ok=True)
     seconds, computed = 0.0, 0
     for clip in clips or sorted(by_clip):
@@ -316,11 +318,40 @@ def cmd_smoke(_args) -> None:
         raise SystemExit("smoke: cache + merge path does not reproduce Model A")
 
 
+def cmd_recheck(args) -> None:
+    """U7 (GPU part): re-infer confirmation clip 305 in a new process; must equal the cached raw shard exactly."""
+    clip = "uav0000305_00000_v"
+    tag = args.tag
+    ref = shard_dir(tag, "confirmation") / f"{clip}.npz"
+    rec_dir = OUT / "raw_recheck" / tag
+    shard = rec_dir / f"{clip}.npz"
+    if shard.exists():
+        shard.unlink()  # only this command's own earlier output
+    info = cache(tag, "confirmation", clips=[clip], out_dir=rec_dir)
+    a, b = np.load(ref), np.load(shard)
+    same_ids = bool(np.array_equal(a["image_ids"], b["image_ids"]))
+    diff = (
+        max(float(np.abs(a[k] - b[k]).max()) for k in ("boxes", "scores"))
+        if same_ids
+        else None
+    )
+    out = {
+        "tag": tag,
+        "clip": clip,
+        **info,
+        "same_image_ids": same_ids,
+        "max_abs_diff": diff,
+        "identical": same_ids and diff == 0.0,
+    }
+    o7.save_json(EVID / f"gpu_recheck_{tag}.json", out)
+    print(json.dumps(out, indent=2))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument("command", choices=["check", "build", "cache", "smoke"])
+    ap.add_argument("command", choices=["check", "build", "cache", "smoke", "recheck"])
     ap.add_argument("tag", nargs="?")
     ap.add_argument("--stage", choices=["discovery", "confirmation", "test"])
     ap.add_argument("--clips", nargs="*")
@@ -329,6 +360,8 @@ def main() -> None:
         cmd_check(args)
     elif args.command == "build":
         cmd_build(args)
+    elif args.command == "recheck":
+        cmd_recheck(args)
     elif args.command == "smoke":
         cmd_smoke(args)
     elif args.command == "cache":
