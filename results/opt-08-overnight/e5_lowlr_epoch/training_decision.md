@@ -34,3 +34,15 @@ in a non-resume run). Nothing else changes (no augmentation, regularisation, dat
 4. Evaluation exactly as E4 (one candidate `l1`): raw 6-view cache on the discovery clips, CH-13 merge, x2;
    S1 discovery >= x2 + 0.0003; S2 confirmation >= x2; S3 val_full, U1-U8; U7 includes a GPU re-inference of clip
    `uav0000305_00000_v` equal to its cached raw shard; test cache + CSV only if eligible.
+
+## Pre-result corrections (after the CUDA smoke, before the full run; no E5 metric existed)
+
+* The smoke log showed `AdamW(lr=5e-05, momentum=0.937)`: an explicit optimizer takes Ultralytics' default beta1
+  0.937, while Model A's `optimizer=auto` used 0.9. `overrides.momentum = 0.9` restores Model A's value, so the
+  learning rate remains the only change. (The smoke config keeps 0.937; the smoke only checks mechanics.)
+* Smoke results (`smoke_checks.json`, `results/opt08_e5_lowlr_smoke/`): finite losses (0.41 / 0.45 / 0.07 at start,
+  i.e. Model A level, far below a COCO start), checkpoint written, resume completed epoch 2, the checkpoint reloads
+  and runs a CH-13 raw pass; learned parameters equal Model A's exactly (L2 0 vs 14.05 to COCO): start point proven,
+  but the ~3 accumulated optimizer steps of the smoke were all skipped (AMP GradScaler warm-up). Added stop rule:
+  after the full epoch, if the learned parameters still equal Model A's (L2 = 0), E5 is rejected as "no update".
+* Throughput 4.4 it/s, so the epoch is ~23 min (6,072 frames).
