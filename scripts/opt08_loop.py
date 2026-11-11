@@ -154,13 +154,19 @@ def transform(params: dict, split: str, stages: list[str] | None = None) -> list
 
     E4 soups read their own raw caches: `stages` limits val to the cached clip stages (S1: discovery only)."""
     nbrs = neighbours(split)
-    if params["kind"] == "soup":
+    if params["kind"] in ("soup", "combo"):
         import opt08_soup
 
         if split == "test":
             stages = ["test"]
+        # combo (E6): x4 border drop on the soup's raw views; soup (E4): the unchanged CH-13 merge
+        border = (
+            (params["factor"], params["margin"])
+            if params["kind"] == "combo"
+            else (1.0, 0.0)
+        )
         preds = opt08_soup.merged(
-            params["tag"], stages or ["discovery", "confirmation"]
+            params["tag"], stages or ["discovery", "confirmation"], *border
         )
         return opt08.apply(params, preds, nbrs)
     if params["kind"] == "x4_then_x2":
@@ -353,7 +359,7 @@ def cmd_screen(args) -> None:
     meta = {}
     for cid, params in opt08.EXPERIMENTS[exp].items():
         t0 = time.perf_counter()
-        soup = params["kind"] == "soup"
+        soup = params["kind"] in ("soup", "combo")
         preds = transform(params, "val_full", ["discovery"] if soup else None)
         full_path = OUT / exp / cid / "val_full.json"
         save_json(full_path, preds)
@@ -423,9 +429,8 @@ def cmd_confirm(args) -> None:
     ids = subsets()["confirmation"]
     full_path = OUT / exp / cid / "val_full.json"
     s1 = load_json(out_dir / "screen.json")["candidates"][cid]
-    if (
-        params["kind"] == "soup"
-    ):  # S1 saw only the discovery cache: build val_full now, discovery must be unchanged
+    # soup / combo: S1 saw only the discovery cache, so build val_full now; discovery must be unchanged
+    if params["kind"] in ("soup", "combo"):
         preds = transform(params, "val_full")
         check = OUT / exp / cid / "discovery_recheck.json"
         save_json(check, restrict(preds, subsets()["discovery"]))

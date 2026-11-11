@@ -148,3 +148,11 @@ def test_soup_grid_is_frozen():
         "w065",
         "w050",
     ]
+
+
+def test_e6_uses_only_passed_components():
+    (k1,) = opt08.EXPERIMENTS["e6_combination"].values()
+    assert k1["tag"] == opt08.EXPERIMENTS["e4_checkpoint_soup"]["s1"]["tag"]
+    assert k1["mode"] == opt08.EXPERIMENTS["e3_broader_support"]["b3"]["mode"]
+    e1 = opt08.EXPERIMENTS["e1_x4_then_x2"]["c1"]
+    assert (k1["factor"], k1["margin"]) == (e1["factor"], e1["margin"])

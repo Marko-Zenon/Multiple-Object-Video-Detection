@@ -61,6 +61,17 @@ EXPERIMENTS: dict[str, dict[str, dict]] = {
         "s2": {"kind": "soup", "tag": "w065", "iou": 0.5},
         "s3": {"kind": "soup", "tag": "w050", "iou": 0.5},
     },
+    # E6 (TASK.md rule, fixed before any E6 result): every component that passed S1-S3 and U1-U8 on its own:
+    # E4 w080 weights -> E1's x4 border drop on the soup's raw views -> E3 b3 (best passed temporal rule).
+    "e6_combination": {
+        "k1": {
+            "kind": "combo",
+            "tag": "w080",
+            "factor": 0.0,
+            "margin": 0.005,
+            "mode": "five_frame_mean",
+        },
+    },
 }
 
 IOU = 0.5
@@ -224,6 +235,6 @@ def apply(params: dict, preds: Sequence[dict], nbrs: dict) -> list[dict]:
         return persistence_boost(preds, nbrs, params["iou"])
     if kind == "tracklet":
         return tracklet_smoothing(preds, nbrs, params["agg"], params["k"])
-    if kind == "support":
+    if kind in ("support", "combo"):
         return broader_support(preds, nbrs, params["mode"])
     raise ValueError(kind)
