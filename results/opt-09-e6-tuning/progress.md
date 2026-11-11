@@ -21,6 +21,42 @@ x2 CSV `9dc8fb03…c867`, x4 CSV `09a5c8d1…2fcb`; 15 E6 raw shards hashed; fro
 The OPT-09 code path (parallel merge + `opt09.five_frame_boost` at IoU 0.5, strength 1) rebuilds E6 val_full
 byte-identically (367 s CPU).
 
-## Next
+## 10:50 — rule commit 431a13d, Phase B build + smoke, baseline
 
-Commit `selection_rule.md` + this log + code before any evaluation; then baseline, Phase B build + smoke, Phase A.
+* `selection_rule.md`, `movd/opt09.py`, the scripts and tests committed and pushed (431a13d) before any evaluation.
+* `opt09_soup.py build` (`b_soup_weight/soup_build.json`): OPT-08 compatibility passes (941 tensors, same names,
+  shapes, dtypes, adjacent epochs); rebuilding w080 with the same arithmetic gives the E6 soup's tensors exactly;
+  w075 `cfaaf0a4…b39d`, w085 `9353e0fd…1037`, w090 `ef65198e…a6f` (git-ignored `outputs/opt09/soup/`).
+* `opt09_soup.py smoke` (`b_soup_weight/smoke.json`): 20 GPU frames of w080 equal OPT-08's raw shard exactly;
+  w075 / w085 / w090 finite, scores in [0, 1], 0.46 s per frame. GPU checked idle before (2.0 GB desktop, 0 %).
+* Discovery raw caches for w075, w085, w090 started in the background (one GPU process, sequential). No Phase B
+  result is evaluated before Phase A is decided.
+* Baseline (`baseline/subsets.json`): E6 evaluated once on every subset; equals the OPT-08 E6 record on val_full,
+  width <= 1920, discovery (0.334488) and confirmation (0.270895).
+
+## 11:00 — Phase A1 border margin: rejected at S1
+
+| cand | margin | discovery mAP | Δ vs E6 | Δ AP_S |
+|---|---:|---:|---:|---:|
+| E6 | 0.005 | 0.334488 | — | — |
+| m1 | 0.0035 | 0.334435 | -0.000053 | -0.000068 |
+| m2 | 0.0065 | 0.334531 | +0.000043 | +0.000050 |
+| m3 | 0.008 | 0.334533 | +0.000045 | +0.000023 |
+
+Selection m3, +0.000045 < +0.0003: **rejected at S1**, no confirmation. The margin is flat around 0.005 (as in
+OPT-03, where 0.005 and 0.01 differed by 0.000002 on val_fast). Not retuned.
+
+## 11:08 — Phase A2 five-frame persistence: rejected at S1 (Phase A complete, no component passed)
+
+| cand | change | discovery mAP | Δ vs E6 | Δ AP_S |
+|---|---|---:|---:|---:|
+| E6 | IoU 0.5, strength 1 | 0.334488 | — | — |
+| p1 | strength 0.75 | 0.334069 | -0.000420 | -0.000263 |
+| p2 | strength 1.25 | 0.334695 | +0.000207 | +0.000176 |
+| p3 | strength 1.5 | 0.333311 | -0.001177 | -0.000714 |
+| p4 | IoU 0.45 | 0.334169 | -0.000319 | -0.000362 |
+| p5 | IoU 0.55 | 0.334496 | +0.000008 | +0.000084 |
+
+Selection p2, +0.000207 < +0.0003: **rejected at S1**, no confirmation. Weaker (0.75) and much stronger (1.5)
+boosts both lose; IoU 0.55 is flat and 0.45 loses. E6's IoU 0.5 / strength 1 sits at or near a local optimum.
+Phase A result: neither border nor persistence passes; both stay as in E6. Not retuned.

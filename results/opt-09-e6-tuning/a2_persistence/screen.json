@@ -1,0 +1,146 @@
+{
+  "grid": "a2_persistence",
+  "rule_commit": "431a13d",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.0003,
+    "S2_min_delta_confirmation_exclusive": 0.0
+  },
+  "baseline_E6_discovery": {
+    "num_images": 1335,
+    "num_predictions": 638045,
+    "mAP": 0.3344880450293952,
+    "AP50": 0.66079403123135,
+    "AP75": 0.2931346251149099,
+    "AP_small": 0.19486829336528577,
+    "AP_medium": 0.3353142558454753,
+    "AP_large": 0.5448983865410537,
+    "density_ge100": null
+  },
+  "candidates": {
+    "p1": {
+      "params": {
+        "soup": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.5,
+        "strength": 0.75
+      },
+      "changed": [
+        "strength"
+      ],
+      "discovery_predictions_sha256": "662abadc42ddc7a92ef4e0824dc86a950f47daa26b8f44ae57dee69be2af5a0a",
+      "num_predictions": 638045,
+      "transform_seconds": 101.7,
+      "discovery": {
+        "mAP": 0.3340685076990373,
+        "AP50": 0.6602323732491286,
+        "AP75": 0.29274893349389197,
+        "AP_small": 0.1946049233362746,
+        "AP_medium": 0.33491805301176947,
+        "AP_large": 0.5441585212030527
+      },
+      "delta_discovery_mAP": -0.00041953733035793306
+    },
+    "p2": {
+      "params": {
+        "soup": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.5,
+        "strength": 1.25
+      },
+      "changed": [
+        "strength"
+      ],
+      "discovery_predictions_sha256": "d31ba3a21599ad8a834d3879cc4a2858b97c721f0b394685963e7ca9140a2f9b",
+      "num_predictions": 638045,
+      "transform_seconds": 105.0,
+      "discovery": {
+        "mAP": 0.33469548251759307,
+        "AP50": 0.6607142881233575,
+        "AP75": 0.29342186902530326,
+        "AP_small": 0.19504395364859062,
+        "AP_medium": 0.3355125945966974,
+        "AP_large": 0.5454400010713589
+      },
+      "delta_discovery_mAP": 0.00020743748819784802
+    },
+    "p3": {
+      "params": {
+        "soup": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.5,
+        "strength": 1.5
+      },
+      "changed": [
+        "strength"
+      ],
+      "discovery_predictions_sha256": "e4fd0e5115f19e66acc46880fc232aabdff44bda813557b6b83c4c8725e8a489",
+      "num_predictions": 638045,
+      "transform_seconds": 104.9,
+      "discovery": {
+        "mAP": 0.33331110754847837,
+        "AP50": 0.6591368420628669,
+        "AP75": 0.2920927912763139,
+        "AP_small": 0.19415470425390588,
+        "AP_medium": 0.33398675842362274,
+        "AP_large": 0.5451883379191907
+      },
+      "delta_discovery_mAP": -0.001176937480916851
+    },
+    "p4": {
+      "params": {
+        "soup": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.45,
+        "strength": 1.0
+      },
+      "changed": [
+        "iou"
+      ],
+      "discovery_predictions_sha256": "cfa8ff49b7a90afe39f07379ce21bd6d6f2317516209b0b903e33b490d71bd12",
+      "num_predictions": 638045,
+      "transform_seconds": 106.4,
+      "discovery": {
+        "mAP": 0.33416855756385133,
+        "AP50": 0.6599011449041338,
+        "AP75": 0.2929655111251729,
+        "AP_small": 0.1945065435234235,
+        "AP_medium": 0.33501512862604943,
+        "AP_large": 0.5444199953710862
+      },
+      "delta_discovery_mAP": -0.0003194874655438884
+    },
+    "p5": {
+      "params": {
+        "soup": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.55,
+        "strength": 1.0
+      },
+      "changed": [
+        "iou"
+      ],
+      "discovery_predictions_sha256": "21e9f5d1a49d59cc7e74ffc9242cc948d296bcd6e5e513998aa098a20b894c69",
+      "num_predictions": 638045,
+      "transform_seconds": 104.4,
+      "discovery": {
+        "mAP": 0.3344956422062183,
+        "AP50": 0.6606646315405825,
+        "AP75": 0.2931770457889494,
+        "AP_small": 0.19495199605525923,
+        "AP_medium": 0.33529820314489106,
+        "AP_large": 0.5447769479729823
+      },
+      "delta_discovery_mAP": 7.59717682308203e-06
+    }
+  },
+  "selected": "p2",
+  "passes_S1": false,
+  "wall_seconds": 754.5,
+  "evaluated_at_kyiv": "2026-11-11 11:08",
+  "decision": "rejected at S1 (discovery)"
+}
