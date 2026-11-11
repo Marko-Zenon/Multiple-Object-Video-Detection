@@ -1,0 +1,118 @@
+{
+  "chunk": "10.3c",
+  "recorded_at_kyiv": "2026-11-11T16:58:27+02:00",
+  "base_commit": "dec99da",
+  "decision": "REJECTED_AT_S2",
+  "candidate": "c0",
+  "upload_ready": false,
+  "gate_results": {
+    "S1": {
+      "status": "PASS",
+      "historical": true,
+      "delta_mAP": 0.001508015353369807,
+      "required_delta": 0.001
+    },
+    "S2": {
+      "status": "FAIL",
+      "delta_mAP": -0.005565738646730933,
+      "required_delta": 0.0
+    },
+    "S3": {
+      "status": "NOT_RUN",
+      "reason": "Frozen S2 prerequisite failed"
+    },
+    "G1": {
+      "status": "NOT_RUN",
+      "rule": "val_full delta mAP >= +0.0010",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G2": {
+      "status": "NOT_RUN",
+      "rule": "width <=1920 delta mAP >= +0.0010",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G3": {
+      "status": "NOT_RUN",
+      "rule": "at least 5/7 clips with nonnegative delta",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G4": {
+      "status": "NOT_RUN",
+      "rule": "without-4K delta mAP >= +0.0010",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G5": {
+      "status": "NOT_RUN",
+      "rule": "val_full AP_small loss <=0.002",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G6": {
+      "status": "NOT_RUN",
+      "rule": "density >=100 mAP loss <=0.002",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G7": {
+      "status": "NOT_RUN",
+      "rule": "every leave-one-clip-out delta >0",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G8": {
+      "status": "NOT_RUN",
+      "rule": "separate-process val_full prediction byte identity",
+      "reason": "S3 not reached after frozen S2 failure"
+    },
+    "G9": {
+      "status": "PASS",
+      "rule": "Frozen evaluator/protocol/writer/validators unchanged vs origin/develop",
+      "source": "start/end identity verification"
+    }
+  },
+  "confirmation_E6": {
+    "num_images": 1511,
+    "num_predictions": 755500,
+    "mAP": 0.27089469511565134,
+    "AP50": 0.4492097408869811,
+    "AP75": 0.2851757377524864,
+    "AP_small": 0.012513525612396713,
+    "AP_medium": 0.19538386236982366,
+    "AP_large": 0.4397311578987566,
+    "density_ge100": null
+  },
+  "confirmation_c0": {
+    "mAP": 0.2653289564689204,
+    "AP50": 0.4420294149553673,
+    "AP75": 0.27676159108158793,
+    "AP_small": 0.012531503582036897,
+    "AP_medium": 0.1953406867779025,
+    "AP_large": 0.43153433415596437
+  },
+  "confirmation_delta": {
+    "mAP": -0.005565738646730933,
+    "AP50": -0.007180325931613829,
+    "AP75": -0.00841414667089846,
+    "AP_small": 1.7977969640184735e-05,
+    "AP_medium": -4.3175591921157386e-05,
+    "AP_large": -0.008196823742792236
+  },
+  "checkpoint_sha256": "6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c",
+  "rule_sha256": "73038215e77df40f717a1283ec16c2f4c5001f50284e6161f05e7eba2b8018c9",
+  "gpu": {
+    "budget_minutes": 25,
+    "used_minutes": 14.756666666666666,
+    "used_seconds": 885.4,
+    "jobs": 1
+  },
+  "historical_evidence_bytes_unchanged": true,
+  "protected_identity_start_end": "PASS",
+  "new_confirmation_artifact_hashes": "PASS",
+  "checks": {
+    "pytest_passed": 348,
+    "pytest_skipped": 4,
+    "dataset": "PASS",
+    "splits": "PASS",
+    "scoped_ruff": "PASS",
+    "format": "PASS"
+  },
+  "scope_stop": "No S3, further candidate evaluation, training, test predictions, Kaggle CSV/upload or PR after S2 failure.",
+  "gpu_reservation": "closing heartbeat follows evidence push"
+}

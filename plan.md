@@ -1484,6 +1484,15 @@ Blockers / deviations: manifest checker initially referred to a nonexistent stan
 Completion or handoff note: chunks 10.1/10.2 complete; chunk 10.3 PARTIAL after S1 pass, pending student review of the frozen budget stop before confirmation/S2 and conditional S3. No 10.4, R1/R2/R3, later candidate, test inference, CSV or upload. Keep E6 + E4 protected. No PR, merge or DONE transition for OPT-10; release GPU on live board and stop
 ```
 
+
+#### Separate continuation 10.3c (2026-11-11T16:58:27+02:00)
+
+Badabuba authorized pending c0 S2 and conditional S3 from dec99da in the same branch/worktree, with independent 25-minute GPU accounting and timestamps (results/opt-10-soup-bn/continuation-c0-eval/contract.json). Prior chunk 10.3 and its 45-minute guard, D1/D2, c0 build and S1 evidence were preserved byte-identically. No new claim or Phase 0 restart. Fresh exclusive-GPU heartbeat e1a3646 pushed before CUDA after live ownership/process/reservation and identity checks.
+
+Result: c0 confirmation mAP 0.2653289564689204 vs E6 0.27089469511565134, delta -0.005565738646730933 < 0: S2 FAIL, terminal rejection. S1 historical PASS; S3 and G1-G8 NOT RUN after S2 failure; G9 identity PASS. Confirmation AP_small delta +0.000017977970; AP_large delta -0.008196823743, neither used as a substitute for a val_full gate. No c0 val_full, test-like/non-4K, dense/clip/leave-one-out or determinism metric claimed.
+
+Validation: 348 tests passed, four skipped (CUDA-only/missing reference-weight fixtures); full dataset, frozen splits, scoped Ruff/format PASS. Start/end protected and historical identity PASS, E6 rebuilt byte-identically, new confirmation artifact hashes match. GPU use 885.4 seconds = 14.756667 minutes of this continuation's 25-minute budget. New records, exact gate statuses and full confirmation metric table in results/opt-10-soup-bn/continuation-c0-eval/. Only identity output routing changed in opt10_loop.py; opt10_c0_continue.py reuses frozen confirmation caching with separate accounting; three budget regression tests added. No score threshold or frozen protocol changed. Closing heartbeat releases GPU; leave OPT-10 PARTIAL / PAUSED for review. No R1/R2/R3, test predictions, Kaggle CSV/upload, PR or DONE.
+
 ## 11. Change log
 
 | Date (Kyiv) | Change | By | Approved by |

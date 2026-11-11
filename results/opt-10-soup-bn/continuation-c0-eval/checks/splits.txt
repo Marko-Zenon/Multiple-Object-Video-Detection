@@ -1,0 +1,4 @@
+[OK] train_rubric: 2800 images, 56 clips, sha256 58acdbb35f1b6fed (committed 58acdbb35f1b6fed)
+[OK] train_final: 6072 images, 56 clips, sha256 63732dd60f6bbff0 (committed 63732dd60f6bbff0)
+[OK] val_fast: 714 images, 7 clips, sha256 e4eaf32da5896462 (committed e4eaf32da5896462)
+[OK] val_full: 2846 images, 7 clips, sha256 1a09ab8ac02b1e2b (committed 1a09ab8ac02b1e2b)

@@ -1,0 +1,27 @@
+{
+  "candidate": "c0",
+  "baseline_E6_confirmation": {
+    "num_images": 1511,
+    "num_predictions": 755500,
+    "mAP": 0.27089469511565134,
+    "AP50": 0.4492097408869811,
+    "AP75": 0.2851757377524864,
+    "AP_small": 0.012513525612396713,
+    "AP_medium": 0.19538386236982366,
+    "AP_large": 0.4397311578987566,
+    "density_ge100": null
+  },
+  "confirmation": {
+    "mAP": 0.2653289564689204,
+    "AP50": 0.4420294149553673,
+    "AP75": 0.27676159108158793,
+    "AP_small": 0.012531503582036897,
+    "AP_medium": 0.1953406867779025,
+    "AP_large": 0.43153433415596437
+  },
+  "delta_confirmation_mAP": -0.005565738646730933,
+  "confirmation_predictions_sha256": "880301d92deb163066854b8fec95231fa09742b42dfc4e143dac8844371c97cb",
+  "passes_S2": false,
+  "evaluated_at_kyiv": "2026-11-11 16:46",
+  "decision": "rejected at S2 (confirmation)"
+}

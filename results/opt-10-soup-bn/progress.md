@@ -63,3 +63,8 @@ The original build check falsely required strictly positive variance. Eight cons
 ## 2026-11-11 15:06 Kyiv — GPU released, handoff pushed
 
 Exclusive GPU reservation released on origin/develop in dbef9fd after the evidence checkpoint fca1b76 was pushed. No Python job remained at release; NVIDIA reported 1% utilization and 1,957 MiB desktop memory use. The coordination commit was merged into the existing task branch and pushed (d3528d0). OPT-10 stays PARTIAL / PAUSED under Badabuba for student review at the frozen budget stop. Stop here.
+
+
+## 2026-11-11T16:58:27+02:00 — separately authorized 10.3c continuation, c0 rejected at S2
+
+Authorized from dec99da with a new 25-minute GPU budget; previous chunk 10.3 and all original evidence/accounting retained unchanged. Confirmation c0 mAP 0.2653289564689204 vs E6 0.27089469511565134, delta -0.005565738646730933 < 0: frozen S2 FAIL. Candidate evaluation stopped; S3 and G1-G8 are unreached, G9/start-end integrity PASS. Independent GPU use 14.756667 minutes, one confirmation cache job, no Phase 0 restart. Full suite 348 passed / 4 skipped; dataset/splits/scoped Ruff PASS. Detailed metrics and every gate status are in continuation-c0-eval/README.md and decision.json. Stop after c0 decision; GPU release recorded in closing heartbeat.

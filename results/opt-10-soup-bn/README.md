@@ -70,3 +70,7 @@ S1 checks mAP only. The discovery AP_small delta of -0.003181553828 is reported 
 Technical evidence only. Student conclusions and decisions remain with Nazar and Marko.
 
 GPU reservation released on origin/develop at 15:06 Kyiv in dbef9fd. Task remains PARTIAL / PAUSED under Badabuba for student review.
+
+## Subsequent chunk 10.3c — c0 evaluation completed separately
+
+Badabuba authorized the pending evaluation from dec99da with its own 25-minute GPU budget. The previous Phase 0 checkpoint above is retained as historical evidence. c0 failed the unchanged S2 confirmation gate (0.265328956469 vs E6 0.270894695116, delta -0.005565738647 < 0). S3/G1-G8 were not run after this rejection. Protected and historical artifacts matched at start/end; 348 tests passed, four skipped. See continuation-c0-eval/README.md and decision.json for the current c0 decision and all applicable gate statuses. No training, test predictions, Kaggle CSV/upload or PR.

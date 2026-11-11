@@ -1,0 +1,54 @@
+Wed Nov 11 16:24:01 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.74                 KMD Version: 610.74        CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070 ...  WDDM  |   00000000:01:00.0  On |                  N/A |
+| N/A   42C    P0             10W /  110W |    2169MiB /   8151MiB |      1%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            5184    C+G   ...8bbwe\PhoneExperienceHost.exe      N/A      |
+|    0   N/A  N/A            9432    C+G   ...App_cw5n1h2txyewy\LockApp.exe      N/A      |
+|    0   N/A  N/A           14168    C+G   ...ns\Microsoft VS Code\Code.exe      N/A      |
+|    0   N/A  N/A           14248    C+G   ...cord\app-1.0.9267\Discord.exe      N/A      |
+|    0   N/A  N/A           14516    C+G   C:\Windows\explorer.exe               N/A      |
+|    0   N/A  N/A           14688    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           15188    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
+|    0   N/A  N/A           16476    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           16500    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           16812    C+G   ...IA App\CEF\NVIDIA Overlay.exe      N/A      |
+|    0   N/A  N/A           17892    C+G   ...xyewy\ShellExperienceHost.exe      N/A      |
+|    0   N/A  N/A           18156    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           18364    C+G   ....0.4341.42\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           21164    C+G   ...IA App\CEF\NVIDIA Overlay.exe      N/A      |
+|    0   N/A  N/A           23004    C+G   ...Telegram Desktop\Telegram.exe      N/A      |
+|    0   N/A  N/A           24944    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A           26900    C+G   ...\cef.win64\steamwebhelper.exe      N/A      |
+|    0   N/A  N/A           27812    C+G   ....0.4341.42\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           27992    C+G   ...s\Win64\EpicGamesLauncher.exe      N/A      |
+|    0   N/A  N/A           29580    C+G   ...4__8wekyb3d8bbwe\ms-teams.exe      N/A      |
+|    0   N/A  N/A           30068    C+G   ...2p2nqsd0c76g0\app\ChatGPT.exe      N/A      |
+|    0   N/A  N/A           30116    C+G   ...aries\Win64\EpicWebHelper.exe      N/A      |
+|    0   N/A  N/A           32260    C+G   ...ayRenderer-Win64-Shipping.exe      N/A      |
+|    0   N/A  N/A           32956    C+G   ...4__8wekyb3d8bbwe\ms-teams.exe      N/A      |
+|    0   N/A  N/A           34028    C+G   ...em32\ApplicationFrameHost.exe      N/A      |
+|    0   N/A  N/A           36388    C+G   ...\codex-computer-use-swift.exe      N/A      |
+|    0   N/A  N/A           39016    C+G   ..._pzs8sxrjxfjjc\app\claude.exe      N/A      |
+|    0   N/A  N/A           40248    C+G   ...adeonsoftware\AMDRSSrcExt.exe      N/A      |
+|    0   N/A  N/A           41684    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           42220    C+G   ...onsoftware\RadeonSoftware.exe      N/A      |
+|    0   N/A  N/A           44116    C+G   ...lpaper_engine\wallpaper64.exe      N/A      |
+|    0   N/A  N/A           48652    C+G   ...SnippingTool\SnippingTool.exe      N/A      |
+|    0   N/A  N/A           50860    C+G   ...x64__dt26b99r8h8gj\RtkUWP.exe      N/A      |
+|    0   N/A  N/A           52016    C+G   ..._pzs8sxrjxfjjc\app\claude.exe      N/A      |
+|    0   N/A  N/A           53564    C+G   ...ntrolPanel\SystemSettings.exe      N/A      |
++-----------------------------------------------------------------------------------------+

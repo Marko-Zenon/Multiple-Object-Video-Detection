@@ -1,0 +1,15 @@
+{
+  "chunk": "10.3c",
+  "budget_minutes": 25,
+  "used_minutes": 14.756666666666666,
+  "contract_sha256": "a0ae1ba58bc870f8ee94bbd65461e8892a6ef75706fdedb90a5ea0d419fa868e",
+  "jobs": [
+    {
+      "job": "cache_c0_confirmation",
+      "seconds": 885.4,
+      "started_kyiv": "2026-11-11 16:24",
+      "ended_kyiv": "2026-11-11 16:38",
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+........................................................................ [ 20%]
+.......................s............s................................... [ 40%]
+........................................................................ [ 61%]
+....................s................................................... [ 81%]
+............................................................s...         [100%]
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_evaluate.py:332: no CUDA device
+SKIPPED [1] tests\test_infer.py:185: needs the CH-11 checkpoint and a visible CUDA device
+SKIPPED [1] tests\test_rtdetr.py:83: outputs/weights/rtdetr-l.pt not downloaded
+SKIPPED [1] tests\test_yolo_p2.py:69: outputs/weights/yolo11s.pt missing
+348 passed, 4 skipped in 27.17s
