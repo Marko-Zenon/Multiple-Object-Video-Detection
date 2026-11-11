@@ -114,3 +114,12 @@ Upload-ready CSVs: 4 of 4 (cap reached). GPU minutes used: 111.7 of 240.
   processes (`ef3f5c2f…b0aa`). **Upload-ready CSV 4 of 4**: `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv`, sha256 `35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35`,
   169,748,252 B, 3,811 rows, 1,841,598 detections; checkpoint soup w080 `2d60d3fa…d939`; both validators pass.
   Not uploaded. The CSV cap is reached: no further candidate CSVs (TASK.md).
+
+### Iteration 7 — 2026-11-11 06:02- (robustness and closeout; no new variant)
+
+* All six directions completed or rejected and the 4-CSV cap reached, so per TASK.md only robustness and closeout.
+* `verify`: every protected hash (Model A, x2 / x4 predictions + CSVs, raw caches) unchanged, frozen files unchanged.
+* Leave-one-clip-out (`robustness/`): every upload-ready candidate stays above x2 for all 7 single-clip removals
+  (E6 min +0.0058, E4 min +0.0035, E1 min +0.0013, E3 min +0.0005); all 4 CSVs and test predictions re-hash equal.
+* Final checks: full pytest 299 passed / 3 skipped; `check_dataset.py` PASSED; `make_splits.py --check` OK;
+  `opt08_loop.py split` reproduces `split.json`; scoped Ruff check + format clean. Final README written.
