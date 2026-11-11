@@ -1,0 +1,18 @@
+{
+  "run_id": "opt08_e5_lowlr",
+  "family": "rtdetr",
+  "weights": "../MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "train_split": "train_final",
+  "note": "OPT-08 E5 (results/opt-08-overnight/e5_lowlr_epoch/training_decision.md): one extra epoch from Model A (CH-14 epoch0.pt, sha256 6ff4a430...5b0b) on train_final, Model A's recipe (configs/runs/final_rtdetr.json) with one change (overrides; epochs 1 = exactly one additional epoch): AdamW at a low constant lr0 5e-5 instead of optimizer=auto (AdamW, lr0 0.000833, 3-epoch warmup). A 1-epoch run has no warmup and a constant LR (Ultralytics: warmup capped at epochs-1, scheduler steps after the epoch).",
+  "overrides": {
+    "cache": false,
+    "epochs": 1,
+    "optimizer": "AdamW",
+    "lr0": 5e-05
+  }
+}

@@ -48,6 +48,8 @@ SOUP_WEIGHTS = {
 OUT = REPO / "outputs" / "opt08" / "soup"
 EVID = REPO / "results" / "opt-08-overnight" / "e4_checkpoint_soup"
 PIPELINE = REPO / "configs" / "runs" / "final_inference.json"
+E5_CKPT = REPO / "outputs" / "opt08_e5_lowlr" / "train" / "weights" / "epoch0.pt"
+E5_EVID = REPO / "results" / "opt-08-overnight" / "e5_lowlr_epoch"
 
 
 def config() -> dict:
@@ -124,6 +126,11 @@ def soup_path(tag: str) -> Path:
 def weights_path(tag: str) -> Path:
     if tag == "modelA":
         return A[0]
+    if tag == "e5l1":  # E5 epoch checkpoint, hash recorded right after training
+        rec = json.loads((E5_EVID / "checkpoint.json").read_text(encoding="utf-8"))
+        if o7.sha256(E5_CKPT) != rec["sha256"]:
+            raise SystemExit(f"{E5_CKPT}: sha256 differs from checkpoint.json")
+        return E5_CKPT
     built = json.loads((EVID / "soup_build.json").read_text(encoding="utf-8"))
     path = soup_path(tag)
     if o7.sha256(path) != built[tag]["sha256"]:

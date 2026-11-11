@@ -61,6 +61,11 @@ EXPERIMENTS: dict[str, dict[str, dict]] = {
         "s2": {"kind": "soup", "tag": "w065", "iou": 0.5},
         "s3": {"kind": "soup", "tag": "w050", "iou": 0.5},
     },
+    # E5: one extra epoch from Model A at AdamW constant lr0 5e-5 (configs/runs/opt08_e5_lowlr.json), its epoch
+    # checkpoint through the same raw cache + CH-13 merge as E4, then x2.
+    "e5_lowlr_epoch": {
+        "l1": {"kind": "soup", "tag": "e5l1", "iou": 0.5},
+    },
     # E6 (TASK.md rule, fixed before any E6 result): every component that passed S1-S3 and U1-U8 on its own:
     # E4 w080 weights -> E1's x4 border drop on the soup's raw views -> E3 b3 (best passed temporal rule).
     "e6_combination": {
