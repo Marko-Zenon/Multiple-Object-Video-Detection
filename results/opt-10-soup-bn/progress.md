@@ -58,3 +58,8 @@ The original build check falsely required strictly positive variance. Eight cons
 - Full suite 345 passed / 4 skipped, with CUDA hidden for CPU checks; reasons in checks/pytest.txt. Full dataset and all four frozen split checks PASS. Scoped Ruff check and format PASS.
 - End identity verify PASS: all protected hashes and all 55 raw shards match, E6 full predictions rebuilt byte-identically, weighted-state identity exact, frozen files unchanged. Start and end identity records both PASS.
 - Stop for student review. Existing E6/E4 final selections protected. No chunk 10.4, replicate training, confirmation/test inference, submission or upload. GPU reservation release follows in the closing live-board heartbeat.
+
+
+## 2026-11-11 15:06 Kyiv — GPU released, handoff pushed
+
+Exclusive GPU reservation released on origin/develop in dbef9fd after the evidence checkpoint fca1b76 was pushed. No Python job remained at release; NVIDIA reported 1% utilization and 1,957 MiB desktop memory use. The coordination commit was merged into the existing task branch and pushed (d3528d0). OPT-10 stays PARTIAL / PAUSED under Badabuba for student review at the frozen budget stop. Stop here.

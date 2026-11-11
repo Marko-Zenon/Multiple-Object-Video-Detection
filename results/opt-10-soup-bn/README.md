@@ -68,3 +68,5 @@ S1 checks mAP only. The discovery AP_small delta of -0.003181553828 is reported 
 - No replicate training, chunk 10.4, confirmation inference, test inference, submission or upload was performed. Protected E6, E4, Model A, epoch1.pt and w080 artifacts matched again at the end identity check.
 
 Technical evidence only. Student conclusions and decisions remain with Nazar and Marko.
+
+GPU reservation released on origin/develop at 15:06 Kyiv in dbef9fd. Task remains PARTIAL / PAUSED under Badabuba for student review.

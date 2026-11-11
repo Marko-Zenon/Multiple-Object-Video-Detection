@@ -65,5 +65,10 @@
     "47e0f39 nonexistent manifest reference",
     "ebb72d8 legitimate zero-variance validation"
   ],
-  "gpu_reservation": "release recorded separately by the closing heartbeat on origin/develop"
+  "gpu_reservation": {
+    "status": "released",
+    "origin_develop_commit": "dbef9fdbdfb32fe15a59395d4112943906746440",
+    "at_kyiv": "2026-11-11 15:06",
+    "python_jobs_remaining": 0
+  }
 }
