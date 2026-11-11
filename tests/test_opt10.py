@@ -483,3 +483,34 @@ def test_gate_thresholds_and_leave_one_clip_out(monkeypatch):
     assert not opt10_loop.gate(*gate_inputs(dense=-0.0021), 8)["passes_G1_G7_G9"]
     # label T: val_full >= 0.2999 (here 0.29 + 0.0100)
     assert opt10_loop.gate(*gate_inputs(delta=0.0100), 8)["label_T"]
+
+
+def test_bn_image_paths_uses_the_manifest_embedded_in_ch14_export_check(
+    tmp_path, monkeypatch
+):
+    import sys
+
+    sys.path.insert(0, str(REPO / "scripts"))
+    import opt10_soup
+
+    export = tmp_path / "export"
+    image = export / "train_final/images/clip/0000001.jpg"
+    image.parent.mkdir(parents=True)
+    image.write_bytes(b"frame")
+    manifest = {"name": "train_final", "num_images": 6072, "masked": True}
+    manifest_path = export / "train_final_manifest.json"
+    manifest_path.write_text(json.dumps(manifest))
+    reference = tmp_path / "export_check.json"
+    reference.write_text(json.dumps({"manifests": {"train_final": manifest}}))
+    monkeypatch.setattr(opt10_soup, "EXPORT", export)
+    monkeypatch.setattr(opt10_soup, "EXPORT_CHECK", reference)
+    monkeypatch.setattr(opt10_soup, "frozen_ids", lambda _name: [1])
+    monkeypatch.setattr(
+        opt10_soup.data,
+        "load_coco",
+        lambda _split: {"images": [{"id": 1, "file_name": "images/clip/0000001.jpg"}]},
+    )
+    assert opt10_soup.bn_image_paths() == [image]
+    manifest_path.write_text(json.dumps({**manifest, "masked": False}))
+    with pytest.raises(SystemExit, match="differs from the CH-14 export manifest"):
+        opt10_soup.bn_image_paths()

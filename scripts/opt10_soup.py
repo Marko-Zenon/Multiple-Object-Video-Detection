@@ -47,7 +47,7 @@ CHECKPOINTS = json.loads(
 )["files"]
 # The masked train_final export the trainer read (CH-14 worktree; read only).
 EXPORT = HW2 / "MOVD-ch14" / "outputs" / "yolo_data_final"
-EXPORT_MANIFEST = REPO / "results/ch-14-final/export/train_final_manifest.json"
+EXPORT_CHECK = REPO / "results/ch-14-final/export/export_check.json"
 PHASE0_JOBS = (
     "smoke",
     "d1",
@@ -226,7 +226,8 @@ def frozen_ids(name: str) -> list[int]:
 def bn_image_paths() -> list[Path]:
     """The 1,024 masked train_final export images of the frozen BatchNorm frame list (manifest = CH-14's)."""
     manifest = EXPORT / "train_final_manifest.json"
-    if o7.sha256(manifest) != o7.sha256(EXPORT_MANIFEST):
+    expected = o7.load_json(EXPORT_CHECK)["manifests"]["train_final"]
+    if o7.load_json(manifest) != expected:
         raise SystemExit(f"{manifest} differs from the CH-14 export manifest")
     images = {im["id"]: im for im in data.load_coco("train")["images"]}
     paths = []
