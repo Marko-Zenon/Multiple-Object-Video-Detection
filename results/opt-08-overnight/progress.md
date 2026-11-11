@@ -9,9 +9,9 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 | 1 | e1_x4_then_x2 | 0e73d20 | c1 +0.0015 pass | +0.0011 pass | 0.2892 (+0.0014), U1-U8 pass | `17273d34…dbf8` | **UPLOAD-READY 1** |
 | 2 | e2_tracklet_smoothing | 0e73d20 | t4 +0.0029 pass | -0.0062 **fail** | not run (rule) | — | **rejected (S2)** |
 | 3 | e3_broader_support | 0e73d20 | b3 +0.0004 pass | +0.0005 pass | 0.2885 (+0.0006), U1-U8 pass | `e45f1b54…c444` | **UPLOAD-READY 2** |
-| 4 | e4_checkpoint_soup | rule pending | — | — | — | — | pending |
+| 4 | e4_checkpoint_soup | 35464d5 | s1 (w080) +0.0030 pass | +0.0236 pass | 0.2945 (+0.0067), U1-U6/U8 pass | pending | U7 / test pending |
 | 5 | e5_lowlr_epoch | decision pending | — | — | — | — | pending (optional) |
-| 6 | e6_combination | TASK.md | — | — | — | — | pending |
+| 6 | e6_combination | 5f495e2 | — | — | — | — | pending |
 
 Upload-ready CSVs: 2 of 4. GPU minutes used: 0 of 240.
 
@@ -57,3 +57,21 @@ Upload-ready CSVs: 2 of 4. GPU minutes used: 0 of 240.
   Small gain (about a third of E1's); the gap-tolerant and clip-end variants were neutral or negative on discovery.
 * E6 now has two independently passed components (E1's x4 step and E3 b3 as the temporal rule), so by TASK.md it
   will be x4 -> b3; it runs after E4 / E5 (order), rule written before it runs.
+
+### Iteration 4 — 2026-11-11 02:39- (E4 checkpoint soup)
+
+* State: clean, row mine, lock FREE, GPU idle before each GPU job (checked with nvidia-smi), one GPU process at a time.
+* Compatibility (`compatibility.json`, before any inference): both hashes = `checkpoints.json`, same class / YAML /
+  941 tensor names, shapes, dtypes, adjacent epochs -> compatible. Rule 35464d5 committed before any soup was built.
+* CUDA smoke (`smoke.json`): Model A through the new cache + merge path on 20 frames = Model A's stored predictions
+  exactly (9,940 detections, max diff 0), 0.5 s/frame, 0.86 GB peak. Soups built (`soup_build.json`).
+* S1 (discovery raw caches, 30.3 GPU min for 3 soups): s1 (w080) +0.003009, s2 (w065) +0.002447, s3 (w050) +0.000088. Selected s1 = w080, pass.
+* S2 (w080 confirmation cache, 12.2 GPU min): +0.023630 vs x2 (pass; discovery predictions rebuilt
+  from the caches equal S1's byte for byte).
+* S3 val_full 0.294539 vs x2 0.287867 (**+0.006672**); width<=1920 +0.004948;
+  AP_small **+0.014874**; >=100 bin -0.002151 (allowed -0.003); 6/7 clips >= 0 (137 -0.0016);
+  without 4K +0.006905. Per class: person +0.0029; bicycle -0.0020; car +0.0036; van -0.0016; truck +0.0175; tricycle +0.0228; bus +0.0137; motor -0.0036.
+  Caveat for the students: the gain is much larger than any post-processing gain and is uneven by clip
+  (117 +0.021, 305 +0.013, 268 +0.011 vs 086 +0.0008, 137 -0.0016); it rests on 7 val clips.
+* U7 GPU part (`gpu_recheck_w080.json`): re-inference of clip 305 in a new process = cached shard exactly (max diff 0).
+* Test raw cache for w080 started (3,811 frames, ~31 GPU min).

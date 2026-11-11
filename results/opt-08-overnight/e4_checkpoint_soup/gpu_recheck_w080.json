@@ -1,0 +1,10 @@
+{
+  "tag": "w080",
+  "clip": "uav0000305_00000_v",
+  "frames": 184,
+  "seconds": 83.5,
+  "peak_mem_gb": 0.86,
+  "same_image_ids": true,
+  "max_abs_diff": 0.0,
+  "identical": true
+}
