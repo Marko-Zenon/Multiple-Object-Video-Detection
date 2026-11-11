@@ -38,9 +38,11 @@ def test_refused_reservation_does_not_modify_the_existing_log(accounting):
     path = accounting / "gpu_log.json"
     path.write_text(json.dumps({"jobs": [{"seconds": 13 * 60}]}))
     before = path.read_bytes()
-    with pytest.raises(SystemExit, match="continuation budget"):
-        with continuation.gpu_job():
-            pytest.fail("refused job must not start")
+    with (
+        pytest.raises(SystemExit, match="continuation budget"),
+        continuation.gpu_job(),
+    ):
+        pytest.fail("refused job must not start")
     assert path.read_bytes() == before
 
 
