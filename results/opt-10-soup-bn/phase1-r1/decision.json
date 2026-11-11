@@ -1,0 +1,198 @@
+{
+  "chunk": "10.4 + 10.5",
+  "candidate": "m2",
+  "spec": {
+    "bn": false,
+    "epoch_weights": [
+      0.8,
+      0.2
+    ],
+    "phase": 1,
+    "runs": [
+      "A",
+      "R1"
+    ]
+  },
+  "rule_commit": "e588d8e",
+  "R1": {
+    "seed": 43,
+    "config": "MOVD-opt10/configs/runs/opt10_rep_s43.json",
+    "config_sha256": "65373f49e7298612722d80fa87212b925869f5dd98eb6b909408a9cd6bd6d629",
+    "start_weights_sha256": "6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f",
+    "frames": 6072,
+    "images_seen": 12144,
+    "status": "stopped_after_epoch_2",
+    "losses_finite": true,
+    "train_seconds": 3172.389,
+    "peak_cuda_reserved_gb": 3.46,
+    "checkpoints": {
+      "epoch1": {
+        "file": "epoch0.pt",
+        "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch0.pt",
+        "sha256": "0e17db9e9c0c20dd146ece954d8c57b1fe69ca39f3bf5f3f0aa916d005d862c9"
+      },
+      "epoch2": {
+        "file": "epoch1.pt",
+        "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch1.pt",
+        "sha256": "5c02bd245b189f508403cbaf0cf5f3633635f9209d96ec778fcc15617ee4dce8"
+      }
+    },
+    "ultralytics_train_kwargs_diff_vs_model_A": {
+      "seed": [
+        42,
+        43
+      ]
+    }
+  },
+  "smoke": {
+    "args_yaml_seed": 43,
+    "stop_then_resume": true,
+    "losses_finite": true,
+    "inference_finite": true,
+    "peak_cuda_reserved_gb": 3.98,
+    "ok": true
+  },
+  "R1_alone_val_fast_single_view_reported_only": {
+    "1": {
+      "R1_mAP": 0.2499327929120344,
+      "model_A_mAP": 0.27896670695801273,
+      "delta": -0.029033914045978326
+    },
+    "2": {
+      "R1_mAP": 0.25052278213253565,
+      "model_A_mAP": 0.2584651444089497,
+      "delta": -0.007942362276414039
+    }
+  },
+  "m2_checkpoint_sha256": "7392eab92e50ffa9c2b857b9818d6f6b1b9af56fe5c6cec6ed4b24475bc91c1c",
+  "m2_weights": [
+    [
+      "A",
+      1,
+      0.4,
+      "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+    ],
+    [
+      "R1",
+      1,
+      0.4,
+      "0e17db9e9c0c20dd146ece954d8c57b1fe69ca39f3bf5f3f0aa916d005d862c9"
+    ],
+    [
+      "A",
+      2,
+      0.1,
+      "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+    ],
+    [
+      "R1",
+      2,
+      0.1,
+      "5c02bd245b189f508403cbaf0cf5f3633635f9209d96ec778fcc15617ee4dce8"
+    ]
+  ],
+  "S1": {
+    "E6": {
+      "mAP": 0.3344880450293952,
+      "AP50": 0.66079403123135,
+      "AP75": 0.2931346251149099,
+      "AP_small": 0.19486829336528577,
+      "AP_medium": 0.3353142558454753,
+      "AP_large": 0.5448983865410537
+    },
+    "m2": {
+      "mAP": 0.3258631749846142,
+      "AP50": 0.6477858449884545,
+      "AP75": 0.2758853726504984,
+      "AP_small": 0.19901552967082328,
+      "AP_medium": 0.3247260874591822,
+      "AP_large": 0.5342155446142576
+    },
+    "delta": {
+      "mAP": -0.008624870044781019,
+      "AP50": -0.01300818624289557,
+      "AP75": -0.017249252464411502,
+      "AP_small": 0.0041472363055375105,
+      "AP_medium": -0.010588168386293118,
+      "AP_large": -0.010682841926796138
+    },
+    "threshold": "+0.0010",
+    "passes": false
+  },
+  "discovery_per_clip_reported_only": {
+    "clip:uav0000086_00000_v": {
+      "E6_mAP": 0.2790392466181147,
+      "m2_mAP": 0.30063802955833735,
+      "delta": 0.02159878294022266,
+      "frames": 464
+    },
+    "clip:uav0000137_00458_v": {
+      "E6_mAP": 0.35673890434178185,
+      "m2_mAP": 0.34066204378225595,
+      "delta": -0.016076860559525896,
+      "frames": 233
+    },
+    "clip:uav0000182_00000_v": {
+      "E6_mAP": 0.23585130418013547,
+      "m2_mAP": 0.23370636542413445,
+      "delta": -0.0021449387560010247,
+      "frames": 363
+    },
+    "clip:uav0000339_00001_v": {
+      "E6_mAP": 0.3253063305382974,
+      "m2_mAP": 0.3255217677728416,
+      "delta": 0.00021543723454420238,
+      "frames": 275
+    }
+  },
+  "barrier_m2_discovery_delta_lt_minus_0.0020": true,
+  "decision": "m2 REJECTED at S1 (discovery delta -0.008625 < +0.0010). Barrier triggered (delta < -0.0020): no R2/R3 under the frozen rule. S2, S3, G1-G9, determinism, test inference and CSV NOT RUN.",
+  "not_reached": [
+    "S2 confirmation",
+    "S3 val_full",
+    "G1-G8",
+    "AP by class / density on val_full",
+    "width<=1920 / without-4K",
+    "leave-one-clip-out",
+    "test inference",
+    "CSV"
+  ],
+  "fallback_per_rule": "D1 was not positive (H1 not material), so the rule's fallback is: stop optimising and keep E6 + E4 as the Kaggle selections.",
+  "gpu_phase1_jobs": [
+    {
+      "job": "rep_smoke",
+      "phase": 1,
+      "seconds": 161.8,
+      "started_kyiv": "2026-11-11 23:57",
+      "ended_kyiv": "2026-11-12 00:00",
+      "status": "ok"
+    },
+    {
+      "job": "train_R1",
+      "phase": 1,
+      "seconds": 3180.1,
+      "started_kyiv": "2026-11-12 00:00",
+      "ended_kyiv": "2026-11-12 00:53",
+      "status": "ok"
+    },
+    {
+      "job": "cache_m2_discovery",
+      "phase": 1,
+      "seconds": 614.8,
+      "started_kyiv": "2026-11-12 00:53",
+      "ended_kyiv": "2026-11-12 01:04",
+      "status": "ok"
+    },
+    {
+      "job": "valfast_R1",
+      "phase": 1,
+      "seconds": 231.7,
+      "started_kyiv": "2026-11-12 01:08",
+      "ended_kyiv": "2026-11-12 01:12",
+      "status": "ok"
+    }
+  ],
+  "gpu_phase1_minutes": 69.81,
+  "gpu_phase1_cap": 85,
+  "decided_at_kyiv": "2026-11-12 01:14"
+}

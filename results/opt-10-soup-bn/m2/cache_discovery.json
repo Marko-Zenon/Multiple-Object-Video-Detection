@@ -1,0 +1,15 @@
+{
+  "candidate": "m2",
+  "stage": "discovery",
+  "checkpoint_sha256": "7392eab92e50ffa9c2b857b9818d6f6b1b9af56fe5c6cec6ed4b24475bc91c1c",
+  "frames": 1335,
+  "seconds": 614.1,
+  "peak_mem_gb": 0.86,
+  "shards_sha256": {
+    "uav0000086_00000_v.npz": "b57024a26d8152d96b83732777ab9515147eb8a439192df142c28a1a279bf915",
+    "uav0000137_00458_v.npz": "301d0eb979ed57ee812fcf88f93e5aa89e6ceaef1f6af3f65fddc6267d4a5548",
+    "uav0000182_00000_v.npz": "d09c3dab7f6eae58653b7bfbd3c769d182d0361aa6ae5d61d1505b2d2b345955",
+    "uav0000339_00001_v.npz": "d459e36a9090131747d67e276d7b17d7f71378a829a5be701991289c5cd1ccd5"
+  },
+  "cached_at_kyiv": "2026-11-12 01:04"
+}

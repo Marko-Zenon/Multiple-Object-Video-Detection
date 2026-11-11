@@ -1,0 +1,36 @@
+{
+  "run": "R1",
+  "path": "unfused network, single full-frame view at 1344, top-300 decoding, conf 0.001 (D1 eval mode)",
+  "epochs": {
+    "1": {
+      "checkpoint_sha256": "0e17db9e9c0c20dd146ece954d8c57b1fe69ca39f3bf5f3f0aa916d005d862c9",
+      "val_fast": {
+        "mAP": 0.2499327929120344,
+        "AP50": 0.478335828838385,
+        "AP75": 0.22536170676793207,
+        "AP_small": 0.12326554310869764,
+        "AP_medium": 0.23296571790807571,
+        "AP_large": 0.4143762362924553,
+        "num_predictions": 214200
+      },
+      "model_A_stored_val_fast_mAP": 0.27896670695801273,
+      "delta_vs_model_A_stored": -0.029033914045978326
+    },
+    "2": {
+      "checkpoint_sha256": "5c02bd245b189f508403cbaf0cf5f3633635f9209d96ec778fcc15617ee4dce8",
+      "val_fast": {
+        "mAP": 0.25052278213253565,
+        "AP50": 0.4634929776087299,
+        "AP75": 0.2361216441107171,
+        "AP_small": 0.11259186281899615,
+        "AP_medium": 0.2355395218517052,
+        "AP_large": 0.4080502232059998,
+        "num_predictions": 214200
+      },
+      "model_A_stored_val_fast_mAP": 0.2584651444089497,
+      "delta_vs_model_A_stored": -0.007942362276414039
+    }
+  },
+  "peak_mem_gb": 0.88,
+  "run_at_kyiv": "2026-11-12 01:12"
+}

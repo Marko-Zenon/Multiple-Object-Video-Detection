@@ -9,7 +9,7 @@
     "max_new_csvs": 3
   },
   "phase0_minutes": 41.2,
-  "phase1_minutes": 55.7,
+  "phase1_minutes": 69.8,
   "jobs": [
     {
       "job": "smoke",
@@ -65,6 +65,22 @@
       "seconds": 3180.1,
       "started_kyiv": "2026-11-12 00:00",
       "ended_kyiv": "2026-11-12 00:53",
+      "status": "ok"
+    },
+    {
+      "job": "cache_m2_discovery",
+      "phase": 1,
+      "seconds": 614.8,
+      "started_kyiv": "2026-11-12 00:53",
+      "ended_kyiv": "2026-11-12 01:04",
+      "status": "ok"
+    },
+    {
+      "job": "valfast_R1",
+      "phase": 1,
+      "seconds": 231.7,
+      "started_kyiv": "2026-11-12 01:08",
+      "ended_kyiv": "2026-11-12 01:12",
       "status": "ok"
     }
   ]

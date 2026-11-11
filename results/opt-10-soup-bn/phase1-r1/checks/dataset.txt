@@ -1,0 +1,35 @@
+Dataset root: C:\UCU\AI\hw2\MOVD-opt10\multiple-object-video-detection-hw-2-ucu-ai-2026
+[OK] dataset root exists
+[OK] no double nesting (root/<dataset name>/ absent)
+[OK] no stray train in the repo root
+[OK] no stray val in the repo root
+[OK] no stray test in the repo root
+[OK] no stray test_images.csv in the repo root
+[OK] train/ exists
+[OK] train: 56 clips (expected 56)
+[OK] train: 24201 images (expected 24201)
+[OK] train: 24201 YOLO label files (expected 24201)
+[OK] train: ignore/ files for 50 clips (expected 50)
+[OK] train/data.yaml exists
+[OK] train/annotations_coco.json exists
+[OK] train: COCO JSON has 24201 images (expected 24201)
+[OK] train: COCO JSON has 1616260 annotations (expected 1616260)
+[OK] train: COCO categories ['person', 'bicycle', 'car', 'van', 'truck', 'tricycle', 'bus', 'motor']
+[OK] val/ exists
+[OK] val: 7 clips (expected 7)
+[OK] val: 2846 images (expected 2846)
+[OK] val: 2846 YOLO label files (expected 2846)
+[OK] val: ignore/ files for 5 clips (expected 5)
+[OK] val/data.yaml exists
+[OK] val/annotations_coco.json exists
+[OK] val: COCO JSON has 2846 images (expected 2846)
+[OK] val: COCO JSON has 146092 annotations (expected 146092)
+[OK] val: COCO categories ['person', 'bicycle', 'car', 'van', 'truck', 'tricycle', 'bus', 'motor']
+[OK] test/ exists
+[OK] test: 48 clips (expected 48)
+[OK] test: 3811 images (expected 3811)
+[OK] test_images.csv exists
+[OK] test_images.csv: 3811 rows (expected 3811)
+[OK] test_images.csv: every file_name exists (0 missing)
+
+PASSED

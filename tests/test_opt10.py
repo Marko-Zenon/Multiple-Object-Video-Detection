@@ -522,3 +522,30 @@ def test_constant_channels_have_valid_zero_bn_variance_after_reestimation():
     assert torch.equal(net[0].running_var, torch.zeros(3))
     assert int(net[0].num_batches_tracked) == 4
     assert torch.isfinite(net(torch.zeros(1, 3, 8, 8))).all()
+
+
+def test_replicate_checkpoint_path_is_resolved_from_the_hw2_folder(
+    tmp_path, monkeypatch
+):
+    """Replicate records store o7.rel paths (relative to the hw2 folder), so the reader must join them to HW2."""
+    import sys
+
+    sys.path.insert(0, str(REPO / "scripts"))
+    import opt10_soup
+
+    record = tmp_path / "replicates" / "R1.json"
+    record.parent.mkdir()
+    rel = "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch0.pt"
+    record.write_text(
+        json.dumps({"checkpoints": {"epoch1": {"path": rel, "sha256": "abc"}}}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(opt10_soup, "EVID", tmp_path)
+    path, sha = opt10_soup.run_checkpoint("R1", 1)
+    assert path == opt10_soup.HW2 / rel and sha == "abc"
+    assert opt10.candidate_weights("m2") == [
+        ("A", 1, 0.4),
+        ("R1", 1, 0.4),
+        ("A", 2, 0.1),
+        ("R1", 2, 0.1),
+    ]

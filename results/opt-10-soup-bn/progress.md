@@ -70,3 +70,15 @@ Exclusive GPU reservation released on origin/develop in dbef9fd after the eviden
 Authorized from dec99da with a new 25-minute GPU budget; previous chunk 10.3 and all original evidence/accounting retained unchanged. Confirmation c0 mAP 0.2653289564689204 vs E6 0.27089469511565134, delta -0.005565738646730933 < 0: frozen S2 FAIL. Candidate evaluation stopped; S3 and G1-G8 are unreached, G9/start-end integrity PASS. Independent GPU use 14.756667 minutes, one confirmation cache job, no Phase 0 restart. Full suite 348 passed / 4 skipped; dataset/splits/scoped Ruff PASS. Detailed metrics and every gate status are in continuation-c0-eval/README.md and decision.json. Stop after c0 decision; GPU release recorded in closing heartbeat.
 
 Continuation 10.3c GPU released at 2026-11-11T16:59:45+02:00, live-board commit 680a0117dcdfb94a211ca10a9992a22d417874a7. Terminal c0 S2 rejection is recorded; OPT-10 remains paused for student review.
+
+
+## 2026-11-12 01:40 Kyiv — chunk 10.4 + 10.5 (R1, m2): m2 rejected at S1, barrier triggered
+
+Authorized by Badabuba from 4066c4c; contract in phase1-r1/contract.json; board heartbeat a3229e3 reserved the RTX 5070. Start identity verify PASS.
+- Replicate smoke PASS (seed 43 in args.yaml, stop after epoch 1 + resume, finite losses, inference finite, 3.98 GB).
+- R1 trained once with configs/runs/opt10_rep_s43.json: only `seed` differs from Model A's kwargs, start weights 6de60b10…e73f, train_final 6,072 frames, 2 of 6 scheduled epochs, 12,144 images seen, finite losses, 52.9 min, 3.46 GB peak reserved. epoch0.pt 0e17db9e…62c9, epoch1.pt 5c02bd24…cee8.
+- Fixed one implementation defect before the build: replicate checkpoint paths are relative to the hw2 folder (run_checkpoint joined them to the repo root); regression test added.
+- m2 built exactly (0.4/0.4/0.1/0.1), sha256 7392eab9…c91c. Discovery cache 614 s.
+- S1: m2 discovery mAP 0.325862930885 vs E6 0.334488045029, delta -0.008624870045 < +0.0010: REJECTED. Below the -0.0020 barrier: no R2/R3. S2/S3/G1-G9, test inference and CSV not run.
+- R1 alone on val_fast (reported only): epoch 1 0.249933 (Model A 0.278967), epoch 2 0.250523 (Model A 0.258465).
+- Phase 1 GPU 69.8 of 85 min. End identity verify PASS; 351 passed / 2 skipped; dataset, splits, scoped Ruff PASS. Details: phase1-r1/README.md, decision.json.
