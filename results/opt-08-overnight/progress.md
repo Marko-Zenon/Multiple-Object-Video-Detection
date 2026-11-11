@@ -11,9 +11,9 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 | 3 | e3_broader_support | 0e73d20 | b3 +0.0004 pass | +0.0005 pass | 0.2885 (+0.0006), U1-U8 pass | `e45f1b54…c444` | **UPLOAD-READY 2** |
 | 4 | e4_checkpoint_soup | 35464d5 | s1 (w080) +0.0030 pass | +0.0236 pass | 0.2945 (+0.0067), U1-U8 pass | `7dc9b318…2014` | **UPLOAD-READY 3** |
 | 5 | e5_lowlr_epoch | 5714d84 / 1b138bb | l1 -0.0186 **fail** | not run (rule) | not run | — | **rejected (S1)** |
-| 6 | e6_combination | 5f495e2 | — | — | — | — | pending |
+| 6 | e6_combination | 5f495e2 | k1 +0.0050 pass | +0.0255 pass | 0.2966 (+0.0087), U1-U8 pass | `35a225c9…7c35` | **UPLOAD-READY 4** |
 
-Upload-ready CSVs: 3 of 4. GPU minutes used: 111.7 of 240.
+Upload-ready CSVs: 4 of 4 (cap reached). GPU minutes used: 111.7 of 240.
 
 ## Iteration log
 
@@ -96,3 +96,21 @@ Upload-ready CSVs: 3 of 4. GPU minutes used: 111.7 of 240.
   The low-LR continuation from Model A loses clearly on the discovery clips (kept as a negative result); the drop
   after epoch 1 is therefore not explained by the rising LR alone. No retuning. E5 cannot enter E6.
 * GPU total 111.7 of 240 min (E5: smoke 2.4, epoch 26.5, discovery 10.1).
+
+### Iteration 6 — 2026-11-11 05:26-06:01 (E6 combination, CPU only)
+
+* State: clean, row mine, lock FREE, GPU idle (not used in this iteration).
+* **E6 `k1`** (rule 5f495e2: w080 soup raw views -> x4 border drop -> E3 b3). S1 discovery +0.005036;
+  S2 confirmation +0.025516; S3 val_full 0.296583 (**+0.008716** vs x2);
+  width<=1920 +0.006611; AP_small +0.015657; >=100 bin -0.000263; 7/7 clips >= 0
+  (smallest 137 +0.00018); without 4K +0.008917.
+* **U8 correction (code, not criterion; ce90662):** the first `full` run reported U8 false because the check diffed
+  all of `configs/` and counted the two *added* E5 run configs (`configs/runs/opt08_e5_lowlr{,_smoke}.json`) as
+  a protocol change. `git diff --stat origin/develop` showed no modified frozen file (evaluator, submission writer,
+  validator, protocol.json, splits unchanged). The check now excludes OPT-08's own added run configs and still
+  fails on any modified / deleted frozen file; `recheck-u8` recomputed only that flag (original record kept in
+  `gate_u8_initial.json`; no metric recomputed). E1-E4 passed U8 before the E5 configs existed.
+* U7: val_full byte-identical in a fresh process (`bdb2806e…ad52`), test predictions identical across two
+  processes (`ef3f5c2f…b0aa`). **Upload-ready CSV 4 of 4**: `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv`, sha256 `35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35`,
+  169,748,252 B, 3,811 rows, 1,841,598 detections; checkpoint soup w080 `2d60d3fa…d939`; both validators pass.
+  Not uploaded. The CSV cap is reached: no further candidate CSVs (TASK.md).

@@ -1,0 +1,2 @@
+candidate,kind,tag,factor,margin,mode,x2_mAP,mAP,delta,AP_small
+k1,combo,w080,0.0,0.005,five_frame_mean,0.32945184095777236,0.3344880450293952,0.005036204071622863,0.19486829336528577
