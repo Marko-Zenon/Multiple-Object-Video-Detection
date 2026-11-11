@@ -8,9 +8,9 @@ Rules, grid, gates, diagnostics and budgets: [`selection_rule.md`](selection_rul
 
 | # | Chunk | Session | State |
 |---|---|---|---|
-| 10.1 | Claim, worktree, frozen rule, frame lists, identity check (hashes, E6 val_full rebuilt byte-identically) | 1 (2026-11-11) | this session |
-| 10.2 | Code + tests: N-checkpoint weighted average, BatchNorm re-estimation, per-image-statistics context, CLIs, replicate configs | 1 | this session |
-| 10.3 | Phase 0 on the GPU (<= 45 min): smoke / anchor, D1, D2, `c0` through S1 (S2 / S3 only if S1 passes) | 1 | this session, then **stop for student review** |
+| 10.1 | Claim, worktree, frozen rule, frame lists, identity check (hashes, E6 val_full rebuilt byte-identically) | 1 (2026-11-11) | complete; start/end identity passed in continuation |
+| 10.2 | Code + tests: N-checkpoint weighted average, BatchNorm re-estimation, per-image-statistics context, CLIs, replicate configs | 1 | complete; two validity-check corrections recorded in README.md |
+| 10.3 | Phase 0 on the GPU (<= 45 min): smoke / anchor, D1, D2, `c0` through S1 (S2 / S3 only if S1 passes) | 1 | partial; D1/D2/c0/S1 complete, S2/S3 stopped by frozen GPU cap; **student review** |
 | 10.4 | Phase 1: replicate smoke, R1 (seed 43, 2 epochs), single-view val_fast | later | needs a separate approval |
 | 10.5 | `m2`: build, discovery cache, S1; barrier rule | later | needs approval |
 | 10.6 | Phase 2: R2, R3 | later | needs approval |
@@ -31,3 +31,7 @@ Rules, grid, gates, diagnostics and budgets: [`selection_rule.md`](selection_rul
 
 Replicate runs R1-R3 use seeds 43, 44, 45 through `overrides.seed` (plan.md section 11, approved by Badabuba on
 2026-11-11). Not used in session 1.
+
+## Continuation checkpoint
+
+Codex resumed the latest pushed Fable checkpoint cffa98e on 2026-11-11 under the existing Badabuba ownership. See progress.md, README.md and session_decision.json. No new branch, worktree, claim or experiment was created. Chunk 10.3 is partial because confirmation admission exceeds the frozen Phase 0 GPU cap after S1 passed.

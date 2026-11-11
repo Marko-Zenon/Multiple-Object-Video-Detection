@@ -47,3 +47,14 @@ The first `bn c0` attempt stopped before the GPU-job context because the CLI ref
 The frozen re-estimation completed once: 1,024 batches, 122 BN layers, every counter 1,024; non-BN tensors and saved parameters identical to w080; flags and momenta restored. Checkpoint SHA256 6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c. Image-content SHA256 b8c9bb9d89a7b5266608df63dc2b1fa750d0f19c40f8482c327adc0a5b1bf69f. GPU-accounted re-estimation wall time 208.4 seconds.
 
 The original build check falsely required strictly positive variance. Eight constant channels have zero variance (7 in model.6.ec.bn and 1 in model.7.ec.bn), exactly as in the protected w080 checkpoint, with epsilon 0.001 and no negative variance. The saved checkpoint is finite. Corrected this implementation validity check to finite nonnegative variance (ebb72d8), added a constant-channel regression test (37 OPT-10 tests pass), retained build_FAILED.json and variance_audit.json, then CPU-audited the same completed checkpoint and wrote build.json. No tensor changed, no BN rerun, no candidate retuning, no selection threshold changed. Median relative BN mean / variance changes are 0.003793946 / 0.010448006. Discovery inference is next.
+
+
+## 2026-11-11 15:04 Kyiv — S1 passed, frozen budget stops confirmation; validation complete
+
+- Discovery cache: 1,335 frames, four clips, 828.8 seconds inference; S1 CPU wall 202.6 seconds.
+- c0 discovery mAP 0.335996060382765 vs E6 0.3344880450293952, delta +0.001508015353369807 >= +0.0010: S1 PASS. H2 material by the frozen reading; m4bn eligible under its discovery condition, with later chunks still requiring approval.
+- Discovery AP_small 0.19168673953689122 vs E6 0.19486829336528577, delta -0.003181553828394551. Reported; this is not a val_full G5 evaluation. Full six-metric tables in README.md and c0/screen.json.
+- Actual logged Phase 0 use 2474.1 seconds = 41.235 minutes <= 45. Unchanged budget guard refuses confirmation: used + 13-minute reservation = 54.235 > 45. Refusal happened before CUDA/cache creation; confirmation_budget_stop.txt retained. S2 and S3 not run; c0 is not upload-ready and has no val_full number. Chunk 10.3 remains partial at this explicit frozen budget stop.
+- Full suite 345 passed / 4 skipped, with CUDA hidden for CPU checks; reasons in checks/pytest.txt. Full dataset and all four frozen split checks PASS. Scoped Ruff check and format PASS.
+- End identity verify PASS: all protected hashes and all 55 raw shards match, E6 full predictions rebuilt byte-identically, weighted-state identity exact, frozen files unchanged. Start and end identity records both PASS.
+- Stop for student review. Existing E6/E4 final selections protected. No chunk 10.4, replicate training, confirmation/test inference, submission or upload. GPU reservation release follows in the closing live-board heartbeat.

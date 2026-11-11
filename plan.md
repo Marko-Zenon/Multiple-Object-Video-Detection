@@ -1474,14 +1474,14 @@ Completion or handoff note: NEGATIVE result, no upload-ready CSV. Keep E6 (publi
 - **Files expected to change:** `movd/opt10.py`, `scripts/opt10_soup.py`, `scripts/opt10_loop.py`, `tests/test_opt10.py`, `configs/runs/opt10_rep_*.json`, `results/opt-10-soup-bn/`, later `results/opt10_rep_s4*/` and `results/submissions.csv` (append), this row and spec.
 - **Evidence log:**
 ```text
-Owner: Badabuba (worker: Claude) | Claimed: 2026-11-11 12:19 Kyiv (row added with the claim) | Last update: 2026-11-11 12:19 Kyiv | Branch: opt-10-soup-bn (worktree MOVD-opt10) | Commits: — | PR: —
-Files changed: —
-Validation commands: —
-Metrics / results: —
-Artifacts: —
-Runtime / hardware: —
-Blockers / deviations: —
-Completion or handoff note: —
+Owner: Badabuba (worker: Codex continuing Fable/Claude checkpoints e588d8e/cffa98e) | Claimed: 2026-11-11 12:19 Kyiv (df0ac04, existing claim retained) | Last update: 2026-11-11 15:04 Kyiv | Branch: opt-10-soup-bn (worktree MOVD-opt10) | Commits: e588d8e, cffa98e, 47e0f39, ebb72d8, c4dee4b, subsequent Phase 0 evidence checkpoint | PR: none (chunk 10.9 not started)
+Files changed: existing OPT-10 implementation/configs from chunks 10.1/10.2; continuation corrects scripts/opt10_soup.py manifest reference and zero-variance validity check, adds two regression tests in tests/test_opt10.py; technical evidence in results/opt-10-soup-bn/, TASK.md/progress.md, and this OPT-10 log/row only
+Validation commands: opt10_loop.py verify at start/end PASS (all protected hashes, 55 w080 raw shards, E6 val_full byte-identical rebuild, generalized weighted-state identity, frozen files unchanged); opt10_soup.py check PASS (941 tensors); smoke PASS (20 frames raw identical); pytest tests -q -ra: 345 passed, 4 skipped (CUDA-only/missing reference-weight fixtures); check_dataset.py PASS; make_splits.py --check PASS; scoped Ruff check --ignore RUF100 and format --check on four OPT-10 Python files PASS
+Metrics / results: D1 unfused eval -> per-image BN mAP: epoch1 0.278989974 -> 0.256616625 (-0.022373349); epoch3 0.261349820 -> 0.243914599 (-0.017435221); epoch6 0.238084752 -> 0.233885170 (-0.004199582), H1 not supported (< +0.010), every state restored byte-identically. D2 train-frame mAP epochs1/3/6 = 0.397074777 / 0.477392397 / 0.499405821, rise +0.102331044 >= +0.03 with val falling: frozen H3 criterion met. c0 discovery mAP 0.335996060382765 vs E6 0.3344880450293952, delta +0.001508015353369807 >= +0.0010: S1 PASS, H2 material; AP_small delta -0.003181553828394551 (discovery only). Full D1/D2 six-metric table and c0 metrics in results/opt-10-soup-bn/README.md. S2/S3 not run, no c0 val_full result or promotion
+Artifacts: ignored outputs/opt10/soup/c0.pt (sha256 6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c), four discovery raw shards, discovery predictions and logs; tracked identity/smoke/diagnostics/build/screen/checks/session_decision evidence, original build_FAILED.json and variance audit retained; no submission artifact
+Runtime / hardware: RTX 5070 Laptop, torch 2.14.1+cu130, Ultralytics 8.4.207; one GPU process at a time, process/nvidia preflight before each job; exclusive-use heartbeat 4e93f72 pushed before CUDA. GPU-accounted Phase 0 wall 2474.1 s = 41.235 min of 45 (smoke 13.1, D1 960.2, D2 462.7, BN 208.6, discovery cache 829.5 s); CPU stages/checks separate. Closing heartbeat releases the GPU reservation
+Blockers / deviations: manifest checker initially referred to a nonexistent standalone file; corrected to CH-14's committed embedded manifest before c0 CUDA (47e0f39). Initial build validity check rejected eight legitimate zero-variance channels, also zero in protected w080, epsilon 0.001; changed to finite nonnegative variance (ebb72d8), audited/reused completed c0 unchanged without BN rerun; original failure retained. Diagnostic wall time exceeded CLI estimates; unchanged budget guard refuses confirmation (used 41.235 + reservation 13 > cap 45), before cache/CUDA. Frozen candidate, frame lists, BN procedure, all score gates and protected artifacts unchanged
+Completion or handoff note: chunks 10.1/10.2 complete; chunk 10.3 PARTIAL after S1 pass, pending student review of the frozen budget stop before confirmation/S2 and conditional S3. No 10.4, R1/R2/R3, later candidate, test inference, CSV or upload. Keep E6 + E4 protected. No PR, merge or DONE transition for OPT-10; release GPU on live board and stop
 ```
 
 ## 11. Change log

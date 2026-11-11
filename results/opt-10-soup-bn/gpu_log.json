@@ -8,7 +8,7 @@
     "max_training_runs": 3,
     "max_new_csvs": 3
   },
-  "phase0_minutes": 27.4,
+  "phase0_minutes": 41.2,
   "jobs": [
     {
       "job": "smoke",
@@ -40,6 +40,14 @@
       "seconds": 208.6,
       "started_kyiv": "2026-11-11 14:30",
       "ended_kyiv": "2026-11-11 14:33",
+      "status": "ok"
+    },
+    {
+      "job": "cache_c0_discovery",
+      "phase": 0,
+      "seconds": 829.5,
+      "started_kyiv": "2026-11-11 14:36",
+      "ended_kyiv": "2026-11-11 14:50",
       "status": "ok"
     }
   ]

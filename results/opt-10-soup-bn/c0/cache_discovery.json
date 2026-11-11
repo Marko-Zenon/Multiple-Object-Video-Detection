@@ -1,0 +1,15 @@
+{
+  "candidate": "c0",
+  "stage": "discovery",
+  "checkpoint_sha256": "6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c",
+  "frames": 1335,
+  "seconds": 828.8,
+  "peak_mem_gb": 0.86,
+  "shards_sha256": {
+    "uav0000086_00000_v.npz": "a7b0014e34a0c837add75c21409c1c73115468da58d151582ab0dea2be5f6043",
+    "uav0000137_00458_v.npz": "daa52ffe2ae787af620874460c1e1ab2f833bf112cc67e8752b4f311d8ed93e1",
+    "uav0000182_00000_v.npz": "1c81319b5977d046e81946b6e4b2163c053c97e57b664e3fcb3fb0d8fc5ad8f0",
+    "uav0000339_00001_v.npz": "1713b451e8810aa5a779ad71a6aacfbe4246967248ed4c01d3c9576c5472adb7"
+  },
+  "cached_at_kyiv": "2026-11-11 14:50"
+}

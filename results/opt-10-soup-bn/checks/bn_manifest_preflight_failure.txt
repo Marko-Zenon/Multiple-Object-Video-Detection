@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "C:\UCU\AI\hw2\MOVD-opt10\scripts\opt10_soup.py", line 673, in <module>
+    main()
+  File "C:\UCU\AI\hw2\MOVD-opt10\scripts\opt10_soup.py", line 663, in main
+    {
+  File "C:\UCU\AI\hw2\MOVD-opt10\scripts\opt10_soup.py", line 278, in cmd_bn
+    paths = bn_image_paths()
+            ^^^^^^^^^^^^^^^^
+  File "C:\UCU\AI\hw2\MOVD-opt10\scripts\opt10_soup.py", line 229, in bn_image_paths
+    if o7.sha256(manifest) != o7.sha256(EXPORT_MANIFEST):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\UCU\AI\hw2\MOVD-opt10\scripts\opt07_loop.py", line 83, in sha256
+    with open(path, "rb") as f:
+         ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\UCU\\AI\\hw2\\MOVD-opt10\\results\\ch-14-final\\export\\train_final_manifest.json'

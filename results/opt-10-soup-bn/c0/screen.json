@@ -1,0 +1,49 @@
+{
+  "candidate": "c0",
+  "spec": {
+    "bn": true,
+    "epoch_weights": [
+      0.8,
+      0.2
+    ],
+    "phase": 0,
+    "runs": [
+      "A"
+    ]
+  },
+  "checkpoint_sha256": "6acb20696921a1b5e1fd7b63d0d17d76f6349d7a1f1eba785f0d0f441a16002c",
+  "rule_commit": "e588d8e",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.001,
+    "S2_min_delta_confirmation": 0.0
+  },
+  "baseline_E6_discovery": {
+    "num_images": 1335,
+    "num_predictions": 638045,
+    "mAP": 0.3344880450293952,
+    "AP50": 0.66079403123135,
+    "AP75": 0.2931346251149099,
+    "AP_small": 0.19486829336528577,
+    "AP_medium": 0.3353142558454753,
+    "AP_large": 0.5448983865410537,
+    "density_ge100": null
+  },
+  "discovery": {
+    "mAP": 0.335996060382765,
+    "AP50": 0.6629964526031992,
+    "AP75": 0.2947520721401818,
+    "AP_small": 0.19168673953689122,
+    "AP_medium": 0.3369414468800251,
+    "AP_large": 0.540036665725978
+  },
+  "delta_discovery_mAP": 0.001508015353369807,
+  "delta_discovery_AP_small": -0.003181553828394551,
+  "discovery_predictions_sha256": "447dd39d5facc5955c0fd290f24e9848e97da24068aae788a87e4bf047b1cbf1",
+  "num_predictions": 643536,
+  "passes_S1": true,
+  "wall_seconds": 202.6,
+  "evaluated_at_kyiv": "2026-11-11 14:54",
+  "decision": "S1 pass: confirmation next",
+  "m4bn_eligible": true,
+  "H2_material": true
+}
