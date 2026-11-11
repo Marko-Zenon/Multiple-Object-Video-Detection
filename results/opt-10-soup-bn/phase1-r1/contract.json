@@ -1,0 +1,31 @@
+{
+  "chunk": "10.4 + 10.5 (+ 10.8 for m2 only if every gate passes)",
+  "authorized_by": "Badabuba (Nazar), 2026-11-11, continuing from 4066c4c on opt-10-soup-bn",
+  "worker": "Claude",
+  "started_kyiv": "2026-11-11 23:47",
+  "board_heartbeat_gpu_reserved": "a3229e3cde1532b32cd174325b33fafe40e3e1d4",
+  "scope": [
+    "replicate smoke (configs/runs/opt10_rep_smoke.json): stop after epoch 1 + resume + inference",
+    "R1 only: configs/runs/opt10_rep_s43.json (Model A recipe, seed 43, stop_after_epoch 2 of the 6-epoch schedule)",
+    "m2 = runs A + R1, epoch_weights [0.8, 0.2] -> 0.4 A_e1 + 0.4 R1_e1 + 0.1 A_e2 + 0.1 R1_e2 (movd.opt10.candidate_weights)",
+    "m2 through S1 (discovery) -> S2 (confirmation) -> S3 (val_full, G1-G9), stop at the first failed gate",
+    "R1 epoch 1 and epoch 2 alone, single-view val_fast (reported only, never a gate)",
+    "test inference + one CSV only if m2 passes every gate"
+  ],
+  "not_in_scope": ["c0 (rejected at S2), D1, D2", "R2, R3, m4, m4e1, m4bn", "Kaggle upload", "PR", "DONE"],
+  "execution_budget": {
+    "gpu_minutes_phase1_cap": 85,
+    "gpu_minutes_phase1_used_before_chunk": 0,
+    "gpu_minutes_test_cap_only_if_upload_ready": 105,
+    "wall_clock_hours": 4,
+    "order": "smoke, R1 training, m2 build (CPU), m2 discovery cache, S1, confirmation cache only after S1, S2, S3 (CPU, reuses both caches), R1 val_fast if the Phase 1 cap still allows"
+  },
+  "frozen_values_used": {
+    "rule": "results/opt-10-soup-bn/selection_rule.md (unchanged)",
+    "S1": "discovery delta vs E6 >= +0.0010",
+    "S2": "confirmation delta vs E6 >= 0",
+    "gate": "G1-G9 as in selection_rule.md",
+    "barrier": "m2 discovery delta < -0.0020 -> no R2 / R3",
+    "training_stop": "non-finite loss, or projected beyond 70 min (epoch 1 > 35 min)"
+  }
+}

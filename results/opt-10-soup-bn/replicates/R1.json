@@ -1,0 +1,54 @@
+{
+  "run": "R1",
+  "run_id": "opt10_rep_s43",
+  "config": "MOVD-opt10/configs/runs/opt10_rep_s43.json",
+  "config_sha256": "65373f49e7298612722d80fa87212b925869f5dd98eb6b909408a9cd6bd6d629",
+  "seed": 43,
+  "deterministic": true,
+  "schedule_epochs": 6,
+  "stop_after_epoch": 2,
+  "ultralytics_train_kwargs_diff_vs_model_A": {
+    "seed": [
+      42,
+      43
+    ]
+  },
+  "start_weights": "outputs/weights/rtdetr-l.pt",
+  "start_weights_sha256": "6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f",
+  "start_weights_equal_model_A": true,
+  "train_split": "train_final",
+  "train_split_file_sha256": "3a37722391f45b05eb791fdfbc873181f0f61f1be45aeb61944abb808546a86a",
+  "export_manifest_equal_model_A": true,
+  "frames": 6072,
+  "batches_per_epoch": 6072,
+  "images_seen": 12144,
+  "saved_epochs": [
+    0,
+    1
+  ],
+  "status": "stopped_after_epoch_2",
+  "losses": {
+    "first_loss": 36.748199462890625,
+    "last_loss": 10.943063735961914,
+    "minimum_loss": 5.5436835289001465,
+    "maximum_loss": 173.27401733398438
+  },
+  "losses_finite": true,
+  "train_seconds": 3172.389,
+  "peak_cuda_allocated_gb": 3.31,
+  "peak_cuda_reserved_gb": 3.46,
+  "checkpoints": {
+    "epoch1": {
+      "file": "epoch0.pt",
+      "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch0.pt",
+      "sha256": "0e17db9e9c0c20dd146ece954d8c57b1fe69ca39f3bf5f3f0aa916d005d862c9"
+    },
+    "epoch2": {
+      "file": "epoch1.pt",
+      "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch1.pt",
+      "sha256": "5c02bd245b189f508403cbaf0cf5f3633635f9209d96ec778fcc15617ee4dce8"
+    }
+  },
+  "recorded_at_kyiv": "2026-11-12 00:53",
+  "ok": true
+}

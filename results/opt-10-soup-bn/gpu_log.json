@@ -9,6 +9,7 @@
     "max_new_csvs": 3
   },
   "phase0_minutes": 41.2,
+  "phase1_minutes": 55.7,
   "jobs": [
     {
       "job": "smoke",
@@ -48,6 +49,22 @@
       "seconds": 829.5,
       "started_kyiv": "2026-11-11 14:36",
       "ended_kyiv": "2026-11-11 14:50",
+      "status": "ok"
+    },
+    {
+      "job": "rep_smoke",
+      "phase": 1,
+      "seconds": 161.8,
+      "started_kyiv": "2026-11-11 23:57",
+      "ended_kyiv": "2026-11-12 00:00",
+      "status": "ok"
+    },
+    {
+      "job": "train_R1",
+      "phase": 1,
+      "seconds": 3180.1,
+      "started_kyiv": "2026-11-12 00:00",
+      "ended_kyiv": "2026-11-12 00:53",
       "status": "ok"
     }
   ]

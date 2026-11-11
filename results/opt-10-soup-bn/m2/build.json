@@ -1,0 +1,68 @@
+{
+  "candidate": "m2",
+  "spec": {
+    "bn": false,
+    "epoch_weights": [
+      0.8,
+      0.2
+    ],
+    "phase": 1,
+    "runs": [
+      "A",
+      "R1"
+    ]
+  },
+  "weights": [
+    {
+      "run": "A",
+      "epoch": 1,
+      "weight": 0.4,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+    },
+    {
+      "run": "R1",
+      "epoch": 1,
+      "weight": 0.4,
+      "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch0.pt",
+      "sha256": "0e17db9e9c0c20dd146ece954d8c57b1fe69ca39f3bf5f3f0aa916d005d862c9"
+    },
+    {
+      "run": "A",
+      "epoch": 2,
+      "weight": 0.1,
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+    },
+    {
+      "run": "R1",
+      "epoch": 2,
+      "weight": 0.1,
+      "path": "MOVD-opt10/outputs/opt10_rep_s43/train/weights/epoch1.pt",
+      "sha256": "5c02bd245b189f508403cbaf0cf5f3633635f9209d96ec778fcc15617ee4dce8"
+    }
+  ],
+  "weights_sum": 1.0,
+  "path": "MOVD-opt10/outputs/opt10/soup/m2.pt",
+  "sha256": "7392eab92e50ffa9c2b857b9818d6f6b1b9af56fe5c6cec6ed4b24475bc91c1c",
+  "num_tensors": 941,
+  "floating_tensors": 819,
+  "non_floating_tensors": 122,
+  "saved_identical_to_weighted_state": true,
+  "max_abs_error_vs_independent_recomputation": 0.0,
+  "non_floating_identical_to_first_source": true,
+  "floating_tensors_changed_vs_first_source": 819,
+  "dtypes": [
+    "torch.float16",
+    "torch.int64"
+  ],
+  "all_finite": true,
+  "sources_unchanged_after_build": {
+    "A_epoch1": true,
+    "R1_epoch1": true,
+    "A_epoch2": true,
+    "R1_epoch2": true
+  },
+  "built_at_kyiv": "2026-11-12 00:53",
+  "ok": true
+}

@@ -123,7 +123,9 @@ def run_checkpoint(run: str, epoch: int) -> tuple[Path, str]:
             f"replicate {run} has not been trained (needs a separate approval)"
         )
     rec = o7.load_json(record)["checkpoints"][f"epoch{epoch}"]
-    return REPO / rec["path"], rec["sha256"]
+    return HW2 / rec["path"], rec[
+        "sha256"
+    ]  # o7.rel paths are relative to the hw2 folder
 
 
 def load_checkpoint(path: Path, expected: str) -> dict:
