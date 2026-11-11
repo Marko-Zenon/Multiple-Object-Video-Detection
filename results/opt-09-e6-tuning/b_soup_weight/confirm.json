@@ -1,0 +1,35 @@
+{
+  "grid": "b_soup_weight",
+  "selected": "w1",
+  "params": {
+    "soup": "w075",
+    "factor": 0.0,
+    "margin": 0.005,
+    "iou": 0.5,
+    "strength": 1.0
+  },
+  "baseline_E6_confirmation": {
+    "num_images": 1511,
+    "num_predictions": 755500,
+    "mAP": 0.27089469511565134,
+    "AP50": 0.4492097408869811,
+    "AP75": 0.2851757377524864,
+    "AP_small": 0.012513525612396713,
+    "AP_medium": 0.19538386236982366,
+    "AP_large": 0.4397311578987566,
+    "density_ge100": null
+  },
+  "confirmation": {
+    "mAP": 0.2746342765309893,
+    "AP50": 0.4560990674806772,
+    "AP75": 0.2899598436637074,
+    "AP_small": 0.011767410557250502,
+    "AP_medium": 0.19749679499094583,
+    "AP_large": 0.43933303604888907
+  },
+  "delta_confirmation_mAP": 0.003739581415337978,
+  "confirmation_predictions_sha256": "a5e00a6a986aa349258abac0618161ee3075f9f5a34bdb6361f720c0b0b6ac85",
+  "passes_S2": true,
+  "evaluated_at_kyiv": "2026-11-11 11:39",
+  "decision": "component passes (S1 and S2)"
+}
