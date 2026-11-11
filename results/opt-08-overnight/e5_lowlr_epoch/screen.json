@@ -1,0 +1,47 @@
+{
+  "experiment": "e5_lowlr_epoch",
+  "rule": "results/opt-08-overnight/e5_lowlr_epoch/rule.md",
+  "rule_commit": "5714d84",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.0003,
+    "S2_min_delta_confirmation": 0.0
+  },
+  "baseline_x2_discovery": {
+    "num_images": 1335,
+    "num_predictions": 650288,
+    "mAP": 0.32945184095777236,
+    "AP50": 0.6534371127953702,
+    "AP75": 0.28524588217160607,
+    "AP_small": 0.1774413250586779,
+    "AP_medium": 0.3312687820754577,
+    "AP_large": 0.5413459384147401,
+    "density_ge100": null
+  },
+  "candidates": {
+    "l1": {
+      "params": {
+        "kind": "soup",
+        "tag": "e5l1",
+        "iou": 0.5
+      },
+      "discovery_predictions_sha256": "6ba15691ceb25a9ff1c0996a8a8eba5f0be1116a9a56a08ac6d5eafc1894d0b6",
+      "val_full_predictions_sha256": null,
+      "num_predictions": 658164,
+      "transform_seconds": 176.5,
+      "discovery": {
+        "mAP": 0.3108498117218409,
+        "AP50": 0.6263635449377314,
+        "AP75": 0.26198092156293407,
+        "AP_small": 0.17410688250162284,
+        "AP_medium": 0.31204403314021795,
+        "AP_large": 0.5208550735715927
+      },
+      "delta_discovery_mAP": -0.01860202923593146
+    }
+  },
+  "selected": "l1",
+  "passes_S1": false,
+  "wall_seconds": 288.6,
+  "evaluated_at_kyiv": "2026-11-11 05:26",
+  "decision": "rejected at S1 (discovery)"
+}

@@ -10,10 +10,10 @@ Read this file, [`TASK.md`](TASK.md) and `git log` at the start of every iterati
 | 2 | e2_tracklet_smoothing | 0e73d20 | t4 +0.0029 pass | -0.0062 **fail** | not run (rule) | — | **rejected (S2)** |
 | 3 | e3_broader_support | 0e73d20 | b3 +0.0004 pass | +0.0005 pass | 0.2885 (+0.0006), U1-U8 pass | `e45f1b54…c444` | **UPLOAD-READY 2** |
 | 4 | e4_checkpoint_soup | 35464d5 | s1 (w080) +0.0030 pass | +0.0236 pass | 0.2945 (+0.0067), U1-U8 pass | `7dc9b318…2014` | **UPLOAD-READY 3** |
-| 5 | e5_lowlr_epoch | decision pending | — | — | — | — | pending (optional) |
+| 5 | e5_lowlr_epoch | 5714d84 / 1b138bb | l1 -0.0186 **fail** | not run (rule) | not run | — | **rejected (S1)** |
 | 6 | e6_combination | 5f495e2 | — | — | — | — | pending |
 
-Upload-ready CSVs: 3 of 4. GPU minutes used: 72.7 of 240.
+Upload-ready CSVs: 3 of 4. GPU minutes used: 111.7 of 240.
 
 ## Iteration log
 
@@ -81,3 +81,18 @@ Upload-ready CSVs: 3 of 4. GPU minutes used: 72.7 of 240.
   checkpoint = soup w080 sha256 `2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939` (recorded in run.json and checked by the independent
   validator); project validator OK, independent validator valid (0 rows differ). Not uploaded. (04:39)
   GPU total so far 72.7 min (smoke 0.2, discovery 30.3, confirmation 12.2, recheck 1.4, test 28.6).
+
+### Iteration 5 — 2026-11-11 04:39-05:26 (E5 one low-LR epoch)
+
+* State: clean, row mine, lock FREE, GPU idle; start 04:39 + 110 min <= 06:50, so the frozen start rule allowed E5.
+* Rule / configs 5714d84 before the smoke. Smoke (`smoke_checks.json`): finite losses, save, resume to epoch 2,
+  reload + CH-13 raw pass, learned parameters = Model A (start point proven; the ~3 smoke optimizer steps were all
+  skipped by the AMP scaler). Pre-result correction 1b138bb: AdamW beta1 pinned to Model A's 0.9 (explicit optimizer
+  default was 0.937); no-update stop rule added.
+* Full epoch: 26.5 GPU min, 6,072 frames, 94 optimizer updates, finite losses, `AdamW(lr=5e-05, momentum=0.9)`,
+  checkpoint sha256 `943a449a…bb45`, learned-parameter L2 to Model A 2.84 (updated).
+* S1 discovery (raw cache 10.1 GPU min, CH-13 merge, x2): mAP 0.310850 vs x2 0.329452
+  (**-0.018602**), AP_small 0.1741 -> **rejected at S1**; no confirmation, no val_full, no CSV.
+  The low-LR continuation from Model A loses clearly on the discovery clips (kept as a negative result); the drop
+  after epoch 1 is therefore not explained by the rising LR alone. No retuning. E5 cannot enter E6.
+* GPU total 111.7 of 240 min (E5: smoke 2.4, epoch 26.5, discovery 10.1).
