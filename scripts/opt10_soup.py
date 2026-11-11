@@ -353,6 +353,9 @@ def cmd_bn(args) -> None:
         "variance_positive": all(
             bool((after[k] > 0).all()) for k in stat_keys if k.endswith("running_var")
         ),
+        "variance_nonnegative": all(
+            bool((after[k] >= 0).all()) for k in stat_keys if k.endswith("running_var")
+        ),
         "median_relative_change_vs_stored_statistics": rel_change,
         "modes_restored": [m.training for m in net.modules()] == modes,
         "momenta_restored": [m.momentum for m in opt10.bn_layers(net)] == momenta,
@@ -368,7 +371,7 @@ def cmd_bn(args) -> None:
                 "non_bn_tensors_identical_to_the_average",
                 "saved_parameters_identical_to_the_average",
                 "statistics_finite",
-                "variance_positive",
+                "variance_nonnegative",
                 "modes_restored",
                 "momenta_restored",
             )

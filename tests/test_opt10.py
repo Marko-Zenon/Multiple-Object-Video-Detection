@@ -514,3 +514,11 @@ def test_bn_image_paths_uses_the_manifest_embedded_in_ch14_export_check(
     manifest_path.write_text(json.dumps({**manifest, "masked": False}))
     with pytest.raises(SystemExit, match="differs from the CH-14 export manifest"):
         opt10_soup.bn_image_paths()
+
+
+def test_constant_channels_have_valid_zero_bn_variance_after_reestimation():
+    net = nn.Sequential(nn.BatchNorm2d(3, eps=0.001)).eval()
+    opt10.reestimate_bn(net, [torch.zeros(1, 3, 8, 8) for _ in range(4)])
+    assert torch.equal(net[0].running_var, torch.zeros(3))
+    assert int(net[0].num_batches_tracked) == 4
+    assert torch.isfinite(net(torch.zeros(1, 3, 8, 8))).all()
