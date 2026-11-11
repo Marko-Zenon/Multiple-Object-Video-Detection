@@ -60,3 +60,28 @@ OPT-03, where 0.005 and 0.01 differed by 0.000002 on val_fast). Not retuned.
 Selection p2, +0.000207 < +0.0003: **rejected at S1**, no confirmation. Weaker (0.75) and much stronger (1.5)
 boosts both lose; IoU 0.55 is flat and 0.45 loses. E6's IoU 0.5 / strength 1 sits at or near a local optimum.
 Phase A result: neither border nor persistence passes; both stay as in E6. Not retuned.
+
+## 11:21 — Phase B soup weight: S1 pass (w075)
+
+Discovery raw caches 10.5 + 10.5 + 10.0 GPU min (w075, w085, w090; one process, sequential; GPU idle before).
+Each soup -> border 0.005 -> b3, as E6.
+
+| cand | weight on Model A | discovery mAP Δ vs E6 | Δ AP_S |
+|---|---:|---:|---:|
+| E6 | 0.80 | — | — |
+| w1 | 0.75 | +0.000600 | +0.001540 |
+| w2 | 0.85 | -0.000104 | -0.002336 |
+| w3 | 0.90 | -0.001009 | -0.007868 |
+
+Selection w1 (w075), +0.000600 >= +0.0003: **S1 pass**. The confirmation raw cache is built for w075 only.
+
+## 11:39 — Phase B S2 pass; 11:50 — Phase C c1 rejected by the promotion gate (NEGATIVE result)
+
+* w075 confirmation raw cache 12.1 GPU min (GPU idle before). S2: confirmation +0.003740 vs E6, **pass**.
+  w075 is the only component that passed S1 and S2.
+* `plan-c` (`c_final/plan.json`): c1 = E6 with soup w075; no c2 (fewer than two components passed).
+* `full c1` (`c_final/c1/gate.json`): val_full 0.297399 (+0.000817), w<=1920 +0.000985, 6/7 clips non-negative
+  (137 -0.0001), without 4K +0.000683, AP_S +0.001332, >=100 -0.000255, 8 classes reported, frozen files
+  unchanged. **G1 (+0.0010) and G4 (+0.0010) fail: rejected.** No determinism run, no test cache, no CSV.
+* OPT-09 stops here with a negative result. The gate is not weakened and no experiment is added.
+  GPU total 43.7 min. E6 and E4 stay the recommended Kaggle final selections.

@@ -1,0 +1,48 @@
+{
+  "rule": "selection_rule.md Phase C: c1 = passed component with the largest discovery delta (ties: earlier phase); c2 = all passed components together, only if at least two passed",
+  "components": {
+    "a1_border_margin": {
+      "selected": "m3",
+      "change": {
+        "margin": 0.008
+      },
+      "delta_discovery": 4.46806538743072e-05,
+      "delta_confirmation": null,
+      "passes": false
+    },
+    "a2_persistence": {
+      "selected": "p2",
+      "change": {
+        "strength": 1.25
+      },
+      "delta_discovery": 0.00020743748819784802,
+      "delta_confirmation": null,
+      "passes": false
+    },
+    "b_soup_weight": {
+      "selected": "w1",
+      "change": {
+        "soup": "w075"
+      },
+      "delta_discovery": 0.0006001345427963933,
+      "delta_confirmation": 0.003739581415337978,
+      "passes": true
+    }
+  },
+  "candidates": {
+    "c1": {
+      "components": [
+        "b_soup_weight"
+      ],
+      "params": {
+        "soup": "w075",
+        "factor": 0.0,
+        "margin": 0.005,
+        "iou": 0.5,
+        "strength": 1.0
+      }
+    }
+  },
+  "decision": "Phase C candidates fixed",
+  "fixed_at_kyiv": "2026-11-11 11:39"
+}
