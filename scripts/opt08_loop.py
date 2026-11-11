@@ -149,9 +149,20 @@ def neighbours(split: str) -> dict:
     return opt07.val_neighbours(data.load_coco("val"))
 
 
-def transform(params: dict, split: str) -> list[dict]:
-    """The candidate's predictions on `split` from protected cached inputs (never from evaluation results)."""
+def transform(params: dict, split: str, stages: list[str] | None = None) -> list[dict]:
+    """The candidate's predictions on `split` from protected cached inputs (never from evaluation results).
+
+    E4 soups read their own raw caches: `stages` limits val to the cached clip stages (S1: discovery only)."""
     nbrs = neighbours(split)
+    if params["kind"] == "soup":
+        import opt08_soup
+
+        if split == "test":
+            stages = ["test"]
+        preds = opt08_soup.merged(
+            params["tag"], stages or ["discovery", "confirmation"]
+        )
+        return opt08.apply(params, preds, nbrs)
     if params["kind"] == "x4_then_x2":
         sys.path.insert(0, str(REPO / "scripts"))
         import opt03_edge
@@ -342,14 +353,16 @@ def cmd_screen(args) -> None:
     meta = {}
     for cid, params in opt08.EXPERIMENTS[exp].items():
         t0 = time.perf_counter()
-        preds = transform(params, "val_full")
+        soup = params["kind"] == "soup"
+        preds = transform(params, "val_full", ["discovery"] if soup else None)
         full_path = OUT / exp / cid / "val_full.json"
         save_json(full_path, preds)
         disc_path = OUT / exp / cid / "discovery.json"
         save_json(disc_path, restrict(preds, ids))
         meta[cid] = {
             "params": params,
-            "val_full_predictions_sha256": sha256(full_path),
+            "discovery_predictions_sha256": sha256(disc_path),
+            "val_full_predictions_sha256": None if soup else sha256(full_path),
             "num_predictions": len(preds),
             "transform_seconds": round(time.perf_counter() - t0, 1),
         }
@@ -410,7 +423,17 @@ def cmd_confirm(args) -> None:
     ids = subsets()["confirmation"]
     full_path = OUT / exp / cid / "val_full.json"
     s1 = load_json(out_dir / "screen.json")["candidates"][cid]
-    if sha256(full_path) != s1["val_full_predictions_sha256"]:
+    if (
+        params["kind"] == "soup"
+    ):  # S1 saw only the discovery cache: build val_full now, discovery must be unchanged
+        preds = transform(params, "val_full")
+        check = OUT / exp / cid / "discovery_recheck.json"
+        save_json(check, restrict(preds, subsets()["discovery"]))
+        if sha256(check) != s1["discovery_predictions_sha256"]:
+            raise SystemExit("discovery predictions differ from S1: stop")
+        save_json(full_path, preds)
+        del preds
+    elif sha256(full_path) != s1["val_full_predictions_sha256"]:
         raise SystemExit("stored candidate predictions changed since S1: stop")
     conf_path = OUT / exp / cid / "confirmation.json"
     save_json(conf_path, restrict(load_json(full_path), ids))
@@ -424,6 +447,7 @@ def cmd_confirm(args) -> None:
         "baseline_x2_confirmation": base,
         "confirmation": m,
         "delta_confirmation_mAP": delta,
+        "val_full_predictions_sha256": sha256(full_path),
         "passes_S2": passes,
         "evaluated_at_kyiv": o7.kyiv_now(),
         "decision": "S2 pass: val_full next"
@@ -470,12 +494,11 @@ def cmd_full(args) -> None:
     if not load_json(out_dir / "confirm.json")["passes_S2"]:
         raise SystemExit(f"{exp} failed S2: no val_full run (rule)")
     full_path = OUT / exp / cid / "val_full.json"
-    if (
-        sha256(full_path)
-        != load_json(out_dir / "screen.json")["candidates"][cid][
-            "val_full_predictions_sha256"
-        ]
-    ):
+    confirmed = load_json(out_dir / "confirm.json").get("val_full_predictions_sha256")
+    screened = load_json(out_dir / "screen.json")["candidates"][cid][
+        "val_full_predictions_sha256"
+    ]
+    if sha256(full_path) != (confirmed or screened):
         raise SystemExit("stored candidate predictions changed since S1: stop")
     base = load_json(EVID / "baseline" / "subsets.json")["subsets"]
     start = time.perf_counter()

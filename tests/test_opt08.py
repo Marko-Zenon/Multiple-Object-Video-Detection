@@ -122,3 +122,29 @@ def test_apply_e1_score_step_is_x2():
     assert scores(opt08.apply(params, preds, clip(3))) == scores(
         opt07.persistence_boost(preds, clip(3), 0.5)
     )
+
+
+def test_soup_state_mixes_floats_and_keeps_integers():
+    import sys
+    from pathlib import Path
+
+    import torch
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    import opt08_soup
+
+    a = {"w": torch.tensor([1.0, 3.0], dtype=torch.float16), "n": torch.tensor(5)}
+    b = {"w": torch.tensor([3.0, 1.0], dtype=torch.float16), "n": torch.tensor(9)}
+    out = opt08_soup.soup_state(a, b, 0.75)
+    assert out["w"].dtype == torch.float16
+    assert out["w"].tolist() == [1.5, 2.5]
+    assert out["n"].item() == 5
+    assert a["w"].tolist() == [1.0, 3.0]
+
+
+def test_soup_grid_is_frozen():
+    assert [p["tag"] for p in opt08.EXPERIMENTS["e4_checkpoint_soup"].values()] == [
+        "w080",
+        "w065",
+        "w050",
+    ]

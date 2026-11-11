@@ -55,6 +55,12 @@ EXPERIMENTS: dict[str, dict[str, dict]] = {
         "b3": {"kind": "support", "mode": "five_frame_mean"},
         "b4": {"kind": "support", "mode": "gap_tolerant_endpoint"},
     },
+    # E4: weight soup w * Model A + (1 - w) * epoch1.pt (scripts/opt08_soup.py), unchanged CH-13 pipeline, then x2.
+    "e4_checkpoint_soup": {
+        "s1": {"kind": "soup", "tag": "w080", "iou": 0.5},
+        "s2": {"kind": "soup", "tag": "w065", "iou": 0.5},
+        "s3": {"kind": "soup", "tag": "w050", "iou": 0.5},
+    },
 }
 
 IOU = 0.5
@@ -214,7 +220,7 @@ def broader_support(preds: Sequence[dict], nbrs: dict, mode: str) -> list[dict]:
 def apply(params: dict, preds: Sequence[dict], nbrs: dict) -> list[dict]:
     """Score-only transforms of merged predictions (E1's x4 step runs on the raw cache in the loop script)."""
     kind = params["kind"]
-    if kind == "x4_then_x2":
+    if kind in ("x4_then_x2", "soup"):
         return persistence_boost(preds, nbrs, params["iou"])
     if kind == "tracklet":
         return tracklet_smoothing(preds, nbrs, params["agg"], params["k"])

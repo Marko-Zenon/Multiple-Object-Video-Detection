@@ -1,0 +1,29 @@
+{
+  "model_A": {
+    "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+    "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+    "epoch": 0,
+    "updates": 915
+  },
+  "adjacent": {
+    "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+    "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799",
+    "epoch": 1,
+    "updates": 1109
+  },
+  "weights_entry": "ema (model is None in both)",
+  "same_class": true,
+  "class": "RTDETRDetectionModel",
+  "same_yaml": true,
+  "num_tensors": 941,
+  "same_names": true,
+  "same_shapes": true,
+  "same_dtypes": true,
+  "dtypes": [
+    "torch.float16",
+    "torch.int64"
+  ],
+  "same_names_list_in_model_attr": true,
+  "adjacent_epochs": true,
+  "compatible": true
+}
