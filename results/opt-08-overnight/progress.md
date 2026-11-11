@@ -32,4 +32,4 @@ Upload-ready CSVs: 1 of 4. GPU minutes used: 0 of 240.
   >=100 +0.001822; 7/7 clips >= 0; without 4K +0.001320; U7 val_full sha identical in a
   fresh process, test sha identical across two processes; U8 unchanged. **Upload-ready CSV 1 of 4**:
   `C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e1_x4_then_x2_c1_test.csv`, sha256 `17273d344bb0fed82804b69abba3d018ef89e8c04cc87291e78356f2b8f2dbf8`, 167,503,001 B, 3,811 rows,
-  {'input_predictions': 1820997, 'accepted': 1820997, 'rejected_bad_score': 0, 'rejected_bad_box': 0, 'rejected_empty_box': 0, 'dropped_over_cap': 0, 'written': 1820997, 'rows': 3811, 'empty_rows': 0, 'max_dets': 500, 'float_format': 'repr (lossless)'} detections; project validator OK, independent validator valid (0 rows differ). Not uploaded. (02:17)
+  1,820,997 detections (0 rejected, 0 over the cap); project validator OK, independent validator valid (0 rows differ). Not uploaded. (02:17)
