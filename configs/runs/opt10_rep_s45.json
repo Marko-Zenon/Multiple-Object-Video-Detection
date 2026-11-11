@@ -1,0 +1,18 @@
+{
+  "run_id": "opt10_rep_s45",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "note": "OPT-10 replicate R3 (results/opt-10-soup-bn/selection_rule.md): configs/runs/final_rtdetr.json (Model A's run, COCO rtdetr-l.pt init, train_final, 6-epoch schedule) with one change: overrides.seed 45 instead of the frozen protocol seed 42 (approved plan.md section 11 exception, replicates only). stop_after_epoch 2 stops right after epoch1.pt is written, so epoch0.pt (epoch 1) and epoch1.pt (epoch 2) exist as for Model A. NOT run in OPT-10 session 1: replicate training needs a separate student approval.",
+  "overrides": {
+    "cache": false,
+    "seed": 45
+  },
+  "train_split": "train_final",
+  "stop_after_epoch": 2
+}

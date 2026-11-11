@@ -405,3 +405,81 @@ def test_preprocess_stretches_to_the_square_input_in_rgb_0_1():
     assert torch.equal(
         out[0], torch.from_numpy(square[..., ::-1].copy()).permute(2, 0, 1) / 255.0
     )
+
+
+# ---------------------------------------------------------------- replicate configs and the gate
+
+
+@pytest.mark.parametrize(("run", "seed"), sorted(opt10.REPLICATE_SEEDS.items()))
+def test_replicate_configs_change_only_the_seed_and_stop_after_epoch_2(run, seed):
+    from movd import ultra
+
+    base = ultra.load_run_config(REPO / "configs/runs/final_rtdetr.json")
+    rep = ultra.load_run_config(REPO / f"configs/runs/opt10_rep_s{seed}.json")
+    assert rep["overrides"] == {**base["overrides"], "seed": seed}
+    assert rep["stop_after_epoch"] == 2 and "stop_after_epoch" not in base
+    same = set(base) - {"run_id", "note", "overrides"}
+    assert all(rep[k] == base[k] for k in same)
+    assert ultra.train_kwargs(rep, "d.yaml", "p", "0")["seed"] == seed
+    assert ultra.train_kwargs(base, "d.yaml", "p", "0")["seed"] == 42
+
+
+def gate_inputs(
+    delta=0.002, clip_deltas=(0.002,) * 7, loco=(0.002,) * 7, small=0.0, dense=0.0
+):
+    clips = [f"clip:c{i}" for i in range(7)]
+    base = {
+        k: {"mAP": 0.29, "AP_small": 0.17, "density_ge100": 0.35}
+        for k in (
+            "val_full",
+            "width_le_1920",
+            "without_4k_clip",
+            "discovery",
+            "confirmation",
+            *clips,
+        )
+    }
+    cand = {
+        k: {
+            "mAP": 0.29 + delta,
+            "AP_small": 0.17 + small,
+            "density_ge100": 0.35 + dense,
+        }
+        for k in base
+    }
+    for k, d in zip(clips, clip_deltas, strict=True):
+        cand[k] = {"mAP": 0.29 + d}
+    base_loco = {f"without:c{i}": {"mAP": 0.29} for i in range(7)}
+    cand_loco = {f"without:c{i}": {"mAP": 0.29 + d} for i, d in enumerate(loco)}
+    return base, cand, base_loco, cand_loco
+
+
+def test_gate_thresholds_and_leave_one_clip_out(monkeypatch):
+    import sys
+
+    sys.path.insert(0, str(REPO / "scripts"))
+    import opt10_loop
+
+    monkeypatch.setattr(opt10_loop, "frozen_unchanged", lambda: True)
+    ok = opt10_loop.gate(*gate_inputs(), 8)
+    assert ok["passes_G1_G7_G9"] and ok["selection_tier_val_part"] and not ok["label_T"]
+    # the OPT-09 w075 case: +0.0008 is below the +0.0010 floor
+    low = opt10_loop.gate(*gate_inputs(delta=0.0008), 8)
+    assert (
+        not low["passes_G1_G7_G9"]
+        and not low["checks"]["G1 val_full mAP >= E6 + 0.0010"]
+    )
+    # +0.0012 is upload-ready but below the +0.0015 selection tier
+    mid = opt10_loop.gate(*gate_inputs(delta=0.0012), 8)
+    assert mid["passes_G1_G7_G9"] and not mid["selection_tier_val_part"]
+    # one leave-one-clip-out removal that erases the gain fails G7
+    loco = opt10_loop.gate(*gate_inputs(loco=(0.002,) * 6 + (0.0,)), 8)
+    assert not loco["checks"]["G7 leave-one-clip-out delta > 0 for every clip"]
+    # three negative clips fail G3; AP_small and dense-bin losses beyond 0.002 fail G5 / G6
+    assert not opt10_loop.gate(
+        *gate_inputs(clip_deltas=(-0.001,) * 3 + (0.002,) * 4), 8
+    )["passes_G1_G7_G9"]
+    assert not opt10_loop.gate(*gate_inputs(small=-0.0021), 8)["passes_G1_G7_G9"]
+    assert not opt10_loop.gate(*gate_inputs(dense=-0.0021), 8)["passes_G1_G7_G9"]
+    # label T: val_full >= 0.2999 (here 0.29 + 0.0100)
+    assert opt10_loop.gate(*gate_inputs(delta=0.0100), 8)["label_T"]

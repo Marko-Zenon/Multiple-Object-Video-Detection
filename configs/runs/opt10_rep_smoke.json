@@ -1,0 +1,18 @@
+{
+  "run_id": "opt10_rep_smoke",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "train_split": "train_final",
+  "epochs": 2,
+  "smoke_fraction": 0.0165,
+  "note": "OPT-10 replicate smoke: the opt10_rep_s43 settings (seed 43) on about 100 frames x 2 epochs. Checks that args.yaml records seed 43, finite losses, memory and checkpoint writing. Not a result. NOT run in OPT-10 session 1.",
+  "overrides": {
+    "cache": false,
+    "seed": 43
+  }
+}
