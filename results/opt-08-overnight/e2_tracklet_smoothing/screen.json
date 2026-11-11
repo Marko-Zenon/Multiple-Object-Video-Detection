@@ -1,0 +1,141 @@
+{
+  "experiment": "e2_tracklet_smoothing",
+  "rule": "results/opt-08-overnight/e2_tracklet_smoothing/rule.md",
+  "rule_commit": "0e73d20",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.0003,
+    "S2_min_delta_confirmation": 0.0
+  },
+  "baseline_x2_discovery": {
+    "num_images": 1335,
+    "num_predictions": 650288,
+    "mAP": 0.32945184095777236,
+    "AP50": 0.6534371127953702,
+    "AP75": 0.28524588217160607,
+    "AP_small": 0.1774413250586779,
+    "AP_medium": 0.3312687820754577,
+    "AP_large": 0.5413459384147401,
+    "density_ge100": null
+  },
+  "candidates": {
+    "t1": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "boost_mean",
+        "k": 2
+      },
+      "val_full_predictions_sha256": "22457d38d9f97274666fc797517273492c1e3811f5a64f2e30729d027b3df830",
+      "num_predictions": 1405788,
+      "transform_seconds": 22.7,
+      "discovery": {
+        "mAP": 0.3301483343533874,
+        "AP50": 0.6547538327973442,
+        "AP75": 0.28602423679656613,
+        "AP_small": 0.17850013595123232,
+        "AP_medium": 0.33177112614523957,
+        "AP_large": 0.542751316548527
+      },
+      "delta_discovery_mAP": 0.000696493395615061
+    },
+    "t2": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "boost_mean",
+        "k": 3
+      },
+      "val_full_predictions_sha256": "48158e22ae76561ae59de8d11c6f05eba2e1daf3fabee60de23c07c2844aba17",
+      "num_predictions": 1405788,
+      "transform_seconds": 22.1,
+      "discovery": {
+        "mAP": 0.33056458885483353,
+        "AP50": 0.6554785117959264,
+        "AP75": 0.28640654056480197,
+        "AP_small": 0.17893259315026694,
+        "AP_medium": 0.33212338160595994,
+        "AP_large": 0.5431856547367813
+      },
+      "delta_discovery_mAP": 0.0011127478970611726
+    },
+    "t3": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "boost_mean",
+        "k": 5
+      },
+      "val_full_predictions_sha256": "6f391c95c77338ead0b2286516d04d3723349a378a8d62a15c77e879e8d1eb1a",
+      "num_predictions": 1405788,
+      "transform_seconds": 21.9,
+      "discovery": {
+        "mAP": 0.3309721950416113,
+        "AP50": 0.6564198945308726,
+        "AP75": 0.28669592919651093,
+        "AP_small": 0.1793617535481883,
+        "AP_medium": 0.332513109129523,
+        "AP_large": 0.5439536295614964
+      },
+      "delta_discovery_mAP": 0.0015203540838389373
+    },
+    "t4": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "replace_mean",
+        "k": 2
+      },
+      "val_full_predictions_sha256": "32fa488f8f0d7f59cf48e2149174ec6dd95b69bafb3e69f47851f718752280bd",
+      "num_predictions": 1405788,
+      "transform_seconds": 21.8,
+      "discovery": {
+        "mAP": 0.33233123336021986,
+        "AP50": 0.6603707151444987,
+        "AP75": 0.28739732350471037,
+        "AP_small": 0.1809082469093156,
+        "AP_medium": 0.33429863156449446,
+        "AP_large": 0.5470523073564549
+      },
+      "delta_discovery_mAP": 0.0028793924024475004
+    },
+    "t5": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "boost_median",
+        "k": 2
+      },
+      "val_full_predictions_sha256": "d9f71f3843c0df829f37549c4a50ebc3a4bd4f7cbcc84013b266adf669ccf286",
+      "num_predictions": 1405788,
+      "transform_seconds": 26.0,
+      "discovery": {
+        "mAP": 0.32986909263150954,
+        "AP50": 0.6540936357885145,
+        "AP75": 0.28592381633606506,
+        "AP_small": 0.17813060602818154,
+        "AP_medium": 0.3315781455702022,
+        "AP_large": 0.5429439166885806
+      },
+      "delta_discovery_mAP": 0.0004172516737371845
+    },
+    "t6": {
+      "params": {
+        "kind": "tracklet",
+        "agg": "boost_triangular",
+        "k": 3
+      },
+      "val_full_predictions_sha256": "5a55cab853dcec54f3331c260780738e6e443278d2c353ac5f884be92c00710c",
+      "num_predictions": 1405788,
+      "transform_seconds": 23.6,
+      "discovery": {
+        "mAP": 0.330130833788453,
+        "AP50": 0.6547613447237525,
+        "AP75": 0.28599794778056686,
+        "AP_small": 0.1785832808626661,
+        "AP_medium": 0.3317977711870374,
+        "AP_large": 0.5424642355615125
+      },
+      "delta_discovery_mAP": 0.0006789928306806248
+    }
+  },
+  "selected": "t4",
+  "passes_S1": true,
+  "wall_seconds": 364.2,
+  "evaluated_at_kyiv": "2026-11-11 02:23",
+  "decision": "S1 pass: confirmation next"
+}

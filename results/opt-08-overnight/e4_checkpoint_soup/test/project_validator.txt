@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1881202,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 409467,
+    "bicycle": 38263,
+    "car": 252587,
+    "van": 366974,
+    "truck": 152972,
+    "tricycle": 233749,
+    "bus": 36089,
+    "motor": 391101
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt08\submissions\opt08_e4_checkpoint_soup_s1_test.csv: 3811 rows, 1881202 detections, sha256 7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014

@@ -1,0 +1,65 @@
+{
+  "model_A_checkpoint": {
+    "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+    "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+    "matches": true
+  },
+  "model_A_csv": {
+    "path": "MOVD-ch14b/submissions/final_rtdetr_epoch1_ch13_fliptile_nms05_test.csv",
+    "sha256": "e587c68b517d6d59f90122946d8a45ef5beac4fb8ae3b24f66ced1268def0da7",
+    "matches": true
+  },
+  "model_A_val_full": {
+    "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_full/pipeline_predictions.json",
+    "sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+    "matches": true
+  },
+  "model_A_test": {
+    "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/test/test_predictions.json",
+    "sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+    "matches": true
+  },
+  "x2_val_full": {
+    "path": "MOVD-opt07/outputs/opt07/x2_persistence_boost/val_full.json",
+    "sha256": "6c3a929f9e0f968963d7f292b3a9e9bef763515803b608ad0b041b7d3ab22c03",
+    "matches": true
+  },
+  "x2_test": {
+    "path": "MOVD-opt07/outputs/opt07/x2_persistence_boost/test/test_predictions.json",
+    "sha256": "fc4fdc8f50d077c3012578f26aa8f4e2300d4ef2e83889ec5b30b0f5107d9191",
+    "matches": true
+  },
+  "x2_csv": {
+    "path": "MOVD-opt07/submissions/opt07_x2_persistence_boost_test.csv",
+    "sha256": "9dc8fb03dc708b2b78b05afeff29289317a810f0219e9be4e2fd50029433c867",
+    "matches": true
+  },
+  "x4_val_full": {
+    "path": "MOVD-opt07/outputs/opt07/x4_border_confirmation/val_full.json",
+    "sha256": "a7c97b072cd091c1b78981991c848085760b26e77a928f97132889f0ac721a5f",
+    "matches": true
+  },
+  "x4_test": {
+    "path": "MOVD-opt07/outputs/opt07/x4_border_confirmation/test/test_predictions.json",
+    "sha256": "bb7adfaa6111b825b478e38ee69ec555e5efdf5886869abb472c7662be176b8c",
+    "matches": true
+  },
+  "x4_csv": {
+    "path": "MOVD-opt07/submissions/opt07_x4_border_confirmation_test.csv",
+    "sha256": "09a5c8d14633f4bade9b9c5b2edd6122c38ca8c3de0cf8afa6b5f79184cd2fcb",
+    "matches": true
+  },
+  "raw_cache_val_full": {
+    "path": "MOVD-opt08/outputs/opt03/raw/val_full.npz",
+    "sha256": "c3350aa8b5150c91293ccdc6c944ea0cd7149a8b58cd1aebba48fa66f480a7ea",
+    "matches": true
+  },
+  "raw_cache_test": {
+    "path": "MOVD-opt08/outputs/opt03/raw/test.npz",
+    "sha256": "d4a8556b5c393a8696ff1f486e4b23fcea0ca2586e4d2d65497f9f4bbea2fcc8",
+    "matches": true
+  },
+  "frozen_files_unchanged": true,
+  "ok": true,
+  "checked_at_kyiv": "2026-11-11 06:02"
+}

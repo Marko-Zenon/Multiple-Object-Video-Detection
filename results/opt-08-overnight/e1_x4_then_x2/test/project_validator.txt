@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1820997,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 351295,
+    "bicycle": 31808,
+    "car": 226060,
+    "van": 390309,
+    "truck": 158118,
+    "tricycle": 239832,
+    "bus": 32520,
+    "motor": 391055
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt08\submissions\opt08_e1_x4_then_x2_c1_test.csv: 3811 rows, 1820997 detections, sha256 17273d344bb0fed82804b69abba3d018ef89e8c04cc87291e78356f2b8f2dbf8
