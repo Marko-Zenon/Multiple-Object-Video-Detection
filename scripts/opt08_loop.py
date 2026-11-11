@@ -233,13 +233,67 @@ def commit_of(path: Path) -> str:
 
 
 def frozen_unchanged() -> bool:
-    """Evaluator, submission writer/validator and protocol configs equal origin/develop's."""
+    """Evaluator, submission writer/validator and protocol configs equal origin/develop's.
+
+    OPT-08's own new run configs (`configs/runs/opt08_*.json`, E5) are additions, not protocol changes, so they are
+    excluded; any modification of an existing file under the frozen paths still fails."""
     r = subprocess.run(
-        ["git", "diff", "--quiet", "origin/develop", "--", *FROZEN_FILES],
+        [
+            "git",
+            "diff",
+            "--quiet",
+            "origin/develop",
+            "--",
+            *FROZEN_FILES,
+            ":(exclude)configs/runs/opt08_*.json",
+        ],
         cwd=REPO,
         check=False,
     )
-    return r.returncode == 0
+    modified = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--name-only",
+            "--diff-filter=MDR",
+            "origin/develop",
+            "--",
+            *FROZEN_FILES,
+        ],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    ).stdout.strip()
+    return r.returncode == 0 and not modified
+
+
+def cmd_recheck_u8(args) -> None:
+    """Recompute only U8 in an existing gate.json (no metric is recomputed); the original record is kept."""
+    path = EVID / args.name / "gate.json"
+    record = load_json(path)
+    original = EVID / args.name / "gate_u8_initial.json"
+    if not original.exists():
+        save_json(original, record)
+    key = "U8 evaluator / protocol / CSV format unchanged"
+    record["checks"][key] = frozen_unchanged()
+    record["passes_U1_U6_U8"] = all(record["checks"].values())
+    record["u8_correction"] = (
+        "U8 first counted the added E5 run configs configs/runs/opt08_e5_lowlr{,_smoke}.json as a protocol change; "
+        "the check now excludes OPT-08's own added run configs and still fails on any modified frozen file. "
+        "Metrics unchanged (gate_u8_initial.json is the original record)."
+    )
+    record["decision"] = (
+        "U1-U6, U8 pass: determinism (U7) next"
+        if record["passes_U1_U6_U8"]
+        else "rejected (gate U1-U6/U8)"
+    )
+    save_json(path, record)
+    print(
+        json.dumps(
+            {"checks": record["checks"], "decision": record["decision"]}, indent=2
+        )
+    )
 
 
 def selected(exp: str) -> tuple[str, dict]:
@@ -724,6 +778,7 @@ def main() -> None:
         "full": cmd_full,
         "determinism": cmd_determinism,
         "test": cmd_test,
+        "recheck-u8": cmd_recheck_u8,
     }
     parser.add_argument("command", choices=list(cmds))
     parser.add_argument("name", nargs="?", choices=sorted(opt08.EXPERIMENTS))
