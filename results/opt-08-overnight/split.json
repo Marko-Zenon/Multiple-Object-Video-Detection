@@ -1,0 +1,36 @@
+{
+  "rule": "sort clips by sha256('OPT-08 split v1:' + clip name); first 4 = discovery",
+  "digests": {
+    "uav0000086_00000_v": "3ef2a8b40f0c9e3622d20bf2a79439c4211f5aa4c448a2bedf70765728762feb",
+    "uav0000117_02622_v": "bd39f1f6f345e1ad8983896592c6b1f58f01865f5c7b3c1ec4762a87db5289ea",
+    "uav0000137_00458_v": "3ffd81b5c8bf3f7f99cc0d7f9555a82ffe0a9f2db756df3179bc2c121fc0374e",
+    "uav0000182_00000_v": "5e2c2d7c168d8a93405ff5eefa26a4e87a2a5a2cc109afe801e11bddc2e4aa65",
+    "uav0000268_05773_v": "e4b6e1c5b8b20dced1597b0936777103c80454463137be938f2b4c24ed247221",
+    "uav0000305_00000_v": "a08de0676a176b7963ed788e9eb6f77ff30f0efdb83f42baef5f0ceac07b110d",
+    "uav0000339_00001_v": "0ec4879b3b48ef799992b58676963ef7cf2a539bc971a29f1902393eef53c00e"
+  },
+  "discovery": [
+    "uav0000339_00001_v",
+    "uav0000086_00000_v",
+    "uav0000137_00458_v",
+    "uav0000182_00000_v"
+  ],
+  "confirmation": [
+    "uav0000305_00000_v",
+    "uav0000117_02622_v",
+    "uav0000268_05773_v"
+  ],
+  "frames": {
+    "discovery": 1335,
+    "confirmation": 1511
+  },
+  "widths": {
+    "uav0000086_00000_v": 1344,
+    "uav0000117_02622_v": 2720,
+    "uav0000137_00458_v": 2688,
+    "uav0000182_00000_v": 1344,
+    "uav0000268_05773_v": 3840,
+    "uav0000305_00000_v": 1904,
+    "uav0000339_00001_v": 1904
+  }
+}
