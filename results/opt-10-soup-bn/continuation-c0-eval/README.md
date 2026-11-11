@@ -51,3 +51,5 @@ Exclusive GPU heartbeat e1a3646 was pushed to origin/develop after identity and 
 - No R1/R2/R3 training, test predictions, Kaggle CSV, upload or PR. OPT-10 stays pending student review, never DONE.
 
 Technical evidence only; student report prose and conclusions remain with Nazar and Marko.
+
+GPU reservation released on origin/develop at 2026-11-11T16:59:45+02:00 in 680a0117dcdfb94a211ca10a9992a22d417874a7. OPT-10 remains PARTIAL / PAUSED under Badabuba.

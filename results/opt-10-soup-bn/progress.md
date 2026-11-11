@@ -68,3 +68,5 @@ Exclusive GPU reservation released on origin/develop in dbef9fd after the eviden
 ## 2026-11-11T16:58:27+02:00 — separately authorized 10.3c continuation, c0 rejected at S2
 
 Authorized from dec99da with a new 25-minute GPU budget; previous chunk 10.3 and all original evidence/accounting retained unchanged. Confirmation c0 mAP 0.2653289564689204 vs E6 0.27089469511565134, delta -0.005565738646730933 < 0: frozen S2 FAIL. Candidate evaluation stopped; S3 and G1-G8 are unreached, G9/start-end integrity PASS. Independent GPU use 14.756667 minutes, one confirmation cache job, no Phase 0 restart. Full suite 348 passed / 4 skipped; dataset/splits/scoped Ruff PASS. Detailed metrics and every gate status are in continuation-c0-eval/README.md and decision.json. Stop after c0 decision; GPU release recorded in closing heartbeat.
+
+Continuation 10.3c GPU released at 2026-11-11T16:59:45+02:00, live-board commit 680a0117dcdfb94a211ca10a9992a22d417874a7. Terminal c0 S2 rejection is recorded; OPT-10 remains paused for student review.

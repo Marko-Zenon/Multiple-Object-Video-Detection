@@ -28,3 +28,8 @@ Continuation GPU use: 885.4 seconds = 14.756667 minutes of its independent 25-mi
 Full suite: 348 passed, 4 skipped (CUDA-only/missing reference weights). Dataset, all frozen split checks, scoped Ruff and format PASS. Final continuation identity verify PASS: all protected hashes, 55 raw shards and frozen files unchanged; E6 full reconstruction byte-identical (391.8 seconds); c0 and historical D1/D2/build/S1/discovery/log/decision bytes match dec99da and the start snapshot exactly. New confirmation shards and prediction hashes match their records.
 
 Terminal decision remains REJECTED_AT_S2. S1 historical PASS, S2 FAIL, G9 integrity PASS; S3/G1-G8 NOT RUN because S2 failed. No c0 full-validation, test-like, dense, clip/leave-one-out or determinism result was invented. GPU reservation release follows the evidence push.
+
+
+## 2026-11-11T16:59:45+02:00 — GPU released, terminal rejection handoff
+
+Fresh live-board heartbeat 680a0117dcdfb94a211ca10a9992a22d417874a7 released the exclusive GPU reservation after evidence checkpoint 5792e9b was pushed. No Python job remained. OPT-10 remains PARTIAL / PAUSED under Badabuba for review; continuation 10.3c is complete at the frozen S2 rejection. No further candidate work.
