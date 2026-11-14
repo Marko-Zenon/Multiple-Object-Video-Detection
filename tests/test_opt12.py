@@ -130,7 +130,7 @@ def test_no_network_or_kaggle_code():
         if f.suffix not in (".py", ".ps1"):
             continue
         code = "\n".join(line for line in f.read_text(encoding="utf-8").splitlines() if not line.lstrip().startswith("#"))
-        code = re.sub(r'""".*?"""', "", code, flags=re.S)
+        code = re.sub(r'""".*?"""', "", code, flags=re.DOTALL)
         assert not pattern.search(code), f"{f.name} mentions network/Kaggle code"
 
 
