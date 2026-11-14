@@ -32,3 +32,15 @@ Per clip: 086 -0.0066, 117 -0.0175, 137 -0.0007, 182 +0.0008, 268 (4K) +0.0022, 
 It is unstable across clips and flat on the test-like width<=1920 subset, so it is ranked last.
 p1 (discovery +0.0019, 4/4 clips non-negative) was not run on test: the frozen rule picked p2 by discovery delta,
 and at 23:08 a 28-min test inference no longer fits the 23:30 deadline.
+
+## Public Kaggle scores (user-reported, 2026-11-14)
+
+| Candidate | val_full | Public | vs E6 0.2947349001 |
+|---|---:|---:|---:|
+| c1 | 0.297399 | **0.2960489045** | +0.0013 |
+| c2 | 0.297638 | 0.2959983429 | +0.0013 (tied with c1, -0.00005) |
+| p2 | 0.297845 | 0.2934521776 | -0.0013 |
+
+Final Kaggle selections (student decision): **c1 + c2**, replacing E6 + E4.
+c2 is effectively tied with c1 but slightly lower. p2 failed to transfer despite the highest val_full, in line with
+its confirmation (-0.0148) and width<=1920 (-0.0002) flags. No further experiment.
