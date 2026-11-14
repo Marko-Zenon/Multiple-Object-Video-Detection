@@ -1,0 +1,27 @@
+{
+  "csv": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_c2_classmix_test.csv",
+  "csv_bytes": 168832101,
+  "csv_sha256": "3e25acda0794df5da3b097f43f9a567806109e82f6639cf34075c49c21fc14ab",
+  "rows": 3811,
+  "groups": 1831222,
+  "max_groups_per_row": 500,
+  "empty_rows": 0,
+  "classes_seen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "predictions": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/test/c2/test_predictions.json",
+  "predictions_sha256": "b10cf56b9922104fb8a3966c5304854eb15eab5061db09da8e10f0606cb7a454",
+  "predictions_count": 1831222,
+  "rows_differing_from_predictions": 0,
+  "run_json": "C:/UCU/AI/hw2/MOVD-opt11/results/opt-11-final-night/test/c2/run.json",
+  "run_checkpoint_sha256": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+  "failures": [],
+  "valid": true
+}

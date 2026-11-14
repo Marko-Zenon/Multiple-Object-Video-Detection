@@ -1,0 +1,74 @@
+{
+  "weights_dir": "C:/UCU/AI/hw2/MOVD-ch14/outputs/final_rtdetr/train/weights",
+  "inputs": {
+    "epoch0.pt": {
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "epoch": 0
+    },
+    "epoch1.pt": {
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799",
+      "epoch": 1
+    },
+    "epoch2.pt": {
+      "sha256": "6b4421bf4f41494dfc55913f02cd655d6a00a25e2aa9ea26bfc51fe2da28d3fd",
+      "epoch": 2
+    },
+    "epoch3.pt": {
+      "sha256": "9372a432c42ab5ed37ff188f2011da531d8e3488cbbe0280111bf51198c272e0",
+      "epoch": 3
+    }
+  },
+  "identity_w075_tensor_equal": true,
+  "p1": {
+    "parts": [
+      {
+        "file": "epoch0.pt",
+        "weight": 0.75,
+        "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+      },
+      {
+        "file": "epoch1.pt",
+        "weight": 0.15,
+        "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+      },
+      {
+        "file": "epoch2.pt",
+        "weight": 0.1,
+        "sha256": "6b4421bf4f41494dfc55913f02cd655d6a00a25e2aa9ea26bfc51fe2da28d3fd"
+      }
+    ],
+    "path": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/soup/p1.pt",
+    "sha256": "0d7ef34a5f5ca010b63bfd8a48dd903682c6443baa75a6f095cd3c299ea4849a",
+    "names_shapes_dtypes_equal_model_A": true,
+    "num_tensors": 941
+  },
+  "p2": {
+    "parts": [
+      {
+        "file": "epoch0.pt",
+        "weight": 0.7,
+        "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b"
+      },
+      {
+        "file": "epoch1.pt",
+        "weight": 0.1,
+        "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799"
+      },
+      {
+        "file": "epoch2.pt",
+        "weight": 0.1,
+        "sha256": "6b4421bf4f41494dfc55913f02cd655d6a00a25e2aa9ea26bfc51fe2da28d3fd"
+      },
+      {
+        "file": "epoch3.pt",
+        "weight": 0.1,
+        "sha256": "9372a432c42ab5ed37ff188f2011da531d8e3488cbbe0280111bf51198c272e0"
+      }
+    ],
+    "path": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/soup/p2.pt",
+    "sha256": "3dd2cface0090a4d871d8395e7c127e342501eba16ee23caff271214f4b57481",
+    "names_shapes_dtypes_equal_model_A": true,
+    "num_tensors": 941
+  },
+  "built_at_kyiv": "2026-11-14 21:22:31"
+}

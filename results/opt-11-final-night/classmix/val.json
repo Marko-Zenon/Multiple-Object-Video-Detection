@@ -1,0 +1,15 @@
+{
+  "rule": "person+motor from E6, other classes from c1, top 500",
+  "val_full": {
+    "mAP": 0.2976378195275272,
+    "AP50": 0.5559474705220012,
+    "AP75": 0.2737389846738536,
+    "AP_small": 0.1694745341409189,
+    "AP_medium": 0.2667164129284393,
+    "AP_large": 0.49164218074672605
+  },
+  "c1_val_full": 0.297399,
+  "passes": true,
+  "evaluated_at_kyiv": "2026-11-14 22:16:23",
+  "note": "class choice made on val_full per-class deltas, so this val gain is optimistic"
+}
