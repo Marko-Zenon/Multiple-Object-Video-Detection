@@ -1,0 +1,51 @@
+{
+  "candidate": "c2",
+  "composition": "person+motor from E6, other classes from c1, top 500",
+  "e6_checkpoint_sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+  "csv": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_c2_classmix_test.csv",
+  "csv_bytes": 168832101,
+  "csv_sha256": "3e25acda0794df5da3b097f43f9a567806109e82f6639cf34075c49c21fc14ab",
+  "test_predictions": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/test/c2/test_predictions.json",
+  "test_predictions_sha256": "b10cf56b9922104fb8a3966c5304854eb15eab5061db09da8e10f0606cb7a454",
+  "checkpoint_sha256": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+  "writer": {
+    "input_predictions": 1831222,
+    "accepted": 1831222,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 1831222,
+    "rows": 3811,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "project_validator_inline": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 1831222,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 500,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 399774,
+      "bicycle": 40145,
+      "car": 254344,
+      "van": 352695,
+      "truck": 145380,
+      "tricycle": 221004,
+      "bus": 35558,
+      "motor": 382322
+    }
+  },
+  "uploaded": false,
+  "written_at_kyiv": "2026-11-14 22:17:02",
+  "validators_exit": {
+    "project": 0,
+    "independent": 0
+  },
+  "valid": true
+}

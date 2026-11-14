@@ -1,0 +1,57 @@
+{
+  "candidate": "p2",
+  "params": {
+    "soup": "p2",
+    "factor": 0.0,
+    "margin": 0.005,
+    "iou": 0.5,
+    "strength": 1.0
+  },
+  "checkpoint": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/soup/p2.pt",
+  "csv": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_p2_trajsoup_test.csv",
+  "csv_bytes": 170868452,
+  "csv_sha256": "69fd9896ee645de5c7debae4f134bd0f092f35e02888a43479f83bdc8a5a7e2b",
+  "test_predictions": "C:/UCU/AI/hw2/MOVD-opt11/outputs/opt11/test/p2/test_predictions.json",
+  "test_predictions_sha256": "9ebe570da150176ebd13a143a89d33232b6b646b0402dd87f02d41385d16eae3",
+  "checkpoint_sha256": "3dd2cface0090a4d871d8395e7c127e342501eba16ee23caff271214f4b57481",
+  "writer": {
+    "input_predictions": 1853738,
+    "accepted": 1853738,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 1853738,
+    "rows": 3811,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "project_validator_inline": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 1853738,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 500,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 441677,
+      "bicycle": 40604,
+      "car": 250550,
+      "van": 329630,
+      "truck": 133799,
+      "tricycle": 231178,
+      "bus": 34716,
+      "motor": 391584
+    }
+  },
+  "uploaded": false,
+  "written_at_kyiv": "2026-11-14 22:43:09",
+  "validators_exit": {
+    "project": 0,
+    "independent": 0
+  },
+  "valid": true
+}
