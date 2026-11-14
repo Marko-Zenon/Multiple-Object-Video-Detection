@@ -9,14 +9,22 @@ torch = pytest.importorskip("torch")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-import opt08_soup as s8  # noqa: E402
-import opt11_night as o11  # noqa: E402
+import opt08_soup as s8
+import opt11_night as o11
 
 
 def _states():
     g = torch.Generator().manual_seed(0)
-    a = {"w": torch.randn(4, 3, generator=g), "h": torch.randn(5, generator=g).half(), "n": torch.tensor([3])}
-    b = {"w": torch.randn(4, 3, generator=g), "h": torch.randn(5, generator=g).half(), "n": torch.tensor([7])}
+    a = {
+        "w": torch.randn(4, 3, generator=g),
+        "h": torch.randn(5, generator=g).half(),
+        "n": torch.tensor([3]),
+    }
+    b = {
+        "w": torch.randn(4, 3, generator=g),
+        "h": torch.randn(5, generator=g).half(),
+        "n": torch.tensor([7]),
+    }
     return a, b
 
 
