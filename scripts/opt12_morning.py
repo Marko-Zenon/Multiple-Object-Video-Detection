@@ -561,7 +561,8 @@ def cmd_handoff(_a) -> None:
                  f"{st.get('decisions', {}).get('reference_R')}.")
     obs_p = REPO / "results" / RUN_ID / "observations.json"
     if obs_p.exists():
-        eps = load_json(obs_p).get("epochs", [])
+        # the trainer's final evaluation of best.pt also fires on_fit_epoch_end; it has no epoch checkpoint
+        eps = [e for e in load_json(obs_p).get("epochs", []) if e.get("checkpoint_exists")]
         lines += ["", "| Epoch | monitor mAP50-95 | epoch s | BN stats frozen |", "|---|---|---|---|"]
         lines += [f"| {e['epoch']} | {e['monitor_mAP50_95']:.4f} | {e['epoch_seconds_incl_val']} | {e['bn_hash_equal_start']} |"
                   for e in eps]

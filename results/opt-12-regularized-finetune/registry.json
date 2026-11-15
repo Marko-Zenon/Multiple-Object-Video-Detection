@@ -1,0 +1,37 @@
+{
+  "avg3": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/avg3.pt",
+    "sha256": "1a5c5c4148e22ec7a0093d87ad80b9de65d3395b0529effd2fa47e8938fb76ad",
+    "epochs_1based": [
+      8,
+      9,
+      10
+    ]
+  },
+  "nstar": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12_reg_ft/train/weights/epoch2.pt",
+    "sha256": "82a2bfd230e54e92bf92c94da029ac4b1dfa71b62bdecf58ec2a509f9914580e",
+    "choice": "best"
+  },
+  "w015n": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/w015n.pt",
+    "sha256": "1f358dee993e31c94ea422b7a1bb37682e917ff04d189cce6d5dba57dd310f90",
+    "alpha": 0.15
+  },
+  "w025n": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/w025n.pt",
+    "sha256": "a8c740bb5c96403e071cd7c7f8fc3a6622cbd23ee85a933231366225e4cc881d",
+    "alpha": 0.25
+  },
+  "w050n": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/w050n.pt",
+    "sha256": "19597307b4866b383bc8b48b3bc2bd77ee6945738282a443e3779a8693ea518f",
+    "alpha": 0.5
+  },
+  "wstar": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/w050n.pt",
+    "sha256": "19597307b4866b383bc8b48b3bc2bd77ee6945738282a443e3779a8693ea518f",
+    "alpha": 0.5,
+    "source_tag": "w050n"
+  }
+}
