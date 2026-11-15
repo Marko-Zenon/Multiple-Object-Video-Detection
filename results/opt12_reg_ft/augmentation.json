@@ -1,0 +1,20 @@
+{
+  "transforms": "Compose(Compose(<ultralytics.data.augment.Mosaic object at 0x000002381B611E80>, <ultralytics.data.augment.CopyPaste object at 0x000002381F826C60>, <ultralytics.data.augment.RandomPerspective object at 0x0000023AA4240F80>), <ultralytics.data.augment.MixUp object at 0x000002381F81AC60>, <ultralytics.data.augment.CutMix object at 0x0000023AA4299B20>, <ultralytics.data.augment.Albumentations object at 0x0000023AA41DC2C0>, <ultralytics.data.augment.RandomHSV object at 0x000002381F822FC0>, <ultralytics.data.augment.RandomFlip object at 0x000002381F820680>, <ultralytics.data.augment.RandomFlip object at 0x000002381F828800>, <ultralytics.data.augment.Format object at 0x0000023AA427F9E0>)",
+  "hyp": {
+    "mosaic": 0.5,
+    "mixup": 0.0,
+    "cutmix": 0.0,
+    "copy_paste": 0.0,
+    "scale": 0.5,
+    "translate": 0.1,
+    "degrees": 0.0,
+    "shear": 0.0,
+    "perspective": 0.0,
+    "fliplr": 0.5,
+    "flipud": 0.0,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "close_mosaic": 2
+  }
+}

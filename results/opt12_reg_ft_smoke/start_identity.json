@@ -1,0 +1,10 @@
+{
+  "start_checkpoint": "C:/UCU/AI/hw2/MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+  "tensors": 941,
+  "missing_in_model": [],
+  "num_missing": 0,
+  "num_nonzero_diff": 0,
+  "max_diff": 0.0,
+  "first_diffs": [],
+  "exact": true
+}

@@ -1,0 +1,104 @@
+{
+  "processes": [
+    {
+      "resume": false,
+      "started": "2026-11-15 00:17:24",
+      "batches": 304,
+      "start_epoch": 0,
+      "samples": 304,
+      "batches_per_epoch": 304,
+      "epochs": 2,
+      "amp": true,
+      "accumulate": 16,
+      "optimizer": "AdamW",
+      "lr0": 0.0001,
+      "bn_hash_start": "9002f1377c9572e6a3feba03dbf62e04d298e49478f710e714b7bd36d7b296c6",
+      "frozen_params": 39,
+      "frozen_prefixes": [
+        "model.0",
+        "model.1"
+      ],
+      "start_identity_exact": true,
+      "first_batch_elapsed_seconds": 15.254,
+      "last_batch_elapsed_seconds": 83.552,
+      "batches_200_elapsed": 59.617,
+      "status": "smoke_stop_after_epoch_1",
+      "seconds": 134.0,
+      "ended": "2026-11-15 00:19:38",
+      "peak_reserved_bytes": 3506438144,
+      "peak_allocated_bytes": 2865703936
+    },
+    {
+      "resume": true,
+      "started": "2026-11-15 00:19:48",
+      "batches": 304,
+      "start_epoch": 1,
+      "samples": 304,
+      "batches_per_epoch": 304,
+      "epochs": 2,
+      "amp": true,
+      "accumulate": 16,
+      "optimizer": "AdamW",
+      "lr0": 0.0001,
+      "bn_hash_start": "9002f1377c9572e6a3feba03dbf62e04d298e49478f710e714b7bd36d7b296c6",
+      "frozen_params": 39,
+      "frozen_prefixes": [
+        "model.0",
+        "model.1"
+      ],
+      "first_batch_elapsed_seconds": 9.523,
+      "last_batch_elapsed_seconds": 76.767,
+      "batches_200_elapsed": 53.309,
+      "status": "completed",
+      "seconds": 151.8,
+      "ended": "2026-11-15 00:22:20",
+      "peak_reserved_bytes": 3531603968,
+      "peak_allocated_bytes": 2866696192
+    }
+  ],
+  "epochs": [
+    {
+      "epoch": 1,
+      "t": "2026-11-15 00:19:38",
+      "epoch_seconds_incl_val": 125.5,
+      "monitor_mAP50_95": 0.24487,
+      "monitor_mAP50": 0.46982,
+      "bn_hash": "9002f1377c9572e6a3feba03dbf62e04d298e49478f710e714b7bd36d7b296c6",
+      "bn_hash_equal_start": true,
+      "lr_pg0": 9.967105263157895e-05,
+      "peak_reserved_bytes": 3506438144,
+      "checkpoint": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12_reg_ft_smoke/train/weights/epoch0.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "epoch": 2,
+      "t": "2026-11-15 00:21:50",
+      "epoch_seconds_incl_val": 117.2,
+      "monitor_mAP50_95": 0.24525,
+      "monitor_mAP50": 0.46788,
+      "bn_hash": "9002f1377c9572e6a3feba03dbf62e04d298e49478f710e714b7bd36d7b296c6",
+      "bn_hash_equal_start": true,
+      "lr_pg0": 5.500000000000001e-05,
+      "peak_reserved_bytes": 3531603968,
+      "checkpoint": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12_reg_ft_smoke/train/weights/epoch1.pt",
+      "checkpoint_exists": true
+    },
+    {
+      "epoch": 3,
+      "t": "2026-11-15 00:22:19",
+      "epoch_seconds_incl_val": 146.1,
+      "monitor_mAP50_95": 0.24497560530751716,
+      "monitor_mAP50": 0.4684428351877166,
+      "bn_hash": "9002f1377c9572e6a3feba03dbf62e04d298e49478f710e714b7bd36d7b296c6",
+      "bn_hash_equal_start": true,
+      "lr_pg0": 5.500000000000001e-05,
+      "peak_reserved_bytes": 3531603968,
+      "checkpoint": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12_reg_ft_smoke/train/weights/epoch2.pt",
+      "checkpoint_exists": false
+    }
+  ],
+  "epoch_checkpoints": [
+    "epoch0.pt",
+    "epoch1.pt"
+  ]
+}
