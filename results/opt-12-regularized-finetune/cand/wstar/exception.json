@@ -1,0 +1,29 @@
+{
+  "candidate": "C2",
+  "tag": "wstar",
+  "gate_passed": false,
+  "failed_checks": [
+    "confirmation"
+  ],
+  "deltas_vs_c1": {
+    "val_full": 0.014820507489092971,
+    "width_le_1920": 0.013725725188605764,
+    "without_4k_clip": 0.018850578169776533,
+    "discovery": 0.013337598132819206,
+    "confirmation": -0.026745972094130627
+  },
+  "clip_deltas_vs_c1": {
+    "clip:uav0000086_00000_v": 0.06740784602431427,
+    "clip:uav0000117_02622_v": -0.028312944413562913,
+    "clip:uav0000137_00458_v": 0.001594339763526853,
+    "clip:uav0000182_00000_v": 0.010779679053241537,
+    "clip:uav0000268_05773_v": -0.03046217935968734,
+    "clip:uav0000305_00000_v": 0.03428204294776177,
+    "clip:uav0000339_00001_v": 0.013411275376601306
+  },
+  "decision": "student-approved one-off exception: build and validate the C2 CSV as an upload candidate",
+  "approved_by": "Badabuba (student, in the Claude Code session)",
+  "approved_at_kyiv": "2026-11-15 10:21:22",
+  "reason_presented": "only failing check is the confirmation aggregate (-0.0267); its losses are the two widest val clips 117 (2720 px) and 268 (3840 px 4K); all four test-width clips gain; the test set has no frame wider than 1920; width<=1920 subset +0.0137",
+  "gate_json_unchanged": true
+}

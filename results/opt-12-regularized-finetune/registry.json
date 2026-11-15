@@ -33,5 +33,12 @@
     "sha256": "19597307b4866b383bc8b48b3bc2bd77ee6945738282a443e3779a8693ea518f",
     "alpha": 0.5,
     "source_tag": "w050n"
+  },
+  "w070": {
+    "path": "C:/UCU/AI/hw2/MOVD-opt12/outputs/opt12/soup/w070.pt",
+    "sha256": "94b6a7f6cdb5cfd5cb968ebcacfdf580ec1562080ab27e3bc222b9048df4a437",
+    "weight_model_A": 0.7,
+    "num_tensors": 941,
+    "dtypes_equal": true
   }
 }

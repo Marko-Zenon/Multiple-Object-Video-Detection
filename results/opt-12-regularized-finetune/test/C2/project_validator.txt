@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1812330,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 500779,
+    "bicycle": 69313,
+    "car": 382638,
+    "van": 176278,
+    "truck": 126109,
+    "tricycle": 180868,
+    "bus": 34138,
+    "motor": 342207
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt12\submissions\opt12_c2_wiseft_test.csv: 3811 rows, 1812330 detections, sha256 9e2ed403e495bf507005a0675d423ab82788e18a28185734011eced152a95fb4

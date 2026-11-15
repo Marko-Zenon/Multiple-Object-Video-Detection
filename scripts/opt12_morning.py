@@ -584,14 +584,18 @@ def cmd_handoff(_a) -> None:
         d = g["deltas_vs_c1"]
         run_p = EVID / "test" / name / "run.json"
         run = load_json(run_p) if run_p.exists() else None
-        passed[name] = g["passed"] and run is not None and run.get("valid")
+        exc_p = EVID / "cand" / gdir / "exception.json"
+        exc = load_json(exc_p) if exc_p.exists() else None
+        passed[name] = (g["passed"] or exc is not None) and run is not None and run.get("valid")
+        verdict = "PASS" if g["passed"] else (
+            f"fail ({', '.join(exc['failed_checks'])}); student exception {exc['approved_at_kyiv']}" if exc else "fail")
         lines.append(f"| {name} ({gdir}) | {fmt(d['val_full'])} | {fmt(d['width_le_1920'])} | {fmt(d['without_4k_clip'])} | "
                      f"{fmt(d['discovery'])} | {fmt(d['confirmation'])} | {g['clips_non_negative']}/7 | "
-                     f"{'PASS' if g['passed'] else 'fail'} | {'ready' if run and run.get('valid') else '-'} |")
+                     f"{verdict} | {'ready' if run and run.get('valid') else '-'} |")
         if run and run.get("valid"):
             det = EVID / "test" / name / "determinism.json"
             rows_csv.append(f"- **{name}**: `{run['csv']}`  \n  sha256 `{run['csv_sha256']}`, "
-                            f"{run['writer'].get('detections')} detections, 3,811 rows; validators project "
+                            f"{run['writer'].get('written')} detections, {run['writer'].get('rows')} rows; validators project "
                             f"{run['validators_exit']['project']} / independent {run['validators_exit']['independent']}"
                             + (f"; rebuild identical: {load_json(det)['identical']}" if det.exists() else ""))
     lines += ["", "## Validated CSVs", ""] + (rows_csv or ["None of the new candidates passed its gate and validators."])
@@ -603,10 +607,13 @@ def cmd_handoff(_a) -> None:
     lines += ["", "## Recommended manual upload order", ""]
     if order:
         lines += [f"{i + 1}. {c}" for i, c in enumerate(order)]
-        lines += ["", ("Sequential rule: upload C1 first if present. If public(C1) >= 0.2930, continue with C3 then C2. "
-                       "If public(C1) < 0.2930, skip C3 and upload C2 only if alpha-star <= 0.25. Keep c1 selected "
-                       "until a new public score beats 0.2960489045; the two final selections remain the students' "
-                       "decision.")]
+        if "C1" in order:
+            lines += ["", ("Sequential rule: upload C1 first. If public(C1) >= 0.2930, continue with C3 then C2. "
+                           "If public(C1) < 0.2930, skip C3 and upload C2 only if alpha-star <= 0.25.")]
+        else:
+            lines += ["", "C1 was not built (gate failed), so the frozen rule's branch 'C2 first' applies."]
+        lines += [("Keep c1 selected until a new public score beats 0.2960489045; the two final selections remain the "
+                   "students' decision.")]
     else:
         lines += ["No new CSV. Keep c1 + c2 as the final selections."]
     (EVID / "HANDOFF.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
