@@ -1,0 +1,4 @@
+case,frame,target,target_width_px,target_height_px,frame_targets,frame_ignore_regions,observation,figure
+tiny_target_miss,images/uav0000086_00000_v/0000001.jpg,person,15,36,36,0,"Red: person, score 0.56, IoU 0.24",figures/tiny_target_miss.png
+car_van_confusion,images/uav0000117_02622_v/0000002.jpg,van,149,92,46,2,"Red: car, score 0.60, IoU 0.83",figures/car_van_confusion.png
+dense_frame_miss,images/uav0000117_02622_v/0000301.jpg,bicycle,182,128,93,7,"Red: person, score 0.60, IoU 0.35",figures/dense_frame_miss.png

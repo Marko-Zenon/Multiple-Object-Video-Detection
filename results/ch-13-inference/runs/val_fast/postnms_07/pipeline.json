@@ -1,0 +1,30 @@
+{
+  "variant": "postnms_07",
+  "axis": "3c post-hoc NMS",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": null,
+    "post_nms": 0.7,
+    "max_det": 500
+  },
+  "num_frames": 714,
+  "num_detections": 177678,
+  "detections_per_frame_mean": 248.85,
+  "detections_per_frame_min": 178,
+  "detections_per_frame_max": 285,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 1,
+  "cpu_postprocess_seconds": 0.54,
+  "cpu_postprocess_ms_per_frame": 0.76
+}

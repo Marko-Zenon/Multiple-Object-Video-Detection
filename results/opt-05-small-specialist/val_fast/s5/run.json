@@ -1,0 +1,23 @@
+{
+  "candidate": {
+    "id": "s5",
+    "size_rule": "in32",
+    "fb_multiplier": 1.0,
+    "nms_iou": 0.5
+  },
+  "frames": 714,
+  "detections": 355936,
+  "A_input": 352886,
+  "A_kept": 309301,
+  "A_removed": 43585,
+  "FB_input": 356835,
+  "FB_eligible": 127128,
+  "FB_added": 46635,
+  "frames_at_cap": 665,
+  "merge_seconds": 1.15,
+  "predictions_sha256": "74324bd28257c224d63c1c98b7d3cb0c64d1770c16af7c5dec1e9f75c2ddf385",
+  "subset_w_le_1920": {
+    "frames": 322,
+    "mAP": 0.31114120356845365
+  }
+}

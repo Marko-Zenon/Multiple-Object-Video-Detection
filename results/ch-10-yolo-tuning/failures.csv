@@ -1,0 +1,13 @@
+run,label,case,frame,target,target_width_px,target_height_px,frame_targets,frame_ignore_regions,observation,figure
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",tiny_target_miss,images/uav0000086_00000_v/0000001.jpg,person,15,36,36,0,"Red: person, score 0.56, IoU 0.24",results/yolo_baseline_marko_3050/figures/tiny_target_miss.png
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",car_van_confusion,images/uav0000117_02622_v/0000002.jpg,van,149,92,46,2,"Red: car, score 0.60, IoU 0.83",results/yolo_baseline_marko_3050/figures/car_van_confusion.png
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",dense_frame_miss,images/uav0000117_02622_v/0000301.jpg,bicycle,182,128,93,7,"Red: person, score 0.60, IoU 0.35",results/yolo_baseline_marko_3050/figures/dense_frame_miss.png
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),tiny_target_miss,images/uav0000086_00000_v/0000001.jpg,person,15,36,36,0,"Red: person, score 0.61, IoU 0.25",results/yolo_baseline_5070/figures/tiny_target_miss.png
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),car_van_confusion,images/uav0000117_02622_v/0000001.jpg,van,147,93,22,2,"Red: car, score 0.70, IoU 0.87",results/yolo_baseline_5070/figures/car_van_confusion.png
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),dense_frame_miss,images/uav0000117_02622_v/0000301.jpg,bicycle,182,128,93,7,"Red: person, score 0.60, IoU 0.29",results/yolo_baseline_5070/figures/dense_frame_miss.png
+yolo_p2,YOLO11s + P2 head (1344),tiny_target_miss,images/uav0000086_00000_v/0000003.jpg,person,15,36,36,0,"Red: person, score 0.15, IoU 0.36",results/yolo_p2/figures/tiny_target_miss.png
+yolo_p2,YOLO11s + P2 head (1344),car_van_confusion,images/uav0000117_02622_v/0000031.jpg,car,170,143,57,3,"Red: van, score 0.12, IoU 0.81",results/yolo_p2/figures/car_van_confusion.png
+yolo_p2,YOLO11s + P2 head (1344),dense_frame_miss,images/uav0000117_02622_v/0000301.jpg,bicycle,182,128,93,7,"Red: person, score 0.44, IoU 0.32",results/yolo_p2/figures/dense_frame_miss.png
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),tiny_target_miss,images/uav0000086_00000_v/0000005.jpg,person,15,36,36,0,"Red: person, score 0.68, IoU 0.28",results/yolo_imgsz1600/figures/tiny_target_miss.png
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),car_van_confusion,images/uav0000117_02622_v/0000002.jpg,van,149,92,46,2,"Red: car, score 0.81, IoU 0.83",results/yolo_imgsz1600/figures/car_van_confusion.png
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),dense_frame_miss,images/uav0000117_02622_v/0000301.jpg,bicycle,182,128,93,7,"Red: tricycle, score 0.12, IoU 0.67",results/yolo_imgsz1600/figures/dense_frame_miss.png

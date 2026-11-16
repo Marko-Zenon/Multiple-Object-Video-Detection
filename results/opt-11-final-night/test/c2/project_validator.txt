@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1831222,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 399774,
+    "bicycle": 40145,
+    "car": 254344,
+    "van": 352695,
+    "truck": 145380,
+    "tricycle": 221004,
+    "bus": 35558,
+    "motor": 382322
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt11\submissions\opt11_c2_classmix_test.csv: 3811 rows, 1831222 detections, sha256 3e25acda0794df5da3b097f43f9a567806109e82f6639cf34075c49c21fc14ab

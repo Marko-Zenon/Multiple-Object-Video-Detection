@@ -1,0 +1,21 @@
+{
+  "resume": false,
+  "batches": 6072,
+  "saved_epochs": [
+    0
+  ],
+  "start_epoch": 0,
+  "samples": 6072,
+  "batches_per_epoch": 6072,
+  "optimizer_state_entries": 0,
+  "amp": true,
+  "first_batch_elapsed_seconds": 12.298,
+  "last_batch_elapsed_seconds": 1789.69,
+  "first_loss": 38.68644332885742,
+  "last_loss": 13.581741333007812,
+  "minimum_loss": 7.618161201477051,
+  "maximum_loss": 157.42660522460938,
+  "elapsed_seconds": 1792.165,
+  "peak_cuda_allocated_bytes": 4722961408,
+  "peak_cuda_reserved_bytes": 5324668928
+}

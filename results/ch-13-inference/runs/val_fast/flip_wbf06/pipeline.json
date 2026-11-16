@@ -1,0 +1,38 @@
+{
+  "variant": "flip_wbf06",
+  "axis": "4a TTA flip",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "flip"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "wbf",
+      "iou": 0.6
+    },
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 714,
+  "num_detections": 228770,
+  "detections_per_frame_mean": 320.41,
+  "detections_per_frame_min": 249,
+  "detections_per_frame_max": 404,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 2,
+  "cpu_postprocess_seconds": 8.7,
+  "cpu_postprocess_ms_per_frame": 12.18
+}

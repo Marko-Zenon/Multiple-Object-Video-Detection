@@ -1,0 +1,33 @@
+{
+  "checkpoint": "Multiple-Object-Video-Detection/outputs/ch08/outputs/retina_anchors/epoch_0006.pt",
+  "checkpoint_sha256": "51159729a629152e231b62ef9a17e3483eba22d40292f936a1e1f4c3ec0be97e",
+  "config_shared_keys_match_checkpoint": true,
+  "config_keys_added_in_results": [
+    "detections_per_img",
+    "protocol_version",
+    "seed",
+    "train_split_size",
+    "training_only",
+    "weights"
+  ],
+  "reproduced_val_full": {
+    "mAP": 0.16924104135343965,
+    "AP50": 0.34649075959412773,
+    "AP75": 0.1446073717327663,
+    "AP_small": 0.07541603981245623,
+    "AP_medium": 0.15281798410772893,
+    "AP_large": 0.32222613869041433
+  },
+  "stored_val_full": {
+    "mAP": 0.16925451042258532,
+    "AP50": 0.34648518343626955,
+    "AP75": 0.14459493780053986,
+    "AP_small": 0.07541240520932305,
+    "AP_medium": 0.15282830460800836,
+    "AP_large": 0.3222630584397855
+  },
+  "max_abs_diff": 3.691974937114484e-05,
+  "reproduces_stored_metrics": true,
+  "num_predictions": 350031,
+  "note": "AMP inference on GPU; small differences (< 1e-3) come from non-deterministic CUDA kernels"
+}

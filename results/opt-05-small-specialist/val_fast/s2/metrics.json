@@ -1,0 +1,149 @@
+{
+  "num_images": 714,
+  "num_predictions": 356882,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.289485006622348,
+    "AP50": 0.5395938690627805,
+    "AP75": 0.26628610150284066,
+    "AP_small": 0.15406754611547685,
+    "AP_medium": 0.25979788659080394,
+    "AP_large": 0.4901368969868727
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.27144174704737584,
+    "AP50": 0.49373899540074406,
+    "AP75": 0.2565712794749478,
+    "AP_small": 0.14617932917058113,
+    "AP_medium": 0.2370479963889127,
+    "AP_large": 0.45761310459658805
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 12644,
+      "AP": 0.29922698415855564,
+      "AP50": 0.6842848436237725,
+      "AP75": 0.20524780951153354,
+      "AP_maxdets100": 0.2922548315030864
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 1519,
+      "AP": 0.25123199754335834,
+      "AP50": 0.6100071678751763,
+      "AP75": 0.13672882030193914,
+      "AP_maxdets100": 0.20053168385737474
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 8001,
+      "AP": 0.4538605225078233,
+      "AP50": 0.702361319385102,
+      "AP75": 0.4993942480754056,
+      "AP_maxdets100": 0.44087559707359936
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 1718,
+      "AP": 0.32950113152820815,
+      "AP50": 0.5568664790894898,
+      "AP75": 0.35661501404304213,
+      "AP_maxdets100": 0.3045478940160252
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 340,
+      "AP": 0.31260557032177744,
+      "AP50": 0.5125503049846498,
+      "AP75": 0.3280484182061135,
+      "AP_maxdets100": 0.30992199714575314
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 1375,
+      "AP": 0.2590727986712661,
+      "AP50": 0.5215594684137007,
+      "AP75": 0.2272529599810748,
+      "AP_maxdets100": 0.23739106166830615
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 66,
+      "AP": 0.2524773531065735,
+      "AP50": 0.298629556203556,
+      "AP75": 0.29732601289103205,
+      "AP_maxdets100": 0.2454013988583732
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 3022,
+      "AP": 0.15790369514122157,
+      "AP50": 0.43049181292679684,
+      "AP75": 0.0796755290125847,
+      "AP_maxdets100": 0.1406095122564887
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 245,
+      "num_gt": 3400,
+      "mAP": 0.21332591386029376,
+      "AP50": 0.36653886652610257,
+      "mAP_maxdets100": 0.21159411256823057
+    },
+    {
+      "bin": "20-49",
+      "num_images": 264,
+      "num_gt": 10066,
+      "mAP": 0.30335857918730214,
+      "AP50": 0.5112926540365087,
+      "mAP_maxdets100": 0.29252242780965265
+    },
+    {
+      "bin": "50-99",
+      "num_images": 157,
+      "num_gt": 10090,
+      "mAP": 0.3091176655838705,
+      "AP50": 0.6353440064330853,
+      "mAP_maxdets100": 0.28081328894924695
+    },
+    {
+      "bin": ">=100",
+      "num_images": 48,
+      "num_gt": 5129,
+      "mAP": 0.3512976508125177,
+      "AP50": 0.7459738601760517,
+      "mAP_maxdets100": 0.31060892551154695
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_fast"
+}

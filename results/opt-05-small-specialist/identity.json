@@ -1,0 +1,80 @@
+{
+  "checkpoints": {
+    "A": {
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "matches_evidence": true
+    },
+    "FB": {
+      "path": "MOVD-opt04/outputs/opt04_rtdetrl1600_e1/train/weights/epoch0.pt",
+      "sha256": "e06a1a4b3a4213147fe98083b5a8d3cd50aaa74dc7c38c72c0047e900acca33f",
+      "matches_evidence": true
+    }
+  },
+  "inputs": {
+    "A/val_fast": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_fast/pipeline_predictions.json",
+      "sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e",
+      "bytes": 53367049,
+      "matches_evidence": true
+    },
+    "A/val_full": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_full/pipeline_predictions.json",
+      "sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+      "bytes": 212607551,
+      "matches_evidence": true
+    },
+    "A/test": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/test/test_predictions.json",
+      "sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+      "bytes": 285736475,
+      "matches_evidence": true
+    },
+    "FB/val_fast": {
+      "path": "MOVD-opt04/outputs/opt04/FB_rtdetrl1600_e1/val_fast/pipeline_predictions.json",
+      "sha256": "f0c86d7077d9d05d3f4fd50da508d844819479572d90b2c6120d6a30b43107e0",
+      "bytes": 53794683,
+      "matches_evidence": true
+    }
+  },
+  "registered_metrics_reproduced": {
+    "A/val_fast": {
+      "registered": "MOVD-opt05/results/ch-14b-rtdetr-short-finetune/stageA_epoch1/val_fast/pipeline/metrics.json",
+      "identical": true,
+      "mAP": 0.2892166441381564
+    },
+    "FB/val_fast": {
+      "registered": "MOVD-opt05/results/opt-04-model-scale/FB_rtdetrl1600_e1/val_fast/pipeline/metrics.json",
+      "identical": true,
+      "mAP": 0.2760746661947264
+    }
+  },
+  "A_only_merge_unchanged": {
+    "0.5": {
+      "detections": 352878,
+      "A_detections": 352886,
+      "unchanged": false,
+      "A_removed": 8,
+      "removed_max_score": 0.07915636897087097,
+      "mAP_A_only_merge": 0.28921664510542155,
+      "subset_ids_count": 322,
+      "ok": true
+    },
+    "0.6": {
+      "detections": 352886,
+      "A_detections": 352886,
+      "unchanged": true,
+      "A_removed": 0,
+      "removed_max_score": null,
+      "mAP_A_only_merge": 0.2892166441381564,
+      "subset_ids_count": 322,
+      "ok": true
+    }
+  },
+  "A_only_merge_note": "At NMS 0.5, A-only re-NMS removes a few low-score A boxes whose stored pair IoU is ~0.49998 (CH-13 NMS ran on the original xyxy; the xywh -> xyxy rebuild in float32 lands just above 0.5). Frozen rule unchanged; deviation recorded.",
+  "model_A_subset_w_le_1920": {
+    "frames": 322,
+    "mAP": 0.3120912393562929
+  },
+  "ok": true
+}

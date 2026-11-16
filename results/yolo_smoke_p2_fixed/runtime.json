@@ -1,0 +1,53 @@
+{
+  "train_process_seconds": [
+    301.9,
+    273.7
+  ],
+  "smoke_processes": [
+    {
+      "status": "checkpoint_stop",
+      "seconds": 301.866,
+      "resume": false,
+      "batches": 50,
+      "saved_epochs": [
+        0
+      ],
+      "start_epoch": 0,
+      "samples": 50,
+      "batches_per_epoch": 50,
+      "optimizer_state_entries": 0,
+      "amp": true,
+      "first_loss": 5.734620094299316,
+      "last_loss": 5.812406539916992,
+      "minimum_loss": 4.413147926330566,
+      "maximum_loss": 6.642704010009766,
+      "peak_cuda_allocated_bytes": 2107467776,
+      "peak_cuda_reserved_bytes": 2308964352
+    },
+    {
+      "status": "completed",
+      "seconds": 273.674,
+      "resume": true,
+      "batches": 50,
+      "saved_epochs": [
+        1
+      ],
+      "start_epoch": 1,
+      "samples": 50,
+      "batches_per_epoch": 50,
+      "optimizer_state_entries": 289,
+      "amp": true,
+      "first_loss": 4.553732872009277,
+      "last_loss": 6.642704010009766,
+      "minimum_loss": 4.165552139282227,
+      "maximum_loss": 6.642704010009766,
+      "peak_cuda_allocated_bytes": 2109944320,
+      "peak_cuda_reserved_bytes": 3168796672
+    }
+  ],
+  "train_seconds_total": 575.6,
+  "epoch_checkpoints": [
+    "epoch0.pt",
+    "epoch1.pt"
+  ]
+}

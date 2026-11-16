@@ -1,0 +1,39 @@
+{
+    "run_id":  "opt12_reg_ft",
+    "family":  "rtdetr",
+    "weights":  "../MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+    "epochs":  6,
+    "imgsz":  1344,
+    "batch_size":  1,
+    "workers":  2,
+    "amp":  true,
+    "data_yaml":  "outputs/yolo_data_final/data.yaml",
+    "train_split":  "train_final",
+    "note":  "OPT-12 primary (plan section D): regularised fine-tune of RT-DETR-l from soup w075 (c1 weights, sha256 cfaaf0a4...b39d) on train_final. Student-approved exception to the flip-only / optimizer=auto protocol: AdamW 1e-4 cosine to 1e-5, nbs 16, warmup 1 epoch, mosaic 0.5 (closed for the last 2 epochs), scale 0.5, translate 0.1, HSV, flip; layers 0-1 (HGStem + first HGBlock stage) frozen; BatchNorm statistics frozen by scripts/opt12_train.py. overrides.epochs is set from the smoke throughput before the run (E). val true = Ultralytics monitor on val_fast only.",
+    "overrides":  {
+                      "cache":  false,
+                      "epochs":  10,
+                      "val":  true,
+                      "optimizer":  "AdamW",
+                      "lr0":  0.0001,
+                      "lrf":  0.1,
+                      "cos_lr":  true,
+                      "momentum":  0.9,
+                      "weight_decay":  0.0001,
+                      "nbs":  16,
+                      "warmup_epochs":  1,
+                      "warmup_bias_lr":  0,
+                      "mosaic":  0.5,
+                      "close_mosaic":  2,
+                      "scale":  0.5,
+                      "translate":  0.1,
+                      "hsv_h":  0.015,
+                      "hsv_s":  0.7,
+                      "hsv_v":  0.4,
+                      "fliplr":  0.5,
+                      "freeze":  [
+                                     0,
+                                     1
+                                 ]
+                  }
+}

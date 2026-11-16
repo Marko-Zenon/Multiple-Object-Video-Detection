@@ -272,3 +272,84 @@ Based on the initial comparisons:
 - Faster R-CNN generally achieved stronger detection accuracy than RetinaNet under the tested configurations.
 
 These observations are preliminary because the models were trained on
+
+<!-- CH-09 section (Ultralytics). The truncated sentence above belongs to section 6 and is left for its authors. -->
+
+## Ultralytics data path, licence and citation (CH-09)
+
+The anchor-free (YOLO11) and query-based (RT-DETR) families use **Ultralytics `ultralytics==8.4.207`**
+(pinned in `requirements.txt`), installed into the same environment as torch 2.14.1+cu130.
+
+- **Licence:** Ultralytics is distributed under the **GNU AGPL-3.0** (https://ultralytics.com/license).
+  This repository uses it unmodified as a library for coursework. The pretrained checkpoints it downloads and
+  the models fine-tuned from them are covered by the same licence. They are not committed (`outputs/` is git-ignored).
+- **Weights:** `yolo11s.pt` (sha256 `85a76fe8…d502d5`) and `yolo11m.pt` (sha256 `d5ffc1a6…305b95`), COCO-pretrained,
+  from https://github.com/ultralytics/assets/releases/tag/v8.4.0, downloaded to `outputs/weights/`.
+- **Citation:** Jocher, G., Qiu, J. *Ultralytics YOLO11*, version 11.0.0, 2024. https://github.com/ultralytics/ultralytics
+  (AGPL-3.0). RT-DETR: Zhao, Y. et al. *DETRs Beat YOLOs on Real-time Object Detection*, CVPR 2024.
+
+Pipeline (CPU steps first, GPU steps only with an explicit `--device`):
+
+```bash
+python scripts/export_yolo.py --dataset-root <dataset>          # masked train_rubric + val_fast copy -> outputs/yolo_data/ (~1.9 GB)
+python scripts/check_ultra_adapter.py --dataset-root <dataset>  # GT -> Ultralytics Results -> evaluator, mAP must be >= 0.99
+python scripts/train_ultra.py --config configs/runs/yolo_baseline.json --device 0 [--resume]
+python scripts/predict_ultra.py curve --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_fast mAP per epoch
+python scripts/predict_ultra.py final --run-id yolo_baseline --device 0 --dataset-root <dataset>   # val_full metrics + speed
+python scripts/failures_ultra.py --run-id yolo_baseline --dataset-root <dataset>                     # CPU: failure-case figures from saved val predictions
+```
+
+Exact GPU steps, expected evidence files and the notebook draft: `results/ch-09-yolo/GPU_RUNBOOK.md`.
+
+The shipped `images/`, `labels/` and `data.yaml` are not used for training because they do not handle ignore regions.
+`movd/ultra.py` applies the CH-02 policy instead (crowd never a target; ignore regions filled with the ImageNet mean except
+inside labelled target boxes). Every reported number comes from `movd/evaluate.py` on the original val images, never from
+Ultralytics' own validator.
+
+<!-- CH-11 section (RT-DETR). -->
+
+## Query-based detector: RT-DETR (CH-11)
+
+- **Model:** Ultralytics RT-DETR-l (`ultralytics==8.4.207`, AGPL-3.0, see the CH-09 section). Official COCO-pretrained
+  `rtdetr-l.pt` from https://github.com/ultralytics/assets/releases/tag/v8.4.0 (66,511,432 bytes, sha256
+  `6de60b10d4bc566f00cda0f5b4d64afe4b66d48dc9695d2171effb7859d8e73f`), downloaded to the git-ignored `outputs/weights/`.
+- **Citation:** Zhao, Y., Lv, W., Xu, S., Wei, J., Wang, G., Dang, Q., Liu, Y., Chen, J. *DETRs Beat YOLOs on Real-time
+  Object Detection*, CVPR 2024. Carion, N. et al. *End-to-End Object Detection with Transformers* (DETR), ECCV 2020.
+- **Code:** the CH-09 Ultralytics path unchanged (masked export, training arguments, adapter with the 500 cap, project
+  evaluator). `movd/rtdetr.py` opens RT-DETR checkpoints with `ultralytics.RTDETR` (run-config `"family": "rtdetr"`).
+  RT-DETR has no NMS and returns at most one box per decoder query. `configs/models/rtdetr-l-q500.yaml` is the packaged
+  `rtdetr-l.yaml` with 500 instead of 300 queries.
+
+```bash
+python scripts/export_yolo.py                                    # once, CPU (~1.5 min, 1.9 GB in outputs/yolo_data/)
+bash results/ch-11-rtdetr/run_ch11.sh python                     # baseline, 500 queries, lr0 1e-4: train -> val_fast curve -> val_full + speed (resumable)
+bash results/ch-11-rtdetr/run_ch11.sh python rtdetr_lr1e4_wb0    # the clean lr0 1e-4 run (rtdetr_lr1e4 is kept but confounded)
+python results/ch-11-rtdetr/make_evidence.py                     # CPU: comparison tables and figures in results/ch-11-rtdetr/
+```
+
+Single steps: `python scripts/train_ultra.py --config configs/runs/rtdetr_baseline.json --device 0 --observe [--resume]`,
+`python scripts/predict_ultra.py curve|final --run-id rtdetr_baseline --device 0`,
+`python scripts/predict_ultra.py speed --weights <ckpt> --family yolo11 --out <json> --device 0`,
+`python scripts/failures_ultra.py --run-id rtdetr_baseline`, `python results/ch-11-rtdetr/relativize_paths.py <run>`
+(repo-relative paths in finished run evidence). Results and the technical analysis: `results/ch-11-rtdetr/analysis.md`.
+
+## Final-pipeline inference settings (CH-13)
+
+- **Frozen settings:** `configs/runs/final_inference.json`. RT-DETR-l, no retraining: 6 passes per frame at imgsz 1344
+  (the full frame, its horizontal flip, and a 2x2 grid of 0.6 W x 0.6 H tiles), merged by class-wise NMS at IoU 0.5,
+  then the top 500 per frame. On the CH-11 `rtdetr_baseline` checkpoint, val_full mAP goes from 0.2577 to 0.2696 at
+  2.26 FPS instead of 13.7 FPS (RTX 5070 Laptop, about 28 min for the 3,811 test frames).
+- **Code:** `movd/infer.py` (raw RT-DETR pass with a forward hook, Ultralytics-identical decoding, tiles, flip, NMS,
+  weighted boxes fusion, `predict_image` for the live pipeline); `scripts/infer_val.py` (cache / eval / speed).
+- **Weighted boxes fusion:** Solovyev, R., Wang, W., Gabruseva, T. *Weighted boxes fusion: Ensembling boxes from
+  different object detection models*, Image and Vision Computing 107, 2021 (own implementation, no new dependency).
+
+```bash
+# checkpoints: outputs/rtdetr_baseline/train/weights/last.pt and outputs/rtdetr_q500/... (CH-11, sha256 in variants.json)
+python scripts/infer_val.py cache --model baseline --imgsz 1344 --views full --split val_fast --device 0   # one per view in variants.json
+python scripts/infer_val.py eval --split val_fast --variant ref flip_nms06 tile_nms05 combo_flip_tile_nms05
+python scripts/infer_val.py speed --device 0 --variant ref combo_flip_tile_nms05
+python results/ch-13-inference/make_tables.py        # CPU: comparison.csv, selection.json, figures
+```
+
+Search space and selection rule: `results/ch-13-inference/selection_rule.md`; evidence: `results/ch-13-inference/analysis.md`.

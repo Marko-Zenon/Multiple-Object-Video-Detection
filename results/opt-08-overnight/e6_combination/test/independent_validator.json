@@ -1,0 +1,27 @@
+{
+  "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv",
+  "csv_bytes": 169748252,
+  "csv_sha256": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+  "rows": 3811,
+  "groups": 1841598,
+  "max_groups_per_row": 500,
+  "empty_rows": 0,
+  "classes_seen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "predictions": "C:/UCU/AI/hw2/MOVD-opt08/outputs/opt08/e6_combination/k1/test/test_predictions.json",
+  "predictions_sha256": "ef3f5c2ff42598696dfcd44aa1431c0d422598203bbfce8f0370c333c14cb0aa",
+  "predictions_count": 1841598,
+  "rows_differing_from_predictions": 0,
+  "run_json": "C:/UCU/AI/hw2/MOVD-opt08/results/opt-08-overnight/e6_combination/test/run.json",
+  "run_checkpoint_sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+  "failures": [],
+  "valid": true
+}

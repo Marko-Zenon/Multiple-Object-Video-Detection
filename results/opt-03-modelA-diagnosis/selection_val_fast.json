@@ -1,0 +1,16 @@
+{
+  "rule": "results/opt-03-modelA-diagnosis/selection_rule.md (commit 528167a, before any result)",
+  "baseline_val_fast": {
+    "mAP": 0.2892166441381564,
+    "AP_small": 0.14273391809388225,
+    "dens100": 0.35150175230579234
+  },
+  "thresholds": {
+    "G-a": 0.2922166441381564,
+    "G-b": 0.13973391809388225,
+    "G-c": 0.34650175230579233
+  },
+  "passing": [],
+  "selected": null,
+  "selected_metrics": null
+}

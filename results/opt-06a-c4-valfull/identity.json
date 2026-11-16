@@ -1,0 +1,60 @@
+{
+  "candidate": {
+    "id": "c4_w075_nms06",
+    "w_A": 1.0,
+    "w_B": 0.75,
+    "iou": 0.6,
+    "route": null
+  },
+  "inputs": {
+    "A/val_fast": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_fast/pipeline_predictions.json",
+      "sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e",
+      "bytes": 53367049,
+      "matches_opt02": true
+    },
+    "A/val_full": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_full/pipeline_predictions.json",
+      "sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+      "bytes": 212607551,
+      "matches_opt02": true
+    },
+    "A/test": {
+      "path": "MOVD-ch14b/outputs/ch14b/stageA_epoch1/test/test_predictions.json",
+      "sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+      "bytes": 285736475,
+      "matches_opt02": true
+    },
+    "B/val_fast": {
+      "path": "MOVD-ch13/outputs/ch13/preds/val_fast_combo_flip_tile_nms05.json",
+      "sha256": "ef43e3198bcbe7b928c91b48d4818c3fd841ecb1086093f57dd522a735758ac5",
+      "bytes": 76339222,
+      "matches_opt02": true
+    },
+    "B/val_full": {
+      "path": "MOVD-ch13/outputs/ch13/preds/val_full_combo_flip_tile_nms05.json",
+      "sha256": "5e42bbaeae6ebfc6b21e55fbf78ef2dbc442518679f5f5a0170261365ee92847",
+      "bytes": 304289473,
+      "matches_opt02": true
+    },
+    "B/test": {
+      "path": "MOVD-ch13/outputs/ch13_test/test_predictions.json",
+      "sha256": "184ddccc963df0bfa5f31665500c671388d4e8b4bdd48c605640d6acc3647ccd",
+      "bytes": 290257180,
+      "matches_opt02": true
+    }
+  },
+  "checkpoints": {
+    "A": {
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "matches_evidence": true
+    },
+    "B": {
+      "path": "MOVD-ch11/outputs/rtdetr_baseline/train/weights/last.pt",
+      "sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "matches_evidence": true
+    }
+  },
+  "ok": true
+}

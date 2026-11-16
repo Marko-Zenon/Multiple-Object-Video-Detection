@@ -1,0 +1,52 @@
+{
+  "ultralytics": "8.4.207",
+  "gt_round_trip": {
+    "split": "val_full",
+    "num_detections": 114132,
+    "metrics": {
+      "mAP": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "AP_small": 1.0,
+      "AP_medium": 1.0,
+      "AP_large": 0.9999988520591189
+    },
+    "per_class_AP": {
+      "person": 1.0,
+      "bicycle": 1.0,
+      "car": 1.0,
+      "van": 1.0,
+      "truck": 1.0,
+      "tricycle": 1.0,
+      "bus": 1.0,
+      "motor": 1.0
+    },
+    "passed": true
+  },
+  "model_preflight": {
+    "weights": "yolo11s.pt",
+    "weights_sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+    "device": "cpu",
+    "imgsz": 1344,
+    "frames": [
+      "images\\uav0000086_00000_v\\0000001.jpg",
+      "images\\uav0000086_00000_v\\0000005.jpg",
+      "images\\uav0000086_00000_v\\0000009.jpg"
+    ],
+    "image_sizes": [
+      [
+        1344,
+        756
+      ]
+    ],
+    "detections_per_image": {
+      "1": 161,
+      "5": 167,
+      "9": 148
+    },
+    "max_box_right_edge_px": 1343.779296875,
+    "cpu_seconds": 1.9,
+    "note": "COCO-pretrained 80-class weights, not fine-tuned, restricted to COCO classes 0-7 so the adapter accepts them: checks only the output format and original-pixel scaling, not accuracy or class meaning. Without the filter the adapter rejects class 38 (verified)",
+    "passed": true
+  }
+}

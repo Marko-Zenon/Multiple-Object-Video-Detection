@@ -1,0 +1,81 @@
+{
+  "checkpoint": "C:/UCU/AI/hw2/MOVD-opt04/outputs/opt04_rtdetrl1600_e1/train/weights/epoch0.pt",
+  "checkpoint_sha256": "e06a1a4b3a4213147fe98083b5a8d3cd50aaa74dc7c38c72c0047e900acca33f",
+  "checkpoint_bytes": 329312426,
+  "epoch_field": 0,
+  "train_args_epochs": 6,
+  "train_args_imgsz": 1600,
+  "train_args_batch": 1,
+  "train_args_seed": 42,
+  "train_args_fraction": 1.0,
+  "train_args_data": "C:\\UCU\\AI\\hw2\\MOVD-opt04\\outputs\\yolo_data_final\\data.yaml",
+  "train_args_project": "C:\\UCU\\AI\\hw2\\MOVD-opt04\\outputs\\opt04_rtdetrl1600_e1",
+  "split": "val_fast",
+  "smoke": false,
+  "pipeline_config": "configs/runs/opt04_inference_1600.json",
+  "pipeline_config_sha256": "2b47bf2d29117fed2c85b40ae6aaf3691729dec56fce068b42516580db712041",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "flip"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1600,
+        "views": "tiles"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.5
+    },
+    "post_nms": null,
+    "max_det": 500,
+    "tile_grid": 2,
+    "tile_frac": 0.6
+  },
+  "frames": 714,
+  "clips": 7,
+  "frames_computed_this_run": 714,
+  "inference_seconds_this_run": 469.3,
+  "fps_this_run": 1.521,
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "peak_cuda_allocated_bytes_this_run": 924933120,
+  "peak_cuda_reserved_bytes_this_run": 1241513984,
+  "torch": "2.14.1+cu130",
+  "ultralytics": "8.4.207",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "detections": {
+    "single": 214200,
+    "pipeline": 356835
+  },
+  "single_predictions_sha256": "082890abd9fcd3a6077b95fce0f790873be3af045911191ba8b44524aa91996d",
+  "single_metrics": {
+    "mAP": 0.26400845336877704,
+    "AP50": 0.4967407026751877,
+    "AP75": 0.24734512419928212,
+    "AP_small": 0.12501350175406728,
+    "AP_medium": 0.23438189394667389,
+    "AP_large": 0.4342822619426756
+  },
+  "pipeline_predictions_sha256": "f0c86d7077d9d05d3f4fd50da508d844819479572d90b2c6120d6a30b43107e0",
+  "pipeline_metrics": {
+    "mAP": 0.2760746661947264,
+    "AP50": 0.5205394146891148,
+    "AP75": 0.25507456858476685,
+    "AP_small": 0.1577194998241636,
+    "AP_medium": 0.24517287285863515,
+    "AP_large": 0.4513681656668994
+  }
+}

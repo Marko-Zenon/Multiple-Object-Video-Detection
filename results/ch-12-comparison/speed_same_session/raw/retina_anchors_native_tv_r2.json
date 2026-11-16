@@ -1,0 +1,22 @@
+{
+  "fps": 30.942476904065124,
+  "latency_ms_per_image": 32.31803333328571,
+  "latency_ms_per_batch": {
+    "mean": 32.31803333328571,
+    "median": 32.2207499993965,
+    "p90": 33.06196000085038,
+    "min": 31.283099999200203
+  },
+  "timed_batches": 30,
+  "warmup_batches": 10,
+  "batch_size": 1,
+  "input_size": "756\u20131344",
+  "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS.",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0",
+  "run": "retina_anchors",
+  "scope": "native_tv"
+}

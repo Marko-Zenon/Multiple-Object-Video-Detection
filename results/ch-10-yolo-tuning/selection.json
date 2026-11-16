@@ -1,0 +1,23 @@
+{
+  "rule": "results/ch-10-yolo-tuning/selection_rule.md",
+  "metric": "val_fast mAP of the epoch-6 checkpoint (last.pt), movd.evaluate maxDets 500",
+  "candidates": {
+    "yolo_baseline_marko_3050": 0.14405776687285152,
+    "yolo_p2": 0.16398169244061878,
+    "yolo_imgsz1600": 0.17509858339108078
+  },
+  "selected": "yolo_imgsz1600",
+  "selected_imgsz": 1600,
+  "selected_gain_over_baseline_val_fast": 0.031040816518229264,
+  "replicate_spread_val_fast": 0.009152378789246018,
+  "replicate_spread_val_full": 0.006330271527100445,
+  "gain_within_replicate_spread": false,
+  "best_at_frozen_1344": "yolo_p2",
+  "val_full_mAP": {
+    "yolo_baseline_marko_3050": 0.14389177166432673,
+    "yolo_baseline_5070": 0.15022204319142718,
+    "yolo_p2": 0.16261888641821381,
+    "yolo_imgsz1600": 0.17101541964683742
+  },
+  "note": "One seed per configuration. val_full is reported for every run but does not select."
+}

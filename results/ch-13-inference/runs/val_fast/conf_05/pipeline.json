@@ -1,0 +1,30 @@
+{
+  "variant": "conf_05",
+  "axis": "3a confidence",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.05
+    },
+    "merge": null,
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 714,
+  "num_detections": 114184,
+  "detections_per_frame_mean": 159.92,
+  "detections_per_frame_min": 5,
+  "detections_per_frame_max": 300,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 1,
+  "cpu_postprocess_seconds": 0.17,
+  "cpu_postprocess_ms_per_frame": 0.23
+}

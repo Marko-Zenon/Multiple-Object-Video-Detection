@@ -1,150 +1,154 @@
 ---
 title: Homework 2 -- Multiple Object Video Detection
-author: Marko-Zenon and Badabuba
+author: Marko-Zenon Peleshko and Nazar Mykolaichuk
 course: Artificial Intelligence · UCU
-date: 2026-11-08
+date: 2026-11-16
 ---
 
-> Report scaffold and verified evidence snapshot at `c3873d2` (2026-11-08). TODO items require student authorship or named chunk evidence. AP values are fractions, not percentages. No discussion or conclusions are supplied here.
+## 1. Task and Dataset
 
-## 1. Introduction and objectives
+Our task was to detect objects in drone videos from the VisDrone dataset. For every frame, the model had to find each object, choose its class and return a bounding box. We worked with eight classes: person, bicycle, car, van, truck, tricycle, bus and motor.
 
-**Student TODO:** Write the problem statement, aerial-video detection objectives, four-family comparison questions, and scope. Explain the intended accuracy–speed trade-off in your own words.
+The main difficulties were small objects, dense scenes, occlusion and visually similar classes. The dataset contains:
 
-## 2. Dataset and exploratory analysis (CH-02, CH-06)
-
-**Student TODO:** Describe the supplied clip-level split, eight merged classes, class imbalance, object sizes, density, sequence differences, occlusion and temporal redundancy. Justify subsampling using the tables below; distinguish target objects from repeated crowd annotations.
-
-| Split | Clips | Frames | Target boxes | Unique ignore regions |
+| Split | Clips | Frames | Target boxes | Ignore regions |
 |---|---:|---:|---:|---:|
 | Train | 56 | 24,201 | 1,105,516 | 63,843 |
 | Validation | 7 | 2,846 | 114,132 | 3,995 |
-| Test | 48 | 3,811 | Unknown (unlabelled) | Unknown |
+| Test | 48 | 3,811 | Unknown | Unknown |
 
-Source: [CH-06 key numbers](results/ch-06-eda/key_numbers.json), `split_overview`; [class/size/density/sequence tables](https://github.com/Marko-Zenon/Multiple-Object-Video-Detection/tree/c3873d2/results/ch-06-eda/tables).
+Our EDA showed that the classes are imbalanced and almost 25% of training objects are small. Some frames also contain hundreds of objects. Adjacent video frames are very similar, so using all of them would add a lot of computation without the same increase in information. For the common model comparison, we selected 50 frames from each training clip, or 2,800 images in total. This subset retained 98.6% of the training tracks.
 
-## 3. Preprocessing and ignored regions (CH-02, CH-04, CH-09)
+![Class distribution](results/ch-06-eda/figures/class_distribution.png)
 
-**Student TODO:** Explain resizing, normalization and horizontal flips. Explain the frozen training mask with target pixels preserved and the unchanged crowd GT used in evaluation. Explain that constant filling is the chosen training heuristic; evaluate its limitations rather than claiming it removes every background-loss contribution.
+![Objects per frame](results/ch-06-eda/figures/objects_per_frame.png)
 
-![Ignore-mask pipeline check: original, ignore regions and training input](images/ch-15-ignore-masking-check.png)
+## 2. Preprocessing and Evaluation
 
-Pipeline test figure, copied byte-for-byte from [CH-02 source](results/ch-02-protocol/figures/ignore_masking_check.png). **Student TODO:** inspect the legend and explain preservation of labelled target pixels.
+We used an input size of 1344 because small people and vehicles can become only a few pixels at lower resolutions. The model families handled resizing differently. Faster R-CNN and RetinaNet kept the aspect ratio, YOLO used letterboxing, and our RT-DETR adapter resized inputs to a 1344 × 1344 square.
 
-## 4. Shared experimental protocol (CH-02, CH-03)
+The annotations also contain ignore regions. We did not use them as normal targets. Instead, we filled their pixels with the ImageNet mean value. If an ignore region overlapped a labelled object, we kept the object pixels. The implementation and visual check are available in [the preprocessing evidence](results/ch-02-protocol/data_facts.json).
 
-**Student TODO:** Explain train_rubric (2,800 frames), six epochs (16,800 images seen), seed 42, aspect-preserving 1344-pixel long side and recorded batch sizes. Distinguish val_fast (714 frames, curves/selection) from val_full (2,846 frames, headlines). Describe COCO IoUs 0.50:0.05:0.95, size bins and global top-500 cap. Cite configs/protocol.json and movd/evaluate.py. Separate legacy v0, smoke tests and rubric runs; do not compare their metrics as controlled experiments.
+![Ignore-mask check](images/ch-15-ignore-masking-check.png)
 
-## 5. Two-stage detector: Faster R-CNN (CH-07)
+For the main comparison, we fixed the training subset, six epochs, seed, input size and evaluation code. We used two validation sets:
 
-**Student TODO:** Explain the pretrained ResNet-50-FPN v2 baseline and isolated RPN pre-NMS / RoI-positive-fraction changes. Interpret all six AP metrics, per-class AP, speed and three failure examples. Explain final-epoch selection on val_fast and single-seed limitations. Use curve.json for each epoch; no standalone corrected learning-curve figure is tracked yet.
+- `val_fast`: 714 frames used for quick checks;
+- `val_full`: all 2,846 validation frames used for final comparisons.
 
-### Verified six-epoch results
+`val_fast` is part of `val_full`, not an independent dataset. This made experiments faster, but repeated tuning could over-fit the validation frames.
 
-| Run | mAP | AP50 | AP75 | AP_S | AP_M | AP_L | FPS | Latency ms |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| [frcnn_baseline](results/frcnn_baseline/metrics.json) | 0.1873 | 0.3808 | 0.1604 | 0.0913 | 0.1779 | 0.3452 | 18.69 | 53.50 |
-| [frcnn_rpn_pre3000](results/frcnn_rpn_pre3000/metrics.json) | 0.1893 | 0.3847 | 0.1614 | 0.1083 | 0.1868 | 0.3107 | 14.85 | 67.35 |
-| [frcnn_roi_pos50](results/frcnn_roi_pos50/metrics.json) | 0.1814 | 0.3643 | 0.1553 | 0.1004 | 0.1763 | 0.3109 | 17.48 | 57.19 |
+Our main metric was COCO `mAP@[0.50:0.95]`. It averages precision across the eight classes and IoU thresholds from 0.50 to 0.95. We also measured AP50, AP75, AP for different object sizes and inference speed. The evaluator kept at most 500 predictions per frame.
 
-Sources: each linked `metrics.json` → `val_full.metrics`; sibling `speed.json` → `inference`. All three: RTX 5070 Laptop GPU, Windows 11, Python 3.12.14, torch 2.14.1+cu130, torchvision 0.29.1+cu130, COCO_V1 initialization. Speed uses 10 warmups and 30 batch-one GPU-resident frames, including detector transforms and NMS; decoding and host transfer excluded. This is detector throughput, not end-to-end video FPS. [Protocol, runtimes and weight checksum](results/ch-07-frcnn/protocol.md).
+## 3. Model Comparison
 
-### Per-class AP on val_full
+We trained four detector families under the common protocol.
 
-| Class | Baseline | RPN pre3000 | RoI pos50 |
-|---|---:|---:|---:|
-| person | 0.2440 | 0.2450 | 0.2510 |
-| bicycle | 0.1608 | 0.1950 | 0.1419 |
-| car | 0.3774 | 0.3756 | 0.3902 |
-| van | 0.2128 | 0.1725 | 0.2075 |
-| truck | 0.1442 | 0.1589 | 0.1245 |
-| tricycle | 0.1800 | 0.1981 | 0.1929 |
-| bus | 0.0471 | 0.0569 | 0.0340 |
-| motor | 0.1325 | 0.1125 | 0.1087 |
+- **Faster R-CNN** is a two-stage detector. It first creates region proposals and then classifies and refines them. Increasing the number of RPN proposals improved small-object AP but reduced speed.
+- **RetinaNet** is a one-stage anchor-based detector that uses focal loss. Modified anchors improved total mAP, but did not improve small-object AP as expected.
+- **YOLO11s** is a fast anchor-free detector. We tested a P2 detection head and a 1600-pixel input. The higher resolution gave the best YOLO result, but it was outside the common 1344-pixel comparison.
+- **RT-DETR-l** uses transformer queries to predict objects. Increasing the number of queries from 300 to 500 and changing the learning rate did not help, but its baseline was still clearly the strongest.
 
-Source: same run metric files → `val_full.per_class[].AP`. Density-bin AP is stored under `val_full.density`; six epoch points under each run’s `curve.json` → `val_fast`.
+| Model | val_full mAP | AP50 | AP_S | Common-scope FPS |
+|---|---:|---:|---:|---:|
+| Faster R-CNN RPN pre3000 | 0.1893 | 0.3847 | 0.1083 | 9.10 |
+| RetinaNet modified anchors | 0.1693 | 0.3465 | 0.0754 | 6.29 |
+| YOLO11s P2 | 0.1626 | 0.3063 | 0.0790 | 55.41 |
+| **RT-DETR-l baseline** | **0.2577** | **0.4775** | **0.1296** | 13.92 |
 
-## 6. One-stage anchor-based detector: RetinaNet (CH-08)
+RT-DETR gave the best accuracy, while YOLO was much faster. This result only describes our dataset and training budget; it does not mean that transformer detectors are always better. Based on this comparison, we selected RT-DETR-l for the remaining experiments. Detailed runs and curves are stored in [the family comparison](results/ch-12-comparison/decision.md).
 
-**Student TODO:** After CH-08 merges, explain the baseline, anchor geometry hypothesis, focal-loss alpha/gamma experiment and controlled comparison with Faster R-CNN. Add six val_full metrics, per-class AP, speed/latency, curves, failed runs and loss rationale. Currently only smoke artifacts are tracked; legacy v0 is not corrected rubric evidence.
+### Faster R-CNN failure cases
 
-## 7. One-stage anchor-free detector: YOLO11 (CH-09, CH-10)
+We inspected incorrect Faster R-CNN predictions and found three common cases. First, it missed tiny objects that occupied only a few pixels. Second, it sometimes confused cars with vans because they look similar from a drone view. Third, it missed objects in dense scenes where many boxes overlap. Examples are stored in [the failure analysis](results/ch-07-frcnn/failure_analysis.md).
 
-**Student TODO:** After CH-09/CH-10 merge, describe the export/ignore and coordinate adapters, pretrained weights, baseline, assignment/loss/resolution variants and high-resolution-head compatibility decision. Add size-bucket and density results. YOLO11 evidence is pending on develop; do not substitute legacy YOLO versions.
+## 4. Improving RT-DETR
 
-## 8. Query-based detector: RT-DETR (CH-11)
+### Inference tuning
 
-**Student TODO:** Record the G9 memory/feasibility decision, exact weights and baseline plus tuning under comparable images-seen budget. Add project-evaluator curves against the CNN comparator and student analysis of convergence, small objects and dense scenes. No RT-DETR runs are tracked in this snapshot.
+We first tried to improve RT-DETR without retraining it. We tested input sizes, confidence thresholds, top-k limits, weighted box fusion, multiscale inference, horizontal-flip TTA, overlapping tiles and an early two-model ensemble.
 
-## 9. Cross-family comparison and final configuration (CH-12)
+The best configuration combined the full frame, its horizontal flip and four overlapping tiles. Each frame was processed six times at 1344. We merged the predictions using class-wise NMS at IoU 0.5 and kept the top 500 detections.
 
-**Student TODO:** Replace pending cells only after all family evidence merges. Link results/summary.csv and configs/runs/final.json when available. Explain the final-family decision using accuracy, small-object AP, wall time and speed on comparable hardware. No final-family decision is available yet.
+| Inference configuration | mAP | AP50 | AP_S | AP_L |
+|---|---:|---:|---:|---:|
+| Single pass | 0.2577 | 0.4775 | 0.1296 | 0.4538 |
+| Horizontal flip | 0.2660 | 0.4941 | 0.1345 | 0.4622 |
+| Overlapping tiles | 0.2644 | 0.4991 | 0.1425 | 0.4404 |
+| **Flip + tiles** | **0.2696** | **0.5069** | **0.1467** | 0.4502 |
 
-| Family | Rubric evidence on develop | Missing evidence owner |
-|---|---|---|
-| Faster R-CNN | Baseline + two isolated variants, six AP metrics, per-class/density AP, speed, curves and failures | Student interpretation / final comparison |
-| RetinaNet | Smoke tests only | CH-08: full baseline, anchors and focal-loss tuning |
-| YOLO11 | No tracked full runs | CH-09/CH-10 |
-| RT-DETR | No tracked runs | CH-11, G9 |
+The selected pipeline helped small objects, but reduced speed from 13.68 FPS to 2.26 FPS. Processing the full test set took around 28–29 minutes.
 
-## 10. Final pipeline and inference improvements (CH-13, CH-14)
+### Final training
 
-**Student TODO:** Add one-change-at-a-time val_full comparisons for resolution, tiling, threshold/NMS/max_det, TTA and any validated ensemble. Include neutral/negative outcomes and speed costs. Link final_inference.json and final-training data-strategy comparison once produced. These artifacts are pending.
+Next, we trained RT-DETR on every fourth frame from all 56 training clips, giving 6,072 frames. The last checkpoint over-fitted and reached only 0.2372 mAP with our inference pipeline. Because we saved every epoch, we found that epoch 1 was much better: it reached 0.2860 on `val_full` and 0.2774301362 on Kaggle.
 
-## 11. Kaggle submission and selection (CH-05, CH-14)
+This showed that more epochs were not automatically better. The model quickly learned useful information and then started to memorize the similar training scenes. We therefore focused on early checkpoints, model soups and stronger augmentation.
 
-**Student TODO:** Explain original-pixel class score x y width height groups, classes 0–7, one row per test image and at most 500 detections. Cite the validator, lossless round-trip and upload log. Add final selection rationale based on internal validation; the first upload is not a final model or a baseline-beating result.
+We also used information from neighbouring video frames. If a detection was supported by nearby frames, we increased its confidence. Removing boxes cut by tile borders also gave a small improvement. Together with checkpoint averaging, these changes produced the E6 system, which scored 0.2947349001 publicly. A later 0.75/0.25 checkpoint average reached 0.2974 on `val_full` and 0.2960489045 on Kaggle. We called this model C1.
 
-| Submission | val_full mAP | Kaggle public score | Status |
-|---|---:|---:|---|
-| Faster R-CNN RPN pre3000, epoch 6 | 0.1893354654 | 0.2011538266 | Accepted; below public baseline 0.22163 |
+### Final model
 
-Source: [append-only submissions log](results/submissions.csv), [validation receipt](results/ch-05-submission/frcnn_rpn_pre3000_e6_test/validation.txt), [lossless real round-trip](results/ch-05-submission/roundtrip_frcnn_rpn_pre3000_e6_lossless.json). Test: 3,811 rows and 261,940 detections. Remaining: CH-14 baseline-beating score and two final selections; G1 exact UTC close time.
+For the last training run, we started from the C1 weights. We added mosaic, scale, translation, HSV and horizontal-flip augmentation. We also used AdamW with cosine learning-rate decay and kept BatchNorm statistics frozen.
 
-## 12. Limitations and reproducibility (CH-16)
+The model improved until epoch 3, which reached 0.2916 in the single-view check compared with 0.2882 for the starting weights. Later epochs became worse again. We averaged the epoch-3 weights with C1 using equal weights:
 
-**Student TODO:** Discuss one seed, CUDA nondeterminism, subset training, scene/domain shifts, speed-benchmark boundaries and unknown hidden Kaggle scorer equivalence. Add exact commands, package/weight versions and checksums from stored artifacts; perform the clean-environment check. Resolve G1 exact UTC deadline and G10 student authorship before freeze.
+$$
+W_{final}=0.5W_{C1}+0.5W_{epoch3}.
+$$
 
-## 13. Discussion — student authored
+This final WiSE-FT model improved `val_full` by 0.0148 and the validation subset with width up to 1920 by 0.0137. However, it performed worse on two very wide validation clips and failed our original selection rule. The test set had no frames wider than 1920, so we recorded an exception and uploaded it as an additional test of the resolution hypothesis. We did not change or hide the failed rule.
 
-**Student TODO:** Write your own evidence-based interpretation, trade-offs, unsuccessful hypotheses and answers to the objectives. Separate measured facts from explanations that were not experimentally tested.
+The result was much stronger than expected: the public Kaggle score increased to **0.3470602874**.
 
-## 14. Conclusions — student authored
+## 5. Kaggle Results
 
-**Student TODO:** Write your own conclusions only after final evidence and selection exist. State what the experiments support, remaining limitations and any justified incomplete rubric items.
+Every submission contained all 3,811 test IDs in the required order and no more than 500 detections per frame. We checked each final CSV using both the project validator and an independent validator.
 
-## 15. References
+| Submission | Kaggle public score |
+|---|---:|
+| Faster R-CNN | 0.2011538266 |
+| RT-DETR flip + tiles | 0.2328849249 |
+| Early final-training checkpoint | 0.2774301362 |
+| E6 | 0.2947349001 |
+| C1 | 0.2960489045 |
+| **Final WiSE-FT model** | **0.3470602874** |
 
-**Student TODO:** Add original papers for Faster R-CNN, FPN, RetinaNet/focal loss, the specific YOLO11 implementation and RT-DETR; VisDrone and COCO evaluation sources; torchvision, pycocotools and Ultralytics documentation; exact pretrained-weight identifiers and package versions. Cite the Ultralytics AGPL-3.0 license. Verify bibliographic details and connect in-text citations before submission.
+The final score was 0.0510113829 higher than our previous best. We selected `opt12_c2_wiseft_test.csv` as the main submission and kept C1 as the second selection. All files, hashes and public scores are recorded in [the submission log](results/submissions.csv) and [the final handoff](results/opt-12-regularized-finetune/HANDOFF.md).
 
-## Evidence and figure inventory
+## 6. Reproduction
 
-Figure convention: `images/<chunk>-<name>.png` (or the existing source extension), copied from `results/<chunk-or-run>/figures/`. Keep the source link and an explanatory student caption. CH-15 includes one pipeline test image only; the final figure selection/copying belongs to CH-16. No new charts were generated.
+The code was run with Python 3.12 and the pinned packages from `requirements.txt`. From the repository root, the main steps are:
 
-| Evidence | Verified source | Report image / action |
-|---|---|---|
-| Class distribution | [ch-06-eda/figures/class_distribution.png](results/ch-06-eda/figures/class_distribution.png) | TODO CH-16: select, copy and add student caption |
-| Object sizes | [ch-06-eda/figures/object_sizes.png](results/ch-06-eda/figures/object_sizes.png) | TODO CH-16: select, copy and add student caption |
-| Density | [ch-06-eda/figures/objects_per_frame.png](results/ch-06-eda/figures/objects_per_frame.png) | TODO CH-16: select, copy and add student caption |
-| Sequence differences | [ch-06-eda/figures/per_sequence.png](results/ch-06-eda/figures/per_sequence.png) | TODO CH-16: select, copy and add student caption |
-| Ground truth | [ch-06-eda/figures/annotated_frames.jpg](results/ch-06-eda/figures/annotated_frames.jpg) | TODO CH-16: select, copy and add student caption |
-| Ignore masking check | [ch-02-protocol/figures/ignore_masking_check.png](results/ch-02-protocol/figures/ignore_masking_check.png) | `images/ch-15-ignore-masking-check.png` |
-| Tiny-target failure | [ch-07-frcnn/figures/tiny_target_miss.png](results/ch-07-frcnn/figures/tiny_target_miss.png) | TODO CH-16: select, copy and add student caption |
-| Car/van failure | [ch-07-frcnn/figures/car_van_confusion.png](results/ch-07-frcnn/figures/car_van_confusion.png) | TODO CH-16: select, copy and add student caption |
-| Dense-frame failure | [ch-07-frcnn/figures/dense_frame_miss.png](results/ch-07-frcnn/figures/dense_frame_miss.png) | TODO CH-16: select, copy and add student caption |
+```bash
+python -m pip install -r requirements.txt
+python scripts/check_dataset.py --root <dataset-path>
+python scripts/opt12_train.py --config configs/runs/opt12_reg_ft.json --device 0
+python scripts/opt12_morning.py baseline
+python scripts/opt12_morning.py select
+python scripts/opt12_morning.py cache wstar test
+python scripts/opt12_morning.py csv C2
+python scripts/opt12_morning.py rebuild C2
+```
 
-**Student TODO:** use [failure metadata](results/ch-07-frcnn/failure_cases.csv) and [failure analysis](results/ch-07-frcnn/failure_analysis.md) to write your own interpretation. Failure display threshold 0.10 and same-class IoU check 0.50 are qualitative settings, separate from AP evaluation. Add a learning-curve figure from stored `curve.json` in the owning chunk; no standalone curve/comparison PNG is tracked here.
+Before running these commands, the dataset, C1 source checkpoint and protected C1 caches must be restored at the paths and hashes recorded in [OPT-12 HANDOFF](results/opt-12-regularized-finetune/HANDOFF.md). The final commands create `submissions/opt12_c2_wiseft_test.csv`, run both validators and rebuild the file to check that its SHA256 is identical.
 
-### Artifact completeness and provenance
+## 7. Discussion and Limitations
 
-| Evidence group | Stored material | Status / limit |
-|---|---|---|
-| CH-02 protocol | configs/protocol.json; split JSONs; data_facts.json; ignore test | Frozen protocol; Kaggle daily-limit field is stale, use current board G2b (5/day recorded) |
-| CH-03 evaluator | sanity.json; speed_selftest.json; pytest.txt; CLI example | Synthetic/tool checks; never model leaderboard evidence |
-| CH-06 EDA | key_numbers.json; tables/; figures/; run_stage1.py | Corrected EDA evidence; test labels unavailable |
-| Three full Faster R-CNN runs | config.json, metrics.json, curve.json, speed.json, hardware.json, runtime.json per run; configs/runs/frcnn_*.json | Complete, six epochs each; one seed |
-| Smoke groups | smoke_frcnn*, smoke_retina*, frcnn_*_smoke | Integration/preflight only, excluded from headline table |
-| CH-05 submission | validator/prediction receipts; synthetic and real round-trips; submissions.csv | One accepted upload; final selection pending |
-| CH-08 to CH-14 | See named section TODOs | Unmerged/pending work is not treated as completed evidence |
+Checkpoint averaging worked better than our simple ensembles with older or similar models. The new epoch-3 model was stronger on some clips, while C1 was more stable. Their average kept useful properties from both without adding inference cost.
 
-**Student TODO:** replace this snapshot with the final CH-16 traceability audit, retaining source links, failed experiments and exact package/weight versions. Check README commands against the frozen protocol before running them.
+The project also showed a problem with our validation data. Two very wide clips strongly affected `val_full`, while the test frames were at most 1920 pixels wide. The width-matched subset predicted the final Kaggle improvement better. In future work, we would create validation splits by resolution and scene type before tuning.
+
+There are several limitations. Most models were trained with one seed, we tested many ideas on the same validation frames, and the final candidate required a recorded exception to our original rule. We also saw public leaderboard scores during development. Therefore, the final score is not a completely independent estimate of generalization. The final pipeline is also slow: 2.26 FPS was acceptable for this test set, but not for real-time use.
+
+## 8. Conclusion
+
+RT-DETR-l was the most accurate model family in our experiments. The final system combined regularized fine-tuning, a 50/50 weight average with C1 and multi-pass inference. It achieved a Kaggle public score of **0.3470602874**. Longer training was harmful on similar video frames, while checkpoint averaging, stronger augmentation and validation at test-like resolutions helped the final result.
+
+## References
+
+[Faster R-CNN](https://arxiv.org/abs/1506.01497); [FPN](https://arxiv.org/abs/1612.03144); [RetinaNet](https://arxiv.org/abs/1708.02002); [RT-DETR](https://arxiv.org/abs/2304.08069); [VisDrone](https://arxiv.org/abs/2001.06303); [COCO evaluation](https://cocodataset.org/#detection-eval). Ultralytics was pinned to version 8.4.207.
+
+## AI Assistance Declaration
+
+AI assistants supported planning, code review and automation of repeated experiment steps, documentation checks and language editing. We selected the experiment directions, ran and verified the experiments, made the Kaggle uploads and reviewed the final report. We are responsible for the final interpretation and submitted work.

@@ -1,0 +1,18 @@
+{
+  "weights": "C:/UCU/AI/hw2/MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+  "weights_sha256": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+  "monitor_mAP50_95": 0.2814225018426861,
+  "monitor_mAP50": 0.5176875521954777,
+  "settings": {
+    "imgsz": 1344,
+    "batch": 2,
+    "half": true,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 500,
+    "split": "val_fast list of data.yaml"
+  },
+  "seconds": 37.7,
+  "at_kyiv": "2026-11-15 00:22:59",
+  "note": "Ultralytics validator, monitoring only; same settings as the in-training validator"
+}

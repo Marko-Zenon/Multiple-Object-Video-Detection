@@ -1,0 +1,57 @@
+{
+  "clip": "uav0000086_00000_v",
+  "w080": {
+    "frames": 20,
+    "seconds": 10.2,
+    "peak_mem_gb": 0.86,
+    "finite": true,
+    "scores_in_0_1": true,
+    "shape": [
+      20,
+      6,
+      300,
+      4
+    ],
+    "identical_to_opt08_shard": true
+  },
+  "w075": {
+    "frames": 20,
+    "seconds": 9.1,
+    "peak_mem_gb": 0.86,
+    "finite": true,
+    "scores_in_0_1": true,
+    "shape": [
+      20,
+      6,
+      300,
+      4
+    ]
+  },
+  "w085": {
+    "frames": 20,
+    "seconds": 9.2,
+    "peak_mem_gb": 0.88,
+    "finite": true,
+    "scores_in_0_1": true,
+    "shape": [
+      20,
+      6,
+      300,
+      4
+    ]
+  },
+  "w090": {
+    "frames": 20,
+    "seconds": 9.1,
+    "peak_mem_gb": 1.06,
+    "finite": true,
+    "scores_in_0_1": true,
+    "shape": [
+      20,
+      6,
+      300,
+      4
+    ]
+  },
+  "ok": true
+}

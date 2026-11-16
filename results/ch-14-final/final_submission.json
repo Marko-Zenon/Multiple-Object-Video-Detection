@@ -1,0 +1,26 @@
+{
+  "selected_by": "results/ch-14-final/selection.json (rule B of selection_rule.md): fallback kept",
+  "csv_path": "C:/UCU/AI/hw2/MOVD-ch13/submissions/rtdetr_baseline_ch13_fliptile_nms05_test.csv (outside Git; not copied, not regenerated)",
+  "csv_file": "rtdetr_baseline_ch13_fliptile_nms05_test.csv",
+  "csv_bytes": 176046764,
+  "csv_sha256": "73f73e219dfbf3b674277703f7314d14c316d0800bcd046634aaecd27f2b793b",
+  "rows": 3811,
+  "detections": 1902580,
+  "max_detections_per_row": 500,
+  "checkpoint": "MOVD-ch11 outputs/rtdetr_baseline/train/weights/last.pt (CH-11 rtdetr_baseline: train_rubric 2,800 frames x 6 epochs, imgsz 1344)",
+  "checkpoint_sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+  "inference": "configs/runs/final_inference.json (CH-13), unchanged",
+  "writer": "CH-05 movd.submission (lossless repr floats)",
+  "raw_test_predictions_sha256": "184ddccc963df0bfa5f31665500c671388d4e8b4bdd48c605640d6acc3647ccd",
+  "val_full": {
+    "mAP": 0.2696,
+    "AP50": 0.5069,
+    "AP_small": 0.1467
+  },
+  "kaggle_public_score": "0.2328849249 (user-reported)",
+  "validators": {
+    "project": "scripts/validate_submission.py exit 0 (fallback/project_validator.txt)",
+    "independent": "scripts/check_submission_independent.py exit 0, 0 failures (fallback/independent_validator.json)"
+  },
+  "ch14_test_inference": "not run: CH-14 final_rtdetr lost rule B, so the validated fallback CSV is reused (user instruction)"
+}

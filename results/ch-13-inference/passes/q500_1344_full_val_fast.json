@@ -1,0 +1,25 @@
+{
+  "model": "q500",
+  "checkpoint": "outputs/rtdetr_q500/train/weights/last.pt",
+  "checkpoint_sha256": "9456f34a53a9509b6311ef3e3e22f68d40e363082c4fdaf92901ede466eff055",
+  "imgsz": 1344,
+  "views": [
+    "full"
+  ],
+  "split": "val_fast",
+  "num_frames": 714,
+  "passes_per_frame": 1,
+  "wall_seconds": 59.8,
+  "pass_seconds": 52.3,
+  "seconds_per_frame_all_views": 0.0732,
+  "note": "pass_seconds = Ultralytics predict (resize, normalisation, forward, its own decoding) + the raw capture, for every view of each frame; excludes reading the JPEG from disk",
+  "ultralytics": "8.4.207",
+  "finished_kyiv": "2026-11-09T15:58:07",
+  "peak_allocated_bytes": 699878912,
+  "peak_reserved_bytes": 926941184,
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0"
+}

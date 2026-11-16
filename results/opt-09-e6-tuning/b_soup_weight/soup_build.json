@@ -1,0 +1,57 @@
+{
+  "compatibility": {
+    "model_A": {
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "epoch": 0,
+      "updates": 915
+    },
+    "adjacent": {
+      "path": "MOVD-ch14/outputs/final_rtdetr/train/weights/epoch1.pt",
+      "sha256": "5594fb0e9a1ae97bd0ca42fa6c6bc42cfbed9c77697ddc3b3e2336f6bb015799",
+      "epoch": 1,
+      "updates": 1109
+    },
+    "weights_entry": "ema (model is None in both)",
+    "same_class": true,
+    "class": "RTDETRDetectionModel",
+    "same_yaml": true,
+    "num_tensors": 941,
+    "same_names": true,
+    "same_shapes": true,
+    "same_dtypes": true,
+    "dtypes": [
+      "torch.float16",
+      "torch.int64"
+    ],
+    "same_names_list_in_model_attr": true,
+    "adjacent_epochs": true,
+    "compatible": true
+  },
+  "w080_rebuilt_tensor_identical_to_E6": true,
+  "E6_soup": {
+    "path": "MOVD-opt08/outputs/opt08/soup/soup_w080.pt",
+    "sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939"
+  },
+  "w075": {
+    "weight_model_A": 0.75,
+    "path": "MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+    "sha256": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+    "names_shapes_dtypes_equal_model_A": true,
+    "num_tensors": 941
+  },
+  "w085": {
+    "weight_model_A": 0.85,
+    "path": "MOVD-opt09/outputs/opt09/soup/soup_w085.pt",
+    "sha256": "9353e0fd436a5746986a0d874a176f37e051533f3822b3fec89667bc4d741037",
+    "names_shapes_dtypes_equal_model_A": true,
+    "num_tensors": 941
+  },
+  "w090": {
+    "weight_model_A": 0.9,
+    "path": "MOVD-opt09/outputs/opt09/soup/soup_w090.pt",
+    "sha256": "ef65198edfdac3f73d02f2e1ee2c4e6c7630e65d13977981f13cd33344e14a6f",
+    "names_shapes_dtypes_equal_model_A": true,
+    "num_tensors": 941
+  }
+}

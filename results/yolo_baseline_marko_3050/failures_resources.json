@@ -1,0 +1,16 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-u",
+    "scripts/failures_ultra.py",
+    "--run-id",
+    "yolo_baseline_marko_3050"
+  ],
+  "exit_code": 0,
+  "seconds": 8.17,
+  "stop_reason": null,
+  "sample_interval_seconds": 1,
+  "peak_process_tree_rss_bytes": 693309440,
+  "minimum_available_ram_bytes": 5941252096,
+  "peak_device_used_mib_sampled": 0
+}

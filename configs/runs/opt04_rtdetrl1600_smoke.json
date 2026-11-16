@@ -1,0 +1,18 @@
+{
+  "run_id": "opt04_rtdetrl1600_smoke",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "train_split": "train_final",
+  "epochs": 2,
+  "smoke_fraction": 0.0165,
+  "note": "OPT-04 G0 smoke for FB: opt04_rtdetrl1600_e1 settings (imgsz 1600 via overrides) on about 100 frames x 2 epochs (0.0165 x 6,072); run with --stop-after-epoch 1, then --resume. Not a result.",
+  "overrides": {
+    "cache": false,
+    "imgsz": 1600
+  }
+}

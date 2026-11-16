@@ -1,0 +1,52 @@
+{
+  "weights": "C:/UCU/AI/hw2/MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+  "sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+  "bytes": 329312362,
+  "epoch_field": 0,
+  "train_args": {
+    "epochs": 6,
+    "imgsz": 1344,
+    "batch": 1,
+    "seed": 42,
+    "fraction": 1.0,
+    "data": "C:\\UCU\\AI\\hw2\\MOVD-ch14\\outputs\\yolo_data_final\\data.yaml",
+    "optimizer": "AdamW",
+    "lr0": 0.000833,
+    "momentum": 0.937,
+    "warmup_bias_lr": 0.0,
+    "amp": true
+  },
+  "architecture": {
+    "head": "RTDETRDecoder",
+    "num_queries": 300,
+    "nc": 8,
+    "names": [
+      "person",
+      "bicycle",
+      "car",
+      "van",
+      "truck",
+      "tricycle",
+      "bus",
+      "motor"
+    ],
+    "layers": 29,
+    "reference_layers": 29
+  },
+  "run_record": "results/final_rtdetr/config.json",
+  "run_train_split": "train_final",
+  "run_manifest_num_images": 6072,
+  "run_split_file_sha256": "63732dd60f6bbff00a32d436e4f56557b9b01b14f59fd4a05658103ad0ffcafa",
+  "train_final_split_file_sha256_now": "63732dd60f6bbff00a32d436e4f56557b9b01b14f59fd4a05658103ad0ffcafa",
+  "checks": {
+    "architecture_rtdetr_l": true,
+    "imgsz_1344_batch_1_seed_42": true,
+    "not_smoke": true,
+    "data_is_train_final_export": true,
+    "run_on_train_final_6072": true,
+    "split_file_unchanged": true,
+    "sha256_matches_ch14_checkpoints_json": true,
+    "epoch1_of_6": true
+  },
+  "passed": true
+}

@@ -1,0 +1,86 @@
+{
+  "rule": "results/ch-14-final/selection_rule.md (rule B)",
+  "compared": "val_full, CH-13 pipeline configs/runs/final_inference.json, project evaluator maxDets 500",
+  "C": "CH-14 final_rtdetr last.pt (epoch 6)",
+  "F": "CH-11 rtdetr_baseline last.pt (sha256 da5d3625...e872)",
+  "mAP": {
+    "C": 0.23721936637427107,
+    "F": 0.2696340695338878,
+    "lead": -0.032414703159616726
+  },
+  "spread": 0.0063,
+  "secondary_checks": [
+    {
+      "check": "AP50",
+      "C": 0.46478489934437156,
+      "F": 0.5068607722408747,
+      "C_leads": false
+    },
+    {
+      "check": "AP75",
+      "C": 0.20863444120055438,
+      "F": 0.2453147152579958,
+      "C_leads": false
+    },
+    {
+      "check": "AP_small",
+      "C": 0.14903775272088943,
+      "F": 0.14671952325152776,
+      "C_leads": true
+    },
+    {
+      "check": "AP_medium",
+      "C": 0.2231422052453789,
+      "F": 0.2374569218196573,
+      "C_leads": false
+    },
+    {
+      "check": "AP_large",
+      "C": 0.3939116272203226,
+      "F": 0.45020919471383486,
+      "C_leads": false
+    },
+    {
+      "check": "density 0-19",
+      "C": 0.15141176237097123,
+      "F": 0.1994128679572624,
+      "C_leads": false
+    },
+    {
+      "check": "density 20-49",
+      "C": 0.26088478024220085,
+      "F": 0.2816404938854807,
+      "C_leads": false
+    },
+    {
+      "check": "density 50-99",
+      "C": 0.2614151472382701,
+      "F": 0.28586750483345863,
+      "C_leads": false
+    },
+    {
+      "check": "density >=100",
+      "C": 0.3379251113068085,
+      "F": 0.361393532435919,
+      "C_leads": false
+    }
+  ],
+  "secondary_wins": 1,
+  "identity": {
+    "train_split": "train_final",
+    "num_images": 6072,
+    "epochs_completed": 6,
+    "train_args_epochs": 6,
+    "train_args_fraction": 1.0,
+    "checkpoint_sha256": "a85d2741f1891df7ee536a99e98f1e02d2c188591a1b9634728e5930469d482b"
+  },
+  "criteria": {
+    "B1_mAP_lead_ge_spread": false,
+    "B2_secondary_wins_ge_5_of_9": false,
+    "B3_AP_small_guard": true,
+    "B4_identity": true
+  },
+  "tie": false,
+  "primary_submission": "fallback rtdetr_baseline + CH-13 pipeline",
+  "single_pass_data_strategy_gain": -0.021759728678757195
+}

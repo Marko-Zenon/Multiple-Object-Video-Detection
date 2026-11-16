@@ -1,0 +1,149 @@
+{
+  "num_images": 714,
+  "num_predictions": 71400,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.2424739767020215,
+    "AP50": 0.4370442343233268,
+    "AP75": 0.23081500632083687,
+    "AP_small": 0.11472401323007864,
+    "AP_medium": 0.20375586373926782,
+    "AP_large": 0.44099340384379043
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.2424739767020215,
+    "AP50": 0.4370442343233268,
+    "AP75": 0.23081500632083687,
+    "AP_small": 0.11472401323007864,
+    "AP_medium": 0.20375586373926782,
+    "AP_large": 0.44099340384379043
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 12644,
+      "AP": 0.26667652429475935,
+      "AP50": 0.6267393994730757,
+      "AP75": 0.1756050808122177,
+      "AP_maxdets100": 0.26667652429475935
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 1519,
+      "AP": 0.21253315294532618,
+      "AP50": 0.43637260835156516,
+      "AP75": 0.1798689168411079,
+      "AP_maxdets100": 0.21253315294532618
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 8001,
+      "AP": 0.412792256265887,
+      "AP50": 0.6250504019972934,
+      "AP75": 0.45848716507534626,
+      "AP_maxdets100": 0.412792256265887
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 1718,
+      "AP": 0.27352826363082916,
+      "AP50": 0.41966299481470737,
+      "AP75": 0.3118588518418088,
+      "AP_maxdets100": 0.27352826363082916
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 340,
+      "AP": 0.22600169287699753,
+      "AP50": 0.37721599223068003,
+      "AP75": 0.2368810756742625,
+      "AP_maxdets100": 0.22600169287699753
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 1375,
+      "AP": 0.17740605507652937,
+      "AP50": 0.3855905264021236,
+      "AP75": 0.13289995682919162,
+      "AP_maxdets100": 0.17740605507652937
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 66,
+      "AP": 0.2546717844395169,
+      "AP50": 0.3005676982792619,
+      "AP75": 0.2966446644664466,
+      "AP_maxdets100": 0.2546717844395169
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 3022,
+      "AP": 0.11618208408632656,
+      "AP50": 0.32515425303790707,
+      "AP75": 0.05427433902631375,
+      "AP_maxdets100": 0.11618208408632656
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 245,
+      "num_gt": 3400,
+      "mAP": 0.12921663328516925,
+      "AP50": 0.19810759510030898,
+      "mAP_maxdets100": 0.12921663328516925
+    },
+    {
+      "bin": "20-49",
+      "num_images": 264,
+      "num_gt": 10066,
+      "mAP": 0.2546101933612483,
+      "AP50": 0.4265235860188714,
+      "mAP_maxdets100": 0.2546101933612483
+    },
+    {
+      "bin": "50-99",
+      "num_images": 157,
+      "num_gt": 10090,
+      "mAP": 0.25436604053367057,
+      "AP50": 0.5197409160052422,
+      "mAP_maxdets100": 0.25436604053367057
+    },
+    {
+      "bin": ">=100",
+      "num_images": 48,
+      "num_gt": 5129,
+      "mAP": 0.31526947658246635,
+      "AP50": 0.5722105624069735,
+      "mAP_maxdets100": 0.31526947658246635
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_fast"
+}

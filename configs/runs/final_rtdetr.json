@@ -1,0 +1,16 @@
+{
+  "run_id": "final_rtdetr",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "note": "CH-14 final training frozen by CH-12. Identical to rtdetr_baseline (CH-11) except the training frames: train_final = every 4th frame of every train clip (6,072 frames) instead of train_rubric (2,800). 6 epochs = 36,432 images seen. imgsz 1344, batch 1, AMP, seed 42, flip-only, optimizer=auto (AdamW lr0 0.000833), 300 queries, frozen ignore policy (masked export). CH-14 copy of configs/runs/final.json run_config; the only added key is train_split, which makes train_ultra.py read and check outputs/yolo_data_final/train_final_manifest.json.",
+  "overrides": {
+    "cache": false
+  },
+  "train_split": "train_final"
+}

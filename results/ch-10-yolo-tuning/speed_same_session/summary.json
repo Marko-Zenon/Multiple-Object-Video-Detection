@@ -1,0 +1,79 @@
+{
+  "started_kyiv": "2026-11-09T12:40:08+02:00",
+  "finished_kyiv": "2026-11-09T12:41:30+02:00",
+  "rounds": 3,
+  "benchmark": "scripts/predict_ultra.py speed (movd.speed.benchmark): batch 1, FP32, 30 preloaded val_full frames, 10 warm-up + 30 timed; YOLO: letterbox + NMS + rescale; RT-DETR: square stretch, no NMS",
+  "missing": [],
+  "runs": {
+    "yolo_baseline_marko_3050": {
+      "family": "yolo11",
+      "imgsz": 1344,
+      "fps_median": 73.32971410426642,
+      "fps_rounds": [
+        73.32971410426642,
+        72.93761597003487,
+        74.0057147224914
+      ],
+      "latency_ms_median": 13.637036666720329,
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "checkpoint": "MOVD-ch10/outputs/yolo_baseline_marko_3050/train/weights/last.pt",
+      "checkpoint_sha256": "79ae099a95cae0b7b5d6f8e208bbaab885c1a79715cec13f60503242fe6f9172"
+    },
+    "yolo_baseline_5070": {
+      "family": "yolo11",
+      "imgsz": 1344,
+      "fps_median": 71.63747996510783,
+      "fps_rounds": [
+        73.15513717424055,
+        71.63747996510783,
+        71.50078722295709
+      ],
+      "latency_ms_median": 13.959173333387298,
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "checkpoint": "MOVD-ch10/outputs/yolo_baseline_5070/train/weights/last.pt",
+      "checkpoint_sha256": "41720cba86d0da842a03a827bdea749437982b65fff294374b1fc1ba335e6a68"
+    },
+    "yolo_p2": {
+      "family": "yolo11",
+      "imgsz": 1344,
+      "fps_median": 54.05779426858128,
+      "fps_rounds": [
+        54.14035670991724,
+        53.90635065203419,
+        54.05779426858128
+      ],
+      "latency_ms_median": 18.498720000146324,
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "checkpoint": "MOVD-ch10/outputs/yolo_p2/train/weights/last.pt",
+      "checkpoint_sha256": "9be7161e1d298d2cda6828624f2e3475e38acc1bb85085dcc034e5e5af44770d"
+    },
+    "yolo_imgsz1600": {
+      "family": "yolo11",
+      "imgsz": 1600,
+      "fps_median": 48.29912225979427,
+      "fps_rounds": [
+        48.28345089552627,
+        48.73483554666231,
+        48.29912225979427
+      ],
+      "latency_ms_median": 20.704310000110127,
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "checkpoint": "MOVD-ch10/outputs/yolo_imgsz1600/train/weights/last.pt",
+      "checkpoint_sha256": "e76a44a4934e51b6bceab937fdcd560a029dd3e883c277bd828d60e8213a1805"
+    },
+    "rtdetr_baseline": {
+      "family": "rtdetr",
+      "imgsz": 1344,
+      "fps_median": 13.616585545890644,
+      "fps_rounds": [
+        13.616585545890644,
+        13.640766503738087,
+        13.608022455417181
+      ],
+      "latency_ms_median": 73.43984999982543,
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "checkpoint": "MOVD-ch11/outputs/rtdetr_baseline/train/weights/last.pt",
+      "checkpoint_sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872"
+    }
+  }
+}

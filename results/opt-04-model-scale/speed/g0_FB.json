@@ -1,0 +1,66 @@
+{
+  "started_local": "2026-11-10T18:30:10",
+  "rows": [
+    {
+      "fps": 10.090444691886335,
+      "latency_ms_per_image": 99.10366000064339,
+      "latency_ms_per_batch": {
+        "mean": 99.10366000064339,
+        "median": 99.04600000299979,
+        "p90": 99.58979000366526,
+        "min": 98.45309999946039
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1600:full",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "FBsmoke",
+      "weights": "C:/UCU/AI/hw2/MOVD-opt04/outputs/opt04_rtdetrl1600_smoke/train/weights/last.pt",
+      "weights_sha256": "08933862c1f92689fb7884661f91bb80210fc7acedd247ba670d977ace34537c",
+      "pipeline_config": "configs/runs/opt04_inference_1600.json",
+      "pipeline_config_sha256": "2b47bf2d29117fed2c85b40ae6aaf3691729dec56fce068b42516580db712041",
+      "mode": "single",
+      "passes_per_frame": 1,
+      "test_minutes_3811_frames": 6.3,
+      "peak_cuda_allocated_bytes": 924925440,
+      "peak_cuda_reserved_bytes": 1241513984
+    },
+    {
+      "fps": 1.6623281379848538,
+      "latency_ms_per_image": 601.5659466681731,
+      "latency_ms_per_batch": {
+        "mean": 601.5659466681731,
+        "median": 601.0717000026489,
+        "p90": 603.9598300078069,
+        "min": 597.512700012885
+      },
+      "timed_batches": 30,
+      "warmup_batches": 10,
+      "batch_size": 1,
+      "input_size": "1600:full, 1600:flip, 1600:tile0, 1600:tile1, 1600:tile2, 1600:tile3",
+      "note": "CH-13 method: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass + CPU decoding, merge and the 500 cap; FP32, batch 1",
+      "device": "cuda:0",
+      "torch": "2.14.1+cu130",
+      "python": "3.12.14",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "cuda": "13.0",
+      "name": "FBsmoke",
+      "weights": "C:/UCU/AI/hw2/MOVD-opt04/outputs/opt04_rtdetrl1600_smoke/train/weights/last.pt",
+      "weights_sha256": "08933862c1f92689fb7884661f91bb80210fc7acedd247ba670d977ace34537c",
+      "pipeline_config": "configs/runs/opt04_inference_1600.json",
+      "pipeline_config_sha256": "2b47bf2d29117fed2c85b40ae6aaf3691729dec56fce068b42516580db712041",
+      "mode": "pipeline",
+      "passes_per_frame": 6,
+      "test_minutes_3811_frames": 38.2,
+      "peak_cuda_allocated_bytes": 924925440,
+      "peak_cuda_reserved_bytes": 1241513984
+    }
+  ],
+  "finished_local": "2026-11-10T18:30:39"
+}

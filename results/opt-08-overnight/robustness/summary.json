@@ -1,0 +1,59 @@
+{
+  "leave_one_clip_out": {
+    "e4_checkpoint_soup:s1": {
+      "min_delta": 0.003488215037208975,
+      "max_delta": 0.00717556655109769,
+      "all_positive": true
+    },
+    "e6_combination:k1": {
+      "min_delta": 0.005828758369397891,
+      "max_delta": 0.009360637650644044,
+      "all_positive": true
+    },
+    "e3_broader_support:b3": {
+      "min_delta": 0.0004775944050030012,
+      "max_delta": 0.0006971865846091552,
+      "all_positive": true
+    },
+    "e1_x4_then_x2:c1": {
+      "min_delta": 0.0013003096159376892,
+      "max_delta": 0.0016287061226082367,
+      "all_positive": true
+    }
+  },
+  "artifact_rehash": {
+    "e1_x4_then_x2": {
+      "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e1_x4_then_x2_c1_test.csv",
+      "csv_sha256_recorded": "17273d344bb0fed82804b69abba3d018ef89e8c04cc87291e78356f2b8f2dbf8",
+      "csv_sha256_now": "17273d344bb0fed82804b69abba3d018ef89e8c04cc87291e78356f2b8f2dbf8",
+      "test_predictions_sha256_now_matches": true,
+      "uploaded": false,
+      "csv_identical": true
+    },
+    "e3_broader_support": {
+      "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e3_broader_support_b3_test.csv",
+      "csv_sha256_recorded": "e45f1b5416cae645100ae3d744d93511d6608e8b2b8c65d119ca3ff942c1a444",
+      "csv_sha256_now": "e45f1b5416cae645100ae3d744d93511d6608e8b2b8c65d119ca3ff942c1a444",
+      "test_predictions_sha256_now_matches": true,
+      "uploaded": false,
+      "csv_identical": true
+    },
+    "e4_checkpoint_soup": {
+      "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv",
+      "csv_sha256_recorded": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+      "csv_sha256_now": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+      "test_predictions_sha256_now_matches": true,
+      "uploaded": false,
+      "csv_identical": true
+    },
+    "e6_combination": {
+      "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv",
+      "csv_sha256_recorded": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+      "csv_sha256_now": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+      "test_predictions_sha256_now_matches": true,
+      "uploaded": false,
+      "csv_identical": true
+    }
+  },
+  "at_kyiv": "2026-11-11 06:26"
+}

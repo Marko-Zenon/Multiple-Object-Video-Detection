@@ -1,0 +1,49 @@
+{
+  "experiment": "e6_combination",
+  "rule": "results/opt-08-overnight/e6_combination/rule.md",
+  "rule_commit": "5f495e2",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.0003,
+    "S2_min_delta_confirmation": 0.0
+  },
+  "baseline_x2_discovery": {
+    "num_images": 1335,
+    "num_predictions": 650288,
+    "mAP": 0.32945184095777236,
+    "AP50": 0.6534371127953702,
+    "AP75": 0.28524588217160607,
+    "AP_small": 0.1774413250586779,
+    "AP_medium": 0.3312687820754577,
+    "AP_large": 0.5413459384147401,
+    "density_ge100": null
+  },
+  "candidates": {
+    "k1": {
+      "params": {
+        "kind": "combo",
+        "tag": "w080",
+        "factor": 0.0,
+        "margin": 0.005,
+        "mode": "five_frame_mean"
+      },
+      "discovery_predictions_sha256": "0d525fae8d3c3760a2a699884937f21b95996d2d2759fd05de98892f86bfd81c",
+      "val_full_predictions_sha256": null,
+      "num_predictions": 638045,
+      "transform_seconds": 167.6,
+      "discovery": {
+        "mAP": 0.3344880450293952,
+        "AP50": 0.66079403123135,
+        "AP75": 0.2931346251149099,
+        "AP_small": 0.19486829336528577,
+        "AP_medium": 0.3353142558454753,
+        "AP_large": 0.5448983865410537
+      },
+      "delta_discovery_mAP": 0.005036204071622863
+    }
+  },
+  "selected": "k1",
+  "passes_S1": true,
+  "wall_seconds": 271.2,
+  "evaluated_at_kyiv": "2026-11-11 05:31",
+  "decision": "S1 pass: confirmation next"
+}

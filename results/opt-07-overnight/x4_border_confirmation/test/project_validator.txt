@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1820997,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 351295,
+    "bicycle": 31808,
+    "car": 226060,
+    "van": 390309,
+    "truck": 158118,
+    "tricycle": 239832,
+    "bus": 32520,
+    "motor": 391055
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt07\submissions\opt07_x4_border_confirmation_test.csv: 3811 rows, 1820997 detections, sha256 09a5c8d14633f4bade9b9c5b2edd6122c38ca8c3de0cf8afa6b5f79184cd2fcb

@@ -1,0 +1,54 @@
+{
+  "at_kyiv": "2026-11-15 00:20:18",
+  "all_ok": true,
+  "artifacts": {
+    "c1_csv": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_c1_w075_test.csv",
+      "expected": "04fcd221137f033af8557c561d6046d2fa3a08fcad8eb566380dfb6f91361e8c",
+      "actual": "04fcd221137f033af8557c561d6046d2fa3a08fcad8eb566380dfb6f91361e8c",
+      "ok": true
+    },
+    "c2_csv": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_c2_classmix_test.csv",
+      "expected": "3e25acda0794df5da3b097f43f9a567806109e82f6639cf34075c49c21fc14ab",
+      "actual": "3e25acda0794df5da3b097f43f9a567806109e82f6639cf34075c49c21fc14ab",
+      "ok": true
+    },
+    "p2_csv": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt11/submissions/opt11_p2_trajsoup_test.csv",
+      "expected": "69fd9896ee645de5c7debae4f134bd0f092f35e02888a43479f83bdc8a5a7e2b",
+      "actual": "69fd9896ee645de5c7debae4f134bd0f092f35e02888a43479f83bdc8a5a7e2b",
+      "ok": true
+    },
+    "E6_csv": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e6_combination_k1_test.csv",
+      "expected": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+      "actual": "35a225c905ac56ed86532314046821d10085f73781666ee843fb4c6d28127c35",
+      "ok": true
+    },
+    "E4_csv": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv",
+      "expected": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+      "actual": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+      "ok": true
+    },
+    "soup_w075": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+      "expected": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+      "actual": "cfaaf0a4097c96a972340cfde7aa7a35eba066a64be9c00a3f8f2bbb8ec1b39d",
+      "ok": true
+    },
+    "soup_w080": {
+      "path": "C:/UCU/AI/hw2/MOVD-opt08/outputs/opt08/soup/soup_w080.pt",
+      "expected": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+      "actual": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+      "ok": true
+    },
+    "modelA_epoch0": {
+      "path": "C:/UCU/AI/hw2/MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+      "expected": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "actual": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+      "ok": true
+    }
+  }
+}

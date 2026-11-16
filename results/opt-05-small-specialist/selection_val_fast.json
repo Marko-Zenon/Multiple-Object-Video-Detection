@@ -1,0 +1,352 @@
+{
+  "rule": "results/opt-05-small-specialist/selection_rule.md (Gate V)",
+  "candidates": {
+    "s1": {
+      "id": "s1",
+      "size_rule": "coco32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.5,
+      "delta_mAP_vs_A": 0.0003215249358607397,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.28953816907401714,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.15412321409080013,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.35132382705347054,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3126565440968731,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s2": {
+      "id": "s2",
+      "size_rule": "coco32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.6,
+      "delta_mAP_vs_A": 0.0002683624841915977,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.289485006622348,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.15406754611547685,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.3512976508125177,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.31251199872441027,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s3": {
+      "id": "s3",
+      "size_rule": "coco32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.5,
+      "delta_mAP_vs_A": 0.0005636488544927265,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.2897802929926491,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.1473011896866688,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.35149244538935415,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3128945725691627,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s4": {
+      "id": "s4",
+      "size_rule": "coco32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.6,
+      "delta_mAP_vs_A": 0.0004998192459262363,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.28971646338408263,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.14730510852115639,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.3514814219890824,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3127060631278477,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s5": {
+      "id": "s5",
+      "size_rule": "in32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.5,
+      "delta_mAP_vs_A": 0.0010759824835174792,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.2902926266216739,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.15045766865686733,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.35218583124202946,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.31114120356845365,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s6": {
+      "id": "s6",
+      "size_rule": "in32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.6,
+      "delta_mAP_vs_A": 0.0010420125898871757,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.2902586567280436,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.1503547000618255,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.3522293093203634,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3110075065290219,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s7": {
+      "id": "s7",
+      "size_rule": "in32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.5,
+      "delta_mAP_vs_A": 0.001051790080253301,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.2902684342184097,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.14419703283600913,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.35185650221392034,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3120625082100361,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    },
+    "s8": {
+      "id": "s8",
+      "size_rule": "in32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.6,
+      "delta_mAP_vs_A": 0.0010581933562457402,
+      "checks": [
+        {
+          "check": "val_fast mAP (A + 0.003)",
+          "value": 0.29027483749440214,
+          "threshold": 0.2922166441381564,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "val_fast AP_small (>= A)",
+          "value": 0.14418554308846873,
+          "threshold": 0.14273391809388225,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "val_fast >=100 bin (A - 0.005)",
+          "value": 0.3518590925488467,
+          "threshold": 0.34650175230579233,
+          "op": ">=",
+          "pass": true
+        },
+        {
+          "check": "width <= 1920 subset mAP (>= A)",
+          "value": 0.3118905582519214,
+          "threshold": 0.3120912393562929,
+          "op": ">=",
+          "pass": false
+        },
+        {
+          "check": "deterministic rerun",
+          "value": true,
+          "pass": true
+        }
+      ],
+      "pass": false
+    }
+  },
+  "passing": [],
+  "selected": null,
+  "outcome": "V0: no candidate passes Gate V -> no val_full, no GPU, no test CSV; Model A kept"
+}

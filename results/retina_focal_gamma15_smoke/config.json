@@ -1,0 +1,22 @@
+{
+  "run_id": "retina_focal_gamma15_smoke",
+  "family": "retina",
+  "train_split": "train_rubric",
+  "epochs": 2,
+  "min_size": 756,
+  "max_size": 1344,
+  "batch_size": 2,
+  "workers": 2,
+  "pretrained": true,
+  "amp": true,
+  "learning_rate": 0.0001,
+  "focal_alpha": 0.25,
+  "focal_gamma": 1.5,
+  "smoke_steps_per_epoch": 25,
+  "seed": 42,
+  "training_only": true,
+  "protocol_version": "v1",
+  "train_split_size": 2800,
+  "weights": "COCO_V1",
+  "detections_per_img": 500
+}

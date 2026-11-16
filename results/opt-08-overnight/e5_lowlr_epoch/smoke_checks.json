@@ -1,0 +1,20 @@
+{
+  "smoke_ckpt": "outputs\\opt08_e5_lowlr_smoke\\train\\weights\\epoch1.pt",
+  "tensors_compared": 804,
+  "l2_smoke_to_modelA": 250.39222506947618,
+  "l2_smoke_to_coco": 1195.300836583355,
+  "l2_modelA_to_coco": 1162.4657251046629,
+  "raw_pass_ok": true,
+  "starts_from_model_A": false,
+  "split_by_kind": {
+    "learned_parameters": 560,
+    "buffers": 244,
+    "params_l2_smoke_to_modelA": 0.0,
+    "params_l2_smoke_to_coco": 14.050621539074818,
+    "params_l2_modelA_to_coco": 14.050621539074818,
+    "buffers_l2_smoke_to_modelA": 250.39222506947618,
+    "buffers_l2_smoke_to_coco": 1195.2182520239699,
+    "starts_from_model_A_params": true
+  },
+  "note": "All-tensor L2 includes BatchNorm running statistics, which update on every training forward pass; the learned-parameter distance is the start-point check."
+}

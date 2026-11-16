@@ -1,0 +1,18 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests",
+    "--basetemp",
+    "outputs/ch09_marko_setup_20261108/pytest_all"
+  ],
+  "exit_code": 0,
+  "seconds": 25.022,
+  "stop_reason": null,
+  "sample_interval_seconds": 1,
+  "peak_process_tree_rss_bytes": 2364628992,
+  "minimum_available_ram_bytes": 2564034560,
+  "peak_device_used_mib_sampled": 0
+}

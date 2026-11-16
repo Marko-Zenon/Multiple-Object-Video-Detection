@@ -1,0 +1,42 @@
+{
+  "frcnn_baseline": {
+    "parameters": 43292028,
+    "checkpoint_bytes": 520065335,
+    "checkpoint_note": "torchvision epoch file includes optimizer and scaler state"
+  },
+  "frcnn_rpn_pre3000": {
+    "parameters": 43292028,
+    "checkpoint_bytes": 520065399,
+    "checkpoint_note": "torchvision epoch file includes optimizer and scaler state"
+  },
+  "retina_baseline": {
+    "parameters": 36477100,
+    "checkpoint_bytes": 438243292,
+    "checkpoint_note": "torchvision epoch file includes optimizer and scaler state"
+  },
+  "retina_anchors": {
+    "parameters": 36477100,
+    "checkpoint_bytes": 438243612,
+    "checkpoint_note": "torchvision epoch file includes optimizer and scaler state"
+  },
+  "yolo_baseline_marko_3050": {
+    "parameters": 9430888,
+    "checkpoint_bytes": 19284881,
+    "checkpoint_note": "Ultralytics last.pt (stripped, half-precision EMA weights)"
+  },
+  "yolo_p2": {
+    "parameters": 9569360,
+    "checkpoint_bytes": 19973018,
+    "checkpoint_note": "Ultralytics last.pt (stripped, half-precision EMA weights)"
+  },
+  "yolo_imgsz1600": {
+    "parameters": 9430888,
+    "checkpoint_bytes": 19307034,
+    "checkpoint_note": "Ultralytics last.pt (stripped, half-precision EMA weights)"
+  },
+  "rtdetr_baseline": {
+    "parameters": 32822516,
+    "checkpoint_bytes": 66498813,
+    "checkpoint_note": "Ultralytics last.pt (stripped, half-precision EMA weights)"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "started_kyiv": "2026-11-09T13:02:35+02:00",
+  "finished_kyiv": "2026-11-09T13:06:58+02:00",
+  "rounds": 3,
+  "runs": {
+    "frcnn_baseline": {
+      "framework": "tv",
+      "family": "frcnn",
+      "imgsz": 1344,
+      "checkpoint": "Multiple-Object-Video-Detection/outputs/ch07/outputs/frcnn_baseline/epoch_0006.pt",
+      "checkpoint_sha256": "3cfb917bdabe5d400be356f0dd20a65353ebb7cfa316b65d4e1014fbb0e09f72",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 9.099123393486549,
+        "fps_rounds": [
+          9.052054381860778,
+          9.099123393486549,
+          9.111509938788487
+        ],
+        "latency_ms_median": 109.90069666665174,
+        "note": "common scope: FP32; preloaded BGR uint8 host array; includes BGR->RGB, host-to-GPU copy, detector resize/normalisation, inference, NMS and box rescaling"
+      },
+      "native_tv": {
+        "fps_median": 22.36156125149429,
+        "fps_rounds": [
+          22.36156125149429,
+          22.447876591759123,
+          22.347112786662475
+        ],
+        "latency_ms_median": 44.71959666649733,
+        "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS."
+      }
+    },
+    "frcnn_rpn_pre3000": {
+      "framework": "tv",
+      "family": "frcnn",
+      "imgsz": 1344,
+      "checkpoint": "Multiple-Object-Video-Detection/outputs/ch07/outputs/frcnn_rpn_pre3000/epoch_0006.pt",
+      "checkpoint_sha256": "522f867dea8de585b0d6b72a3f2750a7cd2470ce165225d2f9514f278804eb9f",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 9.103808359729978,
+        "fps_rounds": [
+          9.087649378621819,
+          9.103808359729978,
+          9.129911241748333
+        ],
+        "latency_ms_median": 109.84414000007139,
+        "note": "common scope: FP32; preloaded BGR uint8 host array; includes BGR->RGB, host-to-GPU copy, detector resize/normalisation, inference, NMS and box rescaling"
+      },
+      "native_tv": {
+        "fps_median": 22.51966529782465,
+        "fps_rounds": [
+          22.51966529782465,
+          22.617650799657415,
+          22.435433626407224
+        ],
+        "latency_ms_median": 44.40563333312942,
+        "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS."
+      }
+    },
+    "retina_baseline": {
+      "framework": "tv",
+      "family": "retina",
+      "imgsz": 1344,
+      "checkpoint": "Multiple-Object-Video-Detection/outputs/ch08/outputs/retina_baseline/epoch_0006.pt",
+      "checkpoint_sha256": "74b4eaf2ed79d7daf52376c51529b22ec2d2b16059f50ca742a9f910ea09edf1",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 6.278152938101271,
+        "fps_rounds": [
+          6.278152938101271,
+          6.155181859875903,
+          6.318910217146573
+        ],
+        "latency_ms_median": 159.28251666682627,
+        "note": "common scope: FP32; preloaded BGR uint8 host array; includes BGR->RGB, host-to-GPU copy, detector resize/normalisation, inference, NMS and box rescaling"
+      },
+      "native_tv": {
+        "fps_median": 30.693162095584412,
+        "fps_rounds": [
+          30.65120007105624,
+          31.009915420409197,
+          30.693162095584412
+        ],
+        "latency_ms_median": 32.58054666657699,
+        "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS."
+      }
+    },
+    "retina_anchors": {
+      "framework": "tv",
+      "family": "retina",
+      "imgsz": 1344,
+      "checkpoint": "Multiple-Object-Video-Detection/outputs/ch08/outputs/retina_anchors/epoch_0006.pt",
+      "checkpoint_sha256": "51159729a629152e231b62ef9a17e3483eba22d40292f936a1e1f4c3ec0be97e",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 6.292407285619282,
+        "fps_rounds": [
+          6.292407285619282,
+          6.303190656204925,
+          6.229054156549322
+        ],
+        "latency_ms_median": 158.9216900001702,
+        "note": "common scope: FP32; preloaded BGR uint8 host array; includes BGR->RGB, host-to-GPU copy, detector resize/normalisation, inference, NMS and box rescaling"
+      },
+      "native_tv": {
+        "fps_median": 30.942476904065124,
+        "fps_rounds": [
+          30.740297055798315,
+          30.942476904065124,
+          31.070483806718062
+        ],
+        "latency_ms_median": 32.31803333328571,
+        "note": "First 30 val_full frames; GPU-resident tensors; includes detector resize, normalization and NMS."
+      }
+    },
+    "yolo_baseline_marko_3050": {
+      "framework": "ultra",
+      "family": "yolo11",
+      "imgsz": 1344,
+      "checkpoint": "MOVD-ch10/outputs/yolo_baseline_marko_3050/train/weights/last.pt",
+      "checkpoint_sha256": "79ae099a95cae0b7b5d6f8e208bbaab885c1a79715cec13f60503242fe6f9172",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 75.23684558935152,
+        "fps_rounds": [
+          75.71350514366696,
+          74.69137523731362,
+          75.23684558935152
+        ],
+        "latency_ms_median": 13.291360000099909,
+        "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500"
+      }
+    },
+    "yolo_p2": {
+      "framework": "ultra",
+      "family": "yolo11",
+      "imgsz": 1344,
+      "checkpoint": "MOVD-ch10/outputs/yolo_p2/train/weights/last.pt",
+      "checkpoint_sha256": "9be7161e1d298d2cda6828624f2e3475e38acc1bb85085dcc034e5e5af44770d",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 55.40839496356678,
+        "fps_rounds": [
+          57.27426066056387,
+          55.40839496356678,
+          55.14437256257506
+        ],
+        "latency_ms_median": 18.047806666436372,
+        "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500"
+      }
+    },
+    "yolo_imgsz1600": {
+      "framework": "ultra",
+      "family": "yolo11",
+      "imgsz": 1600,
+      "checkpoint": "MOVD-ch10/outputs/yolo_imgsz1600/train/weights/last.pt",
+      "checkpoint_sha256": "e76a44a4934e51b6bceab937fdcd560a029dd3e883c277bd828d60e8213a1805",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 49.67315066860507,
+        "fps_rounds": [
+          49.694264320420764,
+          49.56667163419493,
+          49.67315066860507
+        ],
+        "latency_ms_median": 20.13159999999819,
+        "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500"
+      }
+    },
+    "rtdetr_baseline": {
+      "framework": "ultra",
+      "family": "rtdetr",
+      "imgsz": 1344,
+      "checkpoint": "MOVD-ch11/outputs/rtdetr_baseline/train/weights/last.pt",
+      "checkpoint_sha256": "da5d36258918e7fdddcb9cfe6e87f6a78ef8ee1a04e65deb3c0eedb42fb6e872",
+      "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "common": {
+        "fps_median": 13.918732972189304,
+        "fps_rounds": [
+          13.937005108559873,
+          13.918732972189304,
+          13.892229455538285
+        ],
+        "latency_ms_median": 71.84561999990062,
+        "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics resize, normalisation, query decoding (no NMS) and box rescaling; conf 0.001, max_det 500"
+      }
+    }
+  }
+}

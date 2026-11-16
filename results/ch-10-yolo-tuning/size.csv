@@ -1,0 +1,13 @@
+run,label,size,AP,delta_vs_baseline
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",small,0.0865789888569718,0.0
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",medium,0.1434272936224516,0.0
+yolo_baseline_marko_3050,"YOLO11s baseline (CH-09, RTX 3050)",large,0.2554700319006125,0.0
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),small,0.09493098710663113,0.008351998249659334
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),medium,0.15203600871195805,0.008608715089506447
+yolo_baseline_5070,YOLO11s baseline replicate (RTX 5070),large,0.2541851659443031,-0.001284865956309389
+yolo_p2,YOLO11s + P2 head (1344),small,0.0790084698341743,-0.007570519022797498
+yolo_p2,YOLO11s + P2 head (1344),medium,0.14825838905007405,0.004831095427622445
+yolo_p2,YOLO11s + P2 head (1344),large,0.31243512478288,0.056965092882267476
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),small,0.08937565193600566,0.0027966630790338676
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),medium,0.17602725730983249,0.032599963687380884
+yolo_imgsz1600,YOLO11s imgsz 1600 (resolution exception),large,0.27484652360077627,0.019376491700163756

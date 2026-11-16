@@ -1,0 +1,15 @@
+{
+  "run_id": "rtdetr_q500",
+  "family": "rtdetr",
+  "weights": "configs/models/rtdetr-l-q500.yaml",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "note": "CH-11 tuned variant (one variable: decoder queries 300 -> 500). Hypothesis, stated before training: RT-DETR returns at most one box per query and has no NMS, so 300 queries cap recall below the evaluator's maxDets 500 on dense VisDrone frames (up to 180 targets, many crowd regions); 500 queries should raise dense-frame and small-object AP at some speed cost. Same pretrained rtdetr-l.pt weights (all transferred), budget and settings as rtdetr_baseline.",
+  "overrides": {
+    "cache": false,
+    "pretrained": "outputs/weights/rtdetr-l.pt"
+  }
+}

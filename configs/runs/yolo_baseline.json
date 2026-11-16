@@ -1,0 +1,11 @@
+{
+  "run_id": "yolo_baseline",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 4,
+  "workers": 2,
+  "amp": true,
+  "note": "Rubric budget: train_rubric x 6 epochs = 16,800 images, imgsz 1344, flip-only augmentation, seed 42 (movd.ultra.train_kwargs). Model size and batch are provisional until the GPU smoke (yolo_smoke_*) confirms them on the RTX 5070; Ultralytics defaults otherwise (optimizer auto, warmup_epochs 3, nbs 64: gradients accumulate to a nominal batch of 64, so batch 4 gives about 44 optimizer steps per epoch; verified on the CPU pipeline check)."
+}

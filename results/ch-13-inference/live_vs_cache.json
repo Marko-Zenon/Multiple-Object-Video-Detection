@@ -1,0 +1,27 @@
+{
+  "check": "live movd.infer.predict_image vs combine() from the val_fast raw cache, selected config combo_flip_tile_nms05",
+  "frames": [
+    1,
+    145,
+    289,
+    433,
+    577,
+    721,
+    862,
+    1006,
+    1147,
+    1291,
+    1434,
+    1578,
+    1722,
+    1866,
+    2010,
+    2154,
+    2298,
+    2440,
+    2584,
+    2728
+  ],
+  "identical": 20,
+  "total": 20
+}

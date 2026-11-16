@@ -1,0 +1,10 @@
+{
+  "train_process_seconds": [
+    75.3
+  ],
+  "train_seconds_total": 75.3,
+  "epoch_checkpoints": [
+    "epoch0.pt",
+    "epoch1.pt"
+  ]
+}

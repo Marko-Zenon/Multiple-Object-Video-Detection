@@ -1,0 +1,87 @@
+{
+  "rule": "results/ch-14b-rtdetr-short-finetune/selection_rule.md",
+  "selected": "stageA_epoch1",
+  "stage_A": {
+    "identity_passed": true,
+    "val_fast_pipeline_mAP": 0.2892166441381564,
+    "A1_gate": 0.2725,
+    "A1_competitive": true,
+    "rule_R": {
+      "mAP": {
+        "X": 0.28596193196293734,
+        "F": 0.2696340695338878,
+        "lead": 0.016327862429049544
+      },
+      "spread": 0.0063,
+      "secondary_checks": [
+        {
+          "check": "AP50",
+          "X": 0.5358305828022151,
+          "F": 0.5068607722408747,
+          "X_leads": true
+        },
+        {
+          "check": "AP75",
+          "X": 0.26002253272817094,
+          "F": 0.2453147152579958,
+          "X_leads": true
+        },
+        {
+          "check": "AP_small",
+          "X": 0.15037724808751873,
+          "F": 0.14671952325152776,
+          "X_leads": true
+        },
+        {
+          "check": "AP_medium",
+          "X": 0.25682558648571097,
+          "F": 0.2374569218196573,
+          "X_leads": true
+        },
+        {
+          "check": "AP_large",
+          "X": 0.4812468780113069,
+          "F": 0.45020919471383486,
+          "X_leads": true
+        },
+        {
+          "check": "density 0-19",
+          "X": 0.20811713909141988,
+          "F": 0.1994128679572624,
+          "X_leads": true
+        },
+        {
+          "check": "density 20-49",
+          "X": 0.2980836749680106,
+          "F": 0.2816404938854807,
+          "X_leads": true
+        },
+        {
+          "check": "density 50-99",
+          "X": 0.3072906015877802,
+          "F": 0.28586750483345863,
+          "X_leads": true
+        },
+        {
+          "check": "density >=100",
+          "X": 0.3497290291189866,
+          "F": 0.361393532435919,
+          "X_leads": false
+        }
+      ],
+      "secondary_wins": 8,
+      "checks_lost": [
+        "density >=100"
+      ],
+      "criteria": {
+        "R1_mAP_lead_ge_spread": true,
+        "R2_secondary_wins_ge_5_of_9": true,
+        "R3_AP_small_guard": true,
+        "R4_identity": true
+      },
+      "tie": false,
+      "passes": true
+    }
+  },
+  "primary_submission": "stageA_epoch1 + CH-13 pipeline"
+}

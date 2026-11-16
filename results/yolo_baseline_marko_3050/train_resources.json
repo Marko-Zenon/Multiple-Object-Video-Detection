@@ -1,0 +1,19 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-u",
+    "scripts/train_ultra.py",
+    "--config",
+    "configs/runs/yolo_baseline_marko_3050.json",
+    "--device",
+    "0",
+    "--observe"
+  ],
+  "exit_code": 0,
+  "seconds": 2007.217,
+  "stop_reason": null,
+  "sample_interval_seconds": 1,
+  "peak_process_tree_rss_bytes": 2981535744,
+  "minimum_available_ram_bytes": 3520086016,
+  "peak_device_used_mib_sampled": 1849
+}

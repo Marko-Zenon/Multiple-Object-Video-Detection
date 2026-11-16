@@ -1,0 +1,7 @@
+{
+  "this_process_seconds": 23.34248980000848,
+  "train_seconds": 35.16644320002524,
+  "completed_epoch_seconds": 35.16775620006956,
+  "images_seen": 100,
+  "global_step": 50
+}

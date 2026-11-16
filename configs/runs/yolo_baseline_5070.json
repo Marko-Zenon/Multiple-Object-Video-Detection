@@ -1,0 +1,14 @@
+{
+  "run_id": "yolo_baseline_5070",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "note": "CH-10 replicate, not a new baseline: exactly the settings of yolo_baseline_marko_3050 (CH-09, RTX 3050), re-run on the RTX 5070 that trains the CH-10 variants. Purpose: measure how much the same configuration moves between GPUs / non-deterministic CUDA kernels, so variant-vs-baseline differences can be read against that spread. The CH-09 run stays the reference baseline.",
+  "overrides": {
+    "cache": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "cuda": "13.0",
+  "cuda_nms_passed": true,
+  "gpu_memory_free_total_bytes": [
+    5865799680,
+    6086262784
+  ],
+  "ram_available_bytes": 3670212608,
+  "swap_used_bytes": 4294213632,
+  "disk_free_bytes": 81412046848,
+  "nvidia_smi": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144 MiB, 5595 MiB, 0 %"
+}

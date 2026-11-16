@@ -1,0 +1,35 @@
+{
+  "experiment": "e6_combination",
+  "selected": "k1",
+  "params": {
+    "kind": "combo",
+    "tag": "w080",
+    "factor": 0.0,
+    "margin": 0.005,
+    "mode": "five_frame_mean"
+  },
+  "baseline_x2_confirmation": {
+    "num_images": 1511,
+    "num_predictions": 755500,
+    "mAP": 0.24537854698756548,
+    "AP50": 0.4095646191511654,
+    "AP75": 0.25543021821855766,
+    "AP_small": 0.011962480681105413,
+    "AP_medium": 0.1832211845866368,
+    "AP_large": 0.4254835683114093,
+    "density_ge100": null
+  },
+  "confirmation": {
+    "mAP": 0.27089469511565134,
+    "AP50": 0.4492097408869811,
+    "AP75": 0.2851757377524864,
+    "AP_small": 0.012513525612396713,
+    "AP_medium": 0.19538386236982366,
+    "AP_large": 0.4397311578987566
+  },
+  "delta_confirmation_mAP": 0.025516148128085864,
+  "val_full_predictions_sha256": "bdb2806edad09fa093d5b59369780a8dbbb6fea4758522c72c86b8c8e98cad52",
+  "passes_S2": true,
+  "evaluated_at_kyiv": "2026-11-11 05:41",
+  "decision": "S2 pass: val_full next"
+}

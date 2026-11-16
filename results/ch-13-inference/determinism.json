@@ -1,0 +1,47 @@
+{
+  "check": "val_fast raw cache vs the val_fast frames of the val_full cache (two separate GPU runs)",
+  "views": {
+    "full": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    },
+    "flip": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    },
+    "tile0": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    },
+    "tile1": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    },
+    "tile2": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    },
+    "tile3": {
+      "frames": 714,
+      "boxes_identical": true,
+      "scores_identical": true,
+      "max_abs_box_diff": 0.0,
+      "max_abs_score_diff": 0.0
+    }
+  }
+}

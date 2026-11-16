@@ -1,0 +1,16 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-u",
+    "scripts/export_yolo.py",
+    "--results-dir",
+    "results/ch-09-yolo/marko_export"
+  ],
+  "exit_code": 0,
+  "seconds": 96.08,
+  "stop_reason": null,
+  "sample_interval_seconds": 1,
+  "peak_process_tree_rss_bytes": 1351921664,
+  "minimum_available_ram_bytes": 3074846720,
+  "peak_device_used_mib_sampled": 0
+}

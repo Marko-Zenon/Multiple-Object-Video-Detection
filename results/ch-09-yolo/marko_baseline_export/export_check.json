@@ -1,0 +1,384 @@
+{
+  "export_root": "outputs/yolo_data (git-ignored)",
+  "data_yaml": "outputs/yolo_data/data.yaml",
+  "policy": "configs/protocol.json ignore_policy.training (CH-02): crowd never a target; ignore regions filled with [124, 116, 104] except inside labelled target boxes; masked frames re-encoded JPEG q95; frames without ignore regions byte-copied",
+  "val_note": "val_fast is an unmodified byte copy, only for the Ultralytics trainer's internal loader; reported numbers use the original val images and movd.evaluate",
+  "manifests": {
+    "train_rubric": {
+      "name": "train_rubric",
+      "source_split": "train",
+      "num_images": 2800,
+      "masked": true,
+      "jpeg_quality_masked": 95,
+      "label_decimals": 6,
+      "ignore_fill_rgb": [
+        124,
+        116,
+        104
+      ],
+      "labels_per_class": {
+        "0": 47375,
+        "1": 4652,
+        "2": 59279,
+        "3": 5681,
+        "4": 2871,
+        "5": 4742,
+        "6": 1092,
+        "7": 12064
+      },
+      "num_labels": 137756,
+      "targets_in_coco": 137756,
+      "degenerate_targets_dropped": 0,
+      "frames_masked": 2161,
+      "ignore_regions": 7680,
+      "frames_copied": 639
+    },
+    "val_fast": {
+      "name": "val_fast",
+      "source_split": "val",
+      "num_images": 714,
+      "masked": false,
+      "jpeg_quality_masked": 95,
+      "label_decimals": 6,
+      "ignore_fill_rgb": [
+        124,
+        116,
+        104
+      ],
+      "labels_per_class": {
+        "0": 12644,
+        "1": 1519,
+        "2": 8001,
+        "3": 1718,
+        "4": 340,
+        "5": 1375,
+        "6": 66,
+        "7": 3022
+      },
+      "num_labels": 28685,
+      "targets_in_coco": 28685,
+      "degenerate_targets_dropped": 0,
+      "frames_copied": 714,
+      "ignore_regions": 1007
+    }
+  },
+  "checks": {
+    "train_rubric": {
+      "name": "train_rubric",
+      "num_images": 2800,
+      "num_labels": 137756,
+      "labels_per_class": {
+        "person": 47375,
+        "bicycle": 4652,
+        "car": 59279,
+        "van": 5681,
+        "truck": 2871,
+        "tricycle": 4742,
+        "bus": 1092,
+        "motor": 12064
+      },
+      "class_ids_found": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "label_counts_match_coco_targets": true,
+      "max_label_box_error_px": 0.001984000000049946,
+      "duplicate_label_lines": 0,
+      "masked_frames": 2161,
+      "pixel_check": [
+        {
+          "image_id": 1,
+          "filled_pixels": 39862,
+          "fill_mae": 0.6546669342565183,
+          "kept_target_mae": 0.5956842020978461
+        },
+        {
+          "image_id": 275,
+          "filled_pixels": 27188,
+          "fill_mae": 0.6287332646755922,
+          "kept_target_mae": 0.43729604752915696
+        },
+        {
+          "image_id": 351,
+          "filled_pixels": 32640,
+          "fill_mae": 0.6016033496732026,
+          "kept_target_mae": 0.6258626212037387
+        },
+        {
+          "image_id": 609,
+          "filled_pixels": 14246,
+          "fill_mae": 0.7700407131826478,
+          "kept_target_mae": 0.5778720948631316
+        },
+        {
+          "image_id": 1024,
+          "filled_pixels": 195257,
+          "fill_mae": 0.47673408209010004,
+          "kept_target_mae": 0.31992173954977277
+        },
+        {
+          "image_id": 1406,
+          "filled_pixels": 32936,
+          "fill_mae": 0.44487288478665693,
+          "kept_target_mae": 0.23789196917012803
+        },
+        {
+          "image_id": 1888,
+          "filled_pixels": 3952,
+          "fill_mae": 0.9354757085020243,
+          "kept_target_mae": 0.5903841757500294
+        },
+        {
+          "image_id": 2364,
+          "filled_pixels": 35265,
+          "fill_mae": 0.769488161066213,
+          "kept_target_mae": 0.9769480448989339
+        },
+        {
+          "image_id": 4020,
+          "filled_pixels": 35935,
+          "fill_mae": 0.6215574416771021,
+          "kept_target_mae": 0.33824572272211334
+        },
+        {
+          "image_id": 4459,
+          "filled_pixels": 215523,
+          "fill_mae": 0.5461211409764465,
+          "kept_target_mae": 0.3586004502648039
+        },
+        {
+          "image_id": 4873,
+          "filled_pixels": 342592,
+          "fill_mae": 0.4668205912572389,
+          "kept_target_mae": 0.36955784953561094
+        },
+        {
+          "image_id": 5126,
+          "filled_pixels": 731062,
+          "fill_mae": 0.41035188077983353,
+          "kept_target_mae": 0.2608546983361664
+        },
+        {
+          "image_id": 5410,
+          "filled_pixels": 1057770,
+          "fill_mae": 0.41268706807718125,
+          "kept_target_mae": 0.4005605790090038
+        },
+        {
+          "image_id": 6150,
+          "filled_pixels": 19773,
+          "fill_mae": 0.6094168816062308,
+          "kept_target_mae": 0.39170871260800405
+        },
+        {
+          "image_id": 6429,
+          "filled_pixels": 33320,
+          "fill_mae": 0.5557823129251701,
+          "kept_target_mae": 0.3953910992537602
+        },
+        {
+          "image_id": 7756,
+          "filled_pixels": 20896,
+          "fill_mae": 0.7425025523226135,
+          "kept_target_mae": 0.606688951253955
+        },
+        {
+          "image_id": 8570,
+          "filled_pixels": 76295,
+          "fill_mae": 0.6253183913318916,
+          "kept_target_mae": 0.611716193805746
+        },
+        {
+          "image_id": 9370,
+          "filled_pixels": 12624,
+          "fill_mae": 0.8432879171947613,
+          "kept_target_mae": 0.23377471883494177
+        },
+        {
+          "image_id": 10535,
+          "filled_pixels": 9937,
+          "fill_mae": 0.6914561738955419,
+          "kept_target_mae": 0.4603158004810206
+        },
+        {
+          "image_id": 11375,
+          "filled_pixels": 25530,
+          "fill_mae": 0.5465073769421596,
+          "kept_target_mae": 0.5075457460856442
+        },
+        {
+          "image_id": 11944,
+          "filled_pixels": 58712,
+          "fill_mae": 0.5658525230503701,
+          "kept_target_mae": 0.43010397124257105
+        },
+        {
+          "image_id": 12177,
+          "filled_pixels": 46610,
+          "fill_mae": 0.5237788743474219,
+          "kept_target_mae": 0.39356607982721625
+        },
+        {
+          "image_id": 13461,
+          "filled_pixels": 4484,
+          "fill_mae": 0.8414362176628011,
+          "kept_target_mae": 0.4348372627730348
+        },
+        {
+          "image_id": 14507,
+          "filled_pixels": 78321,
+          "fill_mae": 0.6881381323868013,
+          "kept_target_mae": 1.4504989334317206
+        },
+        {
+          "image_id": 15165,
+          "filled_pixels": 39676,
+          "fill_mae": 0.45934570017138826,
+          "kept_target_mae": 0.3328257475382711
+        },
+        {
+          "image_id": 16464,
+          "filled_pixels": 22999,
+          "fill_mae": 0.5906053886400858,
+          "kept_target_mae": 0.4089806957799485
+        },
+        {
+          "image_id": 17695,
+          "filled_pixels": 66444,
+          "fill_mae": 0.46446631750045153,
+          "kept_target_mae": 0.38593869503789957
+        },
+        {
+          "image_id": 18037,
+          "filled_pixels": 456363,
+          "fill_mae": 0.40950807434724845,
+          "kept_target_mae": 0.3033960086182019
+        },
+        {
+          "image_id": 18611,
+          "filled_pixels": 55932,
+          "fill_mae": 0.5909497246656654,
+          "kept_target_mae": 0.5018360954595464
+        },
+        {
+          "image_id": 19305,
+          "filled_pixels": 3035,
+          "fill_mae": 0.8522789676002197,
+          "kept_target_mae": 0.37781653736573356
+        },
+        {
+          "image_id": 20147,
+          "filled_pixels": 4209,
+          "fill_mae": 0.7823711095272036,
+          "kept_target_mae": 0.40481756246159095
+        },
+        {
+          "image_id": 20586,
+          "filled_pixels": 20076,
+          "fill_mae": 0.5338380819552367,
+          "kept_target_mae": 0.23900319308770634
+        },
+        {
+          "image_id": 20917,
+          "filled_pixels": 106895,
+          "fill_mae": 0.5671235012551258,
+          "kept_target_mae": 0.3716136572996424
+        },
+        {
+          "image_id": 21587,
+          "filled_pixels": 1113,
+          "fill_mae": 0.9820305480682839,
+          "kept_target_mae": 0.2858068345064368
+        },
+        {
+          "image_id": 21936,
+          "filled_pixels": 14640,
+          "fill_mae": 0.772040072859745,
+          "kept_target_mae": 0.38654672019982134
+        },
+        {
+          "image_id": 22253,
+          "filled_pixels": 69986,
+          "fill_mae": 0.6018870440754818,
+          "kept_target_mae": 0.2636817675400304
+        },
+        {
+          "image_id": 22975,
+          "filled_pixels": 10861,
+          "fill_mae": 1.1380167572046773,
+          "kept_target_mae": 0.33933481020683687
+        },
+        {
+          "image_id": 23394,
+          "filled_pixels": 103463,
+          "fill_mae": 0.5330569060114888,
+          "kept_target_mae": 0.3672002726385718
+        },
+        {
+          "image_id": 23848,
+          "filled_pixels": 106253,
+          "fill_mae": 0.5629613595223978,
+          "kept_target_mae": 0.5215666014465672
+        },
+        {
+          "image_id": 24201,
+          "filled_pixels": 233571,
+          "fill_mae": 0.45287442933126687,
+          "kept_target_mae": 0.37362423551617213
+        }
+      ],
+      "pixel_check_max_fill_mae": 1.1380167572046773,
+      "pixel_check_max_kept_target_mae": 1.4504989334317206
+    },
+    "val_fast": {
+      "name": "val_fast",
+      "num_images": 714,
+      "num_labels": 28685,
+      "labels_per_class": {
+        "person": 12644,
+        "bicycle": 1519,
+        "car": 8001,
+        "van": 1718,
+        "truck": 340,
+        "tricycle": 1375,
+        "bus": 66,
+        "motor": 3022
+      },
+      "class_ids_found": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "label_counts_match_coco_targets": true,
+      "max_label_box_error_px": 0.0028800000000046566,
+      "duplicate_label_lines": 0,
+      "masked_frames": 0,
+      "pixel_check": [],
+      "pixel_check_max_fill_mae": null,
+      "pixel_check_max_kept_target_mae": null
+    }
+  },
+  "disk_bytes": {
+    "train_rubric": 1514596080,
+    "val_fast": 408857732
+  },
+  "disk_bytes_total": 1923638614,
+  "figure": "results/ch-09-yolo/marko_baseline_export/figures/export_check.png",
+  "figure_image_ids": [
+    5389,
+    5298
+  ],
+  "seconds": 13.1,
+  "export_seconds": 0.0
+}

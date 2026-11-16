@@ -1,0 +1,7 @@
+candidate,gate,result,failed_checks
+P,G0,PASS,—
+P,G1,PASS,—
+P,G2,FAIL,val_fast mAP; val_fast >=100 bin mAP; test-like subset mAP (width <= 1920) vs Model A
+FB,G0,PASS,—
+FB,G1,PASS,—
+FB,G2,FAIL,val_fast mAP; test-like subset mAP (width <= 1920) vs Model A

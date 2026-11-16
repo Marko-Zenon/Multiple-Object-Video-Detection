@@ -1,0 +1,149 @@
+{
+  "num_images": 2846,
+  "num_predictions": 919037,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.26601654767213345,
+    "AP50": 0.49407550460769695,
+    "AP75": 0.24723270970761294,
+    "AP_small": 0.13445847543237452,
+    "AP_medium": 0.2301522143110692,
+    "AP_large": 0.4621980023178901
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.24825140802375437,
+    "AP50": 0.4494352959575843,
+    "AP75": 0.2375737002358814,
+    "AP_small": 0.1291607626345046,
+    "AP_medium": 0.21057311675068402,
+    "AP_large": 0.43720315471160354
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 50312,
+      "AP": 0.2760261525956021,
+      "AP50": 0.6573950002543087,
+      "AP75": 0.17358878019417404,
+      "AP_maxdets100": 0.2677276774706745
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 6022,
+      "AP": 0.27567012229371324,
+      "AP50": 0.6016503504133195,
+      "AP75": 0.20967689463099815,
+      "AP_maxdets100": 0.2191499477917704
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 31821,
+      "AP": 0.4246447928063797,
+      "AP50": 0.6561888797548235,
+      "AP75": 0.46543541671467,
+      "AP_maxdets100": 0.41710926294993583
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 6842,
+      "AP": 0.31328998169387146,
+      "AP50": 0.5103592107862728,
+      "AP75": 0.34453076811148403,
+      "AP_maxdets100": 0.2793061743572653
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 1359,
+      "AP": 0.2550540725280965,
+      "AP50": 0.4171882811178296,
+      "AP75": 0.27834663948711297,
+      "AP_maxdets100": 0.2521194022715587
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 5487,
+      "AP": 0.2127882665302304,
+      "AP50": 0.4503534747237086,
+      "AP75": 0.1659848275369476,
+      "AP_maxdets100": 0.19868082009177057
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 264,
+      "AP": 0.23739493590319155,
+      "AP50": 0.2809980849402392,
+      "AP75": 0.2809843278030637,
+      "AP_maxdets100": 0.23612266883295727
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 12025,
+      "AP": 0.13326405702598243,
+      "AP50": 0.3784707548710736,
+      "AP75": 0.059314023182452706,
+      "AP_maxdets100": 0.11579531042410225
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 977,
+      "num_gt": 13557,
+      "mAP": 0.13872338519645896,
+      "AP50": 0.2341085546532221,
+      "mAP_maxdets100": 0.13829894204606796
+    },
+    {
+      "bin": "20-49",
+      "num_images": 1062,
+      "num_gt": 40626,
+      "mAP": 0.2744102585035203,
+      "AP50": 0.46534951222039056,
+      "mAP_maxdets100": 0.26487342140029896
+    },
+    {
+      "bin": "50-99",
+      "num_images": 618,
+      "num_gt": 39746,
+      "mAP": 0.28036725707622123,
+      "AP50": 0.5880531807658992,
+      "mAP_maxdets100": 0.2568151798125017
+    },
+    {
+      "bin": ">=100",
+      "num_images": 189,
+      "num_gt": 20203,
+      "mAP": 0.36825576971311247,
+      "AP50": 0.7089888816970832,
+      "mAP_maxdets100": 0.3155323992784295
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_full"
+}

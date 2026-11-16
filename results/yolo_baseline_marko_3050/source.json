@@ -1,0 +1,9 @@
+{
+  "training_source_commit": "80781c4427ef3fd56a71a5fa0bb22956a9635418",
+  "branch": "ch-09-yolo",
+  "resume_claim_commit": "a20a01b",
+  "preserved_cpu_commit": "8e4888192057bdbff490d0382c7f935eb50fe73f",
+  "preserved_smoke_commit": "d84bf00a364e1e79a1932fb9a0d08f975ca67677",
+  "full_run_id": "yolo_baseline_marko_3050",
+  "transfer_status": "not initiated; authorized destination and recipient verification pending"
+}

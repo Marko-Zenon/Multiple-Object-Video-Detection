@@ -1,0 +1,12 @@
+{
+  "split": "val_full",
+  "raw_cache": "MOVD-opt07/outputs/opt03/raw/val_full.npz",
+  "raw_cache_sha256": "c3350aa8b5150c91293ccdc6c944ea0cd7149a8b58cd1aebba48fa66f480a7ea",
+  "model_A_predictions_sha256": "fccda2b3cc14f335468e872e95981592f4e02e5510d329a6a2c808916da7036c",
+  "identical": true,
+  "count_a": 1405788,
+  "count_b": 1405788,
+  "max_abs_diff": 0.0,
+  "frames": 2846,
+  "seconds": 13.8
+}

@@ -1,0 +1,38 @@
+{
+  "variant": "flip_nms06",
+  "axis": "4a TTA flip",
+  "split": "val_full",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "flip"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.6
+    },
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 2846,
+  "num_detections": 919037,
+  "detections_per_frame_mean": 322.92,
+  "detections_per_frame_min": 249,
+  "detections_per_frame_max": 413,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 2,
+  "cpu_postprocess_seconds": 2.66,
+  "cpu_postprocess_ms_per_frame": 0.94
+}

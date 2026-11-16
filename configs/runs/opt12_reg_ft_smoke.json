@@ -1,0 +1,40 @@
+{
+    "run_id":  "opt12_reg_ft_smoke",
+    "family":  "rtdetr",
+    "weights":  "../MOVD-opt09/outputs/opt09/soup/soup_w075.pt",
+    "epochs":  2,
+    "smoke_fraction":  0.05,
+    "imgsz":  1344,
+    "batch_size":  1,
+    "workers":  2,
+    "amp":  true,
+    "data_yaml":  "outputs/yolo_data_final/data.yaml",
+    "train_split":  "train_final",
+    "note":  "OPT-12 smoke: opt12_reg_ft settings on 5 % of train_final (304 frames), 2 epochs, close_mosaic 1, stop after epoch 1 and resume.",
+    "overrides":  {
+                      "cache":  false,
+                      "epochs":  2,
+                      "val":  true,
+                      "optimizer":  "AdamW",
+                      "lr0":  0.0001,
+                      "lrf":  0.1,
+                      "cos_lr":  true,
+                      "momentum":  0.9,
+                      "weight_decay":  0.0001,
+                      "nbs":  16,
+                      "warmup_epochs":  1,
+                      "warmup_bias_lr":  0,
+                      "mosaic":  0.5,
+                      "close_mosaic":  1,
+                      "scale":  0.5,
+                      "translate":  0.1,
+                      "hsv_h":  0.015,
+                      "hsv_s":  0.7,
+                      "hsv_v":  0.4,
+                      "fliplr":  0.5,
+                      "freeze":  [
+                                     0,
+                                     1
+                                 ]
+                  }
+}

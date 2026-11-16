@@ -1,0 +1,30 @@
+{
+  "variant": "topk_100",
+  "axis": "3b decoder top-k",
+  "split": "val_fast",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      }
+    ],
+    "decode": {
+      "k": 100,
+      "conf": 0.001
+    },
+    "merge": null,
+    "post_nms": null,
+    "max_det": 500
+  },
+  "num_frames": 714,
+  "num_detections": 71400,
+  "detections_per_frame_mean": 100.0,
+  "detections_per_frame_min": 100,
+  "detections_per_frame_max": 100,
+  "frames_at_500_cap": 0,
+  "num_raw_passes_per_frame": 1,
+  "cpu_postprocess_seconds": 0.28,
+  "cpu_postprocess_ms_per_frame": 0.4
+}

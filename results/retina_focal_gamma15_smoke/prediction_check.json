@@ -1,0 +1,14 @@
+{
+  "score_threshold_for_cap_test": 0,
+  "detections_per_image": {
+    "1": 500,
+    "5": 500,
+    "9": 500,
+    "13": 500
+  },
+  "resume_global_steps": [
+    25,
+    50
+  ],
+  "original_pixel_bounds_and_labels": "passed"
+}

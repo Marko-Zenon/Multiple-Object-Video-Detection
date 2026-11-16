@@ -1,0 +1,151 @@
+{
+  "rule": "results/opt-02-rtdetr-ensemble/selection_rule.md",
+  "baseline_A": {
+    "mAP": 0.2892166441381564,
+    "AP_small": 0.14273391809388225,
+    "density_ge100": 0.35150175230579234
+  },
+  "test_inference_seconds": {
+    "A": {
+      "seconds": 1729.5,
+      "source": "MOVD-opt02/results/ch-14b-rtdetr-short-finetune/final_submission.json:test_inference.seconds"
+    },
+    "B": {
+      "seconds": 1699.7,
+      "source": "MOVD-ch13/outputs/ch13_test/run.json:inference_seconds_all_shards"
+    }
+  },
+  "candidates": [
+    {
+      "id": "c1_w100_nms05",
+      "mAP": 0.2898866799051446,
+      "AP_small": 0.14871676224445277,
+      "density_ge100": 0.34626445133408235,
+      "delta_mAP": 0.0006700357669882084,
+      "delta_AP_small": 0.0059828441505705154,
+      "delta_density_ge100": -0.0052373009717099905,
+      "merge_seconds": 1.12,
+      "projected_test_minutes": 57.25,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": false,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c2_w100_nms06",
+      "mAP": 0.2903733093631761,
+      "AP_small": 0.14965509046339295,
+      "density_ge100": 0.3467912036224421,
+      "delta_mAP": 0.0011566652250197262,
+      "delta_AP_small": 0.006921172369510703,
+      "delta_density_ge100": -0.004710548683350246,
+      "merge_seconds": 1.54,
+      "projected_test_minutes": 57.29,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c3_w075_nms05",
+      "mAP": 0.29181297659779687,
+      "AP_small": 0.1437464204348892,
+      "density_ge100": 0.35201939996962156,
+      "delta_mAP": 0.0025963324596404713,
+      "delta_AP_small": 0.0010125023410069434,
+      "delta_density_ge100": 0.0005176476638292238,
+      "merge_seconds": 1.49,
+      "projected_test_minutes": 57.29,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c4_w075_nms06",
+      "mAP": 0.29209989893432436,
+      "AP_small": 0.14406995011792817,
+      "density_ge100": 0.3523075837520544,
+      "delta_mAP": 0.0028832547961679666,
+      "delta_AP_small": 0.001336032024045919,
+      "delta_density_ge100": 0.0008058314462620619,
+      "merge_seconds": 1.04,
+      "projected_test_minutes": 57.25,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c5_w050_nms05",
+      "mAP": 0.2901284952150798,
+      "AP_small": 0.14301540866051055,
+      "density_ge100": 0.35160717169930006,
+      "delta_mAP": 0.0009118510769233756,
+      "delta_AP_small": 0.0002814905666282952,
+      "delta_density_ge100": 0.00010541939350772189,
+      "merge_seconds": 1.45,
+      "projected_test_minutes": 57.28,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c6_w050_nms06",
+      "mAP": 0.29037639271761295,
+      "AP_small": 0.14310541679715374,
+      "density_ge100": 0.352011065867737,
+      "delta_mAP": 0.0011597485794565543,
+      "delta_AP_small": 0.0003714987032714945,
+      "delta_density_ge100": 0.0005093135619446687,
+      "merge_seconds": 1.01,
+      "projected_test_minutes": 57.24,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    },
+    {
+      "id": "c7_specialist_bicycle",
+      "mAP": 0.29022587662369437,
+      "AP_small": 0.1429035925456457,
+      "density_ge100": 0.35305245807794444,
+      "delta_mAP": 0.0010092324855379697,
+      "delta_AP_small": 0.00016967445176344076,
+      "delta_density_ge100": 0.0015507057721521056,
+      "merge_seconds": 1.09,
+      "projected_test_minutes": 57.25,
+      "checks": {
+        "G-a mAP >= A + 0.003": false,
+        "G-b AP_small >= A - 0.003": true,
+        "G-c density>=100 >= A - 0.005": true,
+        "G-d projected test minutes <= 90": true
+      },
+      "passes": false
+    }
+  ],
+  "passing": [],
+  "chosen": null,
+  "decision": "no candidate passes: model selection stops, Model A and its 0.2774301362 submission are kept",
+  "peak_process_memory_bytes": 1937108992,
+  "platform": "Windows-11-10.0.26300-SP0"
+}

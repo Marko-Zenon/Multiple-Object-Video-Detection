@@ -1,0 +1,13 @@
+phase,candidate,change,delta_discovery,selected,S1,delta_confirmation,S2,delta_val_full,decision
+a1_border_margin,m1,"{""margin"": 0.0035}",-5.3326224072225425e-05,False,,,,,not selected
+a1_border_margin,m2,"{""margin"": 0.0065}",4.3334080347512405e-05,False,,,,,not selected
+a1_border_margin,m3,"{""margin"": 0.008}",4.46806538743072e-05,True,False,,,,rejected S1
+a2_persistence,p1,"{""strength"": 0.75}",-0.00041953733035793306,False,,,,,not selected
+a2_persistence,p2,"{""strength"": 1.25}",0.00020743748819784802,True,False,,,,rejected S1
+a2_persistence,p3,"{""strength"": 1.5}",-0.001176937480916851,False,,,,,not selected
+a2_persistence,p4,"{""iou"": 0.45}",-0.0003194874655438884,False,,,,,not selected
+a2_persistence,p5,"{""iou"": 0.55}",7.59717682308203e-06,False,,,,,not selected
+b_soup_weight,w1,"{""soup"": ""w075""}",0.0006001345427963933,True,True,0.003739581415337978,True,,component passed
+b_soup_weight,w2,"{""soup"": ""w085""}",-0.0001037825814690918,False,,,,,not selected
+b_soup_weight,w3,"{""soup"": ""w090""}",-0.0010090636683613985,False,,,,,not selected
+c_final,c1,"{""soup"": ""w075""}",0.0006001345427963933,True,,0.003739581415337978,,0.000816515902550663,"rejected (promotion gate G1, G4)"

@@ -1,0 +1,46 @@
+{
+  "rule": "results/opt-06a-c4-valfull/selection_rule.md",
+  "candidate": {
+    "id": "c4_w075_nms06",
+    "w_A": 1.0,
+    "w_B": 0.75,
+    "iou": 0.6,
+    "route": null
+  },
+  "gate": {
+    "min_mAP": 0.284,
+    "max_AP_small_drop": 0.005,
+    "max_density_ge100_drop": 0.01
+  },
+  "baseline_A": {
+    "mAP": 0.28596193196293734,
+    "AP50": 0.5358305828022151,
+    "AP75": 0.26002253272817094,
+    "AP_small": 0.15037724808751873,
+    "AP_medium": 0.25682558648571097,
+    "AP_large": 0.4812468780113069
+  },
+  "baseline_A_density_ge100": 0.3497290291189866,
+  "candidate_metrics": {
+    "mAP": 0.28859954826782613,
+    "AP50": 0.5402768668835911,
+    "AP75": 0.262489981950427,
+    "AP_small": 0.15173380723902613,
+    "AP_medium": 0.2570719852693356,
+    "AP_large": 0.4827009689597773
+  },
+  "candidate_density_ge100": 0.35051541462325014,
+  "delta_mAP": 0.00263761630488879,
+  "delta_AP_small": 0.0013565591515073971,
+  "delta_density_ge100": 0.0007863855042635204,
+  "checks": {
+    "K-a mAP >= 0.2840": true,
+    "K-b AP_small >= A - 0.005": true,
+    "K-c density>=100 >= A - 0.010": true
+  },
+  "passes": true,
+  "decision": "gate passes: one test CSV for a Kaggle exploration",
+  "merge_seconds": 6.23,
+  "wall_seconds": 388.9,
+  "peak_process_memory_bytes": 5417095168
+}

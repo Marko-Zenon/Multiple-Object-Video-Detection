@@ -1,0 +1,17 @@
+{
+  "screens": {
+    "p1": {
+      "delta": 0.001874215341411689,
+      "clips_non_negative": 4
+    },
+    "p2": {
+      "delta": 0.002468267748375219,
+      "clips_non_negative": 2
+    }
+  },
+  "rule": "best of p1/p2; promote iff delta >= 0.0011 and >= 2/4 clips >= E6; strong iff delta >= 0.0025",
+  "decided_at_kyiv": "2026-11-14 22:13:17",
+  "best": "p2",
+  "promoted": true,
+  "strong": false
+}

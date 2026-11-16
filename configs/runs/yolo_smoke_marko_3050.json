@@ -1,0 +1,15 @@
+{
+  "run_id": "yolo_smoke_marko_3050",
+  "family": "yolo11",
+  "weights": "outputs/weights/yolo11s.pt",
+  "epochs": 2,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 0,
+  "amp": true,
+  "smoke_fraction": 0.018,
+  "overrides": {
+    "cache": false
+  },
+  "note": "Marko RTX 3050 6 GB preflight only. int(2800 * 0.018) = 50 sampled images; batch 1 gives 50 batches per epoch. Stop after epoch 0 is safely checkpointed, then resume epoch 1 (100 total successful batches across two epochs; not a full baseline). Seed 42 and flip-only policy inherited. No change to shared baseline config/budget."
+}

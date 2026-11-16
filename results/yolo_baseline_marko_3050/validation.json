@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "epochs_completed": 6,
+  "images_seen": 16800,
+  "batches": 16800,
+  "checkpoint_states": [
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch0.pt",
+      "bytes": 94823715,
+      "epoch": 0,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    },
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch1.pt",
+      "bytes": 94823779,
+      "epoch": 1,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    },
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch2.pt",
+      "bytes": 94823907,
+      "epoch": 2,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    },
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch3.pt",
+      "bytes": 94823971,
+      "epoch": 3,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    },
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch4.pt",
+      "bytes": 94824035,
+      "epoch": 4,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    },
+    {
+      "path": "outputs/yolo_baseline_marko_3050/train/weights/epoch5.pt",
+      "bytes": 94959395,
+      "epoch": 5,
+      "optimizer_entries": 255,
+      "scaler_scale": 512.0
+    }
+  ],
+  "curve_epochs": 6,
+  "val_full_images": 2846,
+  "classes": 8,
+  "failure_cases": 3,
+  "transfer_status": "not transferred; recipient verification pending"
+}

@@ -1,0 +1,12 @@
+{
+  "split": "val_fast",
+  "frames": 714,
+  "detections_from_cache": 352886,
+  "detections_stored_model_a": 352886,
+  "stored_predictions": "C:/UCU/AI/hw2/MOVD-ch14b/outputs/ch14b/stageA_epoch1/val_fast/pipeline_predictions.json",
+  "stored_predictions_sha256": "87137d7df1478253733cf0f1d5d611067c5c22252a63df0dfee5b6da67275a0e",
+  "identical_after_rounding_1e-3px_1e-6score": true,
+  "max_abs_difference": 0.0,
+  "mAP_from_cache": 0.2892166441381564,
+  "registered_mAP": 0.2892
+}

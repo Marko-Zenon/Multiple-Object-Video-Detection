@@ -1,0 +1,19 @@
+{
+  "data_rows": 3811,
+  "expected_rows": 3811,
+  "detections": 1875374,
+  "empty_rows": 0,
+  "max_detections_in_a_row": 500,
+  "rows_not_sorted_by_score": 0,
+  "detections_per_class": {
+    "person": 359382,
+    "bicycle": 31323,
+    "car": 230151,
+    "van": 402417,
+    "truck": 162891,
+    "tricycle": 250183,
+    "bus": 33009,
+    "motor": 406018
+  }
+}
+[OK] C:\UCU\AI\hw2\MOVD-opt07\submissions\opt07_x2_persistence_boost_test.csv: 3811 rows, 1875374 detections, sha256 9dc8fb03dc708b2b78b05afeff29289317a810f0219e9be4e2fd50029433c867

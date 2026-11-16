@@ -1,0 +1,267 @@
+{
+  "files": [
+    {
+      "path": "configs/runs/yolo_smoke_marko_3050.json",
+      "bytes": 597,
+      "sha256": "0002834a697eead815c95d4668d0490d44f98ba08ac956eafbaaf323c6a971de"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/before.txt",
+      "bytes": 8122,
+      "sha256": "a42fdb615548d010e044517005266dd330283d92525a121c807f019e12e1185d"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/constraints.txt",
+      "bytes": 8122,
+      "sha256": "a42fdb615548d010e044517005266dd330283d92525a121c807f019e12e1185d"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/dataset_check.log",
+      "bytes": 1552,
+      "sha256": "ee721196119c7466101573e4eab6afa3cae20ec6c75cde81060f313346f5290c"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/environment_changes.json",
+      "bytes": 367,
+      "sha256": "ec98b491865f21f4dc098813dc5156425f1d29f80cf94cf9b8853f7fc4cbdce9"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/export.log",
+      "bytes": 35053,
+      "sha256": "5b6de23d68b5ded80c9b9ed76fffdfd15db0cb693c85841b36ea74b855163d86"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/export_resources.json",
+      "bytes": 16273,
+      "sha256": "b10883d51a11adac9ae1319d29f8c869eb37737022c81fe46b87c7abf29b3522"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/monitor.py",
+      "bytes": 1973,
+      "sha256": "24f676c74f2ee63f7254aef11544f2c1e1b491d7da02479f1afb0e4e22d024ef"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/package_smoke.py",
+      "bytes": 1481,
+      "sha256": "78ead9b2a8dcd0d5572cad0e3f4e0d94f24bbed70a60ab93e33776788a7554e7"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/pip-check-after.txt",
+      "bytes": 1027,
+      "sha256": "4472532f5e6ecae2c7992b4d92046c235205379ab89bf5a2144ad54a060a987c"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/pip-check-before.txt",
+      "bytes": 1027,
+      "sha256": "4472532f5e6ecae2c7992b4d92046c235205379ab89bf5a2144ad54a060a987c"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/pip-plan.json",
+      "bytes": 175082,
+      "sha256": "dd409d49fdbdfe6e71e16ba3c706ebb1b17ba98bb31ca0cb3706e140f7ada237"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/smoke_initial.log",
+      "bytes": 15694,
+      "sha256": "17d5dcc438ca02458e25ca67aa6a38bf115ef2e264c28537745d1763fc2af562"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/smoke_initial_resources.json",
+      "bytes": 4684,
+      "sha256": "e3cd296bb1daad50545751da23e0080225411d45cd52c636e31eb183d3da0551"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/smoke_resume.log",
+      "bytes": 90374,
+      "sha256": "8ae038c7012649cb74a7dbc8d24110174553d63cb2183d63d3dec3481feaba4a"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/smoke_resume_resources.json",
+      "bytes": 15535,
+      "sha256": "c616fa1b9f17eef8e76e521044506b988e0643a457307e1f2f14e4e11c5d17a4"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/tests.log",
+      "bytes": 272,
+      "sha256": "a763152a15047e9baceac704f67b88f4b8aaf0260a08e1860cb7cab1c5e922ff"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/tests_resources.json",
+      "bytes": 4529,
+      "sha256": "a1a8410c159a4f9313fc4d75311f3d1d2884854dcbe09bad05d385d8933f2460"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/ultralytics_trainer.py",
+      "bytes": 73595,
+      "sha256": "28fdc6508240a4c59c67ad680d1c7251e73c768ad8a3ed6eb12426eb42fc6f6d"
+    },
+    {
+      "path": "outputs/ch09_marko_setup_20261108/weights.json",
+      "bytes": 231,
+      "sha256": "556ee19cd57a801e4b101c1ce239352bb981db3c12c4e543c8af3ac95a04d6aa"
+    },
+    {
+      "path": "outputs/weights/yolo11s.pt",
+      "bytes": 19313732,
+      "sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/args.yaml",
+      "bytes": 2154,
+      "sha256": "9ceea1d628a9e43d4cfb4d16ff5e2edfa5c95c7083893572b879b8e8fabbd84c"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/results.csv",
+      "bytes": 394,
+      "sha256": "7157103ba0392e6d7ada4b6618a1b9eb5faf341974fcf057b53fbc1f9fbed20a"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/weights/best.pt",
+      "bytes": 19284433,
+      "sha256": "54536c42ac22f3f8f6b228f6caca7e60cb7001504465796d62cf9f69f484626a"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/weights/epoch0.pt",
+      "bytes": 94823715,
+      "sha256": "d92352123faf120db632f5b35d768f141948daadacfc041fa149452b23d13db1"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/weights/epoch1.pt",
+      "bytes": 94959011,
+      "sha256": "f79d644eca73a36188075e30e00648ae8f0155f78de8dd313e901783be6bfd2e"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/weights/last.pt",
+      "bytes": 19284433,
+      "sha256": "54536c42ac22f3f8f6b228f6caca7e60cb7001504465796d62cf9f69f484626a"
+    },
+    {
+      "path": "outputs/yolo_smoke_marko_3050/train/weights/resume_source_epoch0.pt",
+      "bytes": 94823715,
+      "sha256": "d92352123faf120db632f5b35d768f141948daadacfc041fa149452b23d13db1"
+    },
+    {
+      "path": "results/ch-09-yolo/GPU_RUNBOOK.md",
+      "bytes": 6326,
+      "sha256": "0ac46f162cab20a52eb1dacb16a8c7330c58729bfb438cca78b57a1cca91a29e"
+    },
+    {
+      "path": "results/ch-09-yolo/LAPTOP_RUNBOOK.md",
+      "bytes": 4311,
+      "sha256": "560a183676a88883c442a3a0b2616a5349ec41321c2e315e24d52f90bb44be7e"
+    },
+    {
+      "path": "results/ch-09-yolo/marko_export/export_check.json",
+      "bytes": 10535,
+      "sha256": "33744992f6d32f4004b4cbdc69cf22edebb6b82bdc3505c10ea68bdffb1a934e"
+    },
+    {
+      "path": "results/ch-09-yolo/marko_export/figures/export_check.png",
+      "bytes": 2537063,
+      "sha256": "3b5e8c89cbfca3f27bd1b5df302af4a5eacba63de980fdc4fb8cd066a5d7bf27"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/README.md",
+      "bytes": 5340,
+      "sha256": "a62abc02e3d5094c2de6dcd09c98a61c0bf9a4d59e0269b30399ad6ae8366dd5"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/config.json",
+      "bytes": 2523,
+      "sha256": "d3c794aaa013a0ee24f20e8e0cbb83991088970a4bef9f23f26623b7e472a651"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/dataset_check.log",
+      "bytes": 1552,
+      "sha256": "ee721196119c7466101573e4eab6afa3cae20ec6c75cde81060f313346f5290c"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/environment_changes.json",
+      "bytes": 367,
+      "sha256": "ec98b491865f21f4dc098813dc5156425f1d29f80cf94cf9b8853f7fc4cbdce9"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/export_resources.json",
+      "bytes": 366,
+      "sha256": "e52041d4a6e0b63b6b1bb0938d9505a8f26ac7081e5e495c7a37c4cda5f20a0c"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/hardware.json",
+      "bytes": 263,
+      "sha256": "d77a06febfc0f1963811f62079e7467142cd6a07a0813d4741a7391d49f9d36b"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/pip-check-after.txt",
+      "bytes": 1027,
+      "sha256": "4472532f5e6ecae2c7992b4d92046c235205379ab89bf5a2144ad54a060a987c"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/pip-check-before.txt",
+      "bytes": 1027,
+      "sha256": "4472532f5e6ecae2c7992b4d92046c235205379ab89bf5a2144ad54a060a987c"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/prerequisites.json",
+      "bytes": 443,
+      "sha256": "2db4df0b54ee98403d76714f379fd173656b93084e83ef0c46a2a67176ff552d"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/resume_source.json",
+      "bytes": 407,
+      "sha256": "c5d778c61d23caf37ce0d1f52cde29632967045591d06a38964c171f29a65d29"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/runtime.json",
+      "bytes": 1257,
+      "sha256": "a24e275a5ff69e83639f5a2ccf41122eb2ef06ddc978d5dea61d5bc472724bc0"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/smoke_initial_resources.json",
+      "bytes": 433,
+      "sha256": "d14a0299fa9df0dab6356b7fb20485674299df76f613b4e16ec9e02cbba41b69"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/smoke_resume_resources.json",
+      "bytes": 414,
+      "sha256": "4f62e4c4e8fafef7469367bbaaf1853f364c8f7b6fd43fffa4d5e7cbc0b968cc"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/tests.log",
+      "bytes": 272,
+      "sha256": "a763152a15047e9baceac704f67b88f4b8aaf0260a08e1860cb7cab1c5e922ff"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/tests_resources.json",
+      "bytes": 384,
+      "sha256": "b562e3c28beaa36c2da9996f8c705dd24ec48b0b31c0e6ad03f67263df6c3601"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/ultralytics/args.yaml",
+      "bytes": 2154,
+      "sha256": "9ceea1d628a9e43d4cfb4d16ff5e2edfa5c95c7083893572b879b8e8fabbd84c"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/ultralytics/results.csv",
+      "bytes": 394,
+      "sha256": "7157103ba0392e6d7ada4b6618a1b9eb5faf341974fcf057b53fbc1f9fbed20a"
+    },
+    {
+      "path": "results/yolo_smoke_marko_3050/weights.json",
+      "bytes": 231,
+      "sha256": "556ee19cd57a801e4b101c1ce239352bb981db3c12c4e543c8af3ac95a04d6aa"
+    },
+    {
+      "path": "scripts/export_yolo.py",
+      "bytes": 6594,
+      "sha256": "b96ef26982cfe22ad6a3735c14006be7e45e8371910a1ce158c85a51b9c06629"
+    },
+    {
+      "path": "scripts/train_ultra.py",
+      "bytes": 8253,
+      "sha256": "2497b4e75cbbe434aaaa2642e8874abefc68bfa88bea4ccdf44c6a927e59f3a8"
+    }
+  ],
+  "count": 52,
+  "total_bytes": 345539113,
+  "note": "Manifest files themselves excluded; paths relative to repository root. No external transfer performed."
+}

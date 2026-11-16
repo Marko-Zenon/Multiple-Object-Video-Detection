@@ -1,0 +1,17 @@
+{
+  "w080": {
+    "weight_model_A": 0.8,
+    "path": "MOVD-opt08/outputs/opt08/soup/soup_w080.pt",
+    "sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939"
+  },
+  "w065": {
+    "weight_model_A": 0.65,
+    "path": "MOVD-opt08/outputs/opt08/soup/soup_w065.pt",
+    "sha256": "eb638796d2284191225943a3320934b64b4ded077269d55e123e372ca4f0ab3c"
+  },
+  "w050": {
+    "weight_model_A": 0.5,
+    "path": "MOVD-opt08/outputs/opt08/soup/soup_w050.pt",
+    "sha256": "8f42432fc36205b0f51edf6c0360f9f3029790abf68fa396b6e076258f22a287"
+  }
+}

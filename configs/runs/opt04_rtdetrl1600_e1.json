@@ -1,0 +1,18 @@
+{
+  "run_id": "opt04_rtdetrl1600_e1",
+  "family": "rtdetr",
+  "weights": "outputs/weights/rtdetr-l.pt",
+  "epochs": 6,
+  "imgsz": 1344,
+  "batch_size": 1,
+  "workers": 2,
+  "amp": true,
+  "data_yaml": "outputs/yolo_data_final/data.yaml",
+  "note": "OPT-04 fallback FB (results/opt-04-model-scale/selection_rule.md). configs/runs/final_rtdetr.json (Model A's run, COCO rtdetr-l.pt init) with one change: the input size 1344 -> 1600 (overrides.imgsz, the documented mechanism for a changed variable; pre-approved resolution exception, plan.md 11). Inference uses configs/runs/opt04_inference_1600.json. stop_after_epoch 1 stops right after epoch0.pt is written. Runs only on OPT-04 stop conditions S1-S6.",
+  "overrides": {
+    "cache": false,
+    "imgsz": 1600
+  },
+  "train_split": "train_final",
+  "stop_after_epoch": 1
+}

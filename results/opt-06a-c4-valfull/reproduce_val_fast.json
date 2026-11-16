@@ -1,0 +1,18 @@
+{
+  "registered": "MOVD-opt06a/results/opt-02-rtdetr-ensemble/val_fast/c4_w075_nms06/metrics.json",
+  "mAP": 0.29209989893432436,
+  "registered_mAP": 0.29209989893432436,
+  "identical": {
+    "metrics": true,
+    "per_class": true,
+    "density": true,
+    "num_predictions": true
+  },
+  "reproduced": true,
+  "merge_seconds": 1.11,
+  "detections": 357000,
+  "mean_per_frame": 500.0,
+  "frames_at_cap": 714,
+  "frames": 714,
+  "share_from_B": 0.1367
+}

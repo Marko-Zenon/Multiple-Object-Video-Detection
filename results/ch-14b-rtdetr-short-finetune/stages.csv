@@ -1,0 +1,7 @@
+candidate,split,mode,mAP,AP50,AP75,AP_small,AP_medium,AP_large
+stageA_epoch1,val_fast,single,0.279,0.5161,0.2578,0.1079,0.2462,0.4834
+stageA_epoch1,val_fast,pipeline,0.2892,0.5397,0.2663,0.1427,0.2594,0.4901
+stageA_epoch1,val_full,single,0.2762,0.5131,0.2541,0.1101,0.2462,0.4714
+stageA_epoch1,val_full,pipeline,0.286,0.5358,0.26,0.1504,0.2568,0.4812
+F rtdetr_baseline,val_fast,pipeline,0.2725,0.5083,0.2494,0.1439,0.2383,0.4584
+F rtdetr_baseline,val_full,pipeline,0.2696,0.5069,0.2453,0.1467,0.2375,0.4502

@@ -1,0 +1,57 @@
+{
+  "experiment": "e4_checkpoint_soup",
+  "candidate": "s1",
+  "params": {
+    "kind": "soup",
+    "tag": "w080",
+    "iou": 0.5
+  },
+  "rule": "results/opt-08-overnight/e4_checkpoint_soup/rule.md",
+  "rule_commit": "35464d5",
+  "csv": "C:/UCU/AI/hw2/MOVD-opt08/submissions/opt08_e4_checkpoint_soup_s1_test.csv",
+  "csv_bytes": 173452716,
+  "csv_sha256": "7dc9b318e354d4839b5dffae8f5973dd7da234fdbeb3c5f84057694878852014",
+  "test_predictions": "C:/UCU/AI/hw2/MOVD-opt08/outputs/opt08/e4_checkpoint_soup/s1/test/test_predictions.json",
+  "test_predictions_sha256": "f97dd8e18bed1aa6483b6fc99bd203e7ebb9df38254c69b7500415970bf443e9",
+  "test_predictions_deterministic": true,
+  "checkpoint_sha256": "2d60d3fa66d9fd37032bcaaaeb297e98510217b600b5809f73873b36360cd939",
+  "model_A_checkpoint_sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+  "writer": {
+    "input_predictions": 1881202,
+    "accepted": 1881202,
+    "rejected_bad_score": 0,
+    "rejected_bad_box": 0,
+    "rejected_empty_box": 0,
+    "dropped_over_cap": 0,
+    "written": 1881202,
+    "rows": 3811,
+    "empty_rows": 0,
+    "max_dets": 500,
+    "float_format": "repr (lossless)"
+  },
+  "project_validator_inline": {
+    "valid": true,
+    "problems": [],
+    "data_rows": 3811,
+    "expected_rows": 3811,
+    "detections": 1881202,
+    "empty_rows": 0,
+    "max_detections_in_a_row": 500,
+    "rows_not_sorted_by_score": 0,
+    "detections_per_class": {
+      "person": 409467,
+      "bicycle": 38263,
+      "car": 252587,
+      "van": 366974,
+      "truck": 152972,
+      "tricycle": 233749,
+      "bus": 36089,
+      "motor": 391101
+    }
+  },
+  "uploaded": false,
+  "validators_exit": {
+    "project": 0,
+    "independent": 0
+  }
+}

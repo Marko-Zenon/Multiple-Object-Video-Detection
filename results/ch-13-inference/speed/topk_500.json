@@ -1,0 +1,23 @@
+{
+  "fps": 13.806012546049214,
+  "latency_ms_per_image": 72.4322100001397,
+  "latency_ms_per_batch": {
+    "mean": 72.4322100001397,
+    "median": 72.32424999892828,
+    "p90": 73.52934000191453,
+    "min": 71.35379999817815
+  },
+  "timed_batches": 30,
+  "warmup_batches": 10,
+  "batch_size": 1,
+  "input_size": "baseline@1344:full",
+  "note": "CH-13 end-to-end pipeline: first 30 val_full frames preloaded as BGR arrays (no disk I/O); every raw pass (Ultralytics resize, normalisation, forward) + raw capture + CPU decoding, merge and the 500 cap; FP32, batch 1",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0",
+  "variant": "topk_500",
+  "passes_per_frame": 1,
+  "test_minutes_3811_frames": 4.6
+}

@@ -1,0 +1,25 @@
+{
+  "fps": 72.77150014952737,
+  "latency_ms_per_image": 13.74164333489413,
+  "latency_ms_per_batch": {
+    "mean": 13.74164333489413,
+    "median": 13.680000003660098,
+    "p90": 14.298880007117987,
+    "min": 13.04250000976026
+  },
+  "timed_batches": 30,
+  "warmup_batches": 10,
+  "batch_size": 1,
+  "input_size": "imgsz 1344 (letterbox, long side)",
+  "note": "First 30 val_full frames preloaded as BGR arrays (no disk I/O); includes Ultralytics letterbox, normalisation, NMS and box rescaling; conf 0.001, max_det 500",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "python": "3.12.14",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda": "13.0",
+  "weights": "outputs/yolo_baseline_marko_3050/train/weights/last.pt (CH-09 transfer from Marko, recipient-verified)",
+  "family": "yolo11",
+  "weights_sha256": "79ae099a95cae0b7b5d6f8e208bbaab885c1a79715cec13f60503242fe6f9172",
+  "weights_sha256_matches": "results/ch-09-yolo/notebook_closeout/transfer_manifest.sha256 (artifact ZIP manifest)",
+  "purpose": "Same-GPU speed comparison with the RT-DETR runs: the YOLO11s CH-09 checkpoint timed on Nazar's RTX 5070 Laptop GPU with the same benchmark (scripts/predict_ultra.py speed). Accuracy numbers stay those of results/yolo_baseline_marko_3050."
+}

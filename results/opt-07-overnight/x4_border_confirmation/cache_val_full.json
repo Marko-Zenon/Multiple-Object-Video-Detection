@@ -1,0 +1,27 @@
+{
+  "split": "val_full",
+  "checkpoint": "../MOVD-ch14/outputs/final_rtdetr/train/weights/epoch0.pt",
+  "checkpoint_sha256": "6ff4a430188405b5d13356872c63f141c4d3dbc7b747983cdf733ce386aa5b0b",
+  "pipeline_config": "configs/runs/final_inference.json",
+  "pipeline_config_sha256": "2e730aeecca4331909de4c8083ea15562fbc8a03fd226e520ee8f04f44164bd7",
+  "views": [
+    "full",
+    "flip",
+    "tile0",
+    "tile1",
+    "tile2",
+    "tile3"
+  ],
+  "frames": 2846,
+  "frames_computed_this_run": 1437,
+  "seconds_this_run": 704.7,
+  "seconds_per_frame_6_views": 0.4904,
+  "cache": "outputs/opt03/raw/val_full.npz",
+  "cache_sha256": "c3350aa8b5150c91293ccdc6c944ea0cd7149a8b58cd1aebba48fa66f480a7ea",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "peak_cuda_allocated_bytes_this_run": 699874304,
+  "torch": "2.14.1+cu130",
+  "ultralytics": "8.4.207",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "finished_kyiv": "2026-11-11T01:04:05"
+}

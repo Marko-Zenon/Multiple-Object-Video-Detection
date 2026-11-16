@@ -1,0 +1,12 @@
+{
+  "split": "test",
+  "raw_cache": "MOVD-opt07/outputs/opt03/raw/test.npz",
+  "raw_cache_sha256": "d4a8556b5c393a8696ff1f486e4b23fcea0ca2586e4d2d65497f9f4bbea2fcc8",
+  "model_A_predictions_sha256": "5f9c4913378dd5b7d740d70827255675a2035801c0dba851656a70806187930e",
+  "identical": true,
+  "count_a": 1875374,
+  "count_b": 1875374,
+  "max_abs_diff": 0.0,
+  "frames": 3811,
+  "seconds": 18.0
+}

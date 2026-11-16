@@ -1,0 +1,87 @@
+{
+  "experiment": "e4_checkpoint_soup",
+  "rule": "results/opt-08-overnight/e4_checkpoint_soup/rule.md",
+  "rule_commit": "35464d5",
+  "stage_rule": {
+    "S1_min_delta_discovery": 0.0003,
+    "S2_min_delta_confirmation": 0.0
+  },
+  "baseline_x2_discovery": {
+    "num_images": 1335,
+    "num_predictions": 650288,
+    "mAP": 0.32945184095777236,
+    "AP50": 0.6534371127953702,
+    "AP75": 0.28524588217160607,
+    "AP_small": 0.1774413250586779,
+    "AP_medium": 0.3312687820754577,
+    "AP_large": 0.5413459384147401,
+    "density_ge100": null
+  },
+  "candidates": {
+    "s1": {
+      "params": {
+        "kind": "soup",
+        "tag": "w080",
+        "iou": 0.5
+      },
+      "discovery_predictions_sha256": "e3e8d04bb2a7375fa58260d2993fbdbd28aa14e1a433c16188ed572025b861fe",
+      "val_full_predictions_sha256": null,
+      "num_predictions": 656031,
+      "transform_seconds": 174.2,
+      "discovery": {
+        "mAP": 0.3324609197484918,
+        "AP50": 0.6572493995248597,
+        "AP75": 0.2910399713963734,
+        "AP_small": 0.19371651504264722,
+        "AP_medium": 0.3335595146726565,
+        "AP_large": 0.5412105862188953
+      },
+      "delta_discovery_mAP": 0.0030090787907194327
+    },
+    "s2": {
+      "params": {
+        "kind": "soup",
+        "tag": "w065",
+        "iou": 0.5
+      },
+      "discovery_predictions_sha256": "33b67617789a16c5e3a86498d4b29cb3884eb4eecb59da4d2f822ad1a9abd1b8",
+      "val_full_predictions_sha256": null,
+      "num_predictions": 659929,
+      "transform_seconds": 171.8,
+      "discovery": {
+        "mAP": 0.33189874460133906,
+        "AP50": 0.6564586384115769,
+        "AP75": 0.28980768060300754,
+        "AP_small": 0.1975222253681077,
+        "AP_medium": 0.33218482149022377,
+        "AP_large": 0.5400394259993418
+      },
+      "delta_discovery_mAP": 0.0024469036435667
+    },
+    "s3": {
+      "params": {
+        "kind": "soup",
+        "tag": "w050",
+        "iou": 0.5
+      },
+      "discovery_predictions_sha256": "fbf64093adcfb949cf0f7b103026f3deddeb96dc03a6d8073270685c3def5645",
+      "val_full_predictions_sha256": null,
+      "num_predictions": 662933,
+      "transform_seconds": 171.4,
+      "discovery": {
+        "mAP": 0.32954016383314727,
+        "AP50": 0.652073728157635,
+        "AP75": 0.2889603392738967,
+        "AP_small": 0.20100247978246916,
+        "AP_medium": 0.32903416231023785,
+        "AP_large": 0.5390754287604703
+      },
+      "delta_discovery_mAP": 8.832287537491323e-05
+    }
+  },
+  "selected": "s1",
+  "passes_S1": true,
+  "wall_seconds": 634.5,
+  "evaluated_at_kyiv": "2026-11-11 03:24",
+  "decision": "S1 pass: confirmation next"
+}

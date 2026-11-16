@@ -1,0 +1,84 @@
+{
+  "frozen": "before any OPT-05 candidate result; see selection_rule.md",
+  "max_det": 500,
+  "size_rules": {
+    "coco32": "w*h < 32**2 px^2 (original pixels)",
+    "in32": "(w*1344/W)*(h*1344/H) < 32**2 (Model A stretched 1344x1344 input)"
+  },
+  "reference_model_A": {
+    "val_fast": {
+      "mAP": 0.2892166441381564,
+      "AP_small": 0.14273391809388225,
+      "bin_ge100": 0.35150175230579234,
+      "subset_w_le_1920": 0.3120912393562929
+    },
+    "val_full": {
+      "mAP": 0.28596193196293734,
+      "AP_small": 0.15037724808751873,
+      "bin_ge100": 0.3497290291189866
+    }
+  },
+  "gate_V": {
+    "mAP": 0.2922166441381564,
+    "AP_small": 0.14273391809388225,
+    "bin_ge100": 0.34650175230579233,
+    "subset": "model_A",
+    "determinism": true
+  },
+  "gate_F": {
+    "mAP": 0.289,
+    "AP_small": 0.1504,
+    "bin_ge100": 0.3447290291189866,
+    "secondary_improve_or_tie_min": 5
+  },
+  "candidates": [
+    {
+      "id": "s1",
+      "size_rule": "coco32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.5
+    },
+    {
+      "id": "s2",
+      "size_rule": "coco32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.6
+    },
+    {
+      "id": "s3",
+      "size_rule": "coco32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.5
+    },
+    {
+      "id": "s4",
+      "size_rule": "coco32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.6
+    },
+    {
+      "id": "s5",
+      "size_rule": "in32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.5
+    },
+    {
+      "id": "s6",
+      "size_rule": "in32",
+      "fb_multiplier": 1.0,
+      "nms_iou": 0.6
+    },
+    {
+      "id": "s7",
+      "size_rule": "in32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.5
+    },
+    {
+      "id": "s8",
+      "size_rule": "in32",
+      "fb_multiplier": 0.75,
+      "nms_iou": 0.6
+    }
+  ]
+}

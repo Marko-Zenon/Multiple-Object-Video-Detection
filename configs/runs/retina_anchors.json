@@ -1,0 +1,71 @@
+{
+  "run_id": "retina_anchors",
+  "family": "retina",
+  "train_split": "train_rubric",
+  "epochs": 6,
+  "min_size": 756,
+  "max_size": 1344,
+  "batch_size": 2,
+  "workers": 2,
+  "pretrained": true,
+  "amp": true,
+  "learning_rate": 0.0001,
+  "focal_alpha": 0.25,
+  "focal_gamma": 2.0,
+  "anchors": {
+    "sizes": [
+      [
+        24,
+        30,
+        38
+      ],
+      [
+        48,
+        60,
+        76
+      ],
+      [
+        96,
+        120,
+        152
+      ],
+      [
+        192,
+        241,
+        304
+      ],
+      [
+        384,
+        483,
+        609
+      ]
+    ],
+    "aspect_ratios": [
+      [
+        0.5,
+        1.0,
+        2.0
+      ],
+      [
+        0.5,
+        1.0,
+        2.0
+      ],
+      [
+        0.5,
+        1.0,
+        2.0
+      ],
+      [
+        0.5,
+        1.0,
+        2.0
+      ],
+      [
+        0.5,
+        1.0,
+        2.0
+      ]
+    ]
+  }
+}

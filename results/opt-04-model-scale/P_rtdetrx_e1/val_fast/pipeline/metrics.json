@@ -1,0 +1,149 @@
+{
+  "num_images": 714,
+  "num_predictions": 356247,
+  "num_predictions_outside_split": 0,
+  "images_over_headline_max_dets": 0,
+  "max_dets": 500,
+  "metrics": {
+    "mAP": 0.2304401377267191,
+    "AP50": 0.45531748408196626,
+    "AP75": 0.20554759974794598,
+    "AP_small": 0.15586907558254812,
+    "AP_medium": 0.23893701886071464,
+    "AP_large": 0.3430354376039876
+  },
+  "metrics_maxdets100": {
+    "mAP": 0.20435562420394213,
+    "AP50": 0.3930038021012338,
+    "AP75": 0.18883827649089657,
+    "AP_small": 0.1427032569252805,
+    "AP_medium": 0.21616709797493242,
+    "AP_large": 0.2917180366152986
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "category_id": 1,
+      "name": "person",
+      "num_gt": 12644,
+      "AP": 0.2893243317489307,
+      "AP50": 0.6703999315763258,
+      "AP75": 0.1940611218818085,
+      "AP_maxdets100": 0.28419165616666753
+    },
+    {
+      "class_id": 1,
+      "category_id": 2,
+      "name": "bicycle",
+      "num_gt": 1519,
+      "AP": 0.24894809094106046,
+      "AP50": 0.5611008579345795,
+      "AP75": 0.15843760323527778,
+      "AP_maxdets100": 0.1510054002374442
+    },
+    {
+      "class_id": 2,
+      "category_id": 3,
+      "name": "car",
+      "num_gt": 8001,
+      "AP": 0.4355672151213512,
+      "AP50": 0.7041242368417854,
+      "AP75": 0.4755820023722197,
+      "AP_maxdets100": 0.42234980978612136
+    },
+    {
+      "class_id": 3,
+      "category_id": 4,
+      "name": "van",
+      "num_gt": 1718,
+      "AP": 0.26803635940458165,
+      "AP50": 0.4759672961767867,
+      "AP75": 0.27873723838979547,
+      "AP_maxdets100": 0.24816726752116713
+    },
+    {
+      "class_id": 4,
+      "category_id": 5,
+      "name": "truck",
+      "num_gt": 340,
+      "AP": 0.20370974830136634,
+      "AP50": 0.3570962209295229,
+      "AP75": 0.2176976898057341,
+      "AP_maxdets100": 0.20052614482892395
+    },
+    {
+      "class_id": 5,
+      "category_id": 6,
+      "name": "tricycle",
+      "num_gt": 1375,
+      "AP": 0.25565324225109276,
+      "AP50": 0.504690628081865,
+      "AP75": 0.23623805675041717,
+      "AP_maxdets100": 0.23477681226386418
+    },
+    {
+      "class_id": 6,
+      "category_id": 7,
+      "name": "bus",
+      "num_gt": 66,
+      "AP": 0.03167585688458195,
+      "AP50": 0.03896234112505437,
+      "AP75": 0.03844759408067986,
+      "AP_maxdets100": 0.0049909072539907045
+    },
+    {
+      "class_id": 7,
+      "category_id": 8,
+      "name": "motor",
+      "num_gt": 3022,
+      "AP": 0.11060625716078747,
+      "AP50": 0.33019835998981106,
+      "AP75": 0.045179491467635224,
+      "AP_maxdets100": 0.08883699557335807
+    }
+  ],
+  "density": [
+    {
+      "bin": "0-19",
+      "num_images": 245,
+      "num_gt": 3400,
+      "mAP": 0.1562135566605816,
+      "AP50": 0.30292959611252596,
+      "mAP_maxdets100": 0.15549078563433327
+    },
+    {
+      "bin": "20-49",
+      "num_images": 264,
+      "num_gt": 10066,
+      "mAP": 0.25814229457264976,
+      "AP50": 0.44751710490269847,
+      "mAP_maxdets100": 0.24064024442202453
+    },
+    {
+      "bin": "50-99",
+      "num_images": 157,
+      "num_gt": 10090,
+      "mAP": 0.2760809656907626,
+      "AP50": 0.5767211393009881,
+      "mAP_maxdets100": 0.24432028638476463
+    },
+    {
+      "bin": ">=100",
+      "num_images": 48,
+      "num_gt": 5129,
+      "mAP": 0.32240150583843885,
+      "AP50": 0.6948598625183557,
+      "mAP_maxdets100": 0.2717590146631198
+    }
+  ],
+  "protocol": {
+    "source": "plan.md \u00a74 / configs/protocol.json (CH-02)",
+    "iou_thresholds": "0.50:0.05:0.95",
+    "area_ranges": "COCO: small < 32^2, medium 32^2-96^2, large > 96^2 px",
+    "max_dets": "top-N detections per image over all classes, by score (N=500 headline, 100 legacy)",
+    "ignore_regions": "provided COCO GT unchanged, iscrowd=1 copies kept (pycocotools crowd matching)",
+    "density": "target (non-crowd) GT objects per frame, bins [low, high)",
+    "pycocotools": "2.0.11"
+  },
+  "split": "val_fast"
+}

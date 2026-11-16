@@ -1,0 +1,81 @@
+{
+  "checkpoint": "C:/UCU/AI/hw2/MOVD-ch14/outputs/final_rtdetr_smoke/train/weights/last.pt",
+  "checkpoint_sha256": "70b5250f75260dc5e32c5d0c920ad3c7d26d3fcbefeeda65c72c9e7a43e1a9c4",
+  "checkpoint_bytes": 66498365,
+  "epoch_field": -1,
+  "train_args_epochs": 2,
+  "train_args_imgsz": 1344,
+  "train_args_batch": 1,
+  "train_args_seed": 42,
+  "train_args_fraction": 0.0083,
+  "train_args_data": "C:\\UCU\\AI\\hw2\\MOVD-ch14\\outputs\\yolo_data_final\\data.yaml",
+  "train_args_project": "C:\\UCU\\AI\\hw2\\MOVD-ch14\\outputs\\final_rtdetr_smoke",
+  "split": "val_full",
+  "smoke": true,
+  "pipeline_config": "configs/runs/final_inference.json",
+  "pipeline_config_sha256": "2e730aeecca4331909de4c8083ea15562fbc8a03fd226e520ee8f04f44164bd7",
+  "config": {
+    "passes": [
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "full"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "flip"
+      },
+      {
+        "model": "baseline",
+        "imgsz": 1344,
+        "views": "tiles"
+      }
+    ],
+    "decode": {
+      "k": 300,
+      "conf": 0.001
+    },
+    "merge": {
+      "method": "nms",
+      "iou": 0.5
+    },
+    "post_nms": null,
+    "max_det": 500,
+    "tile_grid": 2,
+    "tile_frac": 0.6
+  },
+  "frames": 3,
+  "clips": 1,
+  "frames_computed_this_run": 3,
+  "inference_seconds_this_run": 2.4,
+  "fps_this_run": 1.257,
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "peak_cuda_allocated_bytes_this_run": 699881984,
+  "peak_cuda_reserved_bytes_this_run": 924844032,
+  "torch": "2.14.1+cu130",
+  "ultralytics": "8.4.207",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "detections": {
+    "single": 900,
+    "pipeline": 1500
+  },
+  "single_predictions_sha256": "f2b4a939afa44ac7006d0dd26441d813562dd136bc0bf09d43303a4a0157b529",
+  "single_metrics": {
+    "mAP": 0.07450170977541484,
+    "AP50": 0.12631280530013786,
+    "AP75": 0.06904120559114735,
+    "AP_small": 0.0,
+    "AP_medium": 0.09565377867362332,
+    "AP_large": null
+  },
+  "pipeline_predictions_sha256": "6dc56aeb2a0914d4234f6301cd220b79c2558a14e315881327f7eb402355d2b3",
+  "pipeline_metrics": {
+    "mAP": 0.14755345491365773,
+    "AP50": 0.24535541003590683,
+    "AP75": 0.14558413325025898,
+    "AP_small": 0.01155115511551155,
+    "AP_medium": 0.18244463412492717,
+    "AP_large": null
+  }
+}
